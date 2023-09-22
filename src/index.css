@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'NippoBold';
+  src: local('NippoBold'), url('/public/fonts//NippoBold.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NippoExtralight';
+  src: local('NippoExtralight'),
+    url('/public/fonts//NippoExtralight.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NippoLight';
+  src: local('NippoLight'),
+    url('/public/fonts//NippoLight.ttf') format('opentype');
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'NippoLight' !important;
+  background-color: #16171E;
+  color: white;
+}
+
+.bg-main-100 {
+  background-color: #1F212A !important;
+}
+
+.bg-main-200 {
+  background-color: #16171E !important;
+}
+
+.bg-yellow-main {
+  background-color: #FFC412 !important;
+}
+
+.text-yellow-main {
+  color: #FFC412 !important;
+}
