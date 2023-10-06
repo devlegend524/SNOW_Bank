@@ -13,7 +13,7 @@ export default function Header() {
         <div className="container mr-auto ml-auto relative">
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
-              Wild <span className="text-yellow-main">Base</span>
+              WILDx <span className="text-yellow-main">BSC</span>
             </div>
             <div
               className="text-yellow-main ml-2 block sm:hidden"
@@ -26,9 +26,8 @@ export default function Header() {
               <ul className="nav_list">
                 {routes.map((link, key) => (
                   <li
-                    className={`list_item ${
-                      currentUrl === link.url ? "active" : ""
-                    }`}
+                    className={`list_item ${currentUrl === link.url ? "active" : ""
+                      }`}
                     key={key}
                   >
                     <a href={link.url}>{link.name}</a>
@@ -39,7 +38,7 @@ export default function Header() {
             </div>
 
             <div className="nav_action">
-              <WalletConnect/>
+              <WalletConnect />
               <div
                 className="text-yellow-main ml-2 hidden sm:block lg:hidden"
                 onClick={() => setMobile(!isMobile)}
@@ -56,9 +55,8 @@ export default function Header() {
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item ${
-                    currentUrl === link.url ? "active" : ""
-                  }`}
+                  className={`list_item ${currentUrl === link.url ? "active" : ""
+                    }`}
                   key={key}
                 >
                   <a href={link.url}>{link.name}</a>

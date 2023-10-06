@@ -371,19 +371,26 @@ export default function WildSwapCard() {
       </div>
 
       {/* TokenA modal */}
-      <TokenSelectModal
-        open={openA}
-        closeModal={closeModalA}
-        setToken={handleSetTokenA}
-        disableAddress={tokenB?.address}
-      />
+      {
+        openA &&
+        <TokenSelectModal
+          open={openA}
+          closeModal={closeModalA}
+          setToken={handleSetTokenA}
+          disableAddress={tokenB?.address}
+        />
+      }
+
       {/* TokenB modal */}
-      <TokenSelectModal
-        open={openB}
-        closeModal={closeModalB}
-        setToken={handleSetTokenB}
-        disableAddress={tokenA?.address}
-      />
+      {
+        openB &&
+        <TokenSelectModal
+          open={openB}
+          closeModal={closeModalB}
+          setToken={handleSetTokenB}
+          disableAddress={tokenA?.address}
+        />
+      }
     </div>
   );
 }
