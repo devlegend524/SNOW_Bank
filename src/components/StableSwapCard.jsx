@@ -11,7 +11,7 @@ import {
   fromReadableAmount,
   getValidPair,
 } from "utils";
-import { getRouterAddress } from "utils/addressHelper";
+import { getRouterAddress } from "utils/addressHelpers";
 import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import toast from "react-hot-toast";

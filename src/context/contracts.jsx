@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import router_abi from "config/abis/router";
 import factory_abi from "config/abis/factory";
-import { getFactoryAddress, getRouterAddress } from "utils/addressHelper";
+import { getFactoryAddress, getRouterAddress } from "utils/addressHelpers";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 
 export const ContractContext = React.createContext(null);

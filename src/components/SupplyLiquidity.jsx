@@ -11,7 +11,7 @@ import {
 } from "utils";
 import { ContractContext } from "context/contracts";
 import { getAllowance } from "utils";
-import { getRouterAddress } from "utils/addressHelper";
+import { getRouterAddress } from "utils/addressHelpers";
 import { useAccount } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import toast from "react-hot-toast";

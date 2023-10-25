@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { erc20ABI } from "wagmi";
-import { getRouterAddress } from "./addressHelper";
+import { getRouterAddress } from "./addressHelpers";
 import { toReadableAmount } from "./balanceHalper";
 
 export function fromReadableAmount(amount, decimals) {
