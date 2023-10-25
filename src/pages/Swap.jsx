@@ -1,13 +1,17 @@
 import React from "react";
+import Tabs from "components/UI/Tabs";
+
 import WildSwapCard from "components/WildSwapCard";
+import StableSwapCard from "components/StableSwapCard";
 
 export default function Swap() {
   return (
     <div className="swap">
       <div className="container">
-        <div className="flex justify-center">
+        <Tabs>
           <WildSwapCard />
-        </div>
+          <StableSwapCard />
+        </Tabs>
       </div>
     </div>
   );

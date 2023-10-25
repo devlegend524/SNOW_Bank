@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Fade as Hamburger } from "hamburger-react";
-import { routes } from "config/routes";
+import { routes } from "config";
 import { WalletConnect } from "components/UI/ConnectButton";
 
 export default function Header() {
@@ -13,7 +13,7 @@ export default function Header() {
         <div className="container mr-auto ml-auto relative">
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
-              WILDx <span className="text-yellow-main">BSC</span>
+              Wildx <span className="text-yellow-main">BSC</span>
             </div>
             <div
               className="text-yellow-main ml-2 block sm:hidden"
@@ -26,8 +26,9 @@ export default function Header() {
               <ul className="nav_list">
                 {routes.map((link, key) => (
                   <li
-                    className={`list_item ${currentUrl === link.url ? "active" : ""
-                      }`}
+                    className={`list_item ${
+                      currentUrl === link.url ? "active" : ""
+                    }`}
                     key={key}
                   >
                     <a href={link.url}>{link.name}</a>
@@ -55,8 +56,9 @@ export default function Header() {
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item ${currentUrl === link.url ? "active" : ""
-                    }`}
+                  className={`list_item ${
+                    currentUrl === link.url ? "active" : ""
+                  }`}
                   key={key}
                 >
                   <a href={link.url}>{link.name}</a>

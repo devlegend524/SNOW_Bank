@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import { tokens } from "config/tokens";
+import tokens from "config/tokens";
 import TokenItem from "./TokenItem";
 import { isAddress } from "web3-validator";
 import { ethers } from "ethers";

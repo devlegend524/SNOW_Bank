@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Web3 from "web3";
 import { ContractContext } from "context/contracts";
-import { tokens } from "config/tokens";
+import tokens from "config/tokens";
 import TokenSelectModal from "./TokenSelectModal";
 import TokenSelect from "./TokenSelect";
 import {
@@ -371,26 +371,19 @@ export default function WildSwapCard() {
       </div>
 
       {/* TokenA modal */}
-      {
-        openA &&
-        <TokenSelectModal
-          open={openA}
-          closeModal={closeModalA}
-          setToken={handleSetTokenA}
-          disableAddress={tokenB?.address}
-        />
-      }
-
+      <TokenSelectModal
+        open={openA}
+        closeModal={closeModalA}
+        setToken={handleSetTokenA}
+        disableAddress={tokenB?.address}
+      />
       {/* TokenB modal */}
-      {
-        openB &&
-        <TokenSelectModal
-          open={openB}
-          closeModal={closeModalB}
-          setToken={handleSetTokenB}
-          disableAddress={tokenA?.address}
-        />
-      }
+      <TokenSelectModal
+        open={openB}
+        closeModal={closeModalB}
+        setToken={handleSetTokenB}
+        disableAddress={tokenA?.address}
+      />
     </div>
   );
 }

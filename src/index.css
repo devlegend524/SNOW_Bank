@@ -43,8 +43,26 @@ body {
   color: #FFC412 !important;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.buy_card {
+  display: block;
+  padding: 1rem;
+  background-color: #02080e4f;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.main_btn {
+  padding: 10px 20px;
+  background-color: #FFC412;
+  box-shadow: 0 3px 4px #011123;
+  color:black;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.main_btn:hover {
+  box-shadow: 0 1px 1px #011123;
+  background-color: rgb(235 155 16 /0.9);
+  color: black;
 }

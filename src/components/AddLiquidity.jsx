@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { tokens } from "config/tokens";
+import tokens from "config/tokens";
 import TokenSelect from "./TokenSelect";
 import TokenSelectModal from "./TokenSelectModal";
 import { ContractContext } from "context/contracts";
@@ -136,7 +136,7 @@ export default function AddLiquidity(props) {
             moveToSupply={moveToSupply}
             newPair={newPair}
           />
-          
+
           <p className="text-xl text-yellow-main text-center">
             LP reward APR 2.39%
           </p>

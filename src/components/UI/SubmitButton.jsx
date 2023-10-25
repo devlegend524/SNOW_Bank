@@ -325,7 +325,7 @@ export const SubmitButton = (props) => {
                     type="button"
                     className="custom_btn mt-10 mb-5 group hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
                   >
-                    Connect to BSC &nbsp;
+                    Connect to Binance &nbsp;
                     <FaArrowRight className="text-xl group-hover:ml-2 transition ease ease-in-out delay-3000" />
                   </button>
                 );
