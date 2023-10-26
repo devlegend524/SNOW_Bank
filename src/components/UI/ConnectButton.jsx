@@ -1,7 +1,8 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { FaAngleDown } from "react-icons/fa";
-
+import { usePriceWILDXUsdc } from "state/hooks";
 export const WalletConnect = () => {
+  const priceData = usePriceWILDXUsdc();
   return (
     <ConnectButton.Custom>
       {({
@@ -57,11 +58,14 @@ export const WalletConnect = () => {
                 );
               }
               return (
-                <div style={{ display: "flex" }}>
+                <div className="flex items-center">
+                  <img
+                    src="/logo.png"
+                    alt="logo"
+                    className="w-[25px] h-[25px] mx-1"
+                  />
                   <p className="hidden sm:flex items-center balance">
-                    {account.displayBalance
-                      ? `~ ${account.displayBalance}`
-                      : ""}
+                    {Number(priceData[0]) ? `~ ${priceData[0].toString()}` : ""}
                   </p>
                   <button
                     onClick={openChainModal}
