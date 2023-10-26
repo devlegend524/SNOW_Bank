@@ -5,7 +5,7 @@ import { useTranslation } from "context/Localization";
 import { Tooltip } from "react-tooltip";
 
 const MultiplierWrapper = styled.div`
-  color: #0052ff;
+  color: #ffc412;
   width: 36px;
   text-align: right;
   margin-right: 14px;
@@ -27,20 +27,6 @@ const Multiplier = ({ multiplier }) => {
   ) : (
     <Skeleton width={30} />
   );
-  const { t } = useTranslation();
-  const tooltipContent = (
-    <div>
-      {t(
-        "The multiplier represents the amount of WILDX rewards each farm gets."
-      )}
-      <br />
-      <br />
-      {t(
-        "For example, if a 1x farm was getting 1 WILDX per block, a 40x farm would be getting 40 WILDX per block."
-      )}
-    </div>
-  );
-
   return (
     <Container>
       <MultiplierWrapper>{displayMultiplier}</MultiplierWrapper>

@@ -28,7 +28,7 @@ const WILDXWalletBalance = () => {
     <>
       <CardValue
         value={toReadableAmount(balance.toString(), 18)}
-        color="#493df9"
+        color="#fff"
         lineHeight="36px"
       />
       <br />

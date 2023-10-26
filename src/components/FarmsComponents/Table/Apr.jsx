@@ -13,8 +13,6 @@ const Container = styled.div`
 
   button {
     width: 20px;
-    height: 20px;
-
     svg {
       path {
         fill: #0d0d0d;
@@ -26,7 +24,7 @@ const Container = styled.div`
 const AprWrapper = styled.div`
   min-width: 60px;
   text-align: left;
-  color: white;
+  color: #ffc412;
 `;
 
 const Apr = ({

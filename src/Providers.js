@@ -13,16 +13,17 @@ import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import { RefreshContextProvider } from "context/RefreshContext";
 import ContractContextProvideer from "context/contracts";
-import { Toaster } from "react-hot-toast";
 import { ThemeContextProvider } from "context/ThemeContext";
 import { LanguageProvider } from "context/Localization";
+import { ModalProvider } from "uikit";
 
+import { ALCHEMY_ID } from "config";
 import store from "state";
 
 const Providers = ({ children }) => {
   const { chains, publicClient } = configureChains(
     [base, baseGoerli],
-    [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+    [alchemyProvider({ apiKey: ALCHEMY_ID }), publicProvider()]
   );
 
   const { connectors } = getDefaultWallets({
@@ -45,8 +46,7 @@ const Providers = ({ children }) => {
               <LanguageProvider>
                 <RefreshContextProvider>
                   <ContractContextProvideer>
-                    {children}
-                    <Toaster position="bottom-right" />
+                    <ModalProvider>{children}</ModalProvider>
                   </ContractContextProvideer>
                 </RefreshContextProvider>
               </LanguageProvider>

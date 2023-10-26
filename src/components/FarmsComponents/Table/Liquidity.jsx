@@ -43,7 +43,7 @@ const Liquidity = ({ liquidity }) => {
   return (
     <Container>
       <LiquidityWrapper>
-        <Text color="#0052FF">{displayLiquidity}</Text>
+        <Text color="#FFC412">{displayLiquidity}</Text>
       </LiquidityWrapper>
       <HelpIcon
         data-tooltip-id="liquidity-tooltip"

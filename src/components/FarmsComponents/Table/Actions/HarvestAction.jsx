@@ -17,7 +17,6 @@ import { useAccount } from "wagmi";
 import ZapInModal from "components/ZapInModal";
 import CompoundModal from "components/CompoundModal";
 import { didUserReject } from "utils/customHelpers";
-import { harvestMany } from "utils/callHelpers";
 import { useMasterchef } from "hooks/useContract";
 
 const HarvestAction = ({ pid, userData, userDataReady }) => {
@@ -121,7 +120,7 @@ const HarvestAction = ({ pid, userData, userDataReady }) => {
         </button>
         <div className="flex flex-col lg:flex-row gap-2 w-full">
           <button
-            className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-white font-medium bg-green-600 hover:bg-green-500"
+            className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-black font-medium bg-yellow-500 hover:bg-yellow-600"
             data-tooltip-id="compound-tooltip"
             data-tooltip-content={
               earnings.eq(0) || pendingCompoundTx || !userDataReady
@@ -134,7 +133,7 @@ const HarvestAction = ({ pid, userData, userDataReady }) => {
             {pendingCompoundTx ? <Loading /> : t("Compound")}
           </button>
           <button
-            className="rounded-md w-full lg:w-1/2 px-2 py-1 text-center font-medium bg-green-600 hover:bg-green-500"
+            className="rounded-md w-full lg:w-1/2 px-2 py-1 text-black text-center font-medium bg-yellow-500 hover:bg-yellow-600"
             data-tooltip-id="zap-tooltip"
             data-tooltip-content="Stake to this pool from your wallet"
             disabled={!userDataReady}

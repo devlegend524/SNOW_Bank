@@ -1,7 +1,7 @@
-import React from 'react'
-import { useTheme } from 'styled-components'
-import Heading from '../../components/Heading/Heading'
-import getThemeValue from '../../util/getThemeValue'
+import React from "react";
+import { useTheme } from "styled-components";
+import Heading from "../../components/Heading/Heading";
+import getThemeValue from "../../util/getThemeValue";
 import {
   ModalBody,
   ModalHeader,
@@ -9,7 +9,7 @@ import {
   ModalContainer,
   ModalCloseButton,
   ModalBackButton,
-} from './styles'
+} from "./styles";
 
 const Modal = ({
   title,
@@ -17,12 +17,12 @@ const Modal = ({
   onBack,
   children,
   hideCloseButton = false,
-  bodyPadding = '24px',
-  headerBackground = 'transparent',
-  minWidth = '320px',
+  bodyPadding = "24px",
+  headerBackground = "transparent",
+  minWidth = "320px",
   ...props
 }) => {
-  const theme = useTheme()
+  const theme = useTheme();
   return (
     <ModalContainer {...props}>
       <ModalHeader
@@ -33,13 +33,13 @@ const Modal = ({
       >
         <ModalTitle>
           {onBack && <ModalBackButton onBack={onBack} />}
-          <Heading color='#fff'>{title}</Heading>
+          <Heading color="#fff">{title}</Heading>
         </ModalTitle>
         {!hideCloseButton && <ModalCloseButton onDismiss={onDismiss} />}
       </ModalHeader>
       <ModalBody p={bodyPadding}>{children}</ModalBody>
     </ModalContainer>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

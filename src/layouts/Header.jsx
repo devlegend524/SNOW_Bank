@@ -35,6 +35,17 @@ export default function Header() {
                     <img src="/images/hover.png" alt="" />
                   </li>
                 ))}
+                <li className={`list_item`}>
+                  <a
+                    href="https://lodgedocs.gitbook.io/wildx/"
+                    target="_blank"
+                    className={`p-3`}
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    Docs
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -64,6 +75,17 @@ export default function Header() {
                   <a href={link.url}>{link.name}</a>
                 </li>
               ))}
+              <li className={`list_item`}>
+                <a
+                  href="https://lodgedocs.gitbook.io/wildx/"
+                  target="_blank"
+                  className={`p-3`}
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  Docs
+                </a>
+              </li>
             </ul>
           </div>
         </div>

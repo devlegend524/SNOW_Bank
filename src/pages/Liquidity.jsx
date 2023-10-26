@@ -13,22 +13,20 @@ export default function Liquidity() {
   };
 
   return (
-    <div className="liquidity">
-      <div className="container">
-        {supLiquidity === true ? (
-          <SupplyLiquidity
-            handleSupply={handleSupply}
-            tokenA={tokenA}
-            tokenB={tokenB}
-          />
-        ) : (
-          <AddLiquidity
-            handleSupply={handleSupply}
-            setTokenA={setTokenA}
-            setTokenB={setTokenB}
-          />
-        )}
-      </div>
+    <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+      {supLiquidity === true ? (
+        <SupplyLiquidity
+          handleSupply={handleSupply}
+          tokenA={tokenA}
+          tokenB={tokenB}
+        />
+      ) : (
+        <AddLiquidity
+          handleSupply={handleSupply}
+          setTokenA={setTokenA}
+          setTokenB={setTokenB}
+        />
+      )}
     </div>
   );
 }

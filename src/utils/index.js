@@ -1,8 +1,8 @@
 import { ethers } from "ethers";
 import { erc20ABI } from "wagmi";
 import { getRouterAddress } from "./addressHelpers";
-import { toReadableAmount } from "./balanceHalper";
-
+import { toReadableAmount } from "./customHelpers";
+import lpTokenAbi from "config/abis/lpToken.json";
 export function fromReadableAmount(amount, decimals) {
   if (!amount) return 0;
   return ethers.utils.parseUnits(amount.toString(), decimals).toString();
@@ -29,12 +29,29 @@ export const getAllowance = async (
 ) => {
   if (address && token && provider) {
     try {
-      const contract = new ethers.Contract(token.address, erc20ABI, provider);
-      const amount = (
-        await contract.allowance(address, router_address)
-      ).toString();
-      const decimals = await contract.decimals();
-      return toReadableAmount(amount, Number(decimals.toString()));
+      if (token.isTokenOnly) {
+        const contract = new ethers.Contract(
+          token.lpAddresses,
+          erc20ABI,
+          provider
+        );
+        const amount = (
+          await contract.allowance(address, router_address)
+        ).toString();
+        const decimals = await contract.decimals();
+        return toReadableAmount(amount, Number(decimals.toString()));
+      } else {
+        const contract = new ethers.Contract(
+          token.lpAddresses,
+          lpTokenAbi,
+          provider
+        );
+        const amount = (
+          await contract.allowance(address, router_address)
+        ).toString();
+        const decimals = await contract.decimals();
+        return toReadableAmount(amount, Number(decimals.toString()));
+      }
     } catch (e) {
       console.log(e);
       return 0;

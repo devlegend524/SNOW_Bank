@@ -31,7 +31,7 @@ const WILDXHarvestBalance = ({ farmsWithBalance }) => {
 
   return (
     <div>
-      <CardValue value={earningsSum} lineHeight="1.5" />
+      <CardValue value={earningsSum} lineHeight="1.5" color="#fff" />
       {wildPriceUsdt.gt(0) && <CardUsdValue value={earningsUsdt} />}
     </div>
   );

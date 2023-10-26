@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { space, layout, variant } from 'styled-system'
-import { scaleVariants, styleVariants } from './theme'
+import styled from "styled-components";
+import { space, layout, variant } from "styled-system";
+import { scaleVariants, styleVariants } from "./theme";
 
 const getDisabledStyles = ({ $isLoading, theme }) => {
   if ($isLoading === true) {
@@ -9,7 +9,7 @@ const getDisabledStyles = ({ $isLoading, theme }) => {
       &.pancake-button--disabled {
         cursor: not-allowed;
       }
-    `
+    `;
   }
 
   return `
@@ -21,8 +21,8 @@ const getDisabledStyles = ({ $isLoading, theme }) => {
       color: #BDC2C4;
       cursor: not-allowed;
     }
-  `
-}
+  `;
+};
 
 /**
  * This is to get around an issue where if you use a Link component
@@ -31,8 +31,8 @@ const getDisabledStyles = ({ $isLoading, theme }) => {
  */
 
 const getOpacity = ({ $isLoading = false }) => {
-  return $isLoading ? '.5' : '1'
-}
+  return $isLoading ? ".5" : "1";
+};
 
 const StyledButton = styled.button`
   align-items: center;
@@ -67,12 +67,12 @@ const StyledButton = styled.button`
   border-radius: 8px;
   font-weight: 600;
   font-size: 16px;
-  color: #ddd;
+  color: #fff;
   background-color: #031531;
 
   ${getDisabledStyles}
   ${variant({
-    prop: 'scale',
+    prop: "scale",
     variants: scaleVariants,
   })}
   ${variant({
@@ -81,6 +81,6 @@ const StyledButton = styled.button`
   ${layout}
   ${space}
   padding: 20px;
-`
+`;
 
-export default StyledButton
+export default StyledButton;

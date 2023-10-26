@@ -83,23 +83,25 @@ export default function FarmStaking() {
 
   return (
     <div className="flex-1 bg-main-100 p-8 rounded-md">
-      <div className="text-3xl text-end font-semibold text-yellow-main">
+      <div className="text-3xl text-end font-semibold text-yellow-main mb-5">
         Farms & Staking
       </div>
       <div className="flex justify-between flex-col md:flex-row">
         <div>
-          <div className="text-base pb-2">WILDX to Harvest:</div>
+          <div className="text-base pb-2 font-semibold">WILDX to Harvest:</div>
           <div className="text-sm text-gray-300">
             <WILDXHarvestBalance farmsWithBalance={balancesWithValue} />
           </div>
-          <div className="text-base pb-2">WILDX in Wallet:</div>
+          <div className="text-base pb-2 font-semibold mt-5">
+            WILDX in Wallet:
+          </div>
           <div className="text-sm text-gray-300">
             <WILDXWalletBalance />
           </div>
         </div>
         <div>
           {" "}
-          <div className="text-base pt-5">Current Sales Tax:</div>
+          <div className="text-base font-semibold">Current Sales Tax:</div>
           <div className="mb-1">
             <CurrentSaleTax />
           </div>

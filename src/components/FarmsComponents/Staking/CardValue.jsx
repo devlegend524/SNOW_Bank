@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useCountUp } from "react-countup";
+import { Text } from "uikit";
 
 const CardValue = ({
   value,
@@ -34,7 +35,7 @@ const CardValue = ({
   }, [value]);
 
   return (
-    <div
+    <Text
       ref={countUpRef}
       fontSize={fontSize}
       style={{ lineHeight }}

@@ -4,90 +4,68 @@ import { FaArrowRight } from "react-icons/fa";
 export const SubmitButton = (props) => {
   const handleSwap = () => {
     if (!props.pairLoading) {
-      if (props.pair) {
-        if (props.status.insufficientA) {
-          return (
-            <>
-              <button
-                disabled={true}
-                className="custom_btn disabled:mb-[20px] mt-8 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
-              >
-                Insufficient {props.tokenA.symbol} Token Balance
-              </button>
-            </>
-          );
-        } else if (props.status.insufficientB) {
-          return (
-            <>
-              <button
-                disabled={true}
-                className="custom_btn mt-10 mb-5  disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
-              >
-                Insufficient {props.tokenB.symbol} Token Balance
-              </button>
-            </>
-          );
-        } else {
-          if (props.tokenAAmount > props.tokenAAllowance) {
-            if (props.status.approve) {
-              return (
-                <>
-                  <button
-                    disabled={true}
-                    className="custom_btn mt-10 mb-5 disabled:mb-[20px] disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
-                  >
-                    Approving...
-                  </button>
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <button
-                    onClick={() => props.approve("A")}
-                    className="custom_btn mt-10 mb-5 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
-                  >
-                    Approve {props.tokenA.symbol} Token
-                  </button>
-                </>
-              );
-            }
+      if (props.status.insufficientA) {
+        return (
+          <>
+            <button
+              disabled={true}
+              className="custom_btn disabled:mb-[20px] mt-8 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+            >
+              Insufficient {props.tokenA.symbol} Token Balance
+            </button>
+          </>
+        );
+      } else {
+        if (props.tokenAAmount > props.tokenAAllowance) {
+          if (props.status.approve) {
+            return (
+              <>
+                <button
+                  disabled={true}
+                  className="custom_btn mt-10 mb-5 disabled:mb-[20px] disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                >
+                  Approving...
+                </button>
+              </>
+            );
           } else {
-            if (props.status.swap) {
-              return (
-                <>
-                  <button
-                    disabled={true}
-                    className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
-                  >
-                    Swaping...
-                  </button>
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <button
-                    disabled={!props.tokenAAmount || !props.tokenBAmount}
-                    onClick={props.handleSwap}
-                    className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
-                  >
-                    Swap Now
-                  </button>
-                </>
-              );
-            }
+            return (
+              <>
+                <button
+                  onClick={() => props.approve("A")}
+                  className="custom_btn mt-10 mb-5 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                >
+                  Approve {props.tokenA.symbol} Token
+                </button>
+              </>
+            );
+          }
+        } else {
+          if (props.status.swap) {
+            return (
+              <>
+                <button
+                  disabled={true}
+                  className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
+                >
+                  Swaping...
+                </button>
+              </>
+            );
+          } else {
+            return (
+              <>
+                <button
+                  disabled={!props.tokenAAmount || !props.tokenBAmount}
+                  onClick={props.handleSwap}
+                  className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
+                >
+                  Swap
+                </button>
+              </>
+            );
           }
         }
-      } else {
-        return (
-          <a
-            href={"/liquidity"}
-            className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
-          >
-            Please create pair
-          </a>
-        );
       }
     } else {
       return (
@@ -168,7 +146,7 @@ export const SubmitButton = (props) => {
             </>
           );
         } else {
-          console.log(props.tokenAAmount, props.tokenAAllowance)
+          console.log(props.tokenAAmount, props.tokenAAllowance);
           if (props.tokenAAmount > props.tokenAAllowance) {
             if (props.status.approve) {
               return (

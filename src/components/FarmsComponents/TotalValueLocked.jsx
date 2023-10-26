@@ -91,7 +91,7 @@ export default function TotalValueLocked() {
                 value={Number(
                   toReadableAmount(tokenABalanceRead?.data, 18) - 500000
                 )}
-                color="#fffff1"
+                color="#fffff"
               />
             )}
           </div>
@@ -104,7 +104,7 @@ export default function TotalValueLocked() {
                 fontSize="20px"
                 value={totalMinted}
                 decimals={1}
-                color="#fffff1"
+                color="#fffff"
               />
             )}
           </div>

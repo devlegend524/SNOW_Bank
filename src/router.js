@@ -17,10 +17,6 @@ const router = createBrowserRouter([
     element: <Swap />,
   },
   {
-    path: "/liquidity",
-    element: <Liquidity />,
-  },
-  {
     path: "/farms",
     element: <Farms />,
   },
