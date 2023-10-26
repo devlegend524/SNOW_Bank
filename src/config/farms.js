@@ -1,5 +1,35 @@
 import tokens from "./tokens";
 
+export const liquidityList = [
+  {
+    pid: 0,
+    lpSymbol: tokens.wild.symbol,
+    isTokenOnly: true,
+    lpAddresses: tokens.wild.address,
+    decimals: 18,
+    logoA: tokens.wild.logo,
+    logoB: "",
+  },
+  {
+    pid: 0,
+    lpSymbol: tokens.eth.symbol,
+    isTokenOnly: true,
+    lpAddresses: tokens.eth.address,
+    decimals: 18,
+    logoA: tokens.eth.logo,
+    logoB: "",
+  },
+  {
+    pid: 1,
+    lpSymbol: tokens.weth.symbol,
+    isTokenOnly: true,
+    lpAddresses: tokens.weth.address,
+    decimals: 18,
+    logoA: tokens.weth.logo,
+    logoB: "",
+  },
+];
+
 export const zapList = [
   {
     pid: 0,

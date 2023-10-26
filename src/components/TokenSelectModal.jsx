@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import TokenItem from "./TokenItem";
-import { zapList } from "config/farms";
 
 export default function TokenSelectModal({
   open,
@@ -9,6 +8,7 @@ export default function TokenSelectModal({
   setToken,
   disabledToken,
   selected,
+  tokens,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [tokenLists, setTokenLists] = useState();
@@ -21,12 +21,12 @@ export default function TokenSelectModal({
   useEffect(() => {
     setIsOpen(open);
     if (open) {
-      setTokenLists(zapList);
+      setTokenLists(tokens);
     }
   }, [open]);
 
   useEffect(() => {
-    setTokenLists(zapList);
+    setTokenLists(tokens);
   }, []);
 
   const customStyle = {

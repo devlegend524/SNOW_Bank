@@ -10,7 +10,7 @@ const Farms = lazy(() => import("pages/Farms"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Farms />,
   },
   {
     path: "/swap",
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/farms",
     element: <Farms />,
+  },
+  {
+    path: "/liquidity",
+    element: <Liquidity />,
   },
   {
     path: "*",

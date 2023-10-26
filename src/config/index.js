@@ -39,8 +39,8 @@ export const routes = [
     name: "Swap",
     url: "/swap",
   },
-  // {
-  //   name: "Liquidity",
-  //   url: "/liquidity",
-  // },
+  {
+    name: "Liquidity",
+    url: "/liquidity",
+  },
 ];

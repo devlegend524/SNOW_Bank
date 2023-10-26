@@ -4,7 +4,6 @@ import TokenSelect from "components/TokenSelect";
 import { getAllowance } from "utils";
 import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
-import toast from "react-hot-toast";
 import { zapList } from "config/farms";
 import Loading from "components/Loading";
 import useZap from "hooks/useZap";
@@ -261,6 +260,7 @@ export default function Swap() {
           closeModal={closeModalA}
           setToken={handleSetTokenA}
           disabledToken={tokenB?.lpSymbol}
+          tokens={zapList}
         />
         {/* TokenB modal */}
         <TokenSelectModal
@@ -268,6 +268,7 @@ export default function Swap() {
           closeModal={closeModalB}
           setToken={handleSetTokenB}
           disabledToken={tokenA?.lpSymbol}
+          tokens={zapList}
         />
       </div>
     </div>
