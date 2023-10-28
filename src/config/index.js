@@ -33,7 +33,7 @@ export const ARCHIVED_NODE = "https://developer-access-mainnet.base.org";
 export const routes = [
   {
     name: "Farm",
-    url: "/farms",
+    url: "/",
   },
   {
     name: "Swap",

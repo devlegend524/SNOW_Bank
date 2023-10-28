@@ -13,7 +13,9 @@ export default function Header() {
         <div className="container mr-auto ml-auto relative">
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
-              Wildx <span className="text-yellow-main">BSC</span>
+              <a href="/">
+                Wildx <span className="text-yellow-main">BSC</span>
+              </a>
             </div>
             <div
               className="text-yellow-main ml-2 block sm:hidden"
