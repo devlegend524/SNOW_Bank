@@ -14,27 +14,15 @@ const tokens = {
   },
   weth: {
     symbol: "WETH",
-    address: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", //'0xCbd7a2Db5F38fad25352c3279A8535EB7137dd39', //
+    address: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA", //'0xCbd7a2Db5F38fad25352c3279A8535EB7137dd39', //
     decimals: 18,
     logo: "https://svgshare.com/getbyhash/sha1-38zdMb/7WVkaVJEus7guQuBuCSU=",
   },
   wbnb: {
     symbol: "WBNB",
     logo: "/images/tokens/wbnb.svg",
-    address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-  },
-  usdt: {
-    symbol: "USDT",
-    address: "0x221c5B1a293aAc1187ED3a7D7d2d9aD7fE1F3FB0",
-    decimals: 18,
-    logo: "/images/tokens/usdc.svg",
-  },
-  dai: {
-    symbol: "DAI",
-    address: "0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867",
-    decimals: 18,
-    logo: "/images/tokens/dai.svg",
   },
   usdc: {
     symbol: "USDC",

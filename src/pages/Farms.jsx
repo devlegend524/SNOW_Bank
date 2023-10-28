@@ -50,7 +50,7 @@ export default function Farms() {
     setUserDataReady(address || (address && userDataLoaded));
   }, [address, userDataLoaded]);
 
-  const farmsLP = farmsData.filter((farm) => farm.pid !== 1 && farm.pid !== 3);
+  const farmsLP = farmsData.filter((farm) => farm.pid !== 2);
 
   const handleSortOptionChange = (option) => {
     setSortOption(option.value);

@@ -28,7 +28,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    background: "#02264d",
+    background: "#1F212A",
     color: "white",
     border: "none",
   },
@@ -38,7 +38,7 @@ const tokensList = [
     pid: 0,
     lpSymbol: "ETH",
     isTokenOnly: true,
-    lpAddresses: "0x4200000000000000000000000000000000000006",
+    lpAddresses: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA",
     decimals: 18,
     logoA: "/images/tokens/weth.svg",
     logoB: "",
@@ -47,7 +47,7 @@ const tokensList = [
     pid: 1,
     lpSymbol: "WETH",
     isTokenOnly: true,
-    lpAddresses: "0x4200000000000000000000000000000000000006",
+    lpAddresses: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA",
     decimals: 18,
     logoA: "https://svgshare.com/getbyhash/sha1-38zdMb/7WVkaVJEus7guQuBuCSU=",
     logoB: "",
@@ -194,16 +194,16 @@ export default function ZapInModal({ open, closeModal, pid }) {
         <p className="text-center text-gray-400 text-sm py-2">
           Select token to zap.
         </p>
-        <div className="bg-secondary-700 rounded-full p-2 flex mb-2">
+        <div className=" rounded-full p-2 flex mb-2">
           <select
             name="tokenA"
-            className="bg-transparent focus-visible:outline-none w-full cursor-pointer"
+            className="bg-transparent border p-2 focus-visible:outline-none w-full cursor-pointer text-yellow-main rounded-md"
             onChange={(e) => handleChangeToken(e.target.value)}
           >
             {tokensList.map((item, key) => {
               if (item.lpSymbol === "WETH" || item.lpSymbol === "ETH")
                 return (
-                  <option key={key} className="bg-secondary-700" value={key}>
+                  <option key={key} className="" value={key}>
                     {item?.lpSymbol}
                   </option>
                 );
@@ -229,7 +229,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             </button>
           </div>
         </div>
-        <div className="bg-secondary-700 rounded-full p-2 flex mb-2">
+        <div className=" rounded-full p-2 flex mb-2">
           <input
             pattern={`^[0-9]*[.,]?[0-9]{0,${inputToken.decimals}}$`}
             inputMode="decimal"
@@ -239,7 +239,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             type="text"
             onChange={(e) => onChange(e)}
             placeholder="0.000"
-            className="bg-transparent focus-visible:outline-none w-full text-right px-2"
+            className="bg-transparent border p-2 focus-visible:outline-none w-full text-right px-2 rounded-md"
             value={amount}
           />
         </div>
@@ -252,7 +252,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             Cancel
           </button>
           {isCheckingAllowance ? (
-            <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
+            <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] ">
               <Loading /> Loading...
             </button>
           ) : inputToken.lpSymbol !== "ETH" &&
@@ -260,7 +260,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             <button
               onClick={handleApprove}
               disabled={isApproving}
-              className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
             >
               {isApproving ? (
                 <div className="flex justify-center gap-1">
@@ -273,7 +273,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
           ) : (
             <button
               onClick={handleDeposit}
-              className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
               disabled={Number(amount) === 0 || pendingZapTx}
             >
               {pendingZapTx ? <Loading /> : t("Zap in")}
