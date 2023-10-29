@@ -1,4 +1,5 @@
 import tokens from "./tokens";
+import addresses from "constants/addresses";
 
 export const liquidityList = [
   {
@@ -62,7 +63,7 @@ export const zapList = [
     pid: 1,
     lpSymbol: "WETH-WILDX",
     isTokenOnly: false,
-    lpAddresses: "0x092b4Fb175D84A234e6451cde3953f9907Ec2589",
+    lpAddresses: addresses.wildWethlp,
     decimals: 18,
     logoA: tokens.wild.logo,
     logoB: tokens.eth.logo,
@@ -74,7 +75,7 @@ const farmsConfig = [
     pid: 0,
     lpSymbol: tokens.wild.symbol,
     isTokenOnly: true,
-    lpAddresses: "0x58E916635A8D406B459C1c6009FC4f981E7a21a4",
+    lpAddresses: addresses.wild,
     token: tokens.wild,
     quoteToken: tokens.wild,
     logoA: "/images/tokens/wildx.svg",
@@ -83,7 +84,7 @@ const farmsConfig = [
   {
     pid: 1,
     lpSymbol: "WETH-WILDX",
-    lpAddresses: "0x092b4Fb175D84A234e6451cde3953f9907Ec2589",
+    lpAddresses: addresses.wildWethlp,
     isTokenOnly: false,
     token: tokens.wild,
     quoteToken: tokens.weth,
@@ -93,7 +94,7 @@ const farmsConfig = [
   {
     pid: 2,
     lpSymbol: "WETH-USDC",
-    lpAddresses: "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b", //"0x61D62650278b87F64305e07fCbaeB53c7C0f4f6C",
+    lpAddresses: addresses.usdcLp,
     isTokenOnly: false,
     token: tokens.usdc,
     quoteToken: tokens.weth,

@@ -2,7 +2,7 @@
   {
     "inputs": [
       {
-        "internalType": "contract WildToken",
+        "internalType": "address",
         "name": "_wildx",
         "type": "address"
       },
@@ -18,12 +18,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_wildxPerBlock",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_startBlock",
+        "name": "_startTime",
         "type": "uint256"
       }
     ],
@@ -138,6 +133,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "MAX_COMPOUND_PER_DAY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -145,7 +153,7 @@
         "type": "uint256"
       },
       {
-        "internalType": "contract IERC20",
+        "internalType": "address",
         "name": "_lpToken",
         "type": "address"
       },
@@ -157,6 +165,11 @@
       {
         "internalType": "bool",
         "name": "_withUpdate",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "_isNFTPool",
         "type": "bool"
       }
     ],
@@ -179,6 +192,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "amountPerNFT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -189,11 +215,6 @@
         "internalType": "uint256",
         "name": "_amount",
         "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "_isCompound",
-        "type": "bool"
       }
     ],
     "name": "deposit",
@@ -280,12 +301,12 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_from",
+        "name": "_fromTime",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_to",
+        "name": "_toTime",
         "type": "uint256"
       }
     ],
@@ -297,7 +318,7 @@
         "type": "uint256"
       }
     ],
-    "stateMutability": "pure",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -306,11 +327,6 @@
         "internalType": "uint256[]",
         "name": "_pids",
         "type": "uint256[]"
-      },
-      {
-        "internalType": "bool",
-        "name": "_isCompound",
-        "type": "bool"
       }
     ],
     "name": "harvestMany",
@@ -373,7 +389,7 @@
     "name": "poolInfo",
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "internalType": "address",
         "name": "lpToken",
         "type": "address"
       },
@@ -384,7 +400,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "lastRewardBlock",
+        "name": "lastRewardTime",
         "type": "uint256"
       },
       {
@@ -396,6 +412,11 @@
         "internalType": "uint16",
         "name": "depositFeeBP",
         "type": "uint16"
+      },
+      {
+        "internalType": "bool",
+        "name": "isNFTPool",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -440,7 +461,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_startBlock",
+        "name": "_startTime",
         "type": "uint256"
       },
       {
@@ -450,6 +471,19 @@
       }
     ],
     "name": "set",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_newAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAmountPerNFT",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -481,21 +515,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_newPid",
-        "type": "uint256"
-      }
-    ],
-    "name": "setWildXPoolPid",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
-    "name": "startBlock",
+    "name": "startTime",
     "outputs": [
       {
         "internalType": "uint256",
@@ -509,6 +530,19 @@
   {
     "inputs": [],
     "name": "totalAllocPoint",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalDevAlloc",
     "outputs": [
       {
         "internalType": "uint256",
@@ -536,7 +570,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_wildxPerBlock",
+        "name": "_wildxPerSecond",
         "type": "uint256"
       }
     ],
@@ -582,18 +616,10 @@
         "internalType": "uint256",
         "name": "rewardDebt",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "wildPoolPId",
-    "outputs": [
+      },
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "lastWithdrawTime",
         "type": "uint256"
       }
     ],
@@ -615,7 +641,7 @@
   },
   {
     "inputs": [],
-    "name": "wildxPerBlock",
+    "name": "wildxPerSecond",
     "outputs": [
       {
         "internalType": "uint256",
