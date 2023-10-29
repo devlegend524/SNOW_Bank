@@ -18,8 +18,9 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
       setBalance(balance);
       setLoading(false);
     }
-    fetch();
-  }, []);
+    if (address) fetch();
+  }, [address]);
+
 
   return (
     <>

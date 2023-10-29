@@ -295,7 +295,7 @@ export default function Farms() {
   };
 
   return (
-    <div className="flex justify-center max-w-screen-xl">
+    <div className="flex justify-center max-w-screen-xl mt-12">
       <div className="container m-3">
         <FarmBanner />
         <div className="flex gap-5 flex-col md:flex-row mt-5">

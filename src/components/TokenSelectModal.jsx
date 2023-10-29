@@ -38,8 +38,9 @@ export default function TokenSelectModal({
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       width: "100%",
-      maxWidth: "500px",
-      backgroundColor: "#16171E",
+      maxWidth: "550px",
+      padding: "18px",
+      border: "none!important",
     },
   };
 
@@ -52,34 +53,36 @@ export default function TokenSelectModal({
         style={customStyle}
         contentLabel="Example Modal"
       >
-        <div className="flex justify-between border-b border-yellow-500 py-4">
-          <h1 className="text-xl text-yellow-main">Select Token</h1>
-          <button
-            className="text-2xl text-yellow-main"
-            onClick={() => closeModal()}
-          >
-            &times;
-          </button>
+        <div className="bg-[#16171E] p-6 rounded-md border-gray-300/60 border">
+          <div className="flex justify-between border-b border-yellow-500 py-4">
+            <h1 className="text-xl text-yellow-main">Select Token</h1>
+            <button
+              className="text-2xl text-yellow-main"
+              onClick={() => closeModal()}
+            >
+              &times;
+            </button>
+          </div>
+          <ul className="token_lists">
+            {tokenLists?.length ? (
+              tokenLists.map((token, key) => {
+                return (
+                  <TokenItem
+                    key={key}
+                    disabledToken={disabledToken}
+                    token={token}
+                    handleToken={handleToken}
+                    selected={selected === token.lpAddresses}
+                  />
+                );
+              })
+            ) : (
+              <div className="text-center text-xl text-red-600 py-3">
+                The token does exist!
+              </div>
+            )}
+          </ul>
         </div>
-        <ul className="token_lists px-1">
-          {tokenLists?.length ? (
-            tokenLists.map((token, key) => {
-              return (
-                <TokenItem
-                  key={key}
-                  disabledToken={disabledToken}
-                  token={token}
-                  handleToken={handleToken}
-                  selected={selected === token.lpAddresses}
-                />
-              );
-            })
-          ) : (
-            <div className="text-center text-xl text-red-600 py-3">
-              The token does exist!
-            </div>
-          )}
-        </ul>
       </Modal>
     </div>
   );

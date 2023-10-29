@@ -1,7 +1,6 @@
 import React, { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-const Home = lazy(() => import("pages/Home"));
 const Swap = lazy(() => import("pages/Swap"));
 const Liquidity = lazy(() => import("pages/Liquidity"));
 const NotFound = lazy(() => import("pages/Notfound"));
@@ -13,12 +12,12 @@ const router = createBrowserRouter([
     element: <Farms />,
   },
   {
-    path: "/swap",
-    element: <Swap />,
-  },
-  {
     path: "/farms",
     element: <Farms />,
+  },
+  {
+    path: "/swap",
+    element: <Swap />,
   },
   {
     path: "/liquidity",

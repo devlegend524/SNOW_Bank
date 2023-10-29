@@ -76,19 +76,19 @@ export default function TokenSelect({
             onClick={() => {
               setOpen(true);
             }}
-            className="flex items-center hover:bg-black transition ease-in-out rounded-full cursor-pointer p-2 bg-secondary min-w-max mr-2"
+            className="flex items-center gap-3 hover:bg-black transition ease-in-out rounded-full cursor-pointer p-2 bg-secondary min-w-max mr-2"
           >
             {token.isTokenOnly ? (
-              <img className="w-8 h-8 rounded-full" src={token?.logoA} alt="" />
+              <img className="md:w-8 md:h-8 w-6 h-8 rounded-full" src={token?.logoA} alt="" />
             ) : (
-              <div className="w-8 h-8 relative ml-2">
+              <div className="md:w-8 md:h-8 w-6 h-8 relative ml-2">
                 <img
-                  className="w-8 h-8 rounded-full absolute left-1/2 -translate-x-[80%]"
+                  className="md:w-8 md:h-8 w-6 h-8 rounded-full absolute left-1/2 -translate-x-[80%]"
                   src={token?.logoA}
                   alt=""
                 />{" "}
                 <img
-                  className="w-8 h-8 rounded-full  absolute left-1/2 -translate-x-[30%]"
+                  className="md:w-8 md:h-8 w-6 h-8 rounded-full  absolute left-1/2 -translate-x-[30%]"
                   src={token?.logoB}
                   alt=""
                 />
@@ -113,9 +113,9 @@ export default function TokenSelect({
             {loading ? (
               <div className="bg-secondary mt-[2px]  rounded h-[12px] w-[60px] animate-pulse"></div>
             ) : (
-              <p className="text-sm text-gray-400 text-end flex">
+              <div onClick={handleMaxAmount}  className="text-sm text-gray-400 text-end flex cursor-pointer">
                 {`Balance: ${balance ? toFixed(balance, 5) : "0.0"}`}
-              </p>
+              </div>
             )}
           </div>
           {!selectOnly && (

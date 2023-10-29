@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Notfound() {
   return (
-    <div className="h-full mt-[200px]  flex flex-col items-center justify-center">
+    <div className="h-full  flex flex-col items-center justify-center">
       <h1 className="text-5xl text-white font-bold mb-8 animate-pulse">
         Coming Soon
       </h1>

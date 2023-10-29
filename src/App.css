@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* Begin Header styling */
 .logo {
   /* width: 30%; */
@@ -399,9 +403,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .ReactModal__Content,
 .ReactModal__Content--after-open {
-  border: unset !important;
-  border-radius: 12px !important;
-  border: 1px solid gray !important;
+  background-color: transparent!important;
 }
 
 .ReactModal__Overlay,
@@ -416,4 +418,11 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .balance {
   font-size: 14px!important;
+}
+
+.Toastify__toast-theme--dark {
+  background: #1f212a!important;
+  border: 1px solid #989696;
+  border-radius: 14px;
+  color: var(--toastify-text-color-dark);
 }

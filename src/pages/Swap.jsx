@@ -88,8 +88,7 @@ export default function Swap() {
     if (token.lpSymbol !== "ETH") {
       setIsCheckingAllowance(true);
       const res = await getAllowance(address, token, zapAddress, provider);
-      console.log(res);
-      if (type === "A") {
+      if (type === "A" && res) {
         setTokenAAllowance(res);
       }
       setIsCheckingAllowance(false);
@@ -97,6 +96,11 @@ export default function Swap() {
   };
 
   async function handleApprove() {
+    if (Number(tokenAAmount) <= 0) {
+      notify("error", "Please input the amount.");
+      return;
+    }
+
     try {
       if (Number(tokenAAllowance) < Number(tokenAAmount)) {
         console.log("approving...");
@@ -120,13 +124,15 @@ export default function Swap() {
       console.log(e);
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
+      } else {
+        notify("error", e.reason);
       }
       setIsApproving(false);
     }
   }
 
   async function handleDeposit() {
-    if (tokenA === tokenB) return;
+    if (tokenA === tokenB || !tokenAAmount) return;
     try {
       setPendingTx(true);
       await onZap(
@@ -142,6 +148,8 @@ export default function Swap() {
       console.log(e);
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
+      } else {
+        notify("error", e.reason);
       }
       setPendingTx(false);
     }

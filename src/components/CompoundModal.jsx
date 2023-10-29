@@ -95,6 +95,8 @@ export default function CompoundModal({
       console.log(e);
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
+      } else {
+        notify("error", e.reason)
       }
       setIsApproving(false);
     }
@@ -124,6 +126,8 @@ export default function CompoundModal({
     } catch (e) {
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
+      } else {
+        notify("error", e.reason)
       }
       setZapPendingTx(false);
     }

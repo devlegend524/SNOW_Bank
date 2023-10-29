@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import TokenSelect from "components/TokenSelect";
 import TokenSelectModal from "components/TokenSelectModal";
 

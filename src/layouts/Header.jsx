@@ -39,7 +39,7 @@ export default function Header() {
                 ))}
                 <li className={`list_item`}>
                   <a
-                    href="https://lodgedocs.gitbook.io/wildx/"
+                    href="https://lodgedocs.gitbook.io/wild-bsc/"
                     target="_blank"
                     className={`p-3`}
                     rel="noopener noreferrer"

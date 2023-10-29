@@ -30,6 +30,8 @@ export const stake = async (
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason)
     }
     return null;
   }
@@ -53,6 +55,8 @@ export const unstake = async (
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason)
     }
     return null;
   }
@@ -85,6 +89,8 @@ export const zap = async (
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason)
     }
     return null;
   }
@@ -126,6 +132,8 @@ export const zapForFarm = async (
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason)
     }
     return null;
   }
@@ -139,6 +147,8 @@ export const harvest = async (masterChefContract, pid, isCompound, address) => {
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason)
     }
     return null;
   }
@@ -159,6 +169,8 @@ export const harvestMany = async (
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason)
     }
     return null;
   }

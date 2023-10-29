@@ -110,6 +110,8 @@ export default function ZapInModal({ open, closeModal, pid }) {
       console.log(e);
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
+      } else {
+        notify("error", e.reason)
       }
       setIsApproving(false);
     }
@@ -132,6 +134,8 @@ export default function ZapInModal({ open, closeModal, pid }) {
     } catch (e) {
       if (didUserReject(e)) {
         notify("error", "User Rejected Transaction");
+      } else {
+        notify("error", e.reason)
       }
       setZapPendingTx(false); // 21600
     }

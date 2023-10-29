@@ -19,6 +19,28 @@
     url('/public/fonts//NippoLight.ttf') format('opentype');
 }
 
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1f1c1c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffda0a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ffb10a;
+}
+
+
 body {
   min-height: 100vh;
   margin: 0;
