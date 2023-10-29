@@ -1,9 +1,9 @@
 const tokens = {
   eth: {
-    symbol: "ETH",
-    address: "0x4200000000000000000000000000000000000006", //'0xCbd7a2Db5F38fad25352c3279A8535EB7137dd39', //
+    symbol: "BNB",
+    address: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA", //'0xCbd7a2Db5F38fad25352c3279A8535EB7137dd39', //
     decimals: 18,
-    logo: "/images/tokens/weth.svg",
+    logo: "/images/tokens/bnb.svg",
   },
   wild: {
     symbol: "WILDX",

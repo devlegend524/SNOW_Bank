@@ -262,9 +262,13 @@ export const usePriceWILDXUsdc = () => {
           await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDx")
         ).json();
         if (returned && returned.pairs) {
-          setPriceUsd(returned?.pairs[0].priceUsd);
-          setLiquidity(returned?.pairs[0]?.liquidity?.usd);
-          setMarketCap(returned?.pairs[0]?.fdv);
+          console.log(returned.pairs);
+          const data = returned.pairs.filter(
+            (pair) => pair.chainId === "bsc"
+          )[0];
+          setPriceUsd(data?.priceUsd);
+          setLiquidity(data?.liquidity?.usd);
+          setMarketCap(data?.fdv);
         }
       } catch {}
     }
