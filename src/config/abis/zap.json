@@ -226,7 +226,7 @@
   },
   {
     "inputs": [],
-    "name": "WBNB",
+    "name": "WETH",
     "outputs": [
       {
         "internalType": "address",
