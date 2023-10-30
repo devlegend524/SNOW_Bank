@@ -262,7 +262,6 @@ export const usePriceWILDXUsdc = () => {
           await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDx")
         ).json();
         if (returned && returned.pairs) {
-          console.log(returned.pairs);
           const data = returned.pairs.filter(
             (pair) => pair.chainId === "bsc"
           )[0];

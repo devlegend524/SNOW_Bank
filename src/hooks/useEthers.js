@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useWalletClient, usePublicClient } from 'wagmi';
-import { providers } from 'ethers';
+import * as React from "react";
+import { useWalletClient, usePublicClient } from "wagmi";
+import { providers } from "ethers";
 
 export function walletClientToSigner(walletClient) {
   const { account, chain, transport } = walletClient;
@@ -30,7 +30,7 @@ export function publicClientToProvider(publicClient) {
     name: chain.name,
     ensAddress: chain.contracts?.ensRegistry?.address,
   };
-  if (transport.type === 'fallback')
+  if (transport.type === "fallback")
     return new providers.JsonRpcProvider(
       transport.transports[0].value?.url,
       network

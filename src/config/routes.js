@@ -1,4 +1,4 @@
-export const routes  = [
+export const routes = [
   {
     name: "Home",
     url: "/",
@@ -10,9 +10,5 @@ export const routes  = [
   {
     name: "Farm",
     url: "/farm",
-  },
-  {
-    name: "Liquidity",
-    url: "/liquidity",
   },
 ];

@@ -37,6 +37,9 @@ const getContract = (abi, address, provider) => {
 export const getErc20Contract = (address, provider) => {
   return getContract(erc20Abi, address, provider);
 };
+export const getErc721Contract = (address, provider) => {
+  return getContract(nftABI, address, provider);
+};
 
 export const getLpContract = (address, provider) => {
   return getContract(lpTokenAbi, address, provider);

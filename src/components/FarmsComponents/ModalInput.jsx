@@ -1,30 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Text, Button, Input, Flex, Link } from "uikit";
 import { useTranslation } from "context/Localization";
 import { BigNumber } from "bignumber.js";
-import { background } from "styled-system";
-
+import { useEthersSigner } from "hooks/useEthers";
+import { useAccount } from "wagmi";
+import { getNFTContract } from "utils/contractHelpers";
 const getBoxShadow = ({ theme }) => {
   return theme.shadows.inset;
 };
 
-const StyledTokenInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: 2px;
-  box-shadow: ${getBoxShadow};
-  padding: 20px;
-  width: 100%;
-`;
-
 const StyledInput = styled(Input)`
   box-shadow: none;
   flex: 1;
-  margin: 0 8px;
   padding: 0 8px;
-  background-color: #1c417b;
-  color: #fff;
+  color: black;
 
   @media screen and (min-width: 370px) {
     width: 80px;
@@ -51,51 +41,73 @@ const ModalInput = ({
   value,
   addLiquidityUrl,
   inputTitle,
+  isNFTPool,
   decimals = 18,
 }) => {
+  const [userBalance, setUserBalance] = useState("");
+  const { address } = useAccount();
+  const signer = useEthersSigner();
   const { t } = useTranslation();
   const isBalanceZero = max === "0" || !max;
 
-  const displayBalance = (balance) => {
+  const displayBalance = async (balance) => {
+    const nftContract = getNFTContract(signer);
     if (isBalanceZero) {
-      return "0";
+      setUserBalance("0");
     }
-    const balanceBigNumber = new BigNumber(balance);
-    if (balanceBigNumber.gt(0) && balanceBigNumber.lt(0.0001)) {
-      return balanceBigNumber.toLocaleString();
+    if (isNFTPool) {
+      const tokenIds = await nftContract.walletOfOwner(address);
+      console.log(tokenIds.toString());
+      setUserBalance(balance + " : [ " + tokenIds.toString() + " ]");
+    } else {
+      const balanceBigNumber = new BigNumber(balance);
+      if (balanceBigNumber.gt(0) && balanceBigNumber.lt(0.0001)) {
+        setUserBalance(balanceBigNumber.toLocaleString());
+      }
+      setUserBalance(balanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN));
     }
-    return balanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN);
   };
 
+  useEffect(() => {
+    if (address && signer) displayBalance(max);
+  }, [address, signer, max]);
+
   return (
-    <div style={{ position: "relative", color: "white" }}>
-      <StyledTokenInput>
-        <div className="flex items-center justify-between pl-[16px] pb-2">
-          <Text fontSize="15px" color="textWhite">
-            {inputTitle}
-          </Text>
-          <Text fontSize="15px" color="textWhite">
-            {t("Balance: %balance%", { balance: displayBalance(max) })}
-          </Text>
+    <div className="relative">
+      <div className="flex items-center flex-col">
+        <div className="flex flex-row justify-between pb-3 w-full">
+          <div>
+            <Text fontSize="15px" color="textWhite">
+              {inputTitle}
+            </Text>
+          </div>
+          <div>
+            <Text fontSize="15px" color="textWhite">
+              {t("Balance: %balance%", { balance: userBalance })}
+            </Text>
+          </div>
         </div>
-        <div className="flex items-center justify-acound">
+        <div className="flex flex-row items-center justify-between w-full gap-3 py-3">
           <StyledInput
             pattern={`^[0-9]*[.,]?[0-9]{0,${decimals}}$`}
             inputMode="decimal"
             step="any"
             min="0"
             onChange={onChange}
-            placeholder="0"
+            placeholder={isNFTPool ? "token Id" : "0"}
             value={value}
           />
-          <Button scale="sm" onClick={onSelectMax} mr="8px">
-            {t("Max")}
-          </Button>
+          {!isNFTPool && (
+            <Button scale="sm" onClick={onSelectMax} mr="8px">
+              {t("Max")}
+            </Button>
+          )}
+
           <Text fontSize="16px" color="textWhite">
             {symbol}
           </Text>
         </div>
-      </StyledTokenInput>
+      </div>
       {isBalanceZero && (
         <StyledErrorMessage fontSize="14px" color="failure">
           {t("No tokens to stake")}:{" "}

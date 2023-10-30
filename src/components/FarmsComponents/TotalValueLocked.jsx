@@ -42,7 +42,7 @@ export default function TotalValueLocked() {
   const totalMinted =
     totalSupply - toReadableAmount(tokenABalanceRead?.data, 18);
   return (
-    <div className="flex-1 bg-main-100 p-8 rounded-md">
+    <div className="flex-1 bg-main-100 p-8 rounded-md shadow shadow-black/60 drop-shadow-xl">
       <div className="text-3xl text-right  font-semibold text-yellow-main">
         Total Value Locked
       </div>

@@ -3,25 +3,49 @@ import erc20ABI from "config/abis/erc20.json";
 import masterchefABI from "config/abis/masterchef.json";
 import multicall from "utils/multicall";
 import { getMasterChefAddress } from "utils/addressHelpers";
+import nftABI from "config/abis/nft.json";
 
 export const fetchFarmUserAllowances = async (account, farmsToFetch) => {
   const masterChefAddress = getMasterChefAddress();
-  const calls = farmsToFetch.map((farm) => {
-    const lpContractAddress = farm.isTokenOnly
-      ? farm.token.address
-      : farm.lpAddresses;
-    return {
-      address: lpContractAddress,
-      name: "allowance",
-      params: [account, masterChefAddress],
-    };
-  });
+
+  const calls = farmsToFetch
+    .filter((farm) => !farm.isNFTPool)
+    .map((farm) => {
+      const lpContractAddress = farm.isTokenOnly
+        ? farm.token.address
+        : farm.lpAddresses;
+      return {
+        address: lpContractAddress,
+        name: "allowance",
+        params: [account, masterChefAddress],
+      };
+    });
+  const callsNFT = farmsToFetch
+    .filter((farm) => farm.isNFTPool)
+    .map((farm) => {
+      const lpContractAddress = farm.isTokenOnly
+        ? farm.token.address
+        : farm.lpAddresses;
+      return {
+        address: lpContractAddress,
+        name: "isApprovedForAll",
+        params: [account, masterChefAddress],
+      };
+    });
 
   const rawLpAllowances = await multicall(erc20ABI, calls);
+  const rawNFTAllowances = await multicall(nftABI, callsNFT);
+
   const parsedLpAllowances = rawLpAllowances.map((lpBalance) => {
     return new BigNumber(lpBalance).toJSON();
   });
-  return parsedLpAllowances;
+
+  const parsedNFTAllowances = rawNFTAllowances.map((lpBalance) => {
+    return lpBalance
+      ? new BigNumber("10000000000000000000000").toJSON()
+      : new BigNumber("0").toJSON();
+  });
+  return [...parsedLpAllowances, ...parsedNFTAllowances];
 };
 
 export const fetchFarmUserTokenBalances = async (account, farmsToFetch) => {

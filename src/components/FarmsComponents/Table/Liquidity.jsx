@@ -29,10 +29,10 @@ const Liquidity = ({ liquidity }) => {
   const displayLiquidity =
     liquidity && liquidity.gt(0)
       ? `$${Number(liquidity).toLocaleString(undefined, {
-          maximumFractionDigits: 0,
+          maximumFractionDigits: 3,
         })}`
       : `$${Number(0).toLocaleString(undefined, {
-          maximumFractionDigits: 0,
+          maximumFractionDigits: 3,
         })}`;
   const { t } = useTranslation();
   // const { targetRef, tooltip, tooltipVisible } = useTooltip(

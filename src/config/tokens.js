@@ -2,10 +2,10 @@ import addresses from "constants/addresses";
 
 const tokens = {
   eth: {
-    symbol: "ETH",
+    symbol: "BNB",
     address: addresses.wbnb,
     decimals: 18,
-    logo: "/images/tokens/weth.svg",
+    logo: "/images/tokens/bnb.svg",
   },
   wild: {
     symbol: "WILDX",
@@ -31,6 +31,12 @@ const tokens = {
     address: addresses.usdc,
     decimals: 18,
     logo: "/images/tokens/usdc.svg",
+  },
+  nft: {
+    symbol: "WILDx NFT",
+    address: addresses.nft,
+    decimals: 18,
+    logo: "/images/tokens/link.svg",
   },
 };
 

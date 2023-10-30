@@ -1,23 +1,28 @@
-import { useCallback } from 'react'
-import { approve } from 'utils/callHelpers'
-import { useMasterchef } from './useContract'
-import { useAccount } from 'wagmi'
+import { useCallback } from "react";
+import { approve } from "utils/callHelpers";
+import { useMasterchef } from "./useContract";
+import { useAccount } from "wagmi";
 // Approve a Farm
-export const useApprove = (lpContract) => {
-  const { address } = useAccount()
-  const masterChefContract = useMasterchef()
+export const useApprove = (lpContract, isNFTPool) => {
+  const { address } = useAccount();
+  const masterChefContract = useMasterchef();
 
   const handleApprove = useCallback(async () => {
     try {
-      const tx = await approve(lpContract, masterChefContract, address)
-      return tx
+      const tx = await approve(
+        lpContract,
+        masterChefContract,
+        address,
+        isNFTPool
+      );
+      return tx;
     } catch (e) {
-      console.log(e)
-      return false
+      console.log(e);
+      return false;
     }
-  }, [address, lpContract, masterChefContract])
+  }, [address, lpContract, masterChefContract]);
 
-  return { onApprove: handleApprove }
-}
+  return { onApprove: handleApprove };
+};
 
-export default useApprove
+export default useApprove;

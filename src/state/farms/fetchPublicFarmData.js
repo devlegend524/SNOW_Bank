@@ -4,9 +4,10 @@ import erc20 from "config/abis/erc20.json";
 import { getMasterChefAddress } from "utils/addressHelpers";
 import { BIG_TEN, BIG_ZERO } from "utils/bigNumber";
 import multicall from "utils/multicall";
+import nftABI from "config/abis/nft.json";
 
 const fetchPublicFarmData = async (farm) => {
-  const { pid, lpAddresses, token, quoteToken } = farm;
+  const { pid, lpAddresses, token, quoteToken, isNFTPool } = farm;
   const lpAddress = lpAddresses;
   const calls = [
     // Balance of token in the LP contract
@@ -32,32 +33,26 @@ const fetchPublicFarmData = async (farm) => {
       address: lpAddress,
       name: "totalSupply",
     },
-    // Token decimals
-    {
-      address: token.address,
-      name: "decimals",
-    },
-    // Quote token decimals
-    {
-      address: quoteToken.address,
-      name: "decimals",
-    },
   ];
 
-  const [
-    tokenBalanceLP,
-    quoteTokenBalanceLP,
-    lpTokenBalanceMC,
-    lpTotalSupply,
-    tokenDecimals,
-    quoteTokenDecimals,
-  ] = await multicall(erc20, calls);
+  const [tokenBalanceLP, quoteTokenBalanceLP, lpTokenBalanceMC, lpTotalSupply] =
+    await multicall(isNFTPool ? nftABI : erc20, calls);
   let tokenAmountTotal;
   let quoteTokenAmountTotal = BIG_ZERO;
   let lpTotalInQuoteToken = BIG_ZERO;
   let tokenPriceVsQuote = BIG_ZERO;
+  const tokenDecimals = 18;
+  const quoteTokenDecimals = 18;
 
-  if (farm.isTokenOnly) {
+  if (farm.isNFTPool) {
+    tokenAmountTotal = new BigNumber(lpTokenBalanceMC);
+    const tokenBalance = new BigNumber(tokenBalanceLP);
+    const quoteTokenBalance = new BigNumber(quoteTokenBalanceLP);
+    if (new BigNumber(tokenBalanceLP).comparedTo(0) > 0) {
+      tokenPriceVsQuote = quoteTokenBalance.div(new BigNumber(tokenBalance));
+    }
+    lpTotalInQuoteToken = tokenAmountTotal.times(tokenPriceVsQuote);
+  } else if (!farm.isNFTPool && farm.isTokenOnly) {
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
       BIG_TEN.pow(tokenDecimals)
     );

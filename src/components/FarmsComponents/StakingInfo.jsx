@@ -43,7 +43,7 @@ export default function FarmStaking() {
       }
       if (_pids.length > 0)
         // eslint-disable-next-line no-await-in-loop
-        await harvestMany(masterChefContract, _pids, false, address);
+        await harvestMany(masterChefContract, _pids, address);
     } catch (error) {
       console.log(error);
     }
@@ -82,7 +82,7 @@ export default function FarmStaking() {
   }
 
   return (
-    <div className="flex-1 bg-main-100 p-8 rounded-md">
+    <div className="flex-1 bg-main-100 p-8 rounded-md shadow shadow-black/60 drop-shadow-xl">
       <div className="text-3xl text-end font-semibold text-yellow-main mb-5">
         Farms & Staking
       </div>

@@ -44,7 +44,11 @@ export default function TokenSelect({
   };
 
   const handleChangeValue = (e) => {
-    setAmount(Number(e.target.value));
+    if (!e.target.value) {
+      setAmount("");
+    } else {
+      setAmount(Number(e.target.value));
+    }
   };
 
   useEffect(() => {
@@ -79,7 +83,11 @@ export default function TokenSelect({
             className="flex items-center gap-3 hover:bg-black transition ease-in-out rounded-full cursor-pointer p-2 bg-secondary min-w-max mr-2"
           >
             {token.isTokenOnly ? (
-              <img className="md:w-8 md:h-8 w-6 h-8 rounded-full" src={token?.logoA} alt="" />
+              <img
+                className="md:w-8 md:h-8 w-6 h-8 rounded-full"
+                src={token?.logoA}
+                alt=""
+              />
             ) : (
               <div className="md:w-8 md:h-8 w-6 h-8 relative ml-2">
                 <img
@@ -113,7 +121,10 @@ export default function TokenSelect({
             {loading ? (
               <div className="bg-secondary mt-[2px]  rounded h-[12px] w-[60px] animate-pulse"></div>
             ) : (
-              <div onClick={handleMaxAmount}  className="text-sm text-gray-400 text-end flex cursor-pointer">
+              <div
+                onClick={handleMaxAmount}
+                className="text-sm text-gray-400 text-end flex cursor-pointer"
+              >
                 {`Balance: ${balance ? toFixed(balance, 5) : "0.0"}`}
               </div>
             )}

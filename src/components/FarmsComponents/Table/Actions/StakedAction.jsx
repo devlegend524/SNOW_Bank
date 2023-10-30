@@ -14,7 +14,6 @@ import { useFarmUser, useLpTokenPrice } from "state/hooks";
 import { fetchFarmUserDataAsync } from "state/farms";
 import { useTranslation } from "context/Localization";
 import { useApprove } from "hooks/useApprove";
-import { useERC20 } from "hooks/useContract";
 import { BASE_ADD_LIQUIDITY_URL } from "config";
 import { useAppDispatch } from "state";
 import getLiquidityUrlPathParts from "utils/getLiquidityUrlPathParts";
@@ -30,9 +29,11 @@ import WithdrawModal from "../../WithdrawModal";
 import { ActionContainer, ActionTitles, ActionContent, Earned } from "./styles";
 import { useAccount } from "wagmi";
 import { Tooltip } from "react-tooltip";
-
+import { getErc20Contract, getErc721Contract } from "utils/contractHelpers";
+import { useEthersSigner } from "hooks/useEthers";
 const StakedAction = ({
   isTokenOnly,
+  isNFTPool,
   pid,
   lpSymbol,
   lpAddresses,
@@ -45,6 +46,7 @@ const StakedAction = ({
 }) => {
   const { t } = useTranslation();
   const { address } = useAccount();
+  const signer = useEthersSigner();
   const [requestedApproval, setRequestedApproval] = useState(false);
   const {
     allowance,
@@ -58,8 +60,8 @@ const StakedAction = ({
   const stakedBalance = new BigNumber(stakedBalanceAsString).times(
     new BigNumber(10).pow(18 - decimals)
   );
-  const { onStake } = useStake(pid);
-  const { onUnstake } = useUnstake(pid);
+  const { onStake } = useStake(pid, isNFTPool);
+  const { onUnstake } = useUnstake(pid, isNFTPool);
   const location = useLocation();
   const lpPrice = useLpTokenPrice(lpSymbol);
 
@@ -103,6 +105,7 @@ const StakedAction = ({
   const [onPresentDeposit] = useModal(
     <DepositModal
       pid={pid}
+      isNFTPool={isNFTPool}
       account={address}
       max={tokenBalance}
       onConfirm={handleStake}
@@ -120,9 +123,11 @@ const StakedAction = ({
       tokenName={lpSymbol}
     />
   );
-  const lpContract = useERC20(lpAddress);
+  const lpContract = isNFTPool
+    ? getErc721Contract(lpAddress, signer)
+    : getErc20Contract(lpAddress, signer);
   const dispatch = useAppDispatch();
-  const { onApprove } = useApprove(lpContract);
+  const { onApprove } = useApprove(lpContract, isNFTPool);
 
   const handleApprove = useCallback(async () => {
     try {

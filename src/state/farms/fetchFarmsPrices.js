@@ -81,7 +81,6 @@ const getFarmQuoteTokenPrice = (
   if (farm.quoteToken.symbol === "WETH") {
     return wethPriceUsdt;
   }
-  console.log(farm.quoteToken.symbol);
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }

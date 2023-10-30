@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import {
   getErc20Contract,
+  getErc721Contract,
   getWILDXContract,
   getMasterchefContract,
   getZapContract,
@@ -18,6 +19,10 @@ import { CHAIN_ID } from "config";
 export const useERC20 = (address) => {
   const signer = useEthersSigner();
   return useMemo(() => getErc20Contract(address, signer), [address, signer]);
+};
+export const useERC721 = (address) => {
+  const signer = useEthersSigner();
+  return useMemo(() => getErc721Contract(address, signer), [address, signer]);
 };
 
 export const useWILDX = () => {

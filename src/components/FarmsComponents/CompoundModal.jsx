@@ -30,6 +30,7 @@ const customStyles = {
     background: "#1F212A",
     color: "white",
     border: "none",
+    background: "black",
   },
 };
 
@@ -93,7 +94,7 @@ export default function CompoundModal({
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setIsApproving(false);
     }
@@ -124,7 +125,7 @@ export default function CompoundModal({
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setZapPendingTx(false);
     }
@@ -158,7 +159,7 @@ export default function CompoundModal({
             <div className="bg-secondary-700 rounded-full p-2 flex mb-2">
               <select
                 name="tokenA"
-                className="bg-transparent focus-visible:outline-none w-full cursor-pointer"
+                className="focus-visible:outline-none w-full cursor-pointer bg-primary rounded-full p-3"
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
@@ -166,7 +167,7 @@ export default function CompoundModal({
                     return (
                       <option
                         key={key}
-                        className="bg-secondary-700"
+                        className="bg-secondary-700 px-3"
                         value={key}
                       >
                         {item?.lpSymbol}

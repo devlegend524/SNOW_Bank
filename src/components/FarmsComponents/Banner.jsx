@@ -58,7 +58,7 @@ export default function FarmBanner() {
     }
   }, [chain]);
   return (
-    <div className="flex justify-center flex-col md:flex-row bg-main-100 rounded-md">
+    <div className="flex justify-center flex-col md:flex-row bg-main-100 rounded-md shadow shadow-black/60 drop-shadow-xl">
       <div className="p-3 md:p-12 md:w-1/2 xl:w-2/3 w-full text-center md:text-left">
         <h1 className="text-7xl">
           WILDx on <span className="text-yellow-main font-semibold">BSC</span>

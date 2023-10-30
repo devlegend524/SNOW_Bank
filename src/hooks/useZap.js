@@ -1,34 +1,50 @@
-import { useCallback } from 'react'
-import { zap, zapForFarm } from 'utils/callHelpers'
-import { useZapContract } from './useContract'
-import { useAccount } from 'wagmi'
+import { useCallback } from "react";
+import { zap, zapForFarm } from "utils/callHelpers";
+import { useZapContract } from "./useContract";
+import { useAccount } from "wagmi";
 
 const useZap = () => {
-  const { address } = useAccount()
-  const zapContract = useZapContract()
+  const { address } = useAccount();
+  const zapContract = useZapContract();
 
   const handleZap = useCallback(
-    async (tokenA, isNative, amount, tokenB, isOutNative) => {
-      await zap(zapContract, tokenA, isNative, amount, tokenB, isOutNative, address)
+    async (tokenA, isNative, amount, tokenB, isNativeOut) => {
+      await zap(
+        zapContract,
+        tokenA,
+        isNative,
+        amount,
+        tokenB,
+        isNativeOut,
+        address
+      );
     },
-    [address, zapContract],
-  )
+    [address, zapContract]
+  );
 
-  return { onZap: handleZap }
-}
+  return { onZap: handleZap };
+};
 
 export const useZapForFarm = () => {
-  const { address } = useAccount()
-  const zapContract = useZapContract()
+  const { address } = useAccount();
+  const zapContract = useZapContract();
 
   const handleZap = useCallback(
     async (tokenA, isNative, amount, tokenB, pid) => {
-      await zapForFarm(zapContract, tokenA, isNative, amount, tokenB, pid, address)
+      await zapForFarm(
+        zapContract,
+        tokenA,
+        isNative,
+        amount,
+        tokenB,
+        pid,
+        address
+      );
     },
-    [address, zapContract],
-  )
+    [address, zapContract]
+  );
 
-  return { onZapForFarm: handleZap }
-}
+  return { onZapForFarm: handleZap };
+};
 
-export default useZap
+export default useZap;

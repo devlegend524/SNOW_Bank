@@ -15,7 +15,7 @@ const getDisabledStyles = ({ $isLoading, theme }) => {
   return `
     &:disabled,
     &.pancake-button--disabled {
-      background-color: #E9EAEB;
+      background-color: #FFC412;
       border-color: #E9EAEB;
       box-shadow: none;
       color: #BDC2C4;
@@ -48,7 +48,6 @@ const StyledButton = styled.button`
   line-height: 1;
   opacity: ${getOpacity};
   outline: 0;
-  transition: background-color 0.2s, opacity 0.2s;
 
   &:hover:not(:disabled):not(.pancake-button--disabled):not(
       .pancake-button--disabled
@@ -68,7 +67,7 @@ const StyledButton = styled.button`
   font-weight: 600;
   font-size: 16px;
   color: #fff;
-  background-color: #031531;
+  background-color: #ffc412;
 
   ${getDisabledStyles}
   ${variant({

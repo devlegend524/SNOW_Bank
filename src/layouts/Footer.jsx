@@ -6,7 +6,8 @@ export default function Footer() {
     <footer className="flex justify-around items-center absolute bottom-0 w-full mb-2">
       <div className="text-md">
         @{moment().format("YYYY")} BSC.Wildx.FARM{" "}
-        <span className="font-semibold mx-2">( v3.3.4 )</span> All Rights Reserved.
+        <span className="font-semibold mx-2">( v3.3.4 )</span> All Rights
+        Reserved.
       </div>
       <div className="hidden md:flex gap-4">
         {socials.map((item, index) => {
@@ -14,7 +15,7 @@ export default function Footer() {
           return (
             <a
               href={item.href}
-              key={index}G
+              key={index}
               className={`p-3 flex items-center gap-2 hover:text-gray-400`}
               target="_blank"
               rel="noopener noreferrer"

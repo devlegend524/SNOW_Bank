@@ -99,7 +99,7 @@ const Farm = ({
           {isTokenOnly ? (
             <StyledPrimaryImage
               variant="inverted"
-              src={getImageUrlFromToken(token)}
+              src={token.logo}
               width={imgSize}
               height={imgSize}
             />

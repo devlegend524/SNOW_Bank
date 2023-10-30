@@ -8,6 +8,7 @@ import { getFullDisplayBalance } from "utils/formatBalance";
 
 const DepositModal = ({
   max,
+  isNFTPool,
   onConfirm,
   onDismiss,
   tokenName = "",
@@ -20,7 +21,7 @@ const DepositModal = ({
   const [pendingTx, setPendingTx] = useState(false);
   const { t } = useTranslation();
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max);
+    return isNFTPool ? max : getFullDisplayBalance(max);
   }, [max]);
 
   const valNumber = new BigNumber(val);
@@ -46,6 +47,7 @@ const DepositModal = ({
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         max={fullBalance}
+        isNFTPool={isNFTPool}
         symbol={tokenName}
         addLiquidityUrl={addLiquidityUrl}
         inputTitle={t("Stake")}
@@ -75,7 +77,7 @@ const DepositModal = ({
             setPendingTx(false);
             onDismiss();
           }}
-          style={{ alignSelf: "center", color: "white" }}
+          style={{ alignSelf: "center", color: "black" }}
         >
           {pendingTx ? t("Pending Confirmation") : t("Confirm")}
         </Button>

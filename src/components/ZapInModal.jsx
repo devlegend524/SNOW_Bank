@@ -36,11 +36,11 @@ const customStyles = {
 const tokensList = [
   {
     pid: 0,
-    lpSymbol: "ETH",
+    lpSymbol: "BNB",
     isTokenOnly: true,
     lpAddresses: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA",
     decimals: 18,
-    logoA: "/images/tokens/weth.svg",
+    logoA: "/images/tokens/bnb.svg",
     logoB: "",
   },
   {
@@ -49,7 +49,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA",
     decimals: 18,
-    logoA: "https://svgshare.com/getbyhash/sha1-38zdMb/7WVkaVJEus7guQuBuCSU=",
+    logoA: "/images/tokens/wbnb.svg",
     logoB: "",
   },
 ];
@@ -111,7 +111,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setIsApproving(false);
     }
@@ -123,7 +123,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
     try {
       await onZapForFarm(
         inputToken.lpAddresses,
-        inputToken.lpSymbol === "ETH" ? true : false,
+        inputToken.lpSymbol === "BNB" ? true : false,
         fromReadableAmount(amount.toString(), inputToken.decimals),
         targetToken.lpAddresses,
         targetToken.pid
@@ -135,7 +135,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
       if (didUserReject(e)) {
         notify("error", "User Rejected Transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setZapPendingTx(false); // 21600
     }
@@ -149,7 +149,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
   const getBalance = async (token) => {
     try {
       setLoadingBalance(true);
-      if (token.lpSymbol === "ETH") {
+      if (token.lpSymbol === "BNB") {
         const balance = await signer.getBalance();
         setBalance(toReadableAmount(balance, token.decimals));
       } else {
@@ -205,7 +205,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             onChange={(e) => handleChangeToken(e.target.value)}
           >
             {tokensList.map((item, key) => {
-              if (item.lpSymbol === "WETH" || item.lpSymbol === "ETH")
+              if (item.lpSymbol === "WETH" || item.lpSymbol === "BNB")
                 return (
                   <option key={key} className="" value={key}>
                     {item?.lpSymbol}
@@ -259,7 +259,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] ">
               <Loading /> Loading...
             </button>
-          ) : inputToken.lpSymbol !== "ETH" &&
+          ) : inputToken.lpSymbol !== "BNB" &&
             Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ? (
             <button
               onClick={handleApprove}

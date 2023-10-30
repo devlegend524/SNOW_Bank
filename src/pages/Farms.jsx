@@ -42,7 +42,7 @@ export default function Farms() {
     NUMBER_OF_FARMS_VISIBLE
   );
   const [observerIsSet, setObserverIsSet] = useState(false);
-  const wildxPerBlock = useWILDXPerSecond();
+  const wildxPerSecond = useWILDXPerSecond();
 
   const { data: farmsData, userDataLoaded } = useFarms();
 
@@ -100,6 +100,7 @@ export default function Farms() {
         if (!farm.lpTotalInQuoteToken || !farm.quoteToken.usdcPrice) {
           return farm;
         }
+
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(
           farm.quoteToken.usdcPrice
         );
@@ -108,7 +109,7 @@ export default function Farms() {
           new BigNumber(farm.poolWeight),
           wildPrice,
           totalLiquidity,
-          wildxPerBlock
+          wildxPerSecond
         );
         return { ...farm, apr, liquidity: totalLiquidity };
       });
@@ -121,7 +122,7 @@ export default function Farms() {
       }
       return farmsToDisplayWithAPR;
     },
-    [wildPrice, query, isActive, wildxPerBlock]
+    [wildPrice, query, isActive, wildxPerSecond]
   );
 
   useEffect(() => {

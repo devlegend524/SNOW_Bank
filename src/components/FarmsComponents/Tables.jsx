@@ -12,7 +12,10 @@ export default function FarmTables(props) {
   });
 
   return (
-    <div ref={tableWrapperEl} className="overflow-visible">
+    <div
+      ref={tableWrapperEl}
+      className="overflow-visible shadow shadow-black/60 drop-shadow-xl"
+    >
       <table className="border-collapse rounded-sm mx-auto w-full main_bg">
         <tbody>
           {rows.map((row) => {

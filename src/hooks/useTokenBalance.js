@@ -72,14 +72,14 @@ export const useTotalSupply = () => {
 
 export const useWILDXPerSecond = () => {
   const { fastRefresh } = useRefresh();
-  const [wildxPerBlock, setWildPerSecond] = useState(BIG_ZERO);
+  const [wildxPerSecond, setWildPerSecond] = useState(BIG_ZERO);
   const { chain } = useNetwork();
   const provider = useEthersProvider();
   useEffect(() => {
     async function fetchWildPerSecond() {
       try {
         const masterChefContract = getMasterchefContract(provider);
-        const perSecond = await masterChefContract.wildxPerBlock();
+        const perSecond = await masterChefContract.wildxPerSecond();
         setWildPerSecond(ethers.utils.formatUnits(perSecond, 18));
       } catch (e) {
         console.log(e);
@@ -88,7 +88,7 @@ export const useWILDXPerSecond = () => {
     if (provider) fetchWildPerSecond();
   }, [fastRefresh, provider]);
 
-  return wildxPerBlock;
+  return wildxPerSecond;
 };
 
 export const useBurnedBalance = (tokenAddress) => {

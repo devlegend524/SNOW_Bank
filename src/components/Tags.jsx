@@ -44,7 +44,7 @@ const SingleStakeTag = (props) => {
       startIcon={<VerifiedIcon width="18px" color="success" mr="4px" />}
       {...props}
     >
-      {t("Single Stake")}
+      {t("NFT Stake")}
     </Tag>
   );
 };

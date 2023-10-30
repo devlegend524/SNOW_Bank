@@ -4,12 +4,21 @@ import { getMasterChefAddress } from "utils/addressHelpers";
 import { didUserReject, fromReadableAmount } from "./customHelpers";
 import { notify } from "./toastHelper";
 
-export const approve = async (lpContract, masterChefContract, address) => {
-  return await lpContract.approve(
-    masterChefContract.address,
-    ethers.constants.MaxUint256,
-    { from: address }
-  );
+export const approve = async (
+  lpContract,
+  masterChefContract,
+  address,
+  isNFTPool
+) => {
+  return (await isNFTPool)
+    ? lpContract.setApprovalForAll(masterChefContract.address, true, {
+        from: address,
+      })
+    : lpContract.approve(
+        masterChefContract.address,
+        ethers.constants.MaxUint256,
+        { from: address }
+      );
 };
 
 export const stake = async (
@@ -17,21 +26,19 @@ export const stake = async (
   pid,
   amount,
   decimals = 18,
-  isCompound
+  isNFTPool
 ) => {
   try {
     const tx = await masterChefContract.deposit(
       pid,
-      fromReadableAmount(amount, decimals),
-      isCompound
+      isNFTPool ? amount : fromReadableAmount(amount, decimals)
     );
-    await tx.wait();
     notify("success", "Transaction successful!");
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
     } else {
-      notify("error", e.reason)
+      notify("error", e.reason);
     }
     return null;
   }
@@ -42,21 +49,21 @@ export const unstake = async (
   pid,
   amount,
   address,
-  decimals = 18
+  decimals = 18,
+  isNFTPool
 ) => {
   try {
     const tx = await masterChefContract.withdraw(
       pid,
-      fromReadableAmount(amount, decimals),
+      isNFTPool ? amount : fromReadableAmount(amount, decimals),
       { from: address }
     );
-    await tx.wait();
     notify("success", "Transaction successful!");
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
     } else {
-      notify("error", e.reason)
+      notify("error", e.reason);
     }
     return null;
   }
@@ -68,29 +75,30 @@ export const zap = async (
   isNative,
   amount,
   tokenB,
-  isOutNative,
+  isNativeOut,
   address
 ) => {
   try {
     if (isNative) {
-      const tx = await zapContract.zapETH(tokenB, {
+      console.log(tokenB);
+      await zapContract.zapETH(tokenB, {
         from: address,
         value: amount,
       });
-      await tx.wait();
+
       notify("success", "Zap successful!");
     } else {
-      const tx = await zapContract.zap(tokenA, amount, tokenB, isOutNative, {
+      await zapContract.zap(tokenA, amount, tokenB, isNativeOut, {
         from: address,
       });
-      await tx.wait();
       notify("success", "Zap successful!");
     }
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
     } else {
-      notify("error", e.reason)
+      notify("error", e.reason);
+      console.log(e);
     }
     return null;
   }
@@ -133,35 +141,30 @@ export const zapForFarm = async (
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
     } else {
-      notify("error", e.reason)
+      notify("error", e.reason);
     }
     return null;
   }
 };
 
-export const harvest = async (masterChefContract, pid, isCompound, address) => {
+export const harvest = async (masterChefContract, pid, address) => {
   try {
-    const tx = await masterChefContract.deposit(pid, "0", isCompound);
+    const tx = await masterChefContract.deposit(pid, "0");
     await tx.wait();
     notify("success", "Harvest successful!");
   } catch (e) {
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
     } else {
-      notify("error", e.reason)
+      notify("error", e.reason);
     }
     return null;
   }
 };
 
-export const harvestMany = async (
-  masterChefContract,
-  pids,
-  isCompound,
-  address
-) => {
+export const harvestMany = async (masterChefContract, pids, address) => {
   try {
-    const tx = await masterChefContract.harvestMany(pids, isCompound, {
+    const tx = await masterChefContract.harvestMany(pids, {
       from: address,
     });
     await tx.wait();
@@ -170,7 +173,7 @@ export const harvestMany = async (
     if (didUserReject(e)) {
       notify("error", "User rejected transaction");
     } else {
-      notify("error", e.reason)
+      notify("error", e.reason);
     }
     return null;
   }

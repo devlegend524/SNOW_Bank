@@ -85,7 +85,7 @@ export default function Swap() {
   };
 
   const checkAllowance = async (token, type) => {
-    if (token.lpSymbol !== "ETH") {
+    if (token.lpSymbol !== "BNB") {
       setIsCheckingAllowance(true);
       const res = await getAllowance(address, token, zapAddress, provider);
       if (type === "A" && res) {
@@ -137,10 +137,10 @@ export default function Swap() {
       setPendingTx(true);
       await onZap(
         tokenA.lpAddresses,
-        tokenA.lpSymbol === "ETH" ? true : false,
+        tokenA.lpSymbol === "BNB" ? true : false,
         ethers.utils.parseEther(tokenAAmount.toString() || "1"),
         tokenB.lpAddresses,
-        tokenB.lpSymbol === "ETH" ? true : false
+        tokenB.lpSymbol === "BNB" ? true : false
       );
       refreshData();
       setPendingTx(false);
@@ -227,7 +227,7 @@ export default function Swap() {
             <button className="custom_btn  mt-8 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
               <Loading /> Loading...
             </button>
-          ) : tokenA.lpSymbol !== "ETH" && Number(tokenAAllowance) === 0 ? (
+          ) : tokenA.lpSymbol !== "BNB" && Number(tokenAAllowance) === 0 ? (
             <button
               onClick={handleApprove}
               disabled={isApproving}
