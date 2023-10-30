@@ -139,8 +139,8 @@ export default function CompoundModal({
   };
 
   useEffect(() => {
-    getAllowance();
-  }, []);
+    if (address & signer) getAllowance();
+  }, [address, signer]);
 
   return (
     <Modal
