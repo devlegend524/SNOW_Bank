@@ -36,6 +36,7 @@ import {
 } from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
 import { toReadableAmount } from "utils/customHelpers";
+import { BIG_TEN } from "utils/bigNumber";
 const StakedAction = ({
   isTokenOnly,
   isNFTPool,
@@ -75,7 +76,7 @@ const StakedAction = ({
   const lpPrice = useLpTokenPrice(lpSymbol);
 
   const isApproved = isNFTPool
-    ? address && allowance
+    ? address && allowance[0]
     : address && allowance && allowance.isGreaterThan(0);
 
   const lpAddress = isTokenOnly ? token.address : lpAddresses;
@@ -104,11 +105,15 @@ const StakedAction = ({
   };
 
   const displayBalance = useCallback(() => {
-    const stakedBalanceBigNumber = getBalanceAmount(stakedBalance);
-    if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
-      return getFullDisplayBalance(stakedBalance, 18, 4).toLocaleString();
+    if (isNFTPool) {
+      return stakedBalance.toString();
+    } else {
+      const stakedBalanceBigNumber = getBalanceAmount(stakedBalance);
+      if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
+        return getFullDisplayBalance(stakedBalance, 18, 4).toLocaleString();
+      }
+      return stakedBalanceBigNumber.toFixed(4, BigNumber.ROUND_DOWN);
     }
-    return stakedBalanceBigNumber.toFixed(4, BigNumber.ROUND_DOWN);
   }, [stakedBalance]);
 
   const _depositFee = depositFee;
@@ -129,6 +134,7 @@ const StakedAction = ({
   );
   const [onPresentWithdraw] = useModal(
     <WithdrawModal
+      isNFTPool={isNFTPool}
       max={stakedBalance}
       onConfirm={handleUnstake}
       tokenName={lpSymbol}
@@ -191,13 +197,13 @@ const StakedAction = ({
                 fontSize="15px"
                 color="white"
                 decimals={2}
-                value={getBalanceNumber(
-                  lpPrice.times(
-                    isNFTPool
-                      ? stakedBalance.times(new BigNumber(amountPerNFT))
-                      : stakedBalance
-                  )
-                )}
+                value={
+                  isNFTPool
+                    ? lpPrice.times(
+                        stakedBalance.times(new BigNumber(amountPerNFT))
+                      )
+                    : getBalanceNumber(lpPrice.times(stakedBalance))
+                }
                 unit=" USD"
                 prefix="~"
               />

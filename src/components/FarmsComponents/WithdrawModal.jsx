@@ -6,12 +6,18 @@ import ModalInput from "./ModalInput";
 import { useTranslation } from "context/Localization";
 import { getFullDisplayBalance } from "utils/formatBalance";
 
-const WithdrawModal = ({ onConfirm, onDismiss, max, tokenName = "" }) => {
+const WithdrawModal = ({
+  isNFTPool,
+  onConfirm,
+  onDismiss,
+  max,
+  tokenName = "",
+}) => {
   const [val, setVal] = useState("");
   const [pendingTx, setPendingTx] = useState(false);
   const { t } = useTranslation();
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max);
+    return isNFTPool ? max : getFullDisplayBalance(max);
   }, [max]);
 
   const valNumber = new BigNumber(val);
@@ -34,7 +40,7 @@ const WithdrawModal = ({ onConfirm, onDismiss, max, tokenName = "" }) => {
     pendingTx ||
     !valNumber.isFinite() ||
     valNumber.eq(0) ||
-    valNumber.gt(fullBalanceNumber);
+    !isNFTPool && valNumber.gt(fullBalanceNumber);
 
   return (
     <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>
@@ -43,6 +49,7 @@ const WithdrawModal = ({ onConfirm, onDismiss, max, tokenName = "" }) => {
         onChange={handleChange}
         value={val}
         max={fullBalance}
+        isNFTPool={isNFTPool}
         symbol={tokenName}
         inputTitle={t("Unstake")}
       />

@@ -69,7 +69,7 @@ const DepositModal = ({
             pendingTx ||
             !valNumber.isFinite() ||
             valNumber.eq(0) ||
-            valNumber.gt(fullBalanceNumber)
+            (!isNFTPool && valNumber.gt(fullBalanceNumber))
           }
           onClick={async () => {
             setPendingTx(true);

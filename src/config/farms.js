@@ -92,7 +92,7 @@ const farmsConfig = [
     logoB: tokens.wbnb.logo,
   },
   {
-    pid: 3,
+    pid: 1,
     lpSymbol: "WBNB-USDC",
     lpAddresses: addresses.usdcLp,
     isTokenOnly: false,
@@ -109,7 +109,7 @@ const farmsConfig = [
     isTokenOnly: true,
     isNFTPool: true,
     token: tokens.nft,
-    quoteToken: tokens.nft,
+    quoteToken: tokens.wild,
     logoA: "/images/tokens/link.svg",
     logoB: "",
   },

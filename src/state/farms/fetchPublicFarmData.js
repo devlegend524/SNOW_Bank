@@ -5,7 +5,9 @@ import { getMasterChefAddress } from "utils/addressHelpers";
 import { BIG_TEN, BIG_ZERO } from "utils/bigNumber";
 import multicall from "utils/multicall";
 import nftABI from "config/abis/nft.json";
-
+import { getMasterchefContract } from "utils/contractHelpers";
+import httpProvider from "utils/providerHelpers";
+import { toReadableAmount } from "utils/customHelpers";
 const fetchPublicFarmData = async (farm) => {
   const { pid, lpAddresses, token, quoteToken, isNFTPool } = farm;
   const lpAddress = lpAddresses;
@@ -45,13 +47,15 @@ const fetchPublicFarmData = async (farm) => {
   const quoteTokenDecimals = 18;
 
   if (farm.isNFTPool) {
+    const masterChef = getMasterchefContract(httpProvider);
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC);
-    const tokenBalance = new BigNumber(tokenBalanceLP);
-    const quoteTokenBalance = new BigNumber(quoteTokenBalanceLP);
+    const amountPerNFT = await masterChef.getAmountPerNFT();
     if (new BigNumber(tokenBalanceLP).comparedTo(0) > 0) {
-      tokenPriceVsQuote = quoteTokenBalance.div(new BigNumber(tokenBalance));
+      tokenPriceVsQuote = new BigNumber(toReadableAmount(amountPerNFT));
     }
-    lpTotalInQuoteToken = tokenAmountTotal.times(tokenPriceVsQuote);
+    lpTotalInQuoteToken = tokenAmountTotal.times(
+      new BigNumber(toReadableAmount(amountPerNFT))
+    );
   } else if (!farm.isNFTPool && farm.isTokenOnly) {
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
       BIG_TEN.pow(tokenDecimals)

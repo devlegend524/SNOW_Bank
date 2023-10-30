@@ -91,12 +91,6 @@ const getFarmQuoteTokenPrice = (
       : BIG_ZERO;
   }
 
-  if (["USDC", "USDT"].includes(farm.quoteToken.symbol)) {
-    return quoteTokenFarm.tokenPriceVsQuote
-      ? new BigNumber(quoteTokenFarm.tokenPriceVsQuote)
-      : BIG_ZERO;
-  }
-
   return BIG_ZERO;
 };
 

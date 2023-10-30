@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Text, Button, Input, Flex, Link } from "uikit";
+import { Text, Button, Input, Link } from "uikit";
 import { useTranslation } from "context/Localization";
 import { BigNumber } from "bignumber.js";
 import { useEthersSigner } from "hooks/useEthers";
 import { useAccount } from "wagmi";
-import { getNFTContract } from "utils/contractHelpers";
+import { getMasterchefContract, getNFTContract } from "utils/contractHelpers";
 const getBoxShadow = ({ theme }) => {
   return theme.shadows.inset;
 };
@@ -52,11 +52,18 @@ const ModalInput = ({
 
   const displayBalance = async (balance) => {
     const nftContract = getNFTContract(signer);
+    const masterChefContract = getMasterchefContract(signer);
+
     if (isBalanceZero) {
       setUserBalance("0");
     }
     if (isNFTPool) {
-      const tokenIds = await nftContract.walletOfOwner(address);
+      let tokenIds;
+      if (inputTitle === "Stake") {
+        tokenIds = await nftContract.walletOfOwner(address);
+      } else {
+        tokenIds = await masterChefContract.getUserStakedNFTs(2, address);
+      }
       console.log(tokenIds.toString());
       setUserBalance(balance + " : [ " + tokenIds.toString() + " ]");
     } else {

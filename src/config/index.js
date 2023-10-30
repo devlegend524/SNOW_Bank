@@ -12,7 +12,7 @@ export const DEFAULT_GAS_PRICE = 2;
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18);
 export const NUMBER_OF_FARMS_VISIBLE = 12;
 export const wildWethFarmPid = 0;
-export const wethUsdcFarmPid = 3;
+export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 

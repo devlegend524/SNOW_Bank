@@ -89,7 +89,9 @@ export const useFarmUser = (pid) => {
   const farm = useFarmFromPid(pid);
   return {
     allowance: farm.userData
-      ? new BigNumber(farm.userData.allowance)
+      ? farm.isNFTPool
+        ? farm.userData.allowance
+        : new BigNumber(farm.userData.allowance)
       : BIG_ZERO,
     tokenBalance: farm.userData
       ? new BigNumber(farm.userData.tokenBalance)
@@ -259,7 +261,7 @@ export const usePriceWILDXUsdc = () => {
     async function fetchData() {
       try {
         const returned = await (
-          await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDxx")
+          await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDxxx")
         ).json();
         if (returned && returned.pairs) {
           const data = returned.pairs.filter(
