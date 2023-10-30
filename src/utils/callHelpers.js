@@ -6,6 +6,7 @@ import {
   fromReadableAmount,
   toReadableAmount,
 } from "./customHelpers";
+import { limitedFunction } from "./limitHelper";
 import { notify } from "./toastHelper";
 
 export const approve = async (
@@ -155,6 +156,11 @@ export const zapForFarm = async (
 };
 
 export const harvest = async (masterChefContract, pid, address) => {
+  if (!limitedFunction()) {
+    notify("error", "You can harvest or compound only three times a day.");
+    return;
+  }
+
   try {
     const tx = await masterChefContract.deposit(pid, "0");
     await tx.wait();
@@ -170,6 +176,11 @@ export const harvest = async (masterChefContract, pid, address) => {
 };
 
 export const harvestMany = async (masterChefContract, pids, address) => {
+  if (!limitedFunction()) {
+    notify("error", "You can harvest or compound only three times a day.");
+    return;
+  }
+
   try {
     const tx = await masterChefContract.harvestMany(pids, {
       from: address,
