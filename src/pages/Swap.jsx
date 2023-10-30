@@ -88,7 +88,6 @@ export default function Swap() {
     if (token.lpSymbol !== "BNB") {
       setIsCheckingAllowance(true);
       const res = await getAllowance(address, token, zapAddress, provider);
-      console.log(res);
       if (type === "A") {
         setTokenAAllowance(res);
       }
