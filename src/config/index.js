@@ -17,8 +17,7 @@ export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  84531: "https://goerli.basescan.org/",
-  8453: "https://pancakeswap.finance/",
+  56: "https://pancakeswap.finance/",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];

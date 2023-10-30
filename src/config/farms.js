@@ -29,6 +29,15 @@ export const liquidityList = [
     logoA: tokens.wbnb.logo,
     logoB: "",
   },
+  {
+    pid: 1,
+    lpSymbol: "WBNB-WILDX",
+    isTokenOnly: false,
+    lpAddresses: addresses.wildWbnblp,
+    decimals: 18,
+    logoA: tokens.wild.logo,
+    logoB: tokens.wbnb.logo,
+  },
 ];
 
 export const zapList = [

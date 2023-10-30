@@ -67,12 +67,12 @@ export const useFactoryContract = () => {
 };
 
 export const useRouterContract = () => {
-  const provider = useEthersProvider();
+  const signer = useEthersSigner();
   const { chain } = useNetwork();
   return useMemo(
     () =>
-      chain && chain.id === CHAIN_ID && getRouterContract(provider, chain?.id),
-    [provider, chain]
+      chain && chain.id === CHAIN_ID && getRouterContract(signer, chain?.id),
+    [signer, chain]
   );
 };
 

@@ -16,13 +16,15 @@ export default function TokenSelect({
   insufficient,
   updateBalance,
   setDirection,
+  tokenType,
 }) {
   const provider = useEthersProvider();
   const { address } = useAccount();
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const [localAmount, setLocalAmount] = useState("");
-  const [debouncedValue] = useDebounce(balance, 1000);
+  const [fromParent, setFromParent] = useState(false);
+  const [debouncedValue] = useDebounce(localAmount, 1000);
 
   const handleMaxAmount = () => {
     setAmount(balance);
@@ -48,13 +50,8 @@ export default function TokenSelect({
   };
 
   const handleChangeValue = (e) => {
-    if (!e.target.value) {
-      setAmount("");
-    } else {
-      setAmount(Number(e.target.value));
-      setLocalAmount(e.target.value);
-      checkAvailable(e.target.value);
-    }
+    setLocalAmount(e.target.value);
+    setFromParent(false);
   };
 
   useEffect(() => {
@@ -69,6 +66,13 @@ export default function TokenSelect({
   }, [token, updateBalance]);
 
   useEffect(() => {
+    if (amount !== localAmount) {
+      setLocalAmount(amount);
+      setFromParent(true);
+    }
+  }, [amount]);
+
+  useEffect(() => {
     if (localAmount) {
       setInsufficient(Number(balance) <= Number(localAmount));
     } else {
@@ -77,12 +81,10 @@ export default function TokenSelect({
   }, [balance]);
 
   useEffect(() => {
-    if (!selectOnly) {
-      if (localAmount && localAmount !== 0 && localAmount !== "0") {
-        setInsufficient(Number(debouncedValue) <= Number(localAmount));
-      } else {
-        setInsufficient(false);
-      }
+    if (Number(debouncedValue) > 0 && !fromParent) {
+      setDirection(tokenType);
+      setAmount(debouncedValue);
+      checkAvailable(debouncedValue);
     }
   }, [debouncedValue]);
 
@@ -149,7 +151,7 @@ export default function TokenSelect({
               className="text-xl text-gray-200 text-end flex items-center"
               placeholder="0.0"
               min={0}
-              value={amount}
+              value={localAmount}
               onChange={handleChangeValue}
             />
           )}

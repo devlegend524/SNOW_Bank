@@ -1,6 +1,5 @@
 export const EXPLORER_URL = {
-  8453: "https://basescan.org/",
-  84531: "https://georli.basescan.org/",
+  56: "https://bscscan.org/",
 };
 
 export const getSortOptions = () => {
