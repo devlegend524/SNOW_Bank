@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="flex justify-around items-center absolute bottom-0 w-full mb-2">
       <div className="text-md">
         @{moment().format("YYYY")} BSC.Wildx.FARM{" "}
-        <span className="font-semibold mx-2">( v3.3.4 )</span> All Rights
+        <span className="font-semibold mx-2">( v1.0 )</span> All Rights
         Reserved.
       </div>
       <div className="hidden md:flex gap-4">
