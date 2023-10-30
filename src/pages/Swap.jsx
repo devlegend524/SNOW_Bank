@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TokenSelectModal from "components/TokenSelectModal";
 import TokenSelect from "components/TokenSelect";
 import { fromReadableAmount, getAllowance } from "utils";
+import { fromReadableAmount, getAllowance } from "utils";
 import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import { zapList } from "config/farms";
@@ -140,7 +141,7 @@ export default function Swap() {
       await onZap(
         tokenA.lpAddresses,
         tokenA.lpSymbol === "BNB" ? true : false,
-        fromReadableAmount(tokenAAmount.toString() || "1", tokenA.decimals),
+        fromReadableAmount(Number(tokenAAmount), tokenA.decimals),
         tokenB.lpAddresses,
         tokenB.lpSymbol === "BNB" ? true : false
       );

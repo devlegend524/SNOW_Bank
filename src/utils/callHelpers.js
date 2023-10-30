@@ -83,7 +83,6 @@ export const zap = async (
   isNativeOut,
   address
 ) => {
-  console.log(amount, amount.toString(), toReadableAmount(Number(amount)));
   try {
     if (isNative) {
       await zapContract.zapETH(tokenB, {
