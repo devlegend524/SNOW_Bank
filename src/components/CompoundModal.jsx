@@ -110,13 +110,13 @@ export default function CompoundModal({
     try {
       if (isAll) {
         const res = await harvestMany(masterChefContract, pid, false, address);
-        if (!res) {
+        if (res === false) {
           setZapPendingTx(false);
           return;
         }
       } else {
         const res = await onReward(false);
-        if (!res) {
+        if (res === false) {
           setZapPendingTx(false);
           return;
         }
@@ -135,6 +135,7 @@ export default function CompoundModal({
         targetToken.lpAddresses,
         targetToken.pid
       );
+
       dispatch(fetchFarmUserDataAsync({ account: address, pids: pid }));
       closeModal();
       setZapPendingTx(false);
