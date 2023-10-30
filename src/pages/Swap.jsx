@@ -196,6 +196,8 @@ export default function Swap() {
             setStates={handleSetTokenAAvailable}
             setInsufficient={handleSetInsufficientA}
             updateBalance={updateBalance}
+            setDirection={()=>{}}
+            tokenType=""
           />
 
           <div className="flex justify-center">
@@ -222,6 +224,8 @@ export default function Swap() {
             setStates={handleSetTokenBAvailable}
             setInsufficient={handleSetInsufficientB}
             updateBalance={updateBalance}
+            setDirection={()=>{}}
+            tokenType=""
           />
 
           {isCheckingAllowance ? (
