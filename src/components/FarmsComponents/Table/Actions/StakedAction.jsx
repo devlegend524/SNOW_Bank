@@ -88,6 +88,7 @@ const StakedAction = ({
 
   const handleStake = async (amount, daysToLock) => {
     try {
+      if (!isApproved) await handleApprove();
       await onStake(amount);
       dispatch(fetchFarmUserDataAsync({ account: address, pids: [pid] }));
     } catch (e) {
@@ -181,82 +182,6 @@ const StakedAction = ({
     );
   }
 
-  if (isApproved) {
-    if (stakedBalance.gt(0)) {
-      return (
-        <div className="flex flex-row items-center justify-between md:justify-end gap-5 p-2 lg:p-4 w-full">
-          <div className="flex flex-col gap-1 justify-between md:min-w-[200px]">
-            <div className="text-lg font-semibold">
-              {lpSymbol}
-              &nbsp;
-              {t("Staked")}
-            </div>
-            <Earned>{displayBalance()}</Earned>
-            {stakedBalance.gt(0) && lpPrice.gt(0) && (
-              <Balance
-                fontSize="15px"
-                color="white"
-                decimals={2}
-                value={
-                  isNFTPool
-                    ? lpPrice.times(
-                        stakedBalance.times(new BigNumber(amountPerNFT))
-                      )
-                    : getBalanceNumber(lpPrice.times(stakedBalance))
-                }
-                unit=" USD"
-                prefix="~"
-              />
-            )}
-          </div>
-          <div className="flex flex-row items-center">
-            <IconButton
-              variant="secondary"
-              data-tooltip-id="unstake-tooltip"
-              data-tooltip-content="Unstake Pool"
-              onClick={onPresentWithdraw}
-              mr="6px"
-            >
-              <MinusIcon color="primary" width="14px" />
-            </IconButton>
-            <IconButton
-              variant="secondary"
-              data-tooltip-id="stake-tooltip"
-              data-tooltip-content="Stake pool"
-              onClick={onPresentDeposit}
-              disabled={["history", "archived"].some((item) =>
-                location.pathname.includes(item)
-              )}
-            >
-              <AddIcon color="primary" width="14px" />
-            </IconButton>
-            <Tooltip id="unstake-tooltip" />
-            <Tooltip id="stake-tooltip" />
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-4 p-2 lg:p-4 w-full">
-        <div className="flex justify-center font-semibold text-xl w-full">
-          {t("Stake").toUpperCase()} {lpSymbol}
-        </div>
-        <div className="flex w-full justify-center">
-          <button
-            onClick={onPresentDeposit}
-            disabled={["history", "archived"].some((item) =>
-              location.pathname.includes(item)
-            )}
-            className="rounded-md p-1  text-center text-black font-medium bg-yellow-main hover:text-gray-500  max-w-[200px] w-full"
-          >
-            {t("Stake")}
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   if (!userDataReady) {
     return (
       <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-4 p-2 lg:p-4 w-full">
@@ -270,18 +195,75 @@ const StakedAction = ({
     );
   }
 
+  if (stakedBalance.gt(0)) {
+    return (
+      <div className="flex flex-row items-center justify-between md:justify-end gap-5 p-2 lg:p-4 w-full">
+        <div className="flex flex-col gap-1 justify-between md:min-w-[200px]">
+          <div className="text-lg font-semibold">
+            {lpSymbol}
+            &nbsp;
+            {t("Staked")}
+          </div>
+          <Earned>{displayBalance()}</Earned>
+          {stakedBalance.gt(0) && lpPrice.gt(0) && (
+            <Balance
+              fontSize="15px"
+              color="white"
+              decimals={2}
+              value={
+                isNFTPool
+                  ? lpPrice.times(
+                      stakedBalance.times(new BigNumber(amountPerNFT))
+                    )
+                  : getBalanceNumber(lpPrice.times(stakedBalance))
+              }
+              unit=" USD"
+              prefix="~"
+            />
+          )}
+        </div>
+        <div className="flex flex-row items-center">
+          <IconButton
+            variant="secondary"
+            data-tooltip-id="unstake-tooltip"
+            data-tooltip-content="Unstake Pool"
+            onClick={onPresentWithdraw}
+            mr="6px"
+          >
+            <MinusIcon color="primary" width="14px" />
+          </IconButton>
+          <IconButton
+            variant="secondary"
+            data-tooltip-id="stake-tooltip"
+            data-tooltip-content="Stake pool"
+            onClick={onPresentDeposit}
+            disabled={["history", "archived"].some((item) =>
+              location.pathname.includes(item)
+            )}
+          >
+            <AddIcon color="primary" width="14px" />
+          </IconButton>
+          <Tooltip id="unstake-tooltip" />
+          <Tooltip id="stake-tooltip" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-4 p-2 lg:p-4 w-full">
       <div className="flex justify-center font-semibold text-xl w-full">
-        {t("Enable Farm")}
+        {t("Stake").toUpperCase()} {lpSymbol}
       </div>
       <div className="flex w-full justify-center">
         <button
-          disabled={requestedApproval}
-          onClick={handleApprove}
-          className="rounded-md p-1  text-center text-white font-medium bg-blue-600 hover:bg-blue-500  max-w-[200px] w-full"
+          onClick={onPresentDeposit}
+          disabled={["history", "archived"].some((item) =>
+            location.pathname.includes(item)
+          )}
+          className="rounded-md p-1  text-center text-black font-medium bg-yellow-main hover:text-gray-500  max-w-[200px] w-full"
         >
-          {requestedApproval ? t("Approving...") : t("Enable")}
+          {t("Stake")}
         </button>
       </div>
     </div>
