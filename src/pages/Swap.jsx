@@ -123,7 +123,6 @@ export default function Swap() {
         checkAllowance(tokenA, "A");
       }
     } catch (e) {
-      console.log(e);
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
@@ -247,11 +246,10 @@ export default function Swap() {
             <button
               onClick={handleDeposit}
               disabled={
-                (Number(tokenAAmount) <= 0 ||
-                  status.insufficientA ||
-                  pendingTx ||
-                  isApproving) &&
-                tokenA.lpSymbol !== "BNB"
+                Number(tokenAAmount) <= 0 ||
+                status.insufficientA ||
+                pendingTx ||
+                isApproving
               }
               className="custom_btn  mt-8 hover:bg-hover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             >
