@@ -88,14 +88,14 @@ export const zap = async (
       const tx = await zapContract.zapETH(tokenB, {
         from: address,
         value: amount,
-        gasLimit: 4200000,
+        gasLimit: 840000,
       });
       await tx.wait();
       notify("success", "Zap successful!");
     } else {
       const tx = await zapContract.zap(tokenA, amount, tokenB, isNativeOut, {
         from: address,
-        gasLimit: 4200000,
+        gasLimit: 840000,
       });
       await tx.wait();
       notify("success", "Zap successful!");
@@ -127,7 +127,7 @@ export const zapForFarm = async (
         tokenB,
         masterchefAddress,
         pid,
-        { from: address, value: amount, gasLimit: 4200000 }
+        { from: address, value: amount, gasLimit: 840000 }
       );
       await tx.wait();
       notify("success", "Transaction successful!");
@@ -139,7 +139,7 @@ export const zapForFarm = async (
         masterchefAddress,
         pid,
         false,
-        { from: address, gasLimit: 4200000 }
+        { from: address, gasLimit: 840000 }
       );
       await tx.wait();
       return notify("success", "Transaction successful!");
