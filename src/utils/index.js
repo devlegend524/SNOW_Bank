@@ -38,8 +38,7 @@ export const getAllowance = async (
         const amount = (
           await contract.allowance(address, router_address)
         ).toString();
-        const decimals = await contract.decimals();
-        return toReadableAmount(amount, Number(decimals.toString()));
+        return amount;
       } else {
         const contract = new ethers.Contract(
           token.lpAddresses,
@@ -49,8 +48,7 @@ export const getAllowance = async (
         const amount = (
           await contract.allowance(address, router_address)
         ).toString();
-        const decimals = await contract.decimals();
-        return toReadableAmount(amount, Number(decimals.toString()));
+        return amount;
       }
     } catch (e) {
       console.log(e);
