@@ -89,14 +89,14 @@ export const zap = async (
       const tx = await zapContract.zapETH(tokenB, {
         from: address,
         value: amount,
-        gasLimit: 8400000,
+        gasLimit: 2100000,
       });
       await tx.wait();
       notify("success", "Zap successful!");
     } else {
       const tx = await zapContract.zap(tokenA, amount, tokenB, isNativeOut, {
         from: address,
-        gasLimit: 8400000,
+        gasLimit: 2100000,
       });
       await tx.wait();
       notify("success", "Zap successful!");
@@ -128,7 +128,7 @@ export const zapForFarm = async (
         tokenB,
         masterchefAddress,
         pid,
-        { from: address, value: amount, gasLimit: 8400000 }
+        { from: address, value: amount, gasLimit: 2100000 }
       );
       await tx.wait();
       notify("success", "Transaction successful!");
@@ -140,7 +140,7 @@ export const zapForFarm = async (
         masterchefAddress,
         pid,
         false,
-        { from: address, gasLimit: 8400000 }
+        { from: address, gasLimit: 2100000 }
       );
       await tx.wait();
       return notify("success", "Transaction successful!");
@@ -164,7 +164,7 @@ export const harvest = async (masterChefContract, pid, address) => {
   try {
     const tx = await masterChefContract.deposit(pid, "0");
     await tx.wait();
-    limitedFunction(true)
+    limitedFunction(true);
     notify("success", "Harvest successful!");
   } catch (e) {
     if (didUserReject(e)) {
@@ -187,7 +187,7 @@ export const harvestMany = async (masterChefContract, pids, address) => {
       from: address,
     });
     await tx.wait();
-    limitedFunction(true)
+    limitedFunction(true);
     notify("success", "Harvest All successful!");
   } catch (e) {
     if (didUserReject(e)) {
