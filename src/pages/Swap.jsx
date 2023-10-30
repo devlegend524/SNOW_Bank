@@ -253,7 +253,8 @@ export default function Swap() {
             <button
               onClick={handleDeposit}
               disabled={
-                Number(tokenAAllowance) < Number(tokenAAmount) ||
+                (tokenA.lpSymbol !== "BNB" &&
+                  Number(tokenAAllowance) < Number(tokenAAmount)) ||
                 status.insufficientA ||
                 pendingTx ||
                 isApproving
