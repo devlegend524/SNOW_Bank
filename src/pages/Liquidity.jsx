@@ -187,11 +187,11 @@ export default function Liquidity() {
     }
   }, [tokenBAmount, direction]);
   useEffect(() => {
-    if (address) {
+    if (address && signer) {
       getAllowance(tokenA, "from");
       getAllowance(tokenB, "to");
     }
-  }, [address]);
+  }, [address, signer]);
   return (
     <div className="flex justify-center items-center flex-col  min-h-[calc(100vh-200px)] w-full">
       <div className="tab">
@@ -248,6 +248,7 @@ export default function Liquidity() {
             setAmount={setTokenAAmount}
             setStates={setStates}
             setInsufficient={handleSetInsufficientA}
+            setDirection={setDirection}
           />
 
           <div className="flex justify-center">
@@ -262,14 +263,31 @@ export default function Liquidity() {
             selectOnly={false}
             setStates={setStates}
             setInsufficient={handleSetInsufficientB}
+            setDirection={setDirection}
           />
         </div>
-        <button className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
-          Enable {tokenA.lpSymbol}
-        </button>
-        <button className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
-          Enable {tokenB.lpSymbol}
-        </button>
+        {Number(tokenAAmount) > 0 &&
+        Number(allowanceFrom) <= Number(tokenAAmount) ? (
+          <button
+            className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+            onClick={handleApproveFromToken}
+          >
+            Enable {tokenA.lpSymbol}
+          </button>
+        ) : (
+          ""
+        )}
+        {Number(tokenBAmount) > 0 &&
+        Number(allowanceTo) <= Number(tokenBAmount) ? (
+          <button
+            className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+            onClick={handleApproveToToken}
+          >
+            Enable {tokenB.lpSymbol}
+          </button>
+        ) : (
+          ""
+        )}
         <button className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
           Add Liquidity
         </button>

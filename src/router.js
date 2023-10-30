@@ -19,10 +19,10 @@ const router = createBrowserRouter([
     path: "/swap",
     element: <Swap />,
   },
-  // {
-  //   path: "/liquidity",
-  //   element: <Liquidity />,
-  // },
+  {
+    path: "/liquidity",
+    element: <Liquidity />,
+  },
   {
     path: "*",
     element: <NotFound />,

@@ -3,6 +3,7 @@ import { useEthersProvider } from "hooks/useEthers";
 import { useAccount } from "wagmi";
 import { getBalance } from "utils/balanceHalper";
 import { toFixed } from "utils/customHelpers";
+import { useDebounce } from "use-debounce";
 
 export default function TokenSelect({
   setOpen,
@@ -14,12 +15,14 @@ export default function TokenSelect({
   setInsufficient,
   insufficient,
   updateBalance,
+  setDirection,
 }) {
   const provider = useEthersProvider();
   const { address } = useAccount();
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const [localAmount, setLocalAmount] = useState("");
+  const [debouncedValue] = useDebounce(balance, 1000);
 
   const handleMaxAmount = () => {
     setAmount(balance);
@@ -71,6 +74,16 @@ export default function TokenSelect({
       }
     }
   }, [balance]);
+
+  useEffect(() => {
+    if (!selectOnly) {
+      if (localAmount && localAmount !== 0 && localAmount !== "0") {
+        setInsufficient(Number(debouncedValue) <= Number(localAmount));
+      } else {
+        setInsufficient(false);
+      }
+    }
+  }, [debouncedValue]);
 
   return (
     <>
