@@ -196,7 +196,7 @@ export default function Swap() {
             setStates={handleSetTokenAAvailable}
             setInsufficient={handleSetInsufficientA}
             updateBalance={updateBalance}
-            setDirection={()=>{}}
+            setDirection={() => {}}
             tokenType=""
           />
 
@@ -224,15 +224,16 @@ export default function Swap() {
             setStates={handleSetTokenBAvailable}
             setInsufficient={handleSetInsufficientB}
             updateBalance={updateBalance}
-            setDirection={()=>{}}
+            setDirection={() => {}}
             tokenType=""
           />
 
           {isCheckingAllowance ? (
             <button className="custom_btn  mt-8 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
-              <Loading /> Loading...
+              <Loading title="Loading..." />
             </button>
-          ) : tokenA.lpSymbol !== "BNB" && Number(tokenAAllowance) === 0 ? (
+          ) : tokenA.lpSymbol !== "BNB" &&
+            Number(tokenAAllowance) < Number(tokenAAmount) ? (
             <button
               onClick={handleApprove}
               disabled={isApproving}
@@ -240,7 +241,7 @@ export default function Swap() {
             >
               {isApproving ? (
                 <div className="flex justify-center gap-1">
-                  <Loading /> Approving...
+                  <Loading title="Approving..." />
                 </div>
               ) : (
                 "Approve"
@@ -250,7 +251,7 @@ export default function Swap() {
             <button
               onClick={handleDeposit}
               disabled={
-                Number(tokenAAmount) <= 0 ||
+                Number(tokenAAllowance) < Number(tokenAAmount) ||
                 status.insufficientA ||
                 pendingTx ||
                 isApproving
@@ -259,7 +260,7 @@ export default function Swap() {
             >
               {pendingTx ? (
                 <div className="flex justify-center gap-1">
-                  <Loading /> Zapping...
+                  <Loading title="Zapping..." />
                 </div>
               ) : (
                 `Swap ${tokenA.lpSymbol} into ${tokenB.lpSymbol}`
