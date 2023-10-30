@@ -92,6 +92,8 @@ export default function Swap() {
         setTokenAAllowance(res);
       }
       setIsCheckingAllowance(false);
+    } else {
+      setStatus({ ...status, insufficientA: true });
     }
   };
 
@@ -245,10 +247,10 @@ export default function Swap() {
             <button
               onClick={handleDeposit}
               disabled={
-                Number(tokenAAmount) <= 0 ||
+                (Number(tokenAAmount) <= 0 ||
                 status.insufficientA ||
                 pendingTx ||
-                isApproving
+                isApproving) && tokenA.lpSymbol !== 'BNB'
               }
               className="custom_btn  mt-8 hover:bg-hover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             >
