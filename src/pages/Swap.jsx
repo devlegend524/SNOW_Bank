@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TokenSelectModal from "components/TokenSelectModal";
 import TokenSelect from "components/TokenSelect";
-import { getAllowance } from "utils";
+import { fromReadableAmount, getAllowance } from "utils";
 import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import { zapList } from "config/farms";
@@ -140,7 +140,7 @@ export default function Swap() {
       await onZap(
         tokenA.lpAddresses,
         tokenA.lpSymbol === "BNB" ? true : false,
-        ethers.utils.parseEther(tokenAAmount.toString() || "1"),
+        fromReadableAmount(tokenAAmount.toString() || "1", tokenA.decimals),
         tokenB.lpAddresses,
         tokenB.lpSymbol === "BNB" ? true : false
       );
@@ -248,9 +248,10 @@ export default function Swap() {
               onClick={handleDeposit}
               disabled={
                 (Number(tokenAAmount) <= 0 ||
-                status.insufficientA ||
-                pendingTx ||
-                isApproving) && tokenA.lpSymbol !== 'BNB'
+                  status.insufficientA ||
+                  pendingTx ||
+                  isApproving) &&
+                tokenA.lpSymbol !== "BNB"
               }
               className="custom_btn  mt-8 hover:bg-hover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             >
