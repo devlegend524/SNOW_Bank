@@ -126,7 +126,7 @@ export const zapForFarm = async (
         tokenB,
         masterchefAddress,
         pid,
-        { from: address, value: amount, gasLimit: 42000 }
+        { from: address, value: amount, gasLimit: 420000 }
       );
       await tx.wait();
       notify("success", "Transaction successful!");
@@ -138,7 +138,7 @@ export const zapForFarm = async (
         masterchefAddress,
         pid,
         false,
-        { from: address, gasLimit: 42000 }
+        { from: address, gasLimit: 420000 }
       );
       await tx.wait();
       return notify("success", "Transaction successful!");

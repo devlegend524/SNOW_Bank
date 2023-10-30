@@ -18,6 +18,7 @@ import { fetchFarmUserDataAsync } from "state/farms";
 import { getFarmFromPid } from "utils/farmHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { sleep } from "utils/customHelpers";
+import tokens from "config/tokens";
 
 const customStyles = {
   content: {
@@ -112,7 +113,7 @@ export default function CompoundModal({
       }
       await sleep(2000);
       await onZapForFarm(
-        farms[0].lpAddresses,
+        tokens.wild.address,
         false,
         ethers.utils.parseEther(earnings.toString() || "1"),
         targetToken.lpAddresses,
@@ -148,7 +149,7 @@ export default function CompoundModal({
     >
       <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg">
         <div className="flex justify-around items-center">
-          <TokenDisplay token={farms[0]} modal={true} />
+          <TokenDisplay token={tokens.wild} modal={true} />
           <TokenDisplay token={targetToken} modal={true} />
         </div>
         {isAll ? (
@@ -163,7 +164,7 @@ export default function CompoundModal({
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
-                  if (item.lpSymbol !== "WBNB-USDC")
+                  if (item.lpSymbol === "WBNB-WILDX")
                     return (
                       <option
                         key={key}
@@ -184,7 +185,7 @@ export default function CompoundModal({
         <p className="text-center text-lg pt-4">
           Compound{" "}
           <span className="font-semibold text-green-500 mx-1">
-            {farms[0].lpSymbol}
+            {tokens.wild.symbol}
           </span>
           into{" "}
           <span className="font-semibold text-green-500 mx-1">

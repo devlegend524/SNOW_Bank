@@ -227,7 +227,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
           <div className="flex">
             Available:{" "}
             {loadingBalance ? (
-              <Loading />
+              <Loading title="Loading Balance..." />
             ) : (
               Number(balance.toString()).toFixed(4)
             )}{" "}
@@ -289,7 +289,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
               disabled={Number(amount) === 0 || pendingZapTx}
             >
-              {pendingZapTx ? <Loading /> : t("Zap in")}
+              {pendingZapTx ? <Loading title="Zapping in..." /> : t("Zap in")}
             </button>
           )}
         </div>

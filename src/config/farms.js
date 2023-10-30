@@ -113,7 +113,7 @@ const farmsConfig = [
   },
   {
     pid: 2,
-    lpSymbol: "WILDx NFT",
+    lpSymbol: "WILDxNFT",
     lpAddresses: addresses.nft,
     isTokenOnly: true,
     isNFTPool: true,

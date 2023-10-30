@@ -56,7 +56,7 @@ const HarvestAction = ({ pid, userData, userDataReady }) => {
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setPendingTx(false);
     }
@@ -118,7 +118,7 @@ const HarvestAction = ({ pid, userData, userDataReady }) => {
           onClick={handleHavest}
           className="rounded-md p-1  text-center text-black font-medium bg-yellow-main"
         >
-          {pendingTx ? <Loading /> : t("Harvest")}
+          {pendingTx ? <Loading title="Harvesting..." /> : t("Harvest")}
         </button>
         <div className="flex flex-col lg:flex-row gap-2 w-full">
           <button
@@ -132,7 +132,11 @@ const HarvestAction = ({ pid, userData, userDataReady }) => {
             disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
             onClick={openCompoundModal}
           >
-            {pendingCompoundTx ? <Loading /> : t("Compound")}
+            {pendingCompoundTx ? (
+              <Loading title="Compounding..." />
+            ) : (
+              t("Compound")
+            )}
           </button>
           <button
             className="rounded-md w-full lg:w-1/2 px-2 py-1 text-black text-center font-medium bg-yellow-500 hover:bg-yellow-600"

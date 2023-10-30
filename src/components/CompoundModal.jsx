@@ -20,6 +20,7 @@ import { fetchFarmUserDataAsync } from "state/farms";
 import { getFarmFromPid } from "utils/farmHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { sleep } from "utils/customHelpers";
+import tokens from "config/tokens";
 
 const customStyles = {
   content: {
@@ -150,7 +151,7 @@ export default function CompoundModal({
     >
       <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg">
         <div className="flex justify-around items-center">
-          <TokenDisplay token={farms[0]} modal={true} />
+          <TokenDisplay token={tokens.wild} modal={true} />
           <ArrowForwardIcon />
           <TokenDisplay token={targetToken} modal={true} />
         </div>
@@ -166,7 +167,7 @@ export default function CompoundModal({
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
-                  if (item.lpSymbol !== "WBNB-USDC")
+                  if (item.lpSymbol === "WBNB-WILDx")
                     return (
                       <option
                         key={key}
