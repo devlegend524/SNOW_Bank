@@ -259,7 +259,7 @@ export const usePriceWILDXUsdc = () => {
     async function fetchData() {
       try {
         const returned = await (
-          await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDx")
+          await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDxx")
         ).json();
         if (returned && returned.pairs) {
           const data = returned.pairs.filter(
@@ -394,7 +394,7 @@ export const useTotalValue = () => {
     const farm = farms.data[i];
     if (farm.lpTotalInQuoteToken) {
       let val;
-      if (farm.quoteToken.symbol === "WETH" && wethPrice) {
+      if (farm.quoteToken.symbol === "WBNB" && wethPrice) {
         val = wethPrice.times(farm.lpTotalInQuoteToken);
       } else if (farm.quoteToken.symbol === "WILDX") {
         val = wildPrice.times(farm.lpTotalInQuoteToken);

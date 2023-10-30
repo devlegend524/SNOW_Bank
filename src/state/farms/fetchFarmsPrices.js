@@ -25,7 +25,7 @@ const getFarmBaseTokenPrice = (
       ? new BigNumber(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
-  if (farm.quoteToken.symbol === "WETH") {
+  if (farm.quoteToken.symbol === "WBNB") {
     return hasTokenPriceVsQuote
       ? wethPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
@@ -36,17 +36,17 @@ const getFarmBaseTokenPrice = (
       : BIG_ZERO;
   }
 
-  // We can only calculate profits without a quoteTokenFarm for USDC/WETH farms
+  // We can only calculate profits without a quoteTokenFarm for USDC/WBNB farms
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }
 
   // Possible alternative farm quoteTokens:
   // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), ETH (i.e. SUSHI-ETH)
-  // If the farm's quote token isn't USDC or wWETH, we then use the quote token, of the original farm's quote token
-  // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - WETH, (pBTC - WETH)
-  // from the WETH - pBTC price, we can calculate the PNT - USDC price
-  if (quoteTokenFarm.quoteToken.symbol === "WETH") {
+  // If the farm's quote token isn't USDC or wWBNB, we then use the quote token, of the original farm's quote token
+  // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - WBNB, (pBTC - WBNB)
+  // from the WBNB - pBTC price, we can calculate the PNT - USDC price
+  if (quoteTokenFarm.quoteToken.symbol === "WBNB") {
     const quoteTokenInUsdc = wethPriceUsdt.times(
       quoteTokenFarm.tokenPriceVsQuote
     );
@@ -78,14 +78,14 @@ const getFarmQuoteTokenPrice = (
   if (farm.quoteToken.symbol === "WILDX") {
     return wildxPriceUsdt;
   }
-  if (farm.quoteToken.symbol === "WETH") {
+  if (farm.quoteToken.symbol === "WBNB") {
     return wethPriceUsdt;
   }
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }
 
-  if (quoteTokenFarm.quoteToken.symbol === "WETH") {
+  if (quoteTokenFarm.quoteToken.symbol === "WBNB") {
     return quoteTokenFarm.tokenPriceVsQuote
       ? wethPriceUsdt.times(quoteTokenFarm.tokenPriceVsQuote)
       : BIG_ZERO;

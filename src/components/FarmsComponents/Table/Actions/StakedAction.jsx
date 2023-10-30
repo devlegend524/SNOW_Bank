@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   useModal,
   IconButton,
@@ -29,8 +29,13 @@ import WithdrawModal from "../../WithdrawModal";
 import { ActionContainer, ActionTitles, ActionContent, Earned } from "./styles";
 import { useAccount } from "wagmi";
 import { Tooltip } from "react-tooltip";
-import { getErc20Contract, getErc721Contract } from "utils/contractHelpers";
+import {
+  getErc20Contract,
+  getErc721Contract,
+  getMasterchefContract,
+} from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
+import { toReadableAmount } from "utils/customHelpers";
 const StakedAction = ({
   isTokenOnly,
   isNFTPool,
@@ -44,6 +49,7 @@ const StakedAction = ({
   depositFee,
   userData,
 }) => {
+  const [amountPerNFT, setAmountPerNFT] = useState();
   const { t } = useTranslation();
   const { address } = useAccount();
   const signer = useEthersSigner();
@@ -53,6 +59,9 @@ const StakedAction = ({
     tokenBalance: tokenBalanceAsString,
     stakedBalance: stakedBalanceAsString,
   } = useFarmUser(pid);
+
+  const masterChefContract = getMasterchefContract(signer);
+
   const decimals = isTokenOnly ? token.decimals : 18;
   const tokenBalance = new BigNumber(tokenBalanceAsString).times(
     new BigNumber(10).pow(18 - decimals)
@@ -65,7 +74,9 @@ const StakedAction = ({
   const location = useLocation();
   const lpPrice = useLpTokenPrice(lpSymbol);
 
-  const isApproved = address && allowance && allowance.isGreaterThan(0);
+  const isApproved = isNFTPool
+    ? address && allowance
+    : address && allowance && allowance.isGreaterThan(0);
 
   const lpAddress = isTokenOnly ? token.address : lpAddresses;
   const liquidityUrlPathParts = getLiquidityUrlPathParts({
@@ -141,6 +152,16 @@ const StakedAction = ({
     }
   }, [onApprove, dispatch, address, pid]);
 
+  const getAmountPerNFT = async () => {
+    const _amountPerNFT = await masterChefContract.getAmountPerNFT();
+    setAmountPerNFT(toReadableAmount(_amountPerNFT));
+  };
+  useEffect(() => {
+    if (signer) {
+      getAmountPerNFT();
+    }
+  }, [signer]);
+
   if (!address) {
     return (
       <ActionContainer>
@@ -170,7 +191,13 @@ const StakedAction = ({
                 fontSize="15px"
                 color="white"
                 decimals={2}
-                value={getBalanceNumber(lpPrice.times(stakedBalance))}
+                value={getBalanceNumber(
+                  lpPrice.times(
+                    isNFTPool
+                      ? stakedBalance.times(new BigNumber(amountPerNFT))
+                      : stakedBalance
+                  )
+                )}
                 unit=" USD"
                 prefix="~"
               />

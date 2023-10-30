@@ -19,6 +19,7 @@ import {
   fromReadableAmount,
   toReadableAmount,
 } from "utils/customHelpers";
+import tokens from "config/tokens";
 
 const customStyles = {
   content: {
@@ -38,18 +39,27 @@ const tokensList = [
     pid: 0,
     lpSymbol: "BNB",
     isTokenOnly: true,
-    lpAddresses: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA",
+    lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
     logoA: "/images/tokens/bnb.svg",
     logoB: "",
   },
   {
     pid: 1,
-    lpSymbol: "WETH",
+    lpSymbol: "WBNB",
     isTokenOnly: true,
-    lpAddresses: "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA",
+    lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
     logoA: "/images/tokens/wbnb.svg",
+    logoB: "",
+  },
+  {
+    pid: 2,
+    lpSymbol: "USDC",
+    isTokenOnly: true,
+    lpAddresses: tokens.usdc.address,
+    decimals: 18,
+    logoA: "/images/tokens/usdc.svg",
     logoB: "",
   },
 ];
@@ -201,16 +211,15 @@ export default function ZapInModal({ open, closeModal, pid }) {
         <div className=" rounded-full p-2 flex mb-2">
           <select
             name="tokenA"
-            className="bg-transparent border p-2 focus-visible:outline-none w-full cursor-pointer text-yellow-main rounded-md"
+            className="bg-transparent border p-2 focus-visible:outline-none w-full cursor-pointer text-gray-100 rounded-md"
             onChange={(e) => handleChangeToken(e.target.value)}
           >
             {tokensList.map((item, key) => {
-              if (item.lpSymbol === "WETH" || item.lpSymbol === "BNB")
-                return (
-                  <option key={key} className="" value={key}>
-                    {item?.lpSymbol}
-                  </option>
-                );
+              return (
+                <option key={key} className="bg-primary" value={key}>
+                  {item?.lpSymbol}
+                </option>
+              );
             })}
           </select>
         </div>

@@ -163,7 +163,7 @@ export default function CompoundModal({
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
-                  if (item.lpSymbol !== "WETH-USDC" && item.lpSymbol !== "WETH")
+                  if (item.lpSymbol !== "WBNB-USDC")
                     return (
                       <option
                         key={key}

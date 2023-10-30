@@ -15,7 +15,7 @@ const tokens = {
     projectLink: "https://wildbase.farm/", // todo:
   },
   weth: {
-    symbol: "WETH",
+    symbol: "WBNB",
     address: addresses.weth,
     decimals: 18,
     logo: "https://svgshare.com/getbyhash/sha1-38zdMb/7WVkaVJEus7guQuBuCSU=",

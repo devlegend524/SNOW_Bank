@@ -96,7 +96,7 @@ export default function CompoundModal({
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setIsApproving(false);
     }
@@ -127,7 +127,7 @@ export default function CompoundModal({
       if (didUserReject(e)) {
         notify("error", "User rejected transaction");
       } else {
-        notify("error", e.reason)
+        notify("error", e.reason);
       }
       setZapPendingTx(false);
     }
@@ -166,7 +166,7 @@ export default function CompoundModal({
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
-                  if (item.lpSymbol !== "WETH-USDC" && item.lpSymbol !== "WETH")
+                  if (item.lpSymbol !== "WBNB-USDC")
                     return (
                       <option
                         key={key}

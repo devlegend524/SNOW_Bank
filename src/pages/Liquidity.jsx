@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TokenSelect from "components/TokenSelect";
 import TokenSelectModal from "components/TokenSelectModal";
-
+import { getErc20Contract } from "utils/contractHelpers";
+import { getZapAddress } from "utils/addressHelpers";
+import { useEthersSigner } from "hooks/useEthers";
 import { liquidityList } from "config/farms";
+import { useRouterContract, useZapContract } from "hooks/useContract";
+import { didUserReject } from "utils/customHelpers";
+import { notify } from "utils/toastHelper";
+import { useAccount } from "wagmi";
+import { fromReadableAmount, toReadableAmount } from "utils/customHelpers";
+import { ethers } from "ethers";
 
 export default function Liquidity() {
   const [states, setStates] = useState(false);
@@ -13,6 +21,18 @@ export default function Liquidity() {
   const [tokenAAmount, setTokenAAmount] = useState("");
   const [tokenBAmount, setTokenBAmount] = useState("");
   const [active, setActive] = useState(0);
+  const [pendingFromApproveTx, setPendingFromApproveTx] = useState(false);
+  const [pendingToApproveTx, setPendingToApproveTx] = useState(false);
+  const [pendingTx, setPendingTx] = useState(false);
+  const [allowanceFrom, setAllowanceFrom] = useState(0);
+  const [allowanceTo, setAllowanceTo] = useState(0);
+  const [direction, setDirection] = useState("sell");
+
+  const { address } = useAccount();
+  const zapAddress = getZapAddress();
+  const signer = useEthersSigner();
+  const zapContract = useZapContract();
+  const routerContract = useRouterContract();
 
   const [status, setStatus] = useState({
     insufficientA: false,
@@ -22,6 +42,112 @@ export default function Liquidity() {
     loading: false,
     approve: false,
   });
+
+  const refresh = () => {
+    setTokenAAmount("");
+    setTokenBAmount("");
+  };
+
+  const getAllowance = async (token, type) => {
+    let tokenContract;
+    tokenContract = getErc20Contract(token.lpAddresses, signer);
+    const tokenAllowance = await tokenContract.allowance(address, zapAddress, {
+      from: address,
+    });
+    if (type === "from") setAllowanceFrom(tokenAllowance.toString());
+    else setAllowanceTo(tokenAllowance.toString());
+  };
+
+  const handleApproveFromToken = async () => {
+    try {
+      if (
+        Number(ethers.utils.formatUnits(allowanceFrom, "ether")) <
+        Number(tokenAAmount)
+      ) {
+        console.log("approving...");
+        setPendingFromApproveTx(true);
+        let tokenContract;
+        tokenContract = getErc20Contract(tokenA.lpAddresses, signer);
+        await tokenContract.approve(zapAddress, ethers.constants.MaxUint256, {
+          from: address,
+        });
+        setPendingFromApproveTx(false);
+      }
+    } catch (e) {
+      console.log(e);
+      if (didUserReject(e)) {
+        notify("error", "User rejected transaction");
+      }
+      setPendingFromApproveTx(false);
+    }
+  };
+
+  const handleApproveToToken = async () => {
+    try {
+      if (
+        Number(ethers.utils.formatUnits(allowanceTo, "ether")) <
+        Number(tokenBAmount)
+      ) {
+        console.log("approving...");
+        setPendingToApproveTx(true);
+        let tokenContract;
+        tokenContract = getErc20Contract(tokenB.lpAddresses, signer);
+        await tokenContract.approve(zapAddress, ethers.constants.MaxUint256, {
+          from: address,
+        });
+        setPendingToApproveTx(false);
+      }
+    } catch (e) {
+      console.log(e);
+      if (didUserReject(e)) {
+        notify("error", "User rejected transaction");
+      }
+      setPendingToApproveTx(false);
+    }
+  };
+
+  const getAmount = async (amount, type) => {
+    const amount_in = fromReadableAmount(amount, 18);
+    try {
+      if (type === "sell") {
+        const amount_out = await routerContract.getAmountsOut(amount_in, [
+          tokenA?.lpAddresses,
+          tokenB?.lpAddresses,
+        ]);
+        setTokenAAmount(toReadableAmount(amount_out[1], 18));
+      } else {
+        const amount_out = await routerContract.getAmountsIn(amount_in, [
+          tokenA?.lpAddresses,
+          tokenB?.lpAddresses,
+        ]);
+        setTokenBAmount(toReadableAmount(amount_out[0], 18));
+      }
+    } catch (e) {
+      console.log(e);
+      return "unkown";
+    }
+  };
+
+  const handleAddLiquidity = async () => {
+    setPendingTx(true);
+    try {
+      console.log("adding liquidity...");
+      const tx = await zapContract.addTaxFreeLiquidity(
+        tokenA.lpAddresses,
+        tokenB.lpAddresses,
+        fromReadableAmount(tokenAAmount, 18),
+        fromReadableAmount(tokenBAmount, 18)
+      );
+      await tx.wait();
+      refresh();
+    } catch (e) {
+      console.log(e);
+      if (didUserReject(e)) {
+        notify("error", "User rejected transaction");
+      }
+    }
+    setPendingTx(false);
+  };
 
   const closeModalA = () => {
     setOpenA(false);
@@ -39,6 +165,33 @@ export default function Liquidity() {
     setStatus({ ...status, insufficientB: flag });
   };
 
+  useEffect(() => {
+    if (direction === "sell") {
+      if (Number(tokenAAmount) === 0) {
+        setTokenAAmount("");
+        setTokenBAmount("");
+      } else {
+        getAmount(tokenAAmount, "sell");
+      }
+    }
+  }, [tokenAAmount, direction]);
+
+  useEffect(() => {
+    if (direction === "buy") {
+      if (Number(tokenBAmount) === 0) {
+        setTokenAAmount("");
+        setTokenBAmount("");
+      } else {
+        getAmount(tokenBAmount, "buy");
+      }
+    }
+  }, [tokenBAmount, direction]);
+  useEffect(() => {
+    if (address) {
+      getAllowance(tokenA, "from");
+      getAllowance(tokenB, "to");
+    }
+  }, [address]);
   return (
     <div className="flex justify-center items-center flex-col  min-h-[calc(100vh-200px)] w-full">
       <div className="tab">
@@ -111,7 +264,13 @@ export default function Liquidity() {
             setInsufficient={handleSetInsufficientB}
           />
         </div>
-        <button className="custom_btn  mt-8 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
+        <button className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
+          Enable {tokenA.lpSymbol}
+        </button>
+        <button className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
+          Enable {tokenB.lpSymbol}
+        </button>
+        <button className="custom_btn  mt-5 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
           Add Liquidity
         </button>
       </div>

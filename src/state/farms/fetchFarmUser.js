@@ -41,9 +41,7 @@ export const fetchFarmUserAllowances = async (account, farmsToFetch) => {
   });
 
   const parsedNFTAllowances = rawNFTAllowances.map((lpBalance) => {
-    return lpBalance
-      ? new BigNumber("10000000000000000000000").toJSON()
-      : new BigNumber("0").toJSON();
+    return lpBalance;
   });
   return [...parsedLpAllowances, ...parsedNFTAllowances];
 };

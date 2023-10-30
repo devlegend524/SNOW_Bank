@@ -2,14 +2,14 @@
   {
     "inputs": [
       { "internalType": "address", "name": "_factory", "type": "address" },
-      { "internalType": "address", "name": "_WETH", "type": "address" }
+      { "internalType": "address", "name": "_WBNB", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
     "inputs": [],
-    "name": "WETH",
+    "name": "WBNB",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"

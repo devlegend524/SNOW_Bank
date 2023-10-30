@@ -58,6 +58,7 @@ export const unstake = async (
       isNFTPool ? amount : fromReadableAmount(amount, decimals),
       { from: address }
     );
+    await tx.wait();
     notify("success", "Transaction successful!");
   } catch (e) {
     if (didUserReject(e)) {
@@ -84,12 +85,14 @@ export const zap = async (
       await zapContract.zapETH(tokenB, {
         from: address,
         value: amount,
+        gasLimit: 42000,
       });
 
       notify("success", "Zap successful!");
     } else {
       await zapContract.zap(tokenA, amount, tokenB, isNativeOut, {
         from: address,
+        gasLimit: 42000,
       });
       notify("success", "Zap successful!");
     }
@@ -120,7 +123,7 @@ export const zapForFarm = async (
         tokenB,
         masterchefAddress,
         pid,
-        { from: address, value: amount }
+        { from: address, value: amount, gasLimit: 42000 }
       );
       await tx.wait();
       notify("success", "Transaction successful!");
@@ -132,7 +135,7 @@ export const zapForFarm = async (
         masterchefAddress,
         pid,
         false,
-        { from: address }
+        { from: address, gasLimit: 42000 }
       );
       await tx.wait();
       return notify("success", "Transaction successful!");
