@@ -266,13 +266,11 @@ export const usePrice3WiLDUsdc = () => {
           )
         ).json();
         if (returned && returned.pairs) {
-          console.log(returned.pairs);
           const data = returned.pairs.filter(
             (pair) =>
               pair.chainId === "bsc" &&
               pair.pairAddress === addresses.wildWbnblp
           )[0];
-          console.log(data);
 
           setPriceUsd(data?.priceUsd);
           setLiquidity(data?.liquidity?.usd);
