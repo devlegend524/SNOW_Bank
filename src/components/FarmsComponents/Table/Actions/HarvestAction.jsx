@@ -19,7 +19,7 @@ import CompoundModal from "components/CompoundModal";
 import { didUserReject } from "utils/customHelpers";
 import { useMasterchef } from "hooks/useContract";
 
-const HarvestAction = ({ pid, userData, userDataReady }) => {
+const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   const [pendingCompoundTx, setCompoundPendingTx] = useState(false);
   const [pendingTx, setPendingTx] = useState(false);
   const [earnings, setEarnings] = useState(BIG_ZERO);
@@ -120,33 +120,39 @@ const HarvestAction = ({ pid, userData, userDataReady }) => {
         >
           {pendingTx ? <Loading title="Harvesting..." /> : t("Harvest")}
         </button>
+
         <div className="flex flex-col lg:flex-row gap-2 w-full">
-          <button
-            className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-black font-medium bg-yellow-500 hover:bg-yellow-600"
-            data-tooltip-id="compound-tooltip"
-            data-tooltip-content={
-              earnings.eq(0) || pendingCompoundTx || !userDataReady
-                ? "Stake tokens first to use it"
-                : "Restake your WILDX profit to WILDX pool"
-            }
-            disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
-            onClick={openCompoundModal}
-          >
-            {pendingCompoundTx ? (
-              <Loading title="Compounding..." />
-            ) : (
-              t("Compound")
-            )}
-          </button>
-          <button
-            className="rounded-md w-full lg:w-1/2 px-2 py-1 text-black text-center font-medium bg-yellow-500 hover:bg-yellow-600"
-            data-tooltip-id="zap-tooltip"
-            data-tooltip-content="Stake to this pool from your wallet"
-            disabled={!userDataReady}
-            onClick={openModal}
-          >
-            {t("Zap in")}
-          </button>
+          {!isNFTPool && (
+            <>
+              <button
+                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-black font-medium bg-yellow-500 hover:bg-yellow-600"
+                data-tooltip-id="compound-tooltip"
+                data-tooltip-content={
+                  earnings.eq(0) || pendingCompoundTx || !userDataReady
+                    ? "Stake tokens first to use it"
+                    : "Restake your WILDX profit to WILDX pool"
+                }
+                disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
+                onClick={openCompoundModal}
+              >
+                {pendingCompoundTx ? (
+                  <Loading title="Compounding..." />
+                ) : (
+                  t("Compound")
+                )}
+              </button>
+              <button
+                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-black text-center font-medium bg-yellow-500 hover:bg-yellow-600"
+                data-tooltip-id="zap-tooltip"
+                data-tooltip-content="Stake to this pool from your wallet"
+                disabled={!userDataReady}
+                onClick={openModal}
+              >
+                {t("Zap in")}
+              </button>
+            </>
+          )}
+
           <Tooltip id="compound-tooltip" />
           <Tooltip id="zap-tooltip" />
         </div>
