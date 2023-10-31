@@ -59,15 +59,14 @@ export default function FarmBanner() {
   }, [chain]);
   return (
     <div className="flex justify-center flex-col md:flex-row bg-main-100 rounded-md shadow shadow-black/60 drop-shadow-xl">
-      <div className="p-3 md:p-12 md:w-1/2 xl:w-2/3 w-full text-center md:text-left">
+      <div className="p-3 md:p-12 md:w-1/2 w-full text-center md:text-left">
         <h1 className="text-7xl">
-          Earn 3WiLD on <span className="text-yellow-main font-semibold">BSC</span>
+          Earn 3WiLD <br />
+          <span className="text-yellow-main font-semibold"> on BSC</span>
         </h1>
-        <p className="pt-4">
-         Be wild 🤞.
-        </p>
+        <p className="pt-4">Don't panic .. it's organic 🤞.</p>
       </div>
-      <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2 xl:w-1/3">
+      <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2">
         <div className="buy_card shadow shadow-black drop-shadow-md">
           <div className="flex items-center justify-center gap-3">
             <a
