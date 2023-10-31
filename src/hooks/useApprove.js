@@ -15,6 +15,7 @@ export const useApprove = (lpContract, isNFTPool) => {
         address,
         isNFTPool
       );
+      await tx.wait();
       return tx;
     } catch (e) {
       console.log(e);
