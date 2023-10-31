@@ -24,6 +24,7 @@ export default function TokenSelect({
   const handleMaxAmount = () => {
     setAmount(balance);
     setLocalAmount(Number(balance));
+    setInsufficient(false);
   };
 
   const checkAvailable = (value) => {
@@ -48,6 +49,8 @@ export default function TokenSelect({
       setAmount("");
     } else {
       setAmount(Number(e.target.value));
+      setLocalAmount(e.target.value);
+      checkAvailable(e.target.value);
     }
   };
 
@@ -63,12 +66,10 @@ export default function TokenSelect({
   }, [token, updateBalance]);
 
   useEffect(() => {
-    if (!selectOnly) {
-      if (localAmount && localAmount !== 0 && localAmount !== "0") {
-        setInsufficient(Number(balance) <= Number(localAmount));
-      } else {
-        setInsufficient(false);
-      }
+    if (localAmount) {
+      setInsufficient(Number(balance) <= Number(localAmount));
+    } else {
+      setInsufficient(false);
     }
   }, [balance]);
 
