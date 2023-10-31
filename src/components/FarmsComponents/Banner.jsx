@@ -64,10 +64,7 @@ export default function FarmBanner() {
           WILDx on <span className="text-yellow-main font-semibold">BSC</span>
         </h1>
         <p className="pt-4">
-          Zap into one of the farms to earn WILDx as we prepare a new ecosystem
-          of yield opportunities on BASE. All WILDx sales taxes are burned to
-          reduce inflation and there are no non-native coins for whales to milk.
-          Stay WILD and enjoy the yield! 🤞.
+         Be wild 🤞.
         </p>
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2 xl:w-1/3">
