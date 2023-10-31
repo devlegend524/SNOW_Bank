@@ -4,7 +4,7 @@ export default function TokenDisplay(props) {
   if (props.token?.isTokenOnly || props.token?.decimals) {
     return (
       <img
-        src={props.token?.decimals ? props.token?.logo : props.token?.logoA}
+        src={props.token?.decimals ? props.token?.logoA : props.token?.logo}
         alt="token"
         className="rounded-full w-[60px] h-[60px] lg:w-[65px] lg:h-[65px] border-[3px] border-white mb-3"
       />
