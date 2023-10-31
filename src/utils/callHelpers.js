@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { getMasterChefAddress } from "utils/addressHelpers";
 
-import { didUserReject, fromReadableAmount } from "./customHelpers";
+import { didUserReject, fromReadableAmount, toReadableAmount } from "./customHelpers";
 import { notify } from "./toastHelper";
 
 export const approve = async (
@@ -78,12 +78,12 @@ export const zap = async (
   isNativeOut,
   address
 ) => {
+  console.log(amount, amount.toString(), toReadableAmount(Number(amount)))
   try {
     if (isNative) {
-      console.log(tokenB);
       await zapContract.zapETH(tokenB, {
         from: address,
-        value: amount,
+        value: amount.toString(),
       });
 
       notify("success", "Zap successful!");
