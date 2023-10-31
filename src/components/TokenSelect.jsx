@@ -27,8 +27,10 @@ export default function TokenSelect({
   const [debouncedValue] = useDebounce(localAmount, 1000);
 
   const handleMaxAmount = () => {
-    setAmount(balance);
-    setLocalAmount(Number(balance));
+    const maxValue =
+      balance > 0 ? Number((Number(balance) - Number(0.00001)).toFixed(5)) : 0;
+    setAmount(maxValue);
+    setLocalAmount(Number(maxValue));
     setInsufficient(false);
   };
 
