@@ -18,8 +18,8 @@ import {
 } from "./actions";
 import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
 import { useAccount } from "wagmi";
-import { wildWethFarmPid, wethUsdcFarmPid } from "config";
-
+import { wildWethFarmPid, mainTokenSymbol, wethUsdcFarmPid } from "config";
+import addresses from "constants/addresses";
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch();
   const { fastRefresh } = useRefresh();
@@ -261,12 +261,19 @@ export const usePrice3WiLDUsdc = () => {
     async function fetchData() {
       try {
         const returned = await (
-          await fetch("https://api.dexscreener.com/latest/dex/search?q=WILDxx")
+          await fetch(
+            `https://api.dexscreener.com/latest/dex/search?q=${mainTokenSymbol}`
+          )
         ).json();
         if (returned && returned.pairs) {
+          console.log(returned.pairs);
           const data = returned.pairs.filter(
-            (pair) => pair.chainId === "bsc"
+            (pair) =>
+              pair.chainId === "bsc" &&
+              pair.pairAddress === addresses.wildWbnblp
           )[0];
+          console.log(data);
+
           setPriceUsd(data?.priceUsd);
           setLiquidity(data?.liquidity?.usd);
           setMarketCap(data?.fdv);
