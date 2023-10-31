@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Loading({ title = "..." }) {
+export default function Loading({ title = "" }) {
   return (
     <div className="flex justify-center items-center">
       <img
