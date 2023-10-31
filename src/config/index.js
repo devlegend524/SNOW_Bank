@@ -16,7 +16,7 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const mainTokenSymbol = "WILDxxxxx";
+export const mainTokenSymbol = "3WiLD";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
   56: "https://pancakeswap.finance/",
