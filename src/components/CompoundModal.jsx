@@ -43,6 +43,7 @@ export default function CompoundModal({
   pid,
   isAll,
 }) {
+  const signer = useEthersSigner();
   const { t } = useTranslation();
   const [targetToken, setTargetToken] = useState(
     !isAll ? getFarmFromPid(pid[0]) : getFarmFromPid(0)
@@ -54,7 +55,6 @@ export default function CompoundModal({
 
   const { address } = useAccount();
   const zapAddress = getZapAddress();
-  const signer = useEthersSigner();
   const wildXContract = getWILDXContract(signer);
   const { onReward } = useHarvest(pid[0]);
   const { onZapForFarm } = useZapForFarm();
@@ -69,6 +69,7 @@ export default function CompoundModal({
     });
     setAllowance(allowance.toString());
     setIsCheckingAllowance(false);
+    return Number(allowance);
   };
 
   async function handleApprove() {
@@ -107,10 +108,8 @@ export default function CompoundModal({
     setZapPendingTx(true);
     try {
       if (isAll) {
-        console.log("harvest all...", pid);
         await harvestMany(masterChefContract, pid, false, address);
       } else {
-        console.log("harvest single...", pid);
         await onReward(false);
       }
       await sleep(2000);
@@ -139,7 +138,9 @@ export default function CompoundModal({
   };
 
   useEffect(() => {
-    if (address & signer) getAllowance();
+    if (address && signer) {
+      getAllowance();
+    }
   }, [address, signer]);
 
   return (
@@ -151,7 +152,11 @@ export default function CompoundModal({
     >
       <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg">
         <div className="flex justify-around items-center">
-          <TokenDisplay token={tokens.wild} modal={true} />
+          <img
+            src={tokens.wild.logo}
+            alt="token"
+            className="rounded-full w-[60px] h-[60px] lg:w-[65px] lg:h-[65px] border-[3px] border-white mb-3"
+          />
           <ArrowForwardIcon />
           <TokenDisplay token={targetToken} modal={true} />
         </div>
@@ -210,7 +215,9 @@ export default function CompoundModal({
             <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
               <Loading /> Loading...
             </button>
-          ) : Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ? (
+          ) : Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ||
+            Number(ethers.utils.formatUnits(allowance, "ether")) <
+              Number(earnings) ? (
             <button
               onClick={handleApprove}
               disabled={isApproving}
