@@ -123,7 +123,7 @@ export default function TokenSelect({
             <span className="text-sm text-gray-200 md:w-28 hidden md:block text-center">
               {token?.lpSymbol}
             </span>
-            <img className="rounded-full" src="/images/arrow-down.png" alt="" />
+            <img className="rounded-full" src="/assets/arrow-down.png" alt="" />
           </div>
           {!selectOnly && (
             <div

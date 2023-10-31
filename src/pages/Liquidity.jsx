@@ -301,7 +301,6 @@ export default function Liquidity() {
     }
   }, [address, signer]);
 
-
   return (
     <div className="flex justify-center items-center flex-col  min-h-[calc(100vh-200px)] w-full px-5">
       <div className="tab">
@@ -327,7 +326,7 @@ export default function Liquidity() {
         <div className="card">
           <div className="flex justify-between items-center">
             <div className="flex-1">
-              {/* <button className="action_btn"><img src="/images/chart.png" alt="" /></button> */}
+              {/* <button className="action_btn"><img src="/assets/chart.png" alt="" /></button> */}
             </div>
             <div className="flex-1 flex justify-center items-center">
               <div className="block">
@@ -338,7 +337,7 @@ export default function Liquidity() {
             </div>
             <div className="flex-1 flex justify-end items-center">
               <button className="action_btn" onClick={refresh}>
-                <img src="/images/refresh.png" alt="" />
+                <img src="/assets/refresh.png" alt="" />
               </button>
             </div>
           </div>
@@ -424,7 +423,7 @@ export default function Liquidity() {
         <div className="card">
           <div className="flex justify-between items-center">
             <div className="flex-1">
-              {/* <button className="action_btn"><img src="/images/chart.png" alt="" /></button> */}
+              {/* <button className="action_btn"><img src="/assets/chart.png" alt="" /></button> */}
             </div>
             <div className=" flex justify-center items-center">
               <div className="">
@@ -435,7 +434,7 @@ export default function Liquidity() {
             </div>
             <div className="flex-1 flex justify-end items-center">
               <button className="action_btn" onClick={refresh}>
-                <img src="/images/refresh.png" alt="" />
+                <img src="/assets/refresh.png" alt="" />
               </button>
             </div>
           </div>

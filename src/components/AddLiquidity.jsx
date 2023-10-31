@@ -83,7 +83,7 @@ export default function AddLiquidity(props) {
       <div className="card">
         <div className="flex justify-between items-center">
           <div className="flex-1">
-            {/* <button className="action_btn"><img src="/images/chart.png" alt="" /></button> */}
+            {/* <button className="action_btn"><img src="/assets/chart.png" alt="" /></button> */}
           </div>
           <div className="flex-1 flex justify-center items-center">
             <div className="block">
@@ -94,10 +94,10 @@ export default function AddLiquidity(props) {
           </div>
           <div className="flex-1 flex justify-end items-center">
             <button className="action_btn">
-              <img src="/images/refresh.png" alt="" />
+              <img src="/assets/refresh.png" alt="" />
             </button>
             <button className="action_btn ml-3">
-              <img src="/images/setting.png" alt="" />
+              <img src="/assets/setting.png" alt="" />
             </button>
           </div>
         </div>

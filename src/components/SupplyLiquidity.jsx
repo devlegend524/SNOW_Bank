@@ -285,7 +285,7 @@ export default function SupplyLiquidity(props) {
               className="action_btn"
               onClick={() => props.handleSupply(false)}
             >
-              <img src="/images/arrow.png" alt="" />
+              <img src="/assets/arrow.png" alt="" />
             </button>
           </div>
           <div className="flex-1 flex justify-center items-center">
@@ -297,10 +297,10 @@ export default function SupplyLiquidity(props) {
           </div>
           <div className="flex-1 flex justify-end items-center">
             <button className="action_btn">
-              <img src="/images/refresh.png" alt="" />
+              <img src="/assets/refresh.png" alt="" />
             </button>
             <button className="action_btn ml-3">
-              <img src="/images/setting.png" alt="" />
+              <img src="/assets/setting.png" alt="" />
             </button>
           </div>
         </div>

@@ -14,7 +14,7 @@ export default function Header() {
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
               <a href="/">
-                 <span className="text-yellow-main">3</span>WiLD
+                <span className="text-yellow-main">3</span>WiLD
               </a>
             </div>
             <div
@@ -34,7 +34,7 @@ export default function Header() {
                     key={key}
                   >
                     <a href={link.url}>{link.name}</a>
-                    <img src="/images/hover.png" alt="" />
+                    <img src="/assets/hover.png" alt="" />
                   </li>
                 ))}
                 <li className={`list_item`}>

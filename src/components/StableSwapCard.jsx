@@ -185,7 +185,7 @@ export default function WildSwapCard() {
 
   const checkValidPair = async (tokenA, tokenB) => {
     setPair("");
-    console.log(tokenA, tokenB, contracts.factoryProvider)
+    console.log(tokenA, tokenB, contracts.factoryProvider);
     try {
       setPairLoading(true);
       const newPair = await getValidPair(
@@ -235,7 +235,9 @@ export default function WildSwapCard() {
         }
       );
       amount_out = amount_out[1]?.toString();
-      amount_out = Math.round((amount_out * (100 - slippage)) / 100)?.toString();
+      amount_out = Math.round(
+        (amount_out * (100 - slippage)) / 100
+      )?.toString();
 
       if (tokenA.address === "WBNB") {
         await contracts.routerSigner.swapExactETHForTokens(
@@ -284,7 +286,7 @@ export default function WildSwapCard() {
       <div className="flex justify-between items-center">
         <div className="flex-1">
           <button className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out">
-            <img src="/images/chart.png" alt="" />
+            <img src="/assets/chart.png" alt="" />
           </button>
         </div>
         <div className="flex-1 flex justify-center items-center">
@@ -294,10 +296,10 @@ export default function WildSwapCard() {
         </div>
         <div className="flex-1 flex justify-end items-center">
           <button className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out">
-            <img src="/images/refresh.png" alt="" />
+            <img src="/assets/refresh.png" alt="" />
           </button>
           <button className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out ml-3">
-            <img src="/images/setting.png" alt="" />
+            <img src="/assets/setting.png" alt="" />
           </button>
         </div>
       </div>
@@ -325,7 +327,7 @@ export default function WildSwapCard() {
             >
               <img
                 className="w-7 transition ease-in-out"
-                src="/images/swap.png"
+                src="/assets/swap.png"
                 alt=""
               />
             </button>
@@ -370,11 +372,11 @@ export default function WildSwapCard() {
         </div>
         <div className="flex justify-center items-center gap-3 sm:gap-10">
           <button className="connect_btn">
-            <img src="/images/metamask.svg" alt="" />
+            <img src="/assets/metamask.svg" alt="" />
             &nbsp;CONNECT WALLET
           </button>
           <button className="connect_btn">
-            <img src="/images/walletconnector.svg" alt="" />
+            <img src="/assets/walletconnector.svg" alt="" />
             &nbsp;CONNECT WALLET
           </button>
         </div>
