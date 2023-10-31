@@ -159,7 +159,7 @@ export default function Swap() {
   const refreshData = () => {
     setTokenAAmount("");
     setUpdateBalance(true);
-    checkAllowance(tokenB, "A");
+    checkAllowance(tokenA, "A");
   };
 
   return (
