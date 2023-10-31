@@ -92,7 +92,6 @@ export default function CompoundModal({
         await tx.wait();
       }
       setIsApproving(false);
-      getAllowance();
     } catch (e) {
       console.log(e);
       if (didUserReject(e)) {
