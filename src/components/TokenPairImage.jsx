@@ -8,10 +8,11 @@ export const getImageUrlFromToken = (token) => {
 }
 
 const TokenPairImage = ({ primaryToken, secondaryToken, ...props }) => {
+  console.log(secondaryToken, primaryToken,'---secondary-token---')
   return (
     <UIKitTokenPairImage
-      primarySrc={getImageUrlFromToken(primaryToken)}
-      secondarySrc={getImageUrlFromToken(secondaryToken)}
+      primarySrc={primaryToken.logo}
+      secondarySrc={secondaryToken.logo}
       {...props}
     />
   )
