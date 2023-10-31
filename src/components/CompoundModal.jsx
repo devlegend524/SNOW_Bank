@@ -21,6 +21,7 @@ import { getFarmFromPid } from "utils/farmHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { sleep } from "utils/customHelpers";
 import tokens from "config/tokens";
+import { fromReadableAmount } from "utils";
 
 const customStyles = {
   content: {
@@ -129,9 +130,9 @@ export default function CompoundModal({
       }
 
       await onZapForFarm(
-        farms[0].lpAddresses,
+        tokens.wild.address,
         false,
-        ethers.utils.parseEther(earnings.toString() || "1"),
+        fromReadableAmount(earnings),
         targetToken.lpAddresses,
         targetToken.pid
       );
@@ -153,7 +154,7 @@ export default function CompoundModal({
     setTargetToken(farms[Number(e)]);
   };
 
-  useEffect( () => {
+  useEffect(() => {
     if (address && signer) {
       getAllowance();
     }
