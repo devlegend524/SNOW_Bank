@@ -22,21 +22,21 @@ export default function TotalValueLocked() {
     abi: wildABI,
     functionName: "balanceOf",
     args: ["0x000000000000000000000000000000000000dead"],
-    chainId: 8453,
+    chainId: 56,
   });
   const wildxBalanceRead = useContractRead({
     address: getWILDXAddress(),
     abi: wildABI,
     functionName: "balanceOf",
     args: ["0xeAA13b4f85A98E6CcaF65606361BD590e98DE2Cb"],
-    chainId: 8453,
+    chainId: 56,
   });
   const wethBalanceRead = useContractRead({
     address: getWethAddress(),
     abi: erc20ABI,
     functionName: "balanceOf",
     args: ["0xeAA13b4f85A98E6CcaF65606361BD590e98DE2Cb"],
-    chainId: 8453,
+    chainId: 56,
   });
 
   const totalMinted =

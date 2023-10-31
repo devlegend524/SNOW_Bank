@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Loading() {
+export default function Loading({ title = "..." }) {
   return (
     <div className="flex justify-center items-center">
       <img
@@ -8,6 +8,7 @@ export default function Loading() {
         alt="Loading..."
         className="w-[30px] h-[30px]"
       />
+      {title}
     </div>
   );
 }
