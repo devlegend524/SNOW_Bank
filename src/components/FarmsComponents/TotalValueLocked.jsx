@@ -24,7 +24,7 @@ export default function TotalValueLocked() {
     args: ["0x000000000000000000000000000000000000dead"],
     chainId: 56,
   });
-  const wildxBalanceRead = useContractRead({
+  const threeWildBalanceRead = useContractRead({
     address: get3WiLDAddress(),
     abi: wildABI,
     functionName: "balanceOf",
