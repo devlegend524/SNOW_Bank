@@ -131,17 +131,18 @@ export const useLpTokenPrice = (symbol) => {
 
   if (farm.isTokenOnly) return farmTokenPriceInUsd;
 
-  if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
-    // Total value of base token in LP
-    const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(
-      farm.tokenBalanceLP
-    );
-    // Double it to get overall value in LP
-    const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
-    // Divide total value of all tokens, by the number of LP tokens
-    lpTokenPrice = overallValueOfAllTokensInFarm.div(farm.lpTotalSupply);
-  }
-
+  try {
+    if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
+      // Total value of base token in LP
+      const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(
+        farm.tokenBalanceLP
+      );
+      // Double it to get overall value in LP
+      const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
+      // Divide total value of all tokens, by the number of LP tokens
+      lpTokenPrice = overallValueOfAllTokensInFarm.div(farm.lpTotalSupply);
+    }
+  } catch {}
   return lpTokenPrice;
 };
 
