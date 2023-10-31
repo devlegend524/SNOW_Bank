@@ -42,12 +42,9 @@ export default function Zap() {
   };
 
   useEffect(() => {
-    getAvailableNFTs();
-  }, [fastRefresh]);
+    if (address) getAvailableNFTs();
+  }, [fastRefresh, address]);
 
-  useEffect(() => {
-    getAvailableNFTs();
-  }, []);
   return (
     <div className="container">
       <h1 className="text-center text-3xl font-semibold">My NFTs</h1>
