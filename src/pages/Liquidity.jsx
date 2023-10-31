@@ -192,6 +192,8 @@ export default function Liquidity() {
       getAllowance(tokenB, "to");
     }
   }, [address, signer]);
+
+
   return (
     <div className="flex justify-center items-center flex-col  min-h-[calc(100vh-200px)] w-full">
       <div className="tab">
