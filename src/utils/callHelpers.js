@@ -158,7 +158,7 @@ export const zapForFarm = async (
 export const harvest = async (masterChefContract, pid, address) => {
   if (!limitedFunction(false)) {
     notify("error", "You can harvest or compound only three times a day.");
-    return;
+    return false;
   }
 
   try {
@@ -179,7 +179,7 @@ export const harvest = async (masterChefContract, pid, address) => {
 export const harvestMany = async (masterChefContract, pids, address) => {
   if (!limitedFunction(false)) {
     notify("error", "You can harvest or compound only three times a day.");
-    return;
+    return false;
   }
 
   try {

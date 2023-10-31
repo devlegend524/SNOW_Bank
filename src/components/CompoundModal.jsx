@@ -60,6 +60,8 @@ export default function CompoundModal({
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
 
+  const [approve, setApprove] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const getAllowance = async () => {
@@ -69,7 +71,7 @@ export default function CompoundModal({
     });
     setAllowance(allowance.toString());
     setIsCheckingAllowance(false);
-    return Number(allowance);
+    return Number(ethers.utils.formatUnits(allowance, "ether"));
   };
 
   async function handleApprove() {
@@ -107,11 +109,25 @@ export default function CompoundModal({
     setZapPendingTx(true);
     try {
       if (isAll) {
-        await harvestMany(masterChefContract, pid, false, address);
+        const res = await harvestMany(masterChefContract, pid, false, address);
+        if (!res) {
+          setZapPendingTx(false);
+          return;
+        }
       } else {
-        await onReward(false);
+        const res = await onReward(false);
+        if (!res) {
+          setZapPendingTx(false);
+          return;
+        }
       }
       await sleep(2000);
+
+      const allowanceAfterHarvest = await getAllowance();
+      if (allowanceAfterHarvest < Number(earnings)) {
+        await handleApprove();
+      }
+
       await onZapForFarm(
         farms[0].lpAddresses,
         false,
@@ -213,22 +229,6 @@ export default function CompoundModal({
           {isCheckingAllowance ? (
             <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
               <Loading /> Loading...
-            </button>
-          ) : Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ||
-            Number(ethers.utils.formatUnits(allowance, "ether")) <
-              Number(earnings) ? (
-            <button
-              onClick={handleApprove}
-              disabled={isApproving}
-              className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
-            >
-              {isApproving ? (
-                <div className="flex justify-center gap-1">
-                  <Loading /> Approving...
-                </div>
-              ) : (
-                "Approve"
-              )}{" "}
             </button>
           ) : (
             <button
