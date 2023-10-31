@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 // Addresses
 import {
-  getWILDXAddress,
+  get3WiLDAddress,
   getMasterChefAddress,
   getMulticallAddress,
   getZapAddress,
@@ -44,8 +44,8 @@ export const getErc721Contract = (address, provider) => {
 export const getLpContract = (address, provider) => {
   return getContract(lpTokenAbi, address, provider);
 };
-export const getWILDXContract = (provider, chainId) => {
-  return getContract(wildAbi, getWILDXAddress(), provider);
+export const get3WiLDContract = (provider, chainId) => {
+  return getContract(wildAbi, get3WiLDAddress(), provider);
 };
 export const getMasterchefContract = (provider, chainId) => {
   return getContract(masterChef, getMasterChefAddress(), provider);

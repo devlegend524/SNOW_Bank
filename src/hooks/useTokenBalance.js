@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 import {
   getErc20Contract,
-  getWILDXContract,
+  get3WiLDContract,
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { BIG_ZERO } from "utils/bigNumber";
@@ -57,7 +57,7 @@ export const useTotalSupply = () => {
   const provider = useEthersProvider();
   useEffect(() => {
     async function fetchTotalSupply() {
-      const wildContract = getWILDXContract(
+      const wildContract = get3WiLDContract(
         provider,
         chain ? chain.id : CHAIN_ID
       );
@@ -70,7 +70,7 @@ export const useTotalSupply = () => {
   return totalSupply;
 };
 
-export const useWILDXPerSecond = () => {
+export const use3WiLDPerSecond = () => {
   const { fastRefresh } = useRefresh();
   const [wildxPerSecond, setWildPerSecond] = useState(BIG_ZERO);
   const { chain } = useNetwork();
@@ -111,14 +111,14 @@ export const useBurnedBalance = (tokenAddress) => {
   return balance;
 };
 
-export const useWILDXBurnedBalance = () => {
+export const use3WiLDBurnedBalance = () => {
   const [balance, setBalance] = useState(BIG_ZERO);
   const { fastRefresh } = useRefresh();
   const { chain } = useNetwork();
   const provider = useEthersProvider();
   useEffect(() => {
     const fetchBalance = async () => {
-      const wildContract = getWILDXContract(
+      const wildContract = get3WiLDContract(
         provider,
         chain ? chain.id : CHAIN_ID
       );

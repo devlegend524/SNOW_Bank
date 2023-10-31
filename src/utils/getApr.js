@@ -28,7 +28,7 @@ export const getPoolApr = (
 /**
  * Get farm APR value in %
  * @param poolWeight allocationPoint / totalAllocationPoint
- * @param wildPriceUsd WILDX price in USD
+ * @param wildPriceUsd 3WiLD price in USD
  * @param poolLiquidityUsd Total pool liquidity in USD
  * @returns
  */
@@ -39,8 +39,8 @@ export const getFarmApr = (
   tokenPerBlock
 ) => {
   const wildPerYear = YEAR_BN.times(tokenPerBlock);
-  const yearlyWILDXRewardAllocation = wildPerYear.times(poolWeight);
-  const wildRewardsApr = yearlyWILDXRewardAllocation
+  const yearly3WiLDRewardAllocation = wildPerYear.times(poolWeight);
+  const wildRewardsApr = yearly3WiLDRewardAllocation
     .times(wildPriceUsd)
     .div(poolLiquidityUsd)
     .times(100);

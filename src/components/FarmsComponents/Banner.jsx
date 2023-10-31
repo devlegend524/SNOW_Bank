@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FaExternalLinkAlt, FaRegCopy } from "react-icons/fa";
-import { getWILDXAddress, getWethAddress } from "utils/addressHelpers";
+import { get3WiLDAddress, getWethAddress } from "utils/addressHelpers";
 import { CHAIN_ID, TESTNET_CHAIN_ID, BASE_SWAP_URL, BASE_URL } from "config";
 import { useNetwork } from "wagmi";
 import { formatAddress } from "utils/customHelpers";
@@ -12,10 +12,10 @@ export default function FarmBanner() {
   const [isCopied, setIsCopied] = useState(false);
   const [wildAddress, setWildAddress] = useState("Connect correct wallet");
   const { chain } = useNetwork();
-  const token = getWILDXAddress();
+  const token = get3WiLDAddress();
   // const provider = useEthersProvider()
 
-  const addWatchWILDXToken = useCallback(async () => {
+  const addWatch3WiLDToken = useCallback(async () => {
     const provider = window.ethereum;
     if (provider) {
       console.log("asdfasdf", provider);
@@ -27,7 +27,7 @@ export default function FarmBanner() {
             type: "ERC20",
             options: {
               address: token,
-              symbol: "WILDX",
+              symbol: "3WiLD",
               decimals: "18",
               image: `${BASE_URL}/images/tokens/wildx.png`,
             },
@@ -53,7 +53,7 @@ export default function FarmBanner() {
 
   useEffect(() => {
     if (chain && (chain.id === CHAIN_ID || chain.id === TESTNET_CHAIN_ID)) {
-      const addr = getWILDXAddress();
+      const addr = get3WiLDAddress();
       setWildAddress(addr);
     }
   }, [chain]);
@@ -61,27 +61,27 @@ export default function FarmBanner() {
     <div className="flex justify-center flex-col md:flex-row bg-main-100 rounded-md shadow shadow-black/60 drop-shadow-xl">
       <div className="p-3 md:p-12 md:w-1/2 xl:w-2/3 w-full text-center md:text-left">
         <h1 className="text-7xl">
-          WILDx on <span className="text-yellow-main font-semibold">BSC</span>
+          Earn 3WiLD on <span className="text-yellow-main font-semibold">BSC</span>
         </h1>
         <p className="pt-4">
          Be wild 🤞.
         </p>
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2 xl:w-1/3">
-        <div className="buy_card">
+        <div className="buy_card shadow shadow-black drop-shadow-md">
           <div className="flex items-center justify-center gap-3">
             <a
-              className="main_btn flex-1"
-              href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${getWILDXAddress()}`}
+              className="main_btn w-full"
+              href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${get3WiLDAddress()}`}
               target="_blank"
             >
-              Buy WILDX
+              Buy 3WiLD
             </a>
             <button
-              onClick={addWatchWILDXToken}
-              className="main_btn flex items-center justify-center"
+              onClick={addWatch3WiLDToken}
+              className="main_btn flex items-center justify-center w-full"
             >
-              Add WILDX to &nbsp;
+              Add 3WiLD &nbsp;
               <svg
                 viewBox="0 0 35 33"
                 color="text"

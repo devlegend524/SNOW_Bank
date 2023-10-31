@@ -1,8 +1,8 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { FaAngleDown } from "react-icons/fa";
-import { usePriceWILDXUsdc } from "state/hooks";
+import { usePrice3WiLDUsdc } from "state/hooks";
 export const WalletConnect = () => {
-  const priceData = usePriceWILDXUsdc();
+  const priceData = usePrice3WiLDUsdc();
   return (
     <ConnectButton.Custom>
       {({

@@ -30,7 +30,7 @@ const getFarmBaseTokenPrice = (
       ? wethPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
-  if (farm.quoteToken.symbol === "WILDX") {
+  if (farm.quoteToken.symbol === "3WiLD") {
     return hasTokenPriceVsQuote
       ? wildxPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
@@ -75,7 +75,7 @@ const getFarmQuoteTokenPrice = (
   if (["USDC", "USDT"].includes(farm.quoteToken.symbol)) {
     return BIG_ONE;
   }
-  if (farm.quoteToken.symbol === "WILDX") {
+  if (farm.quoteToken.symbol === "3WiLD") {
     return wildxPriceUsdt;
   }
   if (farm.quoteToken.symbol === "WBNB") {

@@ -32,7 +32,7 @@ const ApyCalculatorModal = ({
   apr,
   linkLabel,
   linkHref,
-  earningTokenSymbol = "WILDX",
+  earningTokenSymbol = "3WiLD",
   roundingDecimals = 2,
   compoundFrequency = 1,
   performanceFee = 0,

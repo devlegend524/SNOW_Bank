@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getWILDXContract } from 'utils/contractHelpers'
+import { get3WiLDContract } from 'utils/contractHelpers'
 import { useEthersProvider } from 'hooks/useEthers'
 
 export default function CurrentSaleTax() {
@@ -7,7 +7,7 @@ export default function CurrentSaleTax() {
     const provider = useEthersProvider()
     const getCurrentTaxRate = async () => {
         try {
-            const wildxContract = getWILDXContract(provider)
+            const wildxContract = get3WiLDContract(provider)
             const currentRate = await wildxContract.getCurrentTaxRate();
             setTaxRate(Number(currentRate) / 100)
         } catch (e) {

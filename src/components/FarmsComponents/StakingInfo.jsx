@@ -5,8 +5,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useMasterchef } from "hooks/useContract";
 import { useFarmsWithBalance } from "hooks/useFarmsWithBalance";
 import { harvestMany } from "utils/callHelpers";
-import WILDXHarvestBalance from "./Staking/WILDXHarvestBalance";
-import WILDXWalletBalance from "./Staking/WILDXWalletBalance";
+import WiLDHarvestBalance from "./Staking/WiLDHarvestBalance";
+import WiLDWalletBalance from "./Staking/WiLDWalletBalance";
 import Loading from "components/Loading";
 import CompoundModal from "./CompoundModal";
 import BigNumber from "bignumber.js";
@@ -88,15 +88,15 @@ export default function FarmStaking() {
       </div>
       <div className="flex justify-between flex-col md:flex-row">
         <div>
-          <div className="text-base pb-2 font-semibold">WILDX to Harvest:</div>
+          <div className="text-base pb-2 font-semibold">3WiLD to Harvest:</div>
           <div className="text-sm text-gray-300">
-            <WILDXHarvestBalance farmsWithBalance={balancesWithValue} />
+            <WiLDHarvestBalance farmsWithBalance={balancesWithValue} />
           </div>
           <div className="text-base pb-2 font-semibold mt-5">
-            WILDX in Wallet:
+            3WiLD in Wallet:
           </div>
           <div className="text-sm text-gray-300">
-            <WILDXWalletBalance />
+            <WiLDWalletBalance />
           </div>
         </div>
         <div>

@@ -8,7 +8,7 @@ const tokens = {
     logo: "/images/tokens/bnb.svg",
   },
   wild: {
-    symbol: "WILDX",
+    symbol: "3WiLD",
     address: addresses.wild,
     decimals: 18,
     logo: "/images/tokens/wildx.png",
@@ -33,7 +33,7 @@ const tokens = {
     logo: "/images/tokens/usdc.svg",
   },
   nft: {
-    symbol: "WILDx NFT",
+    symbol: "3WiLD NFT",
     address: addresses.nft,
     decimals: 18,
     logo: "/images/tokens/link.svg",

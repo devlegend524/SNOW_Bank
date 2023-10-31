@@ -6,7 +6,7 @@ import { BIG_ZERO } from "utils/bigNumber";
 import { getBalanceAmount } from "utils/formatBalance";
 import { useAppDispatch } from "state";
 import { fetchFarmUserDataAsync } from "state/farms";
-import { usePriceWILDXUsdc } from "state/hooks";
+import { usePrice3WiLDUsdc } from "state/hooks";
 import { useHarvest } from "hooks/useHarvest";
 import { useTranslation } from "context/Localization";
 import { Earned } from "./styles";
@@ -33,7 +33,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { address } = useAccount();
-  const wildPrice = usePriceWILDXUsdc()[0];
+  const wildPrice = usePrice3WiLDUsdc()[0];
   const masterChefContract = useMasterchef();
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   //   try {
   //     setCompoundPendingTx(true)
   //     await harvestMany(masterChefContract, [pid], true, address)
-  //     notify('success', 'You have successfully claimed WILDX tokens')
+  //     notify('success', 'You have successfully claimed 3WiLD tokens')
   //     dispatch(fetchFarmUserDataAsync({ address, pids: [pid] }))
   //     setCompoundPendingTx(false)
   //   } catch (e) {
@@ -97,7 +97,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
     <div className="flex flex-row items-center  justify-between md:justify-around gap-4  p-2 lg:p-4 w-full">
       <div className="flex flex-col justify-between gap-2 w-full">
         <div className="text-white text-md font-semibold">
-          WILDX &nbsp;
+          3WiLD &nbsp;
           {t("Earned")}
         </div>
         <Earned>{displayBalance}</Earned>
@@ -130,7 +130,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 data-tooltip-content={
                   earnings.eq(0) || pendingCompoundTx || !userDataReady
                     ? "Stake tokens first to use it"
-                    : "Restake your WILDX profit to WILDX pool"
+                    : "Restake your 3WiLD profit to 3WiLD pool"
                 }
                 disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
                 onClick={openCompoundModal}

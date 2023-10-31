@@ -31,7 +31,7 @@ export const liquidityList = [
   },
   {
     pid: 1,
-    lpSymbol: "WBNB-WILDX",
+    lpSymbol: "WBNB-3WiLD",
     isTokenOnly: false,
     lpAddresses: addresses.wildWbnblp,
     decimals: 18,
@@ -79,7 +79,7 @@ export const zapList = [
   },
   {
     pid: 1,
-    lpSymbol: "WBNB-WILDX",
+    lpSymbol: "WBNB-3WiLD",
     isTokenOnly: false,
     lpAddresses: addresses.wildWbnblp,
     decimals: 18,
@@ -91,7 +91,7 @@ export const zapList = [
 const farmsConfig = [
   {
     pid: 0,
-    lpSymbol: "WBNB-WILDX",
+    lpSymbol: "WBNB-3WiLD",
     lpAddresses: addresses.wildWbnblp,
     isTokenOnly: false,
     isNFTPool: false,
@@ -113,7 +113,7 @@ const farmsConfig = [
   },
   {
     pid: 2,
-    lpSymbol: "WILDxNFT",
+    lpSymbol: "3WiLDNFT",
     lpAddresses: addresses.nft,
     isTokenOnly: true,
     isNFTPool: true,

@@ -8,7 +8,7 @@ export const getFactoryAddress = () => {
   return contractAddresses.factory;
 };
 
-export const getWILDXAddress = () => {
+export const get3WiLDAddress = () => {
   return tokens.wild.address;
 };
 export const getMasterChefAddress = () => {

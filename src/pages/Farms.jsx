@@ -18,9 +18,9 @@ import { latinise } from "utils/latinise";
 import { getFarmApr } from "utils/getApr";
 import { getBalanceNumber } from "utils/formatBalance";
 import isArchivedPid from "utils/farmHelpers";
-import { useWILDXPerSecond } from "hooks/useTokenBalance";
+import { use3WiLDPerSecond } from "hooks/useTokenBalance";
 import { NUMBER_OF_FARMS_VISIBLE } from "config";
-import { useFarms, usePollFarmsData, usePriceWILDXUsdc } from "state/hooks";
+import { useFarms, usePollFarmsData, usePrice3WiLDUsdc } from "state/hooks";
 import { useAccount } from "wagmi";
 
 export default function Farms() {
@@ -31,7 +31,7 @@ export default function Farms() {
   const isActive = !isInactive && !isArchived;
   usePollFarmsData(isArchived);
 
-  const wildPrice = usePriceWILDXUsdc()[0];
+  const wildPrice = usePrice3WiLDUsdc()[0];
   const loadMoreRef = useRef();
 
   const [userDataReady, setUserDataReady] = useState("hot");
@@ -42,7 +42,7 @@ export default function Farms() {
     NUMBER_OF_FARMS_VISIBLE
   );
   const [observerIsSet, setObserverIsSet] = useState(false);
-  const wildxPerSecond = useWILDXPerSecond();
+  const wildxPerSecond = use3WiLDPerSecond();
 
   const { data: farmsData, userDataLoaded } = useFarms();
 

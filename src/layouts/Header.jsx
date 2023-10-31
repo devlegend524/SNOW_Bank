@@ -9,12 +9,12 @@ export default function Header() {
 
   return (
     <>
-      <div className="bg-main-100">
+      <div className="bg-main-100 shadow shadow-black/30 drop-shadow-md">
         <div className="container mr-auto ml-auto relative">
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
               <a href="/">
-                Wildx <span className="text-yellow-main">BSC</span>
+                 <span className="text-yellow-main">3</span>WiLD
               </a>
             </div>
             <div
