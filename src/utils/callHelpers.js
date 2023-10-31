@@ -156,15 +156,15 @@ export const zapForFarm = async (
 };
 
 export const harvest = async (masterChefContract, pid, address) => {
-  if (!limitedFunction(false)) {
-    notify("error", "You can harvest or compound only three times a day.");
+  if (!limitedFunction(false, address)) {
+    notify("error", "You can not harvest or compound three times a day.");
     return false;
   }
 
   try {
     const tx = await masterChefContract.deposit(pid, "0");
     await tx.wait();
-    limitedFunction(true)
+    limitedFunction(true, address)
     notify("success", "Harvest successful!");
   } catch (e) {
     if (didUserReject(e)) {
@@ -177,8 +177,8 @@ export const harvest = async (masterChefContract, pid, address) => {
 };
 
 export const harvestMany = async (masterChefContract, pids, address) => {
-  if (!limitedFunction(false)) {
-    notify("error", "You can harvest or compound only three times a day.");
+  if (!limitedFunction(false, address)) {
+    notify("error", "You can not harvest or compound three times a day.");
     return false;
   }
 
@@ -187,7 +187,7 @@ export const harvestMany = async (masterChefContract, pids, address) => {
       from: address,
     });
     await tx.wait();
-    limitedFunction(true)
+    limitedFunction(true, address)
     notify("success", "Harvest All successful!");
   } catch (e) {
     if (didUserReject(e)) {
