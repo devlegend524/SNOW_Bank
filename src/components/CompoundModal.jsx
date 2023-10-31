@@ -60,7 +60,7 @@ export default function CompoundModal({
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
 
-  const [approve, setApprove] = useState(false);
+  // const [approve, setApprove] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -153,7 +153,7 @@ export default function CompoundModal({
     setTargetToken(farms[Number(e)]);
   };
 
-  useEffect(() => {
+  useEffect( () => {
     if (address && signer) {
       getAllowance();
     }
@@ -209,7 +209,7 @@ export default function CompoundModal({
         <p className="text-center text-lg pt-4">
           Compound{" "}
           <span className="font-semibold text-green-500 mx-1">
-            {farms[0].lpSymbol}
+            {tokens.wild.symbol}
           </span>
           into{" "}
           <span className="font-semibold text-green-500 mx-1">
