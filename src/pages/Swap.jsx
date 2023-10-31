@@ -235,7 +235,8 @@ export default function Swap() {
               <Loading title="Loading..." />
             </button>
           ) : (tokenA.lpSymbol !== "BNB" && Number(tokenAAllowance) === 0) ||
-            Number(tokenAAllowance) < Number(tokenAAmount) ? (
+            (tokenA.lpSymbol !== "BNB" &&
+              Number(tokenAAllowance) < Number(tokenAAmount)) ? (
             <button
               onClick={handleApprove}
               disabled={isApproving}
