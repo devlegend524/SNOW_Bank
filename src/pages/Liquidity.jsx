@@ -303,7 +303,7 @@ export default function Liquidity() {
 
 
   return (
-    <div className="flex justify-center items-center flex-col  min-h-[calc(100vh-200px)] w-full">
+    <div className="flex justify-center items-center flex-col  min-h-[calc(100vh-200px)] w-full px-5">
       <div className="tab">
         <div className="flex justify-center">
           <div className="tab_panel">

@@ -112,7 +112,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           />
         )}
       </div>
-      <div className="flex flex-col justify-center gap-2 lg:min-w-[180px]">
+      <div className="flex flex-col justify-center gap-2 lg:min-w-[180px] min-w-[130px]">
         <button
           disabled={earnings.eq(0) || pendingTx || !userDataReady}
           onClick={handleHavest}

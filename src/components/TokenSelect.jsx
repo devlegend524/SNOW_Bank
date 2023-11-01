@@ -102,19 +102,19 @@ export default function TokenSelect({
           >
             {token.isTokenOnly ? (
               <img
-                className="md:w-8 md:h-8 w-6 h-8 rounded-full"
+                className="md:w-8 md:h-8 w-8 h-8 rounded-full"
                 src={token?.logoA}
                 alt=""
               />
             ) : (
-              <div className="md:w-8 md:h-8 w-6 h-8 relative ml-2">
+              <div className="md:w-8 md:h-8 w-8 h-8 relative ml-2">
                 <img
-                  className="md:w-8 md:h-8 w-6 h-8 rounded-full absolute left-1/2 -translate-x-[80%]"
+                  className="md:w-8 md:h-8 w-8 h-8 rounded-full absolute left-1/2 -translate-x-[80%]"
                   src={token?.logoA}
                   alt=""
                 />{" "}
                 <img
-                  className="md:w-8 md:h-8 w-6 h-8 rounded-full  absolute left-1/2 -translate-x-[30%]"
+                  className="md:w-8 md:h-8 w-8 h-8 rounded-full  absolute left-1/2 -translate-x-[30%]"
                   src={token?.logoB}
                   alt=""
                 />
