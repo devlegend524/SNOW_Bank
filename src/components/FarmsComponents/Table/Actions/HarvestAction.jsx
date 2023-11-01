@@ -49,7 +49,11 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   async function handleHavest() {
     try {
       setPendingTx(true);
-      await onReward(false);
+      const res = await onReward(false);
+      if (res === false) {
+        setPendingTx(false);
+        return;
+      }
       dispatch(fetchFarmUserDataAsync({ address, pids: [pid] }));
       setPendingTx(false);
     } catch (e) {
