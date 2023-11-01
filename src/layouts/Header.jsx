@@ -18,7 +18,7 @@ export default function Header() {
               </a>
             </div>
             <div
-              className="text-yellow-main ml-2 block sm:hidden"
+              className="text-yellow-main ml-2 block sm:hidden mt-[3px]"
               onClick={() => setMobile(!isMobile)}
             >
               <Hamburger />

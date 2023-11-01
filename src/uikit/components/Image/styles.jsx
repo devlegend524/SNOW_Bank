@@ -5,11 +5,9 @@ import TokenImage from './TokenImage'
 
 export const StyledPrimaryImage = styled(TokenImage)`
   position: absolute;
-  border: 2px solid #91abe1;
   border-radius: 50%;
   img {
     border-radius: 50%;
-    background: #fff;
   }
 
   width: 100%;
