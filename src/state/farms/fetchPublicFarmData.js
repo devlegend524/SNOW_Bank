@@ -140,8 +140,8 @@ const fetchPublicFarmData = async (farm) => {
   // TODO Remove on production
   // if(farm.pid === 0) tokenPriceVsQuote = BIG_ONE
   const publicData = {
-    tokenBalanceLP: tokenBalanceLP,
-    quoteTokenBalanceLP: quoteTokenBalanceLP,
+    tokenBalanceLP: new BigNumber(tokenBalanceLP).toJSON(),
+    quoteTokenBalanceLP: new BigNumber(quoteTokenBalanceLP).toJSON(),
     tokenAmountTotal: tokenAmountTotal.toJSON(),
     quoteTokenAmountTotal: quoteTokenAmountTotal.toJSON(),
     lpTokenBalanceMC: new BigNumber(lpTokenBalanceMC).toJSON(),

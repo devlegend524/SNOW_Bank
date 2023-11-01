@@ -140,11 +140,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           onClick={handleHavest}
           className="rounded-md p-1  text-center text-black font-medium bg-yellow-main"
         >
-          {pendingTx ? (
-            <Loading title="Harvesting..." />
-          ) : (
-            t(`Harvest (${currentCounts})`)
-          )}
+          {pendingTx ? <Loading title="Harvesting..." /> : t(`Harvest`)}
         </button>
 
         <div className="flex flex-col lg:flex-row gap-2 w-full">
@@ -164,7 +160,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 {pendingCompoundTx ? (
                   <Loading title="Compounding..." />
                 ) : (
-                  t(`Compound (${currentCounts})`)
+                  t(`Compound`)
                 )}
               </button>
               <button
