@@ -72,14 +72,14 @@ export const useTotalSupply = () => {
 
 export const use3WiLDPerSecond = () => {
   const { fastRefresh } = useRefresh();
-  const [wildxPerSecond, setWildPerSecond] = useState(BIG_ZERO);
+  const [threeWildPerSecond, setWildPerSecond] = useState(BIG_ZERO);
   const { chain } = useNetwork();
   const provider = useEthersProvider();
   useEffect(() => {
     async function fetchWildPerSecond() {
       try {
         const masterChefContract = getMasterchefContract(provider);
-        const perSecond = await masterChefContract.wildxPerSecond();
+        const perSecond = await masterChefContract.threeWildPerSecond();
         setWildPerSecond(ethers.utils.formatUnits(perSecond, 18));
       } catch (e) {
         console.log(e);
@@ -88,7 +88,7 @@ export const use3WiLDPerSecond = () => {
     if (provider) fetchWildPerSecond();
   }, [fastRefresh, provider]);
 
-  return wildxPerSecond;
+  return threeWildPerSecond;
 };
 
 export const useBurnedBalance = (tokenAddress) => {

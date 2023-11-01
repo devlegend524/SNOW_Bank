@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_wildx",
+        "name": "_threeWild",
         "type": "address"
       },
       {
@@ -438,7 +438,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingWildx",
+    "name": "pendingThreeWild",
     "outputs": [
       {
         "internalType": "uint256",
@@ -476,7 +476,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accWildxPerShare",
+        "name": "accThreeWildPerShare",
         "type": "uint256"
       },
       {
@@ -589,7 +589,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_wildx",
+        "name": "_threeWild",
         "type": "address"
       }
     ],
@@ -601,6 +601,32 @@
   {
     "inputs": [],
     "name": "startTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "threeWild",
+    "outputs": [
+      {
+        "internalType": "contract ThreeWildToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "threeWildPerSecond",
     "outputs": [
       {
         "internalType": "uint256",
@@ -654,7 +680,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_wildxPerSecond",
+        "name": "_threeWildPerSecond",
         "type": "uint256"
       }
     ],
@@ -714,32 +740,6 @@
       {
         "internalType": "uint256",
         "name": "harvestTimes",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "wildx",
-    "outputs": [
-      {
-        "internalType": "contract WildToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "wildxPerSecond",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
         "type": "uint256"
       }
     ],
