@@ -125,7 +125,8 @@ export default function CompoundModal({
     try {
       if (isAll) {
         console.log("harvest all...", pid);
-        const res = await harvestMany(masterChefContract, pid, false, address);
+        // const res = await harvestMany(masterChefContract, pid, false, address);
+        const res = await onReward(false);
         if (res === false) {
           setZapPendingTx(false);
           return;
