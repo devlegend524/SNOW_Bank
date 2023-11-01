@@ -41,7 +41,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/images/tokens/bnb.svg",
+    logoA: "/assets/tokens/bnb.svg",
     logoB: "",
   },
   {
@@ -50,7 +50,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/images/tokens/wbnb.svg",
+    logoA: "/assets/tokens/wbnb.svg",
     logoB: "",
   },
   {
@@ -59,7 +59,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: tokens.usdc.address,
     decimals: 18,
-    logoA: "/images/tokens/usdc.svg",
+    logoA: "/assets/tokens/usdc.svg",
     logoB: "",
   },
 ];

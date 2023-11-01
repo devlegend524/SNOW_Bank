@@ -5,13 +5,13 @@ const tokens = {
     symbol: "BNB",
     address: addresses.wbnb,
     decimals: 18,
-    logo: "/images/tokens/bnb.svg",
+    logo: "/assets/tokens/bnb.svg",
   },
   wild: {
     symbol: "3WiLD",
     address: addresses.wild,
     decimals: 18,
-    logo: "/images/tokens/wildx.png",
+    logo: "/assets/tokens/wildx.png",
     projectLink: "https://wildbase.farm/", // todo:
   },
   weth: {
@@ -22,7 +22,7 @@ const tokens = {
   },
   wbnb: {
     symbol: "WBNB",
-    logo: "/images/tokens/wbnb.svg",
+    logo: "/assets/tokens/wbnb.svg",
     address: addresses.wbnb,
     decimals: 18,
   },
@@ -30,7 +30,7 @@ const tokens = {
     symbol: "USDC",
     address: addresses.usdc,
     decimals: 18,
-    logo: "/images/tokens/usdc.svg",
+    logo: "/assets/tokens/usdc.svg",
   },
   nft: {
     symbol: "3WiLD NFT",

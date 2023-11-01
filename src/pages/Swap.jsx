@@ -159,7 +159,7 @@ export default function Swap() {
   const refreshData = () => {
     setTokenAAmount("");
     setUpdateBalance(true);
-    checkAllowance(tokenB, "A");
+    checkAllowance(tokenA, "A");
   };
 
   return (
@@ -179,7 +179,7 @@ export default function Swap() {
               className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out"
               onClick={refreshData}
             >
-              <img src="/images/refresh.png" alt="" />
+              <img src="/assets/refresh.png" alt="" />
             </button>
           </div>
         </div>
@@ -209,7 +209,7 @@ export default function Swap() {
               >
                 <img
                   className="w-7 transition ease-in-out"
-                  src="/images/swap.png"
+                  src="/assets/swap.png"
                   alt=""
                 />
               </button>

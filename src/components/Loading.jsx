@@ -4,7 +4,7 @@ export default function Loading({ title = "" }) {
   return (
     <div className="flex justify-center items-center">
       <img
-        src="/images/loading.svg"
+        src="/assets/loading.svg"
         alt="Loading..."
         className="w-[30px] h-[30px]"
       />

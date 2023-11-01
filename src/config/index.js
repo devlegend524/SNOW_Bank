@@ -1,7 +1,7 @@
 import { BIG_TEN } from "utils/bigNumber";
 import BigNumber from "bignumber.js";
 
-export const BASE_URL = "ttps://pancakeswap.finance/swap";
+export const BASE_URL = "https://wildbase.farm";
 export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 
 export const CHAIN_ID = 56;
@@ -16,7 +16,7 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const mainTokenSymbol = "WILDxxxx";
+export const mainTokenSymbol = "WILDxxxxx";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
   56: "https://pancakeswap.finance/",
