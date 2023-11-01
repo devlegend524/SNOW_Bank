@@ -208,7 +208,6 @@ export default function Liquidity() {
         Date.now() + 400,
         {
           from: address,
-          gasLimit: 420000,
         }
       );
       await tx.wait();
@@ -236,7 +235,6 @@ export default function Liquidity() {
         Date.now() + 400,
         {
           from: address,
-          gasLimit: 420000,
         }
       );
       await tx.wait();
