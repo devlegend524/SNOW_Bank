@@ -9,6 +9,7 @@ import WiLDHarvestBalance from "./Staking/WiLDHarvestBalance";
 import WiLDWalletBalance from "./Staking/WiLDWalletBalance";
 import Loading from "components/Loading";
 import CompoundModal from "./CompoundModal";
+import { useHarvest } from "hooks/useHarvest";
 import BigNumber from "bignumber.js";
 import { DEFAULT_TOKEN_DECIMAL } from "config";
 import CurrentSaleTax from "./Staking/CurrentSaleTax";
@@ -22,6 +23,7 @@ export default function FarmStaking() {
   const { address } = useAccount();
   const farmsWithBalance = useFarmsWithBalance();
   const masterChefContract = useMasterchef();
+  const { onReward } = useHarvest(0);
 
   const balancesWithValue = farmsWithBalance.filter((balanceType) =>
     balanceType.balance.gt(0)
@@ -43,7 +45,8 @@ export default function FarmStaking() {
       }
       if (_pids.length > 0) {
         // eslint-disable-next-line no-await-in-loop
-        const res = await harvestMany(masterChefContract, _pids, address);
+        // const res = await harvestMany(masterChefContract, _pids, address);
+        const res = await onReward(false);
         if (res === false) {
           setPendingTx(false);
           return;
