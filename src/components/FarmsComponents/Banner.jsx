@@ -68,10 +68,10 @@ export default function FarmBanner() {
         </p>
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2 xl:w-1/3">
-        <div className="buy_card">
+        <div className="buy_card shadow shadow-black drop-shadow-md">
           <div className="flex items-center justify-center gap-3">
             <a
-              className="main_btn flex-1"
+              className="main_btn w-full h-full"
               href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${getWILDXAddress()}`}
               target="_blank"
             >
@@ -79,9 +79,9 @@ export default function FarmBanner() {
             </a>
             <button
               onClick={addWatchWILDXToken}
-              className="main_btn flex items-center justify-center"
+              className="main_btn flex items-center justify-center w-full"
             >
-              Add WILDX to &nbsp;
+              Add WILDX &nbsp;
               <svg
                 viewBox="0 0 35 33"
                 color="text"
