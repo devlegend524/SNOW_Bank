@@ -119,7 +119,7 @@ const farmsConfig = [
     isNFTPool: true,
     token: tokens.nft,
     quoteToken: tokens.wild,
-    logoA: "/images/tokens/nft.png",
+    logoA: "/assets/tokens/nft.png",
     logoB: "",
   },
 ];

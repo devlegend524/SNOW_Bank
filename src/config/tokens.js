@@ -36,7 +36,7 @@ const tokens = {
     symbol: "3WiLD NFT",
     address: addresses.nft,
     decimals: 18,
-    logo: "/images/tokens/nft.png",
+    logo: "/assets/tokens/nft.png",
   },
 };
 
