@@ -41,9 +41,14 @@ export default function FarmStaking() {
       for (const farmWithBalance of balancesWithValue) {
         _pids.push(farmWithBalance.pid);
       }
-      if (_pids.length > 0)
+      if (_pids.length > 0) {
         // eslint-disable-next-line no-await-in-loop
-        await harvestMany(masterChefContract, _pids, address);
+        const res = await harvestMany(masterChefContract, _pids, address);
+        if (res === false) {
+          setPendingTx(false);
+          return;
+        }
+      }
     } catch (error) {
       console.log(error);
     }

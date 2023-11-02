@@ -19,6 +19,7 @@ import { getFarmFromPid } from "utils/farmHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { sleep } from "utils/customHelpers";
 import tokens from "config/tokens";
+import { getCounts } from "utils/limitHelper";
 
 const customStyles = {
   content: {
@@ -58,7 +59,25 @@ export default function CompoundModal({
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
 
+  const [currentCounts, setCurrentCounts] = useState(0);
+
   const dispatch = useAppDispatch();
+
+  const getCurrentCounts = async (address) => {
+    const currentDate = new Date().toLocaleDateString();
+    const res = await getCounts(address);
+    if (res.lastCalled !== currentDate) {
+      setCurrentCounts(3);
+    } else {
+      setCurrentCounts(3 - res.counts);
+    }
+  };
+
+  useEffect(() => {
+    if (address) {
+      getCurrentCounts(address);
+    }
+  }, [address]);
 
   const getAllowance = async () => {
     setIsCheckingAllowance(true);
@@ -106,10 +125,18 @@ export default function CompoundModal({
     try {
       if (isAll) {
         console.log("harvest all...", pid);
-        await harvestMany(masterChefContract, pid, false, address);
+        const res = await harvestMany(masterChefContract, pid, false, address);
+        if (res === false) {
+          setZapPendingTx(false);
+          return;
+        }
       } else {
         console.log("harvest single...", pid);
-        await onReward(false);
+        const res = await onReward(false);
+        if (res === false) {
+          setZapPendingTx(false);
+          return;
+        }
       }
       await sleep(2000);
       await onZapForFarm(
@@ -225,12 +252,21 @@ export default function CompoundModal({
             <button
               onClick={handleDeposit}
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
-              disabled={Number(earnings) === 0 || pendingZapTx}
+              disabled={
+                Number(earnings) === 0 || pendingZapTx || currentCounts === 0
+              }
             >
               {pendingZapTx ? <Loading /> : "Compound"}
             </button>
           )}
         </div>
+        {currentCounts === 0 ? (
+          <p className="mt-2 text-red-600">
+            You can not compound or harvest over 3 time(s) a day
+          </p>
+        ) : (
+          <p className="mt-2">{`You are able to compound or harvest ${currentCounts} time(s) today.`}</p>
+        )}
       </div>
     </Modal>
   );

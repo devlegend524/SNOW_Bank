@@ -22,6 +22,7 @@ import { didUserReject } from "utils/customHelpers";
 import { sleep } from "utils/customHelpers";
 import tokens from "config/tokens";
 import { fromReadableAmount } from "utils";
+import { getCounts } from "utils/limitHelper";
 
 const customStyles = {
   content: {
@@ -54,12 +55,30 @@ export default function CompoundModal({
   const [isApproving, setIsApproving] = useState(false);
   const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
 
+  const [currentCounts, setCurrentCounts] = useState(0);
+
   const { address } = useAccount();
   const zapAddress = getZapAddress();
   const wildXContract = get3WiLDContract(signer);
   const { onReward } = useHarvest(pid[0]);
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
+
+  const getCurrentCounts = async (address) => {
+    const currentDate = new Date().toLocaleDateString();
+    const res = await getCounts(address);
+    if (res.lastCalled !== currentDate) {
+      setCurrentCounts(3);
+    } else {
+      setCurrentCounts(3 - res.counts);
+    }
+  };
+
+  useEffect(() => {
+    if (address) {
+      getCurrentCounts(address);
+    }
+  }, [address]);
 
   // const [approve, setApprove] = useState(false);
 
@@ -236,12 +255,22 @@ export default function CompoundModal({
             <button
               onClick={handleDeposit}
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
-              disabled={Number(earnings) === 0 || pendingZapTx}
+              disabled={
+                Number(earnings) === 0 || pendingZapTx || currentCounts === 0
+              }
             >
               {pendingZapTx ? <Loading /> : t("Compound")}
             </button>
           )}
         </div>
+
+        {currentCounts === 0 ? (
+          <p className="mt-2 text-red-600">
+            You can not compound or harvest over 3 time(s) a day
+          </p>
+        ) : (
+          <p className="mt-2">{`You are able to compound or harvest ${currentCounts} time(s) today.`}</p>
+        )}
       </div>
     </Modal>
   );
