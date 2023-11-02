@@ -59,7 +59,7 @@ export default function CompoundModal({
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
 
-  const [currentCounts, setCurrentCounts] = useState(0);
+  const [currentCounts, setCurrentCounts] = useState(3);
 
   const dispatch = useAppDispatch();
 

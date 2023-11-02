@@ -55,7 +55,7 @@ export default function CompoundModal({
   const [isApproving, setIsApproving] = useState(false);
   const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
 
-  const [currentCounts, setCurrentCounts] = useState(0);
+  const [currentCounts, setCurrentCounts] = useState(3);
 
   const { address } = useAccount();
   const zapAddress = getZapAddress();
