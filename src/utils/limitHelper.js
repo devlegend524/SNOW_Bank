@@ -38,7 +38,7 @@ export async function limitedFunction(isSuccess, address) {
   );
 
   const snapshot = await get(dbQuery);
-  const exist = snapshot.val();
+  const exist = await snapshot.val();
 
   if (exist) {
     let callCounts = exist[Object.keys(exist)[0]];
@@ -83,4 +83,28 @@ export async function limitedFunction(isSuccess, address) {
   }
 
   return { success: true };
+}
+
+export async function getCounts(address) {
+  const currentDate = new Date().toLocaleDateString();
+  const dbQuery = query(
+    ref(db, "callCounts"),
+    orderByChild("address"),
+    equalTo(address)
+  );
+
+  const snapshot = await get(dbQuery);
+  const exist = await snapshot.val();
+
+  if (exist) {
+    const callCount = exist[Object.keys(exist)[0]].callCount;
+    const lastCalled = exist[Object.keys(exist)[0]].lastCalled;
+
+    return {
+      counts: callCount > 3 ? 3 : callCount,
+      lastCalled: lastCalled,
+    };
+  }
+
+  return { counts: 0, lastCalled: currentDate.toString() };
 }

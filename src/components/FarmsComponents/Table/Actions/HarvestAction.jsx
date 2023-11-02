@@ -18,6 +18,7 @@ import ZapInModal from "components/ZapInModal";
 import CompoundModal from "components/CompoundModal";
 import { didUserReject } from "utils/customHelpers";
 import { useMasterchef } from "hooks/useContract";
+import { getCounts } from "utils/limitHelper";
 
 const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   const [pendingCompoundTx, setCompoundPendingTx] = useState(false);
@@ -35,6 +36,23 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   const { address } = useAccount();
   const wildPrice = usePrice3WiLDUsdc()[0];
   const masterChefContract = useMasterchef();
+  const [currentCounts, setCurrentCounts] = useState(0);
+
+  const getCurrentCounts = async (address) => {
+    const currentDate = new Date().toLocaleDateString();
+    const res = await getCounts(address);
+    if (res.lastCalled !== currentDate) {
+      setCurrentCounts(3);
+    } else {
+      setCurrentCounts(3 - res.counts);
+    }
+  };
+
+  useEffect(() => {
+    if (address) {
+      getCurrentCounts(address);
+    }
+  }, [address]);
 
   useEffect(() => {
     const earningsBigNumber = new BigNumber(userData.earnings);
@@ -122,7 +140,11 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           onClick={handleHavest}
           className="rounded-md p-1  text-center text-black font-medium bg-yellow-main"
         >
-          {pendingTx ? <Loading title="Harvesting..." /> : t("Harvest")}
+          {pendingTx ? (
+            <Loading title="Harvesting..." />
+          ) : (
+            t(`Harvest (${currentCounts})`)
+          )}
         </button>
 
         <div className="flex flex-col lg:flex-row gap-2 w-full">
@@ -142,7 +164,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 {pendingCompoundTx ? (
                   <Loading title="Compounding..." />
                 ) : (
-                  t("Compound")
+                  t(`Compound (${currentCounts})`)
                 )}
               </button>
               <button
