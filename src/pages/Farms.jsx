@@ -104,7 +104,6 @@ export default function Farms() {
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(
           farm.quoteToken.usdcPrice
         );
-
         const apr = getFarmApr(
           new BigNumber(farm.poolWeight),
           wildPrice,

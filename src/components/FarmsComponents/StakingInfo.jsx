@@ -109,9 +109,18 @@ export default function FarmStaking() {
         </div>
         <div>
           {" "}
-          <div className="text-base font-semibold">Current Sales Tax:</div>
+          <div className="text-base font-semibold text-right">
+            Current Sales Tax:
+          </div>
           <div className="mb-1">
-            <CurrentSaleTax />
+            <div className="flex justify-end">
+              <CurrentSaleTax />
+            </div>
+
+            <span className="text-[11px] text-right">
+              ( Sales tax burns all of the 3WiLD automatically. <br /> The sales
+              tax will drop over the next week to 8% )
+            </span>
           </div>
         </div>
       </div>

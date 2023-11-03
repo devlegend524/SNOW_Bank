@@ -11,8 +11,8 @@ export const routes = [
     name: "Farm",
     url: "/farm",
   },
-  {
-    name: "NFT Claim",
-    url: "/nft-claim",
-  },
+  // {
+  //   name: "NFT Claim",
+  //   url: "/nft-claim",
+  // },
 ];

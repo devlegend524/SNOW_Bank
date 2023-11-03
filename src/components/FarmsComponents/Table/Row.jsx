@@ -16,6 +16,7 @@ import Liquidity from "./Liquidity";
 import ActionPanel from "./Actions/ActionPanel";
 import CellLayout from "./CellLayout";
 import { DesktopColumnSchema, MobileColumnSchema } from "constants";
+
 const cells = {
   apr: Apr,
   farm: Farm,

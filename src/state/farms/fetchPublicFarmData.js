@@ -48,14 +48,16 @@ const fetchPublicFarmData = async (farm) => {
 
   if (farm.isNFTPool) {
     const masterChef = getMasterchefContract(httpProvider);
-    tokenAmountTotal = new BigNumber(lpTokenBalanceMC);
-    const amountPerNFT = await masterChef.getAmountPerNFT();
-    if (new BigNumber(tokenBalanceLP).comparedTo(0) > 0) {
-      tokenPriceVsQuote = new BigNumber(toReadableAmount(amountPerNFT));
-    }
-    lpTotalInQuoteToken = tokenAmountTotal.times(
-      new BigNumber(toReadableAmount(amountPerNFT))
+    tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
+      BIG_TEN.pow(tokenDecimals)
     );
+    const amountPerNFT = await masterChef.getAmountPerNFT();
+    const new_amountPerNFT = toReadableAmount(amountPerNFT, 18, 5);
+
+    if (new BigNumber(tokenBalanceLP).comparedTo(0) > 0) {
+      tokenPriceVsQuote = new BigNumber(toReadableAmount(amountPerNFT, 18, 5));
+    }
+    lpTotalInQuoteToken = new BigNumber(new_amountPerNFT).times(tokenBalanceLP);
   } else if (!farm.isNFTPool && farm.isTokenOnly) {
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
       BIG_TEN.pow(tokenDecimals)
@@ -66,7 +68,7 @@ const fetchPublicFarmData = async (farm) => {
     const quoteTokenBalance = new BigNumber(quoteTokenBalanceLP).div(
       BIG_TEN.pow(quoteTokenDecimals)
     );
-    const stables = ["USDC", "USDT"];
+    const stables = ["USDC", "USDT", "BUSD"];
     if (
       stables.includes(farm.token.symbol) &&
       stables.includes(farm.quoteToken.symbol)

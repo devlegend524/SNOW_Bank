@@ -6,7 +6,7 @@ import { notify } from "utils/toastHelper";
 import useRefresh from "hooks/useRefresh";
 import Loading from "components/Loading";
 import { didUserReject } from "utils/customHelpers";
-
+import { useEthersSigner } from "hooks/useEthers";
 export default function Zap() {
   const { address } = useAccount();
   const [nfts, setNfts] = useState(0);
@@ -14,6 +14,7 @@ export default function Zap() {
   const [isProcessing, setIsProcessing] = useState(false);
   const nftContract = useNFTContract();
   const { fastRefresh } = useRefresh();
+  const signer = useEthersSigner();
 
   const getAvailableNFTs = async () => {
     const availableNFTs = await nftContract.getMaximumAmountCanMint(address);
@@ -42,8 +43,8 @@ export default function Zap() {
   };
 
   useEffect(() => {
-    if (address) getAvailableNFTs();
-  }, [fastRefresh, address]);
+    if (signer && address) getAvailableNFTs();
+  }, [fastRefresh, signer, address]);
 
   return (
     <div className="container">
