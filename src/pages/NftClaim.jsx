@@ -23,6 +23,7 @@ export default function Zap() {
       const tokenIds = await nftContract.walletOfOwner(address);
       setMyTokenIds(tokenIds);
     }
+
     setNfts(Number(availableNFTs) - Number(myNFTs));
   };
 
@@ -38,7 +39,11 @@ export default function Zap() {
     } catch (e) {
       if (didUserReject(e)) {
         notify("error", "User Rejected Transaction");
+      } else {
+        console.log(e);
+        notify("error", e.reason);
       }
+      setIsProcessing(false);
     }
   };
 
