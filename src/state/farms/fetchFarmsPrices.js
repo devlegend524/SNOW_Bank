@@ -20,7 +20,7 @@ const getFarmBaseTokenPrice = (
   threeWildPriceUsdt
 ) => {
   const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote);
-  if (["USDC", "USDT"].includes(farm.quoteToken.symbol)) {
+  if (["USDC", "USDT", "BUSD"].includes(farm.quoteToken.symbol)) {
     return hasTokenPriceVsQuote
       ? new BigNumber(farm.tokenPriceVsQuote)
       : BIG_ZERO;
@@ -55,7 +55,7 @@ const getFarmBaseTokenPrice = (
       : BIG_ZERO;
   }
 
-  if (["USDC", "USDT"].includes(quoteTokenFarm.quoteToken.symbol)) {
+  if (["USDC", "USDT", "BUSD"].includes(quoteTokenFarm.quoteToken.symbol)) {
     const quoteTokenInUsdc = quoteTokenFarm.tokenPriceVsQuote;
     return hasTokenPriceVsQuote && quoteTokenInUsdc
       ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInUsdc)
@@ -72,7 +72,7 @@ const getFarmQuoteTokenPrice = (
   wethPriceUsdt,
   threeWildPriceUsdt
 ) => {
-  if (["USDC", "USDT"].includes(farm.quoteToken.symbol)) {
+  if (["USDC", "USDT", "BUSD"].includes(farm.quoteToken.symbol)) {
     return BIG_ONE;
   }
   if (farm.quoteToken.symbol === "3WiLD") {
