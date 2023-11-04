@@ -90,16 +90,18 @@ export default function Zap() {
       <div className="flex justify-center items-center pb-16 m-2 mt-12">
         <button
           className="bg-secondary-700 rounded-xl w-full max-w-sm flex justify-center px-6 py-3 hover:scale-105 transition ease-in-out border border-white border-opacity-30"
-          disabled={!address && !nfts}
-          onClick={() => claimNFT()}
+          // disabled={!address && !nfts}
+          disabled={true}
+          // onClick={() => claimNFT()}
         >
-          {isProcessing ? (
+          {/* {isProcessing ? (
             <Loading title="Claiming NFT..." />
           ) : nfts ? (
-            "Clain NFT"
+            "Claim NFT"
           ) : (
             "Nothing to claim"
-          )}
+          )} */}
+          Undergoing Update
         </button>
       </div>
     </div>
