@@ -75,12 +75,13 @@ export const use3WiLDPerSecond = () => {
   const [threeWildPerSecond, setWildPerSecond] = useState(BIG_ZERO);
   const { chain } = useNetwork();
   const provider = useEthersProvider();
+
   useEffect(() => {
     async function fetchWildPerSecond() {
       try {
         const masterChefContract = getMasterchefContract(provider);
         const perSecond = await masterChefContract.threeWildPerSecond();
-        setWildPerSecond(toReadableAmount(perSecond));
+        setWildPerSecond(toReadableAmount(perSecond, 18, 5));
       } catch (e) {
         console.log(e);
       }

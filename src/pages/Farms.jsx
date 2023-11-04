@@ -217,6 +217,7 @@ export default function Farms() {
     const tokenAddress = token.address;
     const quoteTokenAddress = quoteToken.address;
     const lpLabel = farm.lpSymbol;
+    
     const row = {
       apr: {
         value:
