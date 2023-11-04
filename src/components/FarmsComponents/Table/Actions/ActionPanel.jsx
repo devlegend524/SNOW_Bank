@@ -8,6 +8,7 @@ import {
   DepositLockDicountTag,
   NoFeesTag,
   SingleStakeTag,
+  NFTStakeTag,
 } from "components/Tags";
 import { BASE_ADD_LIQUIDITY_URL, BASE_SWAP_URL } from "config";
 
@@ -75,6 +76,7 @@ const ActionPanel = ({
 
   const { t } = useTranslation();
   const tokenOnly = farm.isTokenOnly;
+  const nftOnly = farm.isNFTPool;
   const isActive = farm.multiplier !== "0X";
   const { quoteToken, token } = farm;
   const lpLabel =
@@ -88,6 +90,7 @@ const ActionPanel = ({
     () => getScanAddressUrl(tokenOnly ? farm.token.address : lpAddress),
     [tokenOnly, lpAddress, farm.token.address]
   );
+  console.log(parseFloat(farm.depositFee));
   const noFees = parseFloat(farm.depositFee) === 0;
   const link = useMemo(
     () =>
@@ -119,6 +122,7 @@ const ActionPanel = ({
           {noFees && <NoFeesTag />}
           {farm.withDepositLockDiscount && <DepositLockDicountTag />}
           {tokenOnly && <SingleStakeTag />}
+          {nftOnly && <NFTStakeTag />}
         </TagsContainer>
       </div>
       <div className="flex flex-col justify-between md:hidden w-full">

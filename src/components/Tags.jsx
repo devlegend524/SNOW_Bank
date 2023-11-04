@@ -44,6 +44,19 @@ const SingleStakeTag = (props) => {
       startIcon={<VerifiedIcon width="18px" color="success" mr="4px" />}
       {...props}
     >
+      {t("Single Stake")}
+    </Tag>
+  );
+};
+const NFTStakeTag = (props) => {
+  const { t } = useTranslation();
+  return (
+    <Tag
+      variant="binance"
+      outline="false"
+      startIcon={<VerifiedIcon width="18px" color="secondary" mr="4px" />}
+      {...props}
+    >
       {t("NFT Stake")}
     </Tag>
   );
@@ -116,6 +129,7 @@ export {
   CoreTag,
   NoFeesTag,
   SingleStakeTag,
+  NFTStakeTag,
   BinanceTag,
   DualTag,
   ManualPoolTag,
