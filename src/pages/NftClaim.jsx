@@ -24,7 +24,7 @@ export default function Zap() {
       setMyTokenIds(tokenIds);
     }
 
-    setNfts(Number(availableNFTs) - Number(myNFTs));
+    setNfts(Number(availableNFTs));
   };
 
   const claimNFT = async () => {
@@ -91,17 +91,15 @@ export default function Zap() {
         <button
           className="bg-secondary-700 rounded-xl w-full max-w-sm flex justify-center px-6 py-3 hover:scale-105 transition ease-in-out border border-white border-opacity-30"
           // disabled={!address && !nfts}
-          disabled={true}
-          // onClick={() => claimNFT()}
+          onClick={() => claimNFT()}
         >
-          {/* {isProcessing ? (
+          {isProcessing ? (
             <Loading title="Claiming NFT..." />
           ) : nfts ? (
             "Claim NFT"
           ) : (
             "Nothing to claim"
-          )} */}
-          Undergoing Update
+          )}
         </button>
       </div>
     </div>

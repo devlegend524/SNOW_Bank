@@ -38,6 +38,12 @@ const tokens = {
     decimals: 18,
     logo: "/assets/tokens/busd.svg",
   },
+  usdt: {
+    symbol: "USDT",
+    address: addresses.usdt,
+    decimals: 18,
+    logo: "/assets/tokens/usdt.svg",
+  },
   nft: {
     symbol: "3WiLD NFT",
     address: addresses.nft,

@@ -8,10 +8,10 @@ import {
 import { BIG_ZERO } from "utils/bigNumber";
 import useRefresh from "./useRefresh";
 import useLastUpdated from "./useLastUpdated";
-import { useEthersSigner, useEthersProvider } from "./useEthers";
+import { useEthersProvider } from "./useEthers";
 import { useAccount, useNetwork } from "wagmi";
 import { CHAIN_ID } from "config";
-import { ethers } from "ethers";
+import { toReadableAmount } from "utils/customHelpers";
 const FetchStatus = {
   NOT_FETCHED: "not-fetched",
   SUCCESS: "success",
@@ -62,7 +62,7 @@ export const useTotalSupply = () => {
         chain ? chain.id : CHAIN_ID
       );
       const supply = await wildContract.totalSupply();
-      setTotalSupply(ethers.utils.formatUnits(supply, 18));
+      setTotalSupply(toReadableAmount(supply));
     }
     fetchTotalSupply();
   }, [fastRefresh]);
@@ -80,7 +80,7 @@ export const use3WiLDPerSecond = () => {
       try {
         const masterChefContract = getMasterchefContract(provider);
         const perSecond = await masterChefContract.threeWildPerSecond();
-        setWildPerSecond(ethers.utils.formatUnits(perSecond, 18));
+        setWildPerSecond(toReadableAmount(perSecond));
       } catch (e) {
         console.log(e);
       }
