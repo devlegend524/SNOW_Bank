@@ -152,7 +152,7 @@ const farmsConfig = [
     logoB: tokens.wbnb.logo,
   },
   {
-    pid: 4,
+    pid: 6,
     lpSymbol: "BUSD",
     lpAddresses: addresses.busd,
     isTokenOnly: true,
@@ -163,7 +163,7 @@ const farmsConfig = [
     logoB: tokens.busd.logo,
   },
   {
-    pid: 4,
+    pid: 7,
     lpSymbol: "USDT",
     lpAddresses: addresses.usdt,
     isTokenOnly: true,
@@ -174,7 +174,7 @@ const farmsConfig = [
     logoB: tokens.usdt.logo,
   },
   {
-    pid: 4,
+    pid: 8,
     lpSymbol: "USDC",
     lpAddresses: addresses.usdc,
     isTokenOnly: true,
@@ -185,7 +185,7 @@ const farmsConfig = [
     logoB: tokens.usdc.logo,
   },
   {
-    pid: 6,
+    pid: 9,
     lpSymbol: "3WiLDNFT",
     lpAddresses: addresses.nft,
     isTokenOnly: true,
