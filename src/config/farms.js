@@ -88,6 +88,15 @@ export const zapList = [
   },
   {
     pid: 1,
+    lpSymbol: tokens.usdt.symbol,
+    isTokenOnly: true,
+    lpAddresses: tokens.usdt.address,
+    decimals: 18,
+    logoA: tokens.usdt.logo,
+    logoB: "",
+  },
+  {
+    pid: 1,
     lpSymbol: "WBNB-3WiLD",
     isTokenOnly: false,
     lpAddresses: addresses.wildWbnblp,

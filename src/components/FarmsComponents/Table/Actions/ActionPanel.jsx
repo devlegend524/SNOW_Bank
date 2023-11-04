@@ -90,7 +90,6 @@ const ActionPanel = ({
     () => getScanAddressUrl(tokenOnly ? farm.token.address : lpAddress),
     [tokenOnly, lpAddress, farm.token.address]
   );
-  console.log(parseFloat(farm.depositFee));
   const noFees = parseFloat(farm.depositFee) === 0;
   const link = useMemo(
     () =>
