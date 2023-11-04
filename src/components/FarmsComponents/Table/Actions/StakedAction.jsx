@@ -35,8 +35,8 @@ import {
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
-import { toReadableAmount } from "utils/customHelpers";
-import { BIG_TEN } from "utils/bigNumber";
+import { usePrice3WiLDUsdc } from "state/hooks";
+
 const StakedAction = ({
   isTokenOnly,
   isNFTPool,
@@ -60,6 +60,7 @@ const StakedAction = ({
     tokenBalance: tokenBalanceAsString,
     stakedBalance: stakedBalanceAsString,
   } = useFarmUser(pid);
+  const wildPrice = usePrice3WiLDUsdc()[0];
 
   const masterChefContract = getMasterchefContract(signer);
 
@@ -161,7 +162,7 @@ const StakedAction = ({
 
   const getAmountPerNFT = async () => {
     const _amountPerNFT = await masterChefContract.getAmountPerNFT();
-    setAmountPerNFT(toReadableAmount(_amountPerNFT));
+    setAmountPerNFT(_amountPerNFT.toString());
   };
   useEffect(() => {
     if (signer) {
@@ -212,9 +213,9 @@ const StakedAction = ({
               decimals={2}
               value={
                 isNFTPool
-                  ? lpPrice.times(
-                      stakedBalance.times(new BigNumber(amountPerNFT))
-                    )
+                  ? stakedBalance
+                      .times(new BigNumber(amountPerNFT))
+                      .times(wildPrice)
                   : getBalanceNumber(lpPrice.times(stakedBalance))
               }
               unit=" USD"

@@ -48,17 +48,14 @@ const fetchPublicFarmData = async (farm) => {
 
   if (farm.isNFTPool) {
     const masterChef = getMasterchefContract(httpProvider);
-    tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
-      BIG_TEN.pow(tokenDecimals)
-    );
+    tokenAmountTotal = new BigNumber(lpTokenBalanceMC);
     const amountPerNFT = await masterChef.getAmountPerNFT();
-
     if (new BigNumber(tokenBalanceLP).comparedTo(0) > 0) {
-      tokenPriceVsQuote = new BigNumber(toReadableAmount(amountPerNFT, 18, 6));
+      tokenPriceVsQuote = new BigNumber(Number(amountPerNFT));
     }
-    lpTotalInQuoteToken = new BigNumber(Number(amountPerNFT))
-      .times(tokenBalanceLP)
-      .div(BIG_TEN.pow(tokenDecimals));
+    lpTotalInQuoteToken = new BigNumber(Number(amountPerNFT)).times(
+      tokenBalanceLP
+    );
   } else if (!farm.isNFTPool && farm.isTokenOnly) {
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
       BIG_TEN.pow(tokenDecimals)

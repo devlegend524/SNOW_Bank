@@ -50,6 +50,14 @@ const ModalInput = ({
   const { t } = useTranslation();
   const isBalanceZero = max === "0" || !max;
 
+  function removeLeadingZeros(arr) {
+    let i = 0;
+    while (Number(arr[i]) === 0) {
+      i++;
+    }
+    return arr.slice(i);
+  }
+
   const displayBalance = async (balance) => {
     const nftContract = getNFTContract(signer);
     const masterChefContract = getMasterchefContract(signer);
@@ -62,10 +70,11 @@ const ModalInput = ({
       if (inputTitle === "Stake") {
         tokenIds = await nftContract.walletOfOwner(address);
       } else {
-        tokenIds = await masterChefContract.getUserStakedNFTs(2, address);
+        tokenIds = await masterChefContract.getUserStakedNFTs(9, address);
       }
-      console.log(tokenIds.toString());
-      setUserBalance(balance + " : [ " + tokenIds.toString() + " ]");
+      setUserBalance(
+        balance + " : [ " + removeLeadingZeros(tokenIds).toString() + " ]"
+      );
     } else {
       const balanceBigNumber = new BigNumber(balance);
       if (balanceBigNumber.gt(0) && balanceBigNumber.lt(0.0001)) {
