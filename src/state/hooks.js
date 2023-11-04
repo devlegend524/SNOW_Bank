@@ -392,7 +392,6 @@ export const useTotalValue = () => {
   const farms = useFarms();
   const wethPrice = usePriceEthUsdc();
   const wildPrice = usePrice3WiLDUsdc()[0];
-
   let value = new BigNumber(0);
   for (let i = 0; i < farms.data.length; i++) {
     const farm = farms.data[i];
@@ -403,9 +402,8 @@ export const useTotalValue = () => {
       } else if (farm.quoteToken.symbol === "3WiLD") {
         val = wildPrice.times(farm.lpTotalInQuoteToken);
       } else {
-        val = farm.lpTotalInQuoteToken;
+        val = new BigNumber(farm.lpTotalInQuoteToken);
       }
-      // console.log("val", val.toString(), farm.pid, farm.lpTotalSupply, farm.lpTotalInQuoteToken, farm.lpSymbol);
       value = value.plus(val);
     }
   }
