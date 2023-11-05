@@ -55,9 +55,11 @@ export default function Farms() {
   const handleSortOptionChange = (option) => {
     setSortOption(option.value);
   };
+
   const handleChangeQuery = (event) => {
     setQuery(event.target.value);
   };
+  
   const activeFarms = farmsLP.filter(
     (farm) =>
       (farm.pid || farm.pid === 0) &&
