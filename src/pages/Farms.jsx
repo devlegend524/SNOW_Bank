@@ -50,7 +50,7 @@ export default function Farms() {
     setUserDataReady(address || (address && userDataLoaded));
   }, [address, userDataLoaded]);
 
-  const farmsLP = farmsData.filter((farm) => farm.pid !== 1);
+  const farmsLP = farmsData.filter((farm) => farm.pid === 0 || farm.pid === 9);
 
   const handleSortOptionChange = (option) => {
     setSortOption(option.value);
@@ -110,7 +110,8 @@ export default function Farms() {
           new BigNumber(farm.poolWeight),
           wildPrice,
           totalLiquidity,
-          threeWildPerSecond
+          threeWildPerSecond,
+          farm.isNFTPool
         );
         return { ...farm, apr, liquidity: totalLiquidity };
       });
@@ -219,7 +220,7 @@ export default function Farms() {
     const tokenAddress = token.address;
     const quoteTokenAddress = quoteToken.address;
     const lpLabel = farm.lpSymbol;
-    
+
     const row = {
       apr: {
         value:

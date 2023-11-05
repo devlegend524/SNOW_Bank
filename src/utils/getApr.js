@@ -36,7 +36,8 @@ export const getFarmApr = (
   poolWeight,
   wildPriceUsd,
   poolLiquidityUsd,
-  tokenPerBlock
+  tokenPerBlock,
+  isNFTPool
 ) => {
   const wildPerYear = YEAR_BN.times(Number(tokenPerBlock));
   const yearly3WiLDRewardAllocation = wildPerYear.times(poolWeight);

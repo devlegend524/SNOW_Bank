@@ -45,8 +45,8 @@ export default function FarmStaking() {
       }
       if (_pids.length > 0) {
         // eslint-disable-next-line no-await-in-loop
-        // const res = await harvestMany(masterChefContract, _pids, address);
-        const res = await onReward(false);
+        const res = await harvestMany(masterChefContract, _pids, address);
+        // const res = await onReward(false);
         if (res === false) {
           setPendingTx(false);
           return;
