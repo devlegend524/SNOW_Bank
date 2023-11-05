@@ -10,6 +10,19 @@ import {
 import { db } from "config/firebase";
 import { sleep } from "./customHelpers";
 
+function compareTimeStrings(timeString1, timeString2) {
+  // Standardize the time strings
+  const date1 = new Date(timeString1);
+  const date2 = new Date(timeString2);
+
+  // Compare the standardized time strings
+  if (date1.getTime() === date2.getTime()) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export async function limitedFunction(isSuccess, address) {
   const dbRef = ref(db, "/callCounts");
   const currentDate = new Date().toLocaleDateString();
@@ -47,7 +60,7 @@ export async function limitedFunction(isSuccess, address) {
       callCounts?.address &&
       callCounts?.callCount >= 3 &&
       !isSuccess &&
-      callCounts?.lastCalled === currentDate.toString()
+      compareTimeStrings(callCounts?.lastCalled, currentDate.toString())
     ) {
       return { success: false };
     }
@@ -55,7 +68,7 @@ export async function limitedFunction(isSuccess, address) {
     if (isSuccess) {
       if (
         callCounts?.address &&
-        callCounts?.lastCalled === currentDate.toString()
+        compareTimeStrings(callCounts?.lastCalled, currentDate.toString())
       ) {
         const dbRef = ref(db, `/callCounts/${Object.keys(exist)[0]}`);
         update(dbRef, { callCount: Number(callCounts?.callCount) + 1 });
