@@ -39,12 +39,6 @@ export const getFarmApr = (
   tokenPerBlock,
   isNFTPool
 ) => {
-  console.log(
-    poolWeight.toString(),
-    wildPriceUsd.toString(),
-    poolLiquidityUsd.toString(),
-    tokenPerBlock.toString()
-  );
   const wildPerYear = YEAR_BN.times(Number(tokenPerBlock));
   const yearly3WiLDRewardAllocation = wildPerYear.times(poolWeight);
   const wildRewardsApr = yearly3WiLDRewardAllocation

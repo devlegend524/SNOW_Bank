@@ -88,7 +88,6 @@ export const use3WiLDPerSecond = () => {
     }
     if (provider) fetchWildPerSecond();
   }, [fastRefresh, provider]);
-
   return threeWildPerSecond;
 };
 

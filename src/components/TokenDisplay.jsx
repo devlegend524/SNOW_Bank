@@ -1,10 +1,10 @@
 import React from "react";
 
 export default function TokenDisplay(props) {
-  if (props.token?.isTokenOnly || props.token?.decimals) {
+  if (props.token?.isTokenOnly) {
     return (
       <img
-        src={props.token?.decimals ? props.token?.logoA : props.token?.logo}
+        src={props.token?.logoA}
         alt="token"
         className="rounded-full w-[60px] h-[60px] lg:w-[65px] lg:h-[65px] border-[3px] border-white mb-3"
       />
