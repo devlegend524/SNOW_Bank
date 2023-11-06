@@ -39,6 +39,7 @@ const fetchPublicFarmData = async (farm) => {
 
   const [tokenBalanceLP, quoteTokenBalanceLP, lpTokenBalanceMC, lpTotalSupply] =
     await multicall(isNFTPool ? nftABI : erc20, calls);
+
   let tokenAmountTotal;
   let quoteTokenAmountTotal = BIG_ZERO;
   let lpTotalInQuoteToken = BIG_ZERO;
