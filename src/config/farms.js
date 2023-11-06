@@ -163,7 +163,7 @@ const farmsConfig = [
     logoB: tokens.busd.logo,
   },
   {
-    pid: 7,
+    pid: 6,
     lpSymbol: "USDT",
     lpAddresses: addresses.usdt,
     isTokenOnly: true,
@@ -174,7 +174,7 @@ const farmsConfig = [
     logoB: tokens.usdt.logo,
   },
   {
-    pid: 6,
+    pid: 7,
     lpSymbol: "USDC",
     lpAddresses: addresses.usdc,
     isTokenOnly: true,
