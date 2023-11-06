@@ -126,7 +126,7 @@ export default function FarmStaking() {
       </div>
 
       <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
-        {address ? (
+        {/* {address ? (
           <>
             <Button
               id="harvest-all"
@@ -155,7 +155,7 @@ export default function FarmStaking() {
           </>
         ) : (
           <ConnectButton />
-        )}
+        )} */}
       </div>
       {open && (
         <CompoundModal
