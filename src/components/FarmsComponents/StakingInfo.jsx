@@ -125,7 +125,7 @@ export default function FarmStaking() {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
+      {/* <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
         {address ? (
           <>
             <Button
@@ -165,7 +165,7 @@ export default function FarmStaking() {
           pid={pids}
           isAll={true}
         />
-      )}
+      )} */}
     </div>
   );
 }
