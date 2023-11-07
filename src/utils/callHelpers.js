@@ -57,13 +57,6 @@ export const unstake = async (
   decimals = 18,
   isNFTPool
 ) => {
-  console.log(
-    pid,
-    fromReadableAmount(amount, decimals),
-    decimals,
-    isNFTPool,
-    "------caller is not owner---"
-  );
   try {
     const tx = await masterChefContract.withdraw(
       pid,

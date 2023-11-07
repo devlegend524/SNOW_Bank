@@ -72,7 +72,7 @@ export const useTotalSupply = () => {
 
 export const use3WiLDPerSecond = () => {
   const { fastRefresh } = useRefresh();
-  const [threeWildPerSecond, setWildPerSecond] = useState(BIG_ZERO);
+  const [emission, setEmission] = useState(BIG_ZERO);
   const { chain } = useNetwork();
   const provider = useEthersProvider();
 
@@ -81,14 +81,15 @@ export const use3WiLDPerSecond = () => {
       try {
         const masterChefContract = getMasterchefContract(provider);
         const perSecond = await masterChefContract.threeWildPerSecond();
-        setWildPerSecond(toReadableAmount(perSecond, 18, 5));
+        console.log(perSecond.toString());
+        setEmission(toReadableAmount(perSecond, 18, 5));
       } catch (e) {
         console.log(e);
       }
     }
-    if (provider) fetchWildPerSecond();
-  }, [fastRefresh, provider]);
-  return threeWildPerSecond;
+    if (chain && chain.id === CHAIN_ID && provider) fetchWildPerSecond();
+  }, [fastRefresh, provider, chain]);
+  return emission;
 };
 
 export const useBurnedBalance = (tokenAddress) => {
