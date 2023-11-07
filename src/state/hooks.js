@@ -128,6 +128,8 @@ export const useLpTokenPrice = (symbol) => {
   const farm = useFarmFromLpSymbol(symbol);
   const farmTokenPriceInUsd = usePrice3WiLDUsdc()[0];
   let lpTokenPrice = BIG_ZERO;
+  const stables = ["USDC", "USDT", "BUSD"];
+  if (stables.includes(symbol)) return new BigNumber(1);
 
   if (farm.isTokenOnly) return farmTokenPriceInUsd;
 
