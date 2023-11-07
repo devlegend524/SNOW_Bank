@@ -62,6 +62,24 @@ const tokensList = [
     logoA: "/assets/tokens/usdc.svg",
     logoB: "",
   },
+  {
+    pid: 2,
+    lpSymbol: "USDT",
+    isTokenOnly: true,
+    lpAddresses: tokens.usdt.address,
+    decimals: 18,
+    logoA: "/assets/tokens/usdt.svg",
+    logoB: "",
+  },
+  {
+    pid: 2,
+    lpSymbol: "BUSD",
+    isTokenOnly: true,
+    lpAddresses: tokens.busd.address,
+    decimals: 18,
+    logoA: "/assets/tokens/busd.svg",
+    logoB: "",
+  },
 ];
 
 export default function ZapInModal({ open, closeModal, pid }) {
@@ -227,7 +245,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
           <div className="flex">
             Available:{" "}
             {loadingBalance ? (
-              <Loading title="Loading Balance..." />
+              <Loading title="..." />
             ) : (
               Number(balance.toString()).toFixed(4)
             )}{" "}
