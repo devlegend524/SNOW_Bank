@@ -103,8 +103,8 @@ const ActionPanel = ({
     setFarm(details);
   }, [details]);
   return (
-    <div className="flex flex-col md:flex-row justify-between p-2 lg:p-3 max-w-screen w-full">
-      <div className="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-center w-full  lg:w-1/4">
+    <div className="action_panel_container">
+      <div className="action_panel_content">
         <div>
           {isActive && (
             <StakeContainer>

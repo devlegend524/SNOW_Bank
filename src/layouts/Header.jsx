@@ -9,16 +9,16 @@ export default function Header() {
 
   return (
     <>
-      <div className="bg-main-100 shadow shadow-black/30 drop-shadow-md">
+      <div className="bg-secondary">
         <div className="container mr-auto ml-auto relative">
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
               <a href="/">
-                <span className="text-yellow-main">3</span>WiLD
+                <span className="text-orange">3</span>WiLD
               </a>
             </div>
             <div
-              className="text-yellow-main ml-2 block sm:hidden mt-[3px]"
+              className="text-orange ml-2 block sm:hidden mt-[3px]"
               onClick={() => setMobile(!isMobile)}
             >
               <Hamburger />
@@ -34,19 +34,27 @@ export default function Header() {
                     key={key}
                   >
                     <a href={link.url}>{link.name}</a>
-                    <img src="/assets/hover.png" alt="" />
+                    <div className="flex gap-[2px]">
+                      <div className="h-1 w-full bg-orange"></div>
+                      <div className="w-1 h-1 bg-orange rounded-full"></div>
+                    </div>
                   </li>
                 ))}
-                <li className={`list_item`}>
+                <li
+                  className="list_item"
+                >
                   <a
-                    href="https://lodgedocs.gitbook.io/3wild-bsc-farm/"
+                    href="https://lodgedocs.gitbook.io/3WiLD-bsc-farm/"
                     target="_blank"
                     className={`p-3`}
                     rel="noopener noreferrer"
                   >
-                    {" "}
                     Docs
                   </a>
+                  <div className="flex gap-[2px]">
+                    <div className="h-1 w-full bg-orange"></div>
+                    <div className="w-1 h-1 bg-orange rounded-full"></div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -54,7 +62,7 @@ export default function Header() {
             <div className="nav_action">
               <WalletConnect />
               <div
-                className="text-yellow-main ml-2 hidden sm:block lg:hidden"
+                className="text-orange ml-2 hidden sm:block lg:hidden"
                 onClick={() => setMobile(!isMobile)}
               >
                 <Hamburger />
@@ -79,7 +87,7 @@ export default function Header() {
               ))}
               <li className={`list_item`}>
                 <a
-                  href="https://lodgedocs.gitbook.io/3wild-bsc-farm/"
+                  href="https://lodgedocs.gitbook.io/3WiLD-bsc-farm/"
                   target="_blank"
                   className={`p-3`}
                   rel="noopener noreferrer"

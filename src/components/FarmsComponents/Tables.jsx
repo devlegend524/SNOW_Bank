@@ -14,7 +14,7 @@ export default function FarmTables(props) {
   return (
     <div
       ref={tableWrapperEl}
-      className="overflow-visible shadow shadow-black/60 drop-shadow-xl"
+      className="overflow-visible "
     >
       <table className="border-collapse rounded-sm mx-auto w-full main_bg">
         <tbody>

@@ -54,7 +54,7 @@ export default function Zap() {
   return (
     <div className="container">
       <h1 className="text-center text-3xl font-semibold">My NFTs</h1>
-      <div className="flex justify-center gap-4 mt-24">
+      <div className="flex justify-center gap-4 mt-16">
         {myTokenIds && myTokenIds.length > 0 ? (
           myTokenIds.map((tokenId, index) => (
             <div className="w-[200px] h-[200px]">

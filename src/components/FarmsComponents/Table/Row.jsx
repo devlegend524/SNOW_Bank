@@ -38,20 +38,20 @@ const CellInner = styled.div`
   }
 `;
 
-const StyledTr = styled.tr`
-  cursor: pointer;
-  background: #1f212a;
-  border-top: 1px solid #ffc41233;
-  color: white;
-  &:first-of-type {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
+// const div = styled.tr`
+//   cursor: pointer;
+//   background: #1f212a;
+//   border-top: 1px solid #ffc41233;
+//   color: white;
+//   &:first-of-type {
+//     border-top-left-radius: 10px;
+//     border-top-right-radius: 10px;
+//   }
 
-  &:nth-child(odd) {
-    background: #1f212a;
-  }
-`;
+//   &:nth-child(odd) {
+//     background: #1f212a;
+//   }
+// `;
 
 const EarnedMobileCell = styled.td`
   padding: 16px 0 24px 16px;
@@ -91,7 +91,7 @@ const Row = (props) => {
   const handleRenderRow = () => {
     if (!isXs) {
       return (
-        <StyledTr onClick={toggleActionPanel}>
+        <div className="tr" onClick={toggleActionPanel}>
           {Object.keys(props).map((key) => {
             const columnIndex = columnNames.indexOf(key);
             if (columnIndex === -1) {
@@ -134,11 +134,11 @@ const Row = (props) => {
                 );
             }
           })}
-        </StyledTr>
+        </div>
       );
     }
     return (
-      <StyledTr onClick={toggleActionPanel}>
+      <div className="tr" onClick={toggleActionPanel}>
         <td>
           <div>
             <AprMobileCell>
@@ -167,7 +167,7 @@ const Row = (props) => {
             </CellLayout>
           </CellInner>
         </td>
-      </StyledTr>
+      </div>
     );
   };
 

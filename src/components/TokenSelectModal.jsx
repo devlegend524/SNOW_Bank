@@ -55,9 +55,9 @@ export default function TokenSelectModal({
       >
         <div className="bg-[#16171E] p-6 rounded-md border-gray-300/60 border">
           <div className="flex justify-between border-b border-yellow-500 py-4">
-            <h1 className="text-xl text-yellow-main">Select Token</h1>
+            <h1 className="text-xl text-orange">Select Token</h1>
             <button
-              className="text-2xl text-yellow-main"
+              className="text-2xl text-orange"
               onClick={() => closeModal()}
             >
               &times;

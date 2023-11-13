@@ -120,7 +120,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
         <button
           disabled={earnings.eq(0) || pendingTx || !userDataReady}
           onClick={handleHavest}
-          className="rounded-md p-1  text-center text-black font-medium bg-yellow-main"
+          className="rounded-md p-1  text-center text-black font-medium bg-orange"
         >
           {pendingTx ? <Loading title="Harvesting..." /> : t(`Harvest`)}
         </button>

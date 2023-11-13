@@ -9,7 +9,7 @@ export default function FarmControls({
   onSearchChange,
 }) {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-2 justify-between p-4 main_bg mt-5 rounded-md bg-main-100 shadow shadow-black/60 drop-shadow-xl">
+    <div className="flex flex-col md:flex-row items-center gap-2 justify-between p-4 main_bg mt-5 rounded-md bg-secondary ">
       <div className="flex justify-between items-center gap-5 w-full md:w-fit">
         <div>
           <select
@@ -32,7 +32,7 @@ export default function FarmControls({
               onChange={() => onToggleChange()}
               className="sr-only peer"
             />
-            <div className="w-11 h-6 button_bg  bg-[#16171e!important] rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:bg-yellow-main dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-500"></div>
+            <div className="w-11 h-6 button_bg  bg-[#16171e!important] rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:bg-orange dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-500"></div>
             <span className="ml-3 text-md font-medium ">Staked Only</span>
           </label>
         </div>

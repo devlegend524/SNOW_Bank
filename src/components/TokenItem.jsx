@@ -53,7 +53,7 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
           )}
 
           <div className="block ml-3 py-1">
-            <h1 className="text-yellow-main text-base">{token?.lpSymbol}</h1>
+            <h1 className="text-orange text-base">{token?.lpSymbol}</h1>
             <p className="text-gray-400 text-sm">{token.title}</p>
           </div>
         </div>

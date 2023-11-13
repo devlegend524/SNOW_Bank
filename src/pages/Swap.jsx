@@ -169,14 +169,14 @@ export default function Swap() {
           <div className="flex-1"></div>
           <div className="flex-1 flex justify-center items-center">
             <div className="block">
-              <h1 className="text-center text-yellow-main text-2xl font-semibold">
+              <h1 className="text-center text-orange text-2xl font-semibold">
                 Zapper
               </h1>
             </div>
           </div>
           <div className="flex-1 flex justify-end items-center">
             <button
-              className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out"
+              className="action_btn shadow-md hover:bg-black  transition ease-in-out"
               onClick={refreshData}
             >
               <img src="/assets/refresh.png" alt="" />

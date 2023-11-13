@@ -58,16 +58,16 @@ export default function FarmBanner() {
     }
   }, [chain]);
   return (
-    <div className="flex justify-center flex-col md:flex-row bg-main-100 rounded-md shadow shadow-black/60 drop-shadow-xl">
+    <div className="flex justify-center flex-col md:flex-row bg-secondary rounded-md">
       <div className="p-3 md:p-12 md:w-1/2 w-full text-center md:text-left">
         <h1 className="text-7xl">
           Earn 3WiLD <br />
-          <span className="text-yellow-main font-semibold"> on BSC</span>
+          <span className="text-orange font-semibold"> on BSC</span>
         </h1>
         <p className="pt-4">Don't panic .. it's organic 🤞.</p>
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2">
-        <div className="buy_card shadow shadow-black drop-shadow-md">
+        <div className="buy_card">
           <div className="flex items-center justify-center gap-3">
             <a
               className="main_btn w-full"
@@ -212,7 +212,7 @@ export default function FarmBanner() {
           </div>
           <div className="flex items-center justify-center">
             <a
-              className="w-100  flex items-center justify-center py-10 text-base hover:underline  text-yellow-main"
+              className="w-100  flex items-center justify-center py-10 text-base hover:underline  text-orange"
               href={`${
                 chain && chain.id === CHAIN_ID
                   ? getScanTokenUrl(wildAddress)

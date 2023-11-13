@@ -90,8 +90,8 @@ export default function FarmStaking() {
   }
 
   return (
-    <div className="flex-1 bg-main-100 p-8 rounded-md shadow shadow-black/60 drop-shadow-xl">
-      <div className="text-3xl text-end font-semibold text-yellow-main mb-5">
+    <div className="flex-1 bg-secondary p-8 rounded-md ">
+      <div className="text-3xl text-end font-semibold text-orange mb-5">
         Farms & Staking
       </div>
       <div className="flex justify-between flex-col md:flex-row">

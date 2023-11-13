@@ -87,7 +87,7 @@ export default function AddLiquidity(props) {
           </div>
           <div className="flex-1 flex justify-center items-center">
             <div className="block">
-              <h1 className="text-center text-yellow-main text-2xl">
+              <h1 className="text-center text-orange text-2xl">
                 Add Liquidity
               </h1>
             </div>
@@ -137,7 +137,7 @@ export default function AddLiquidity(props) {
             newPair={newPair}
           />
 
-          <p className="text-xl text-yellow-main text-center">
+          <p className="text-xl text-orange text-center">
             LP reward APR 2.39%
           </p>
         </div>

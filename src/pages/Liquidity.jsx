@@ -328,7 +328,7 @@ export default function Liquidity() {
             </div>
             <div className="flex-1 flex justify-center items-center">
               <div className="block">
-                <h1 className="text-center text-yellow-main text-2xl">
+                <h1 className="text-center text-orange text-2xl">
                   Add Liquidity
                 </h1>
               </div>
@@ -425,7 +425,7 @@ export default function Liquidity() {
             </div>
             <div className=" flex justify-center items-center">
               <div className="">
-                <h1 className="text-center text-yellow-main text-2xl">
+                <h1 className="text-center text-orange text-2xl">
                   Remove Liquidity
                 </h1>
               </div>
