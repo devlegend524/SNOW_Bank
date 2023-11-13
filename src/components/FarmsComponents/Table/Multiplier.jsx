@@ -1,20 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { HelpIcon, Skeleton } from "uikit";
-import { useTranslation } from "context/Localization";
 import { Tooltip } from "react-tooltip";
-
-const MultiplierWrapper = styled.div`
-  color: #ffc412;
-  width: 36px;
-  text-align: right;
-  margin-right: 14px;
-
-  @media screen and (min-width: 968px) {
-    text-align: left;
-    margin-right: 0;
-  }
-`;
 
 const Container = styled.div`
   display: flex;
@@ -29,7 +16,7 @@ const Multiplier = ({ multiplier }) => {
   );
   return (
     <Container>
-      <MultiplierWrapper>{displayMultiplier}</MultiplierWrapper>
+      <div className="text-symbol w-[36px] lg:text-right lg:mr-4 text-left mr-0">{displayMultiplier}</div>
       <HelpIcon
         data-tooltip-id="liquidity-tooltip"
         data-tooltip-content="The Multiplier represents the 

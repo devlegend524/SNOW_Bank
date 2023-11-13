@@ -21,12 +21,6 @@ const Container = styled.div`
   }
 `;
 
-const AprWrapper = styled.div`
-  min-width: 60px;
-  text-align: left;
-  color: #ffc412;
-`;
-
 const Apr = ({
   value,
   lpLabel,
@@ -46,7 +40,7 @@ const Apr = ({
     <Container>
       {originalValue ? (
         <>
-          <AprWrapper>{value}%</AprWrapper>
+          <div className="min-w-[60px] text-left text-symbol">{value}%</div>
           {!hideButton && (
             <ApyButton
               lpLabel={lpLabel}
@@ -57,12 +51,12 @@ const Apr = ({
           )}
         </>
       ) : (
-        <AprWrapper>0%</AprWrapper>
+        <div className="min-w-[60px] text-left text-symbol">0%</div>
       )}
     </Container>
   ) : (
     <Container>
-      <AprWrapper>{originalValue}%</AprWrapper>
+      <div className="min-w-[60px] text-left text-symbol">{originalValue}%</div>
     </Container>
   );
 };

@@ -120,7 +120,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
         <button
           disabled={earnings.eq(0) || pendingTx || !userDataReady}
           onClick={handleHavest}
-          className="rounded-md p-1  text-center text-black font-medium bg-orange"
+          className="rounded-md p-1  text-center text-black font-medium bg-symbol"
         >
           {pendingTx ? <Loading title="Harvesting..." /> : t(`Harvest`)}
         </button>
@@ -129,7 +129,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           {!isNFTPool && (
             <>
               <button
-                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-black font-medium bg-yellow-500 hover:bg-yellow-600"
+                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-black font-medium bg-symbol hover:bg-symbolHover"
                 data-tooltip-id="compound-tooltip"
                 data-tooltip-content={
                   earnings.eq(0) || pendingCompoundTx || !userDataReady
@@ -146,7 +146,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 )}
               </button>
               <button
-                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-black text-center font-medium bg-yellow-500 hover:bg-yellow-600"
+                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-black text-center font-medium bg-symbol hover:bg-symbolHover"
                 data-tooltip-id="zap-tooltip"
                 data-tooltip-content="Stake to this pool from your wallet"
                 disabled={!userDataReady}

@@ -9,7 +9,7 @@ export const SubmitButton = (props) => {
           <>
             <button
               disabled={true}
-              className="custom_btn disabled:mb-[20px] mt-8 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+              className="custom_btn disabled:mb-[20px] mt-8 hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
             >
               Insufficient {props.tokenA.symbol} Token Balance
             </button>
@@ -22,7 +22,7 @@ export const SubmitButton = (props) => {
               <>
                 <button
                   disabled={true}
-                  className="custom_btn mt-10 mb-5 disabled:mb-[20px] disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                  className="custom_btn mt-10 mb-5 disabled:mb-[20px] disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                 >
                   Approving...
                 </button>
@@ -33,7 +33,7 @@ export const SubmitButton = (props) => {
               <>
                 <button
                   onClick={() => props.approve("A")}
-                  className="custom_btn mt-10 mb-5 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                  className="custom_btn mt-10 mb-5 disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                 >
                   Approve {props.tokenA.symbol} Token
                 </button>
@@ -46,7 +46,7 @@ export const SubmitButton = (props) => {
               <>
                 <button
                   disabled={true}
-                  className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
+                  className="custom_btn mt-10 mb-5 hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
                 >
                   Swaping...
                 </button>
@@ -58,7 +58,7 @@ export const SubmitButton = (props) => {
                 <button
                   disabled={!props.tokenAAmount || !props.tokenBAmount}
                   onClick={props.handleSwap}
-                  className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
+                  className="custom_btn mt-10 mb-5 hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
                 >
                   Swap
                 </button>
@@ -71,7 +71,7 @@ export const SubmitButton = (props) => {
       return (
         <button
           disabled={true}
-          className="custom_btn mt-10 mb-5 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
+          className="custom_btn mt-10 mb-5 hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
         >
           Checking pair...
         </button>
@@ -84,7 +84,7 @@ export const SubmitButton = (props) => {
       if (props.pair) {
         return (
           <button
-            className="custom_btn mt-10 mb-5  hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+            className="custom_btn mt-10 mb-5  hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
             onClick={props.moveToSupply}
           >
             Add Liquidity
@@ -95,7 +95,7 @@ export const SubmitButton = (props) => {
           return (
             <button
               disabled={true}
-              className="custom_btn mt-10 mb-5  hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+              className="custom_btn mt-10 mb-5  hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
             >
               Creating Pair...
             </button>
@@ -104,7 +104,7 @@ export const SubmitButton = (props) => {
           return (
             <button
               onClick={props.newPair}
-              className="custom_btn mt-10 mb-5  hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+              className="custom_btn mt-10 mb-5  hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
             >
               Create a Pair Now
             </button>
@@ -128,7 +128,7 @@ export const SubmitButton = (props) => {
             <>
               <button
                 disabled={true}
-                className="custom_btn disabled:mb-[20px] mt-8 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                className="custom_btn disabled:mb-[20px] mt-8 hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
               >
                 Insufficient {props.tokenA.symbol} Token Balance
               </button>
@@ -139,7 +139,7 @@ export const SubmitButton = (props) => {
             <>
               <button
                 disabled={true}
-                className="custom_btn mt-8 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                className="custom_btn mt-8 disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
               >
                 Insufficient {props.tokenB.symbol} Token Balance
               </button>
@@ -153,7 +153,7 @@ export const SubmitButton = (props) => {
                 <>
                   <button
                     disabled={true}
-                    className="custom_btn mt-8 disabled:mb-[20px] disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                    className="custom_btn mt-8 disabled:mb-[20px] disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                   >
                     Approving...
                   </button>
@@ -164,7 +164,7 @@ export const SubmitButton = (props) => {
                 <>
                   <button
                     onClick={() => props.approve("A")}
-                    className="custom_btn mt-8 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                    className="custom_btn mt-8 disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                   >
                     Approve {props.tokenA.symbol} Token
                   </button>
@@ -177,7 +177,7 @@ export const SubmitButton = (props) => {
                 <>
                   <button
                     disabled={true}
-                    className="custom_btn mt-8 disabled:mb-[20px] disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                    className="custom_btn mt-8 disabled:mb-[20px] disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                   >
                     Approving...
                   </button>
@@ -188,7 +188,7 @@ export const SubmitButton = (props) => {
                 <>
                   <button
                     onClick={() => props.approve("B")}
-                    className="custom_btn mt-8 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                    className="custom_btn mt-8 disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                   >
                     Approve {props.tokenB.symbol} Token
                   </button>
@@ -201,7 +201,7 @@ export const SubmitButton = (props) => {
                 <>
                   <button
                     disabled={true}
-                    className="custom_btn mt-8 disabled:mb-[20px] disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                    className="custom_btn mt-8 disabled:mb-[20px] disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                   >
                     Suppling...
                   </button>
@@ -213,7 +213,7 @@ export const SubmitButton = (props) => {
                   <button
                     disabled={!props.tokenAAmount || !props.tokenBAmount}
                     onClick={props.supply}
-                    className="custom_btn mt-8 disabled:mt-[40px] hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange  flex justify-center items-center"
+                    className="custom_btn mt-8 disabled:mt-[40px] hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol  flex justify-center items-center"
                   >
                     Supply
                   </button>
@@ -227,7 +227,7 @@ export const SubmitButton = (props) => {
           return (
             <button
               disabled={true}
-              className="custom_btn mt-10 mb-5  hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+              className="custom_btn mt-10 mb-5  hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
             >
               Creating Pair...
             </button>
@@ -236,7 +236,7 @@ export const SubmitButton = (props) => {
           return (
             <button
               onClick={props.newPair}
-              className="custom_btn mt-10 mb-5  hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+              className="custom_btn mt-10 mb-5  hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
             >
               Create a Pair Now
             </button>
@@ -247,7 +247,7 @@ export const SubmitButton = (props) => {
       return (
         <button
           disabled={true}
-          className="custom_btn mt-8 hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
+          className="custom_btn mt-8 hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol disabled:mb-[20px] disabled:mt-[40px]  flex justify-center items-center"
         >
           Checking pair...
         </button>
@@ -290,7 +290,7 @@ export const SubmitButton = (props) => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="custom_btn mt-10 mb-5  hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+                    className="custom_btn mt-10 mb-5  hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
                   >
                     Connect Wallet
                   </button>
@@ -301,10 +301,10 @@ export const SubmitButton = (props) => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="custom_btn mt-10 mb-5 group hover:bg-hover transition ease-in-out disabled:opacity-50 disabled:hover:bg-orange flex justify-center items-center"
+                    className="custom_btn mt-10 mb-5 group hover:bg-symbolHover transition ease-in-out disabled:opacity-50 disabled:hover:bg-symbol flex justify-center items-center"
                   >
                     Connect to Binance &nbsp;
-                    <FaArrowRight className="text-xl group-hover:ml-2 transition ease ease-in-out delay-3000" />
+                    <FaArrowRight className="text-xl group-symbolHover:ml-2 transition ease ease-in-out delay-3000" />
                   </button>
                 );
               }

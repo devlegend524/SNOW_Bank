@@ -125,15 +125,15 @@ const Farm = ({
       </TokensWrapper>
       <div>
         {handleRenderFarming()}
-        <Text color="#FFC412">{label}</Text>
-        <Text fontSize="12px" color="white">
+        <Text color="secondary">{label}</Text>
+        <p className="text-[12px] w-[99px]">
           Deposit fee:{" "}
           <DepositFee
             depositFee={depositFee}
             isTokenOnly={isTokenOnly}
             hasDiscount={hasDiscount}
           />
-        </Text>
+        </p>
       </div>
     </Container>
   );

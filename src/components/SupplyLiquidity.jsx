@@ -290,7 +290,7 @@ export default function SupplyLiquidity(props) {
           </div>
           <div className="flex-1 flex justify-center items-center">
             <div className="block">
-              <h1 className="text-center text-orange text-2xl">
+              <h1 className="text-center text-symbol text-2xl">
                 {tokenA.symbol} - {tokenB.symbol} LP
               </h1>
             </div>
@@ -323,7 +323,7 @@ export default function SupplyLiquidity(props) {
           />
 
           <div className="flex justify-center">
-            <div className="swap_btn_box text-orange text-5xl">+</div>
+            <div className="swap_btn_box text-symbol text-5xl">+</div>
           </div>
 
           <TokenSelect
@@ -358,7 +358,7 @@ export default function SupplyLiquidity(props) {
 
           <div className="flex justify-between items-center py-6">
             <div className="flex-1">
-              <h1 className="text-base text-orange">
+              <h1 className="text-base text-symbol">
                 {tokenA.symbol} per {tokenB.symbol}
               </h1>
               <p className="text-gray-400 text-sm">
@@ -368,7 +368,7 @@ export default function SupplyLiquidity(props) {
               </p>
             </div>
             <div className="flex-1">
-              <h1 className="text-base text-orange text-center">
+              <h1 className="text-base text-symbol text-center">
                 {tokenB.symbol} per {tokenA.symbol}
               </h1>
               <p className="text-gray-400 text-sm text-center">
@@ -378,19 +378,19 @@ export default function SupplyLiquidity(props) {
               </p>
             </div>
             <div className="flex-1">
-              <h1 className="text-base text-orange text-end">
+              <h1 className="text-base text-symbol text-end">
                 Share of Pool
               </h1>
               <p className="text-gray-400 text-sm text-end">0%</p>
             </div>
           </div>
           <div className="flex justify-between items-center border-t border-b border-gray-600 py-4">
-            <p className="text-orange text-base">LP reward APR</p>
-            <p className="text-orange text-base">0.5%</p>
+            <p className="text-symbol text-base">LP reward APR</p>
+            <p className="text-symbol text-base">0.5%</p>
           </div>
           <div className="flex justify-between items-center border-b border-gray-600 py-6">
-            <p className="text-orange text-base">Slippage Tolerance</p>
-            <p className="text-orange text-base">2.39%</p>
+            <p className="text-symbol text-base">Slippage Tolerance</p>
+            <p className="text-symbol text-base">2.39%</p>
           </div>
         </div>
       </div>

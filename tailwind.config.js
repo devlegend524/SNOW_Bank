@@ -6,9 +6,9 @@ module.exports = {
       colors: {
         primary: '#16171E',
         secondary: '#1F212A',
-        orange: '#FFC412',
-        hover: '#eb9b10',
-        border: '#ffc41233'
+        symbol: '#fd2fff',
+        symbolHover: '#ca21cb',
+        symbolBorder: '#ac26d53d'
       }
     },
   },

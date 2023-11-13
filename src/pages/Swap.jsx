@@ -169,7 +169,7 @@ export default function Swap() {
           <div className="flex-1"></div>
           <div className="flex-1 flex justify-center items-center">
             <div className="block">
-              <h1 className="text-center text-orange text-2xl font-semibold">
+              <h1 className="text-center text-symbol text-2xl font-semibold">
                 Zapper
               </h1>
             </div>
@@ -230,7 +230,7 @@ export default function Swap() {
           />
 
           {isCheckingAllowance ? (
-            <button className="custom_btn  mt-8 hover:bg-hover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
+            <button className="custom_btn  mt-8 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700">
               <Loading title="Loading..." />
             </button>
           ) : (tokenA.lpSymbol !== "BNB" && Number(tokenAAllowance) === 0) ||
@@ -239,7 +239,7 @@ export default function Swap() {
             <button
               onClick={handleApprove}
               disabled={isApproving}
-              className="custom_btn  mt-8 hover:bg-hover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="custom_btn  mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             >
               {isApproving ? (
                 <div className="flex justify-center gap-1">
@@ -259,7 +259,7 @@ export default function Swap() {
                 pendingTx ||
                 isApproving
               }
-              className="custom_btn  mt-8 hover:bg-hover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="custom_btn  mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             >
               {pendingTx ? (
                 <div className="flex justify-center gap-1">

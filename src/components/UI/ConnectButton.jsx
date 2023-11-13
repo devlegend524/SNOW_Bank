@@ -39,7 +39,7 @@ export const WalletConnect = () => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="bt-yellow-main btn_connect m-2 sm:m-0 hover:bg-hover bg-orange transition ease-in-out"
+                    className="main_btn px-5 sm:m-0 transition ease-in-out"
                   >
                     Connect Wallet
                   </button>
@@ -50,7 +50,7 @@ export const WalletConnect = () => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="bt-yellow-main btn_connect m-2 sm:m-0 hover:bg-red-500 bg-red-600  transition ease-in-out text-[white!important] flex justify-center items-center gap-1"
+                    className="m-2 sm:m-0 hover:bg-red-500 bg-red-600  transition ease-in-out text-[white!important] flex justify-center items-center gap-1"
                   >
                     Wrong network
                     <FaAngleDown className="text-xl" />
@@ -64,12 +64,12 @@ export const WalletConnect = () => {
                     alt="logo"
                     className="w-[25.3px] h-[25px] mx-1"
                   />
-                  <p className="hidden sm:flex items-center balance">
+                  <p className="hidden sm:flex items-center text-symbol">
                     {Number(priceData[0]) ? `~ ${priceData[0].toString()}` : ""}
                   </p>
                   <button
                     onClick={openChainModal}
-                    className="hidden sm:inline-flex justify-center items-center hover:bg-hover bg-orange rounded-full  transition ease-in-out text-black text-xl"
+                    className="hidden sm:inline-flex justify-center items-center hover:bg-symbolHover bg-symbol rounded-full  transition ease-in-out text-black text-xl"
                   >
                     {chain.iconUrl ? (
                       <img
@@ -83,7 +83,7 @@ export const WalletConnect = () => {
                   </button>
                   <button
                     onClick={openAccountModal}
-                    className="bt-yellow-main btn_connect m-2 sm:m-0 hover:bg-hover bg-orange transition ease-in-out flex justify-center items-center gap-1"
+                    className="m-2 sm:m-0 hover:bg-symbolHover bg-symbol transition ease-in-out flex justify-center items-center gap-1"
                     type="button"
                   >
                     {account.displayName}

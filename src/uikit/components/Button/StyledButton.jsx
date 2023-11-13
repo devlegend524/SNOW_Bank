@@ -15,7 +15,6 @@ const getDisabledStyles = ({ $isLoading, theme }) => {
   return `
     &:disabled,
     &.pancake-button--disabled {
-      background-color: #FFC412;
       border-color: #E9EAEB;
       box-shadow: none;
       color: #BDC2C4;
@@ -67,7 +66,6 @@ const StyledButton = styled.button`
   font-weight: 600;
   font-size: 16px;
   color: #fff;
-  background-color: #ffc412;
 
   ${getDisabledStyles}
   ${variant({

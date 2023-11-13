@@ -12,12 +12,10 @@ export const ModalHeader = styled.div`
   display: flex;
   padding: 12px 24px;
   background-color: #1f212a;
-  color: #ffc412;
 `;
 
 export const ModalTitle = styled(Flex)`
   align-items: center;
-  color: #ffc412;
   flex: 1;
 `;
 

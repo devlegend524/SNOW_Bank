@@ -21,7 +21,7 @@
 }
 
 ::-webkit-scrollbar {
-  @apply w-1.5 rounded-full;
+  @apply w-0.5 rounded-full;
 }
 
 ::-webkit-scrollbar-track {
@@ -29,15 +29,15 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-orange;
+  @apply bg-symbol;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-hover;
+  @apply bg-symbolHover;
 }
 
 body {
-  @apply min-h-screen m-0 bg-primary text-gray-400;
+  @apply min-h-screen m-0 bg-primary text-gray-300;
   font-family: "NippoLight" !important;
 }
 
@@ -46,15 +46,31 @@ body {
 }
 
 .main_btn {
-  @apply px-2 py-3 bg-orange text-black font-semibold rounded-full text-center hover:bg-hover transition ease-in-out;
+  @apply py-2 text-black font-semibold rounded-full text-center  relative hover:text-white transition ease-in-out duration-500;
+  background-image: linear-gradient(
+    210deg,
+    #00eaff 0%,
+    #0080ff 25%,
+    #8000ff 50%,
+    #e619e6 75%,
+    #f00 100%
+  );
+}
+
+.main_btn::before {
+  @apply content-[''] absolute h-full  bg-[#e619e6]/10 w-0 top-0 transition-all duration-500 rounded-full;
+}
+
+.main_btn::before:hover {
+  @apply w-full right-auto left-0 rounded-full;
 }
 
 .tr {
-  @apply bg-secondary border-t border-border cursor-pointer flex justify-between last:rounded-b-lg hover:bg-secondary/80 transition ease-in-out;
+  @apply bg-secondary border-t border-symbolBorder cursor-pointer flex justify-between last:rounded-b-lg hover:bg-secondary/80 transition ease-in-out;
 }
 
 .action_panel_container {
-  @apply flex flex-col md:flex-row justify-between p-2 lg:p-3 w-full border border-border last:rounded-b-md;
+  @apply flex flex-col md:flex-row justify-between p-2 lg:p-3 w-full border border-symbolBorder last:rounded-b-md;
 }
 
 .action_panel {
@@ -66,9 +82,29 @@ body {
 }
 
 .tab_panel .tab_button {
-  @apply w-1/2 h-full rounded-full flex justify-center items-center cursor-pointer hover:text-orange;
+  @apply w-1/2 h-full rounded-full flex justify-center items-center cursor-pointer hover:text-symbol;
 }
 
 .tab_panel .tab_button.active {
-  @apply text-orange  bg-primary;
+  @apply text-symbol  bg-primary border border-symbol;
+}
+
+.nav_action {
+  @apply flex justify-end items-center;
+}
+
+.nav_action p {
+  @apply text-symbol;
+}
+
+.nav_action button {
+  @apply ml-4;
+}
+
+.nav_action button img {
+  @apply w-[40px] h-[40px];
+}
+
+.nav_action .btn_connect {
+  @apply w-[156px] h-[40px] rounded-full text-black;
 }

@@ -291,7 +291,7 @@ export default function WildSwapCard() {
         </div>
         <div className="flex-1 flex justify-center items-center">
           <div className="block">
-            <h1 className="text-center text-orange text-2xl">Wild Swap</h1>
+            <h1 className="text-center text-symbol text-2xl">Wild Swap</h1>
           </div>
         </div>
         <div className="flex-1 flex justify-end items-center">

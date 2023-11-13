@@ -62,7 +62,7 @@ export default function FarmBanner() {
       <div className="p-3 md:p-12 md:w-1/2 w-full text-center md:text-left">
         <h1 className="text-7xl">
           Earn 3WiLD <br />
-          <span className="text-orange font-semibold"> on BSC</span>
+          <span className="text-symbol font-semibold"> on BSC</span>
         </h1>
         <p className="pt-4">Don't panic .. it's organic 🤞.</p>
       </div>
@@ -212,7 +212,7 @@ export default function FarmBanner() {
           </div>
           <div className="flex items-center justify-center">
             <a
-              className="w-100  flex items-center justify-center py-10 text-base hover:underline  text-orange"
+              className="w-100  flex items-center justify-center py-10 text-base hover:underline  text-symbol"
               href={`${
                 chain && chain.id === CHAIN_ID
                   ? getScanTokenUrl(wildAddress)

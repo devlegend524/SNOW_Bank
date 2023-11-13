@@ -91,7 +91,7 @@ export default function FarmStaking() {
 
   return (
     <div className="flex-1 bg-secondary p-8 rounded-md ">
-      <div className="text-3xl text-end font-semibold text-orange mb-5">
+      <div className="text-3xl text-end font-semibold text-symbol mb-5">
         Farms & Staking
       </div>
       <div className="flex justify-between flex-col md:flex-row">

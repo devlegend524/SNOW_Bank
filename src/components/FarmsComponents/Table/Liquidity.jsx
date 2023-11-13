@@ -4,10 +4,6 @@ import { HelpIcon, Text } from "uikit";
 import { useTranslation } from "context/Localization";
 import { Tooltip } from "react-tooltip";
 
-const ReferenceElement = styled.div`
-  display: inline-block;
-`;
-
 const LiquidityWrapper = styled.div`
   min-width: 110px;
   font-weight: 600;
@@ -43,7 +39,7 @@ const Liquidity = ({ liquidity }) => {
   return (
     <Container>
       <LiquidityWrapper>
-        <Text color="#FFC412">{displayLiquidity}</Text>
+        <Text color="secondary">{displayLiquidity}</Text>
       </LiquidityWrapper>
       <HelpIcon
         data-tooltip-id="liquidity-tooltip"

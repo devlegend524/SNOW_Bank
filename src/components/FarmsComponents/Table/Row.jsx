@@ -38,21 +38,6 @@ const CellInner = styled.div`
   }
 `;
 
-// const div = styled.tr`
-//   cursor: pointer;
-//   background: #1f212a;
-//   border-top: 1px solid #ffc41233;
-//   color: white;
-//   &:first-of-type {
-//     border-top-left-radius: 10px;
-//     border-top-right-radius: 10px;
-//   }
-
-//   &:nth-child(odd) {
-//     background: #1f212a;
-//   }
-// `;
-
 const EarnedMobileCell = styled.td`
   padding: 16px 0 24px 16px;
 `;

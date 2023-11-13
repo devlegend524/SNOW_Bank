@@ -14,11 +14,11 @@ export default function Header() {
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
               <a href="/">
-                <span className="text-orange">3</span>WiLD
+                <span className="text-symbol">3</span>WiLD
               </a>
             </div>
             <div
-              className="text-orange ml-2 block sm:hidden mt-[3px]"
+              className="text-symbol ml-2 block sm:hidden mt-[3px]"
               onClick={() => setMobile(!isMobile)}
             >
               <Hamburger />
@@ -35,8 +35,8 @@ export default function Header() {
                   >
                     <a href={link.url}>{link.name}</a>
                     <div className="flex gap-[2px]">
-                      <div className="h-1 w-full bg-orange"></div>
-                      <div className="w-1 h-1 bg-orange rounded-full"></div>
+                      <div className="h-1 w-full bg-symbol"></div>
+                      <div className="w-1 h-1 bg-symbol rounded-full"></div>
                     </div>
                   </li>
                 ))}
@@ -52,8 +52,8 @@ export default function Header() {
                     Docs
                   </a>
                   <div className="flex gap-[2px]">
-                    <div className="h-1 w-full bg-orange"></div>
-                    <div className="w-1 h-1 bg-orange rounded-full"></div>
+                    <div className="h-1 w-full bg-symbol"></div>
+                    <div className="w-1 h-1 bg-symbol rounded-full"></div>
                   </div>
                 </li>
               </ul>
@@ -62,7 +62,7 @@ export default function Header() {
             <div className="nav_action">
               <WalletConnect />
               <div
-                className="text-orange ml-2 hidden sm:block lg:hidden"
+                className="text-symbol ml-2 hidden sm:block lg:hidden"
                 onClick={() => setMobile(!isMobile)}
               >
                 <Hamburger />
