@@ -11,7 +11,7 @@ const tokens = {
     symbol: "3WiLD",
     address: addresses.wild,
     decimals: 18,
-    logo: "/assets/tokens/wildx.png",
+    logo: "/assets/tokens/wildx.jpg",
     projectLink: "https://wildbase.farm/", // todo:
   },
   weth: {

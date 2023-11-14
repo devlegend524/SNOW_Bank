@@ -64,7 +64,7 @@ export default function Zap() {
         ) : (
           <div className="w-full max-w-[300px] max-h-[400px] p-4 rounded-lg border border-gray-600">
             <img
-              src={"/logo.png"}
+              src={"/logo.jpg"}
               alt="token"
               className="w-full border-[3px] border-white rounded-lg border-opacity-30"
             />
@@ -89,7 +89,7 @@ export default function Zap() {
 
       <div className="flex justify-center items-center pb-16 m-2 mt-12">
         <button
-          className="bg-secondary-700 rounded-xl w-full max-w-sm flex justify-center px-6 py-3 hover:scale-105 transition ease-in-out border border-white border-opacity-30"
+          className="main_btn rounded-xl w-full max-w-sm flex justify-center px-6 py-3 hover:scale-105 transition ease-in-out"
           // disabled={!address && !nfts}
           onClick={() => claimNFT()}
         >

@@ -9,12 +9,13 @@ export default function Header() {
 
   return (
     <>
-      <div className="bg-secondary">
+      <div className="py-3">
         <div className="container mr-auto ml-auto relative">
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
               <a href="/">
-                <span className="text-symbol">3</span>WiLD
+                <img src="/logo.jpg" className="h-14 w-14 rounded-full"  alt="" />
+                {/* <span className="text-symbol">3</span>WiLD */}
               </a>
             </div>
             <div

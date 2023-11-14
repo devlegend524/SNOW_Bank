@@ -50,7 +50,7 @@ export const WalletConnect = () => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="m-2 sm:m-0 hover:bg-red-500 bg-red-600  transition ease-in-out text-[white!important] flex justify-center items-center gap-1"
+                    className="m-2 sm:m-0 hover:bg-red-500 bg-red-600  transition ease-in-out text-[white!important] flex justify-center items-center gap-1 py-2 px-4 rounded-full"
                   >
                     Wrong network
                     <FaAngleDown className="text-xl" />
@@ -60,7 +60,7 @@ export const WalletConnect = () => {
               return (
                 <div className="flex items-center">
                   <img
-                    src="/logo.png"
+                    src="/logo.jpg"
                     alt="logo"
                     className="w-[25.3px] h-[25px] mx-1"
                   />
@@ -75,7 +75,7 @@ export const WalletConnect = () => {
                       <img
                         alt={chain.name ?? "Chain icon"}
                         src={chain.iconUrl}
-                        className="h-[40px] w-[40px!important]"
+                        className="h-[30px!important] w-[30px!important]"
                       />
                     ) : (
                       <>?</>
@@ -83,7 +83,7 @@ export const WalletConnect = () => {
                   </button>
                   <button
                     onClick={openAccountModal}
-                    className="m-2 sm:m-0 hover:bg-symbolHover bg-symbol transition ease-in-out flex justify-center items-center gap-1"
+                    className="m-2 sm:m-0 hover:bg-symbolHover main_btn px-5 py-1transition ease-in-out flex justify-center items-center gap-1"
                     type="button"
                   >
                     {account.displayName}

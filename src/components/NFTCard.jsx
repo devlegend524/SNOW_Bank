@@ -6,13 +6,13 @@ export default function NFTCard({ tokenId }) {
   const nftContract = useNFTContract();
 
   const handleImageError = (event) => {
-    event.target.src = "/logo.png";
+    event.target.src = "/logo.jpg";
   };
 
   const getTokenUri = async (_tokenId) => {
     const url = await nftContract.tokenURI(_tokenId);
     console.log(url);
-    setTokenUri(url || "/logo.png");
+    setTokenUri(url || "/logo.jpg");
   };
   useEffect(() => {
     getTokenUri(tokenId);

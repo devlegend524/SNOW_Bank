@@ -29,7 +29,7 @@ export default function FarmBanner() {
               address: token,
               symbol: "3WiLD",
               decimals: "18",
-              image: `${BASE_URL}/assets/tokens/wildx.png`,
+              image: `${BASE_URL}/assets/tokens/wildx.jpg`,
             },
           },
         });

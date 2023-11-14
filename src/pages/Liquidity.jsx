@@ -376,7 +376,7 @@ export default function Liquidity() {
           {Number(tokenAAmount) > 0 &&
           Number(allowanceFrom) <= Number(tokenAAmount) ? (
             <button
-              className="custom_btn  mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="main_btn mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
               onClick={handleApproveFromToken}
               disabled={pendingFromApproveTx}
             >
@@ -390,7 +390,7 @@ export default function Liquidity() {
           {Number(tokenBAmount) > 0 &&
           Number(allowanceTo) <= Number(tokenBAmount) ? (
             <button
-              className="custom_btn  mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="main_btn mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
               onClick={handleApproveToToken}
               disabled={pendingToApproveTx}
             >
@@ -402,7 +402,7 @@ export default function Liquidity() {
             ""
           )}
           <button
-            className="custom_btn  mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+            className="main_btn mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             onClick={handleAddLiquidity}
             disabled={
               pendingTx ||
@@ -457,7 +457,7 @@ export default function Liquidity() {
           {Number(removeTokenAmount) > 0 &&
           Number(allowanceRemove) <= Number(removeTokenAmount) ? (
             <button
-              className="custom_btn  mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+              className="main_btn mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
               onClick={handleApproveRemoveToken}
               disabled={pendingRemoveApproveTx}
             >
@@ -469,7 +469,7 @@ export default function Liquidity() {
             ""
           )}
           <button
-            className="custom_btn  mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
+            className="main_btn mt-5 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             onClick={handleRemoveLiquidity}
             disabled={pendingRemoveTx || Number(removeTokenAmount) === 0}
           >

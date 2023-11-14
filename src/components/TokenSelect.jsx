@@ -5,7 +5,7 @@ import { getBalance } from "utils/balanceHalper";
 import { toFixed } from "utils/customHelpers";
 import { useDebounce } from "use-debounce";
 
-export default function TokenSelect({
+export default function  TokenSelect({
   setOpen,
   token,
   setAmount,
@@ -92,7 +92,7 @@ export default function TokenSelect({
 
   return (
     <>
-      <div className="custom_input">
+      <div className="custom_input bg-primary/60">
         <div className="token_select min-w-max mr-3">
           <div
             onClick={() => {
@@ -150,7 +150,7 @@ export default function TokenSelect({
           {!selectOnly && (
             <input
               type="number"
-              className="text-xl text-gray-200 text-end flex items-center"
+              className="text-xl text-gray-200 text-end flex items-center bg-red"
               placeholder="0.0"
               min={0}
               value={localAmount}

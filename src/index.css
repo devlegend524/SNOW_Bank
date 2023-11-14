@@ -29,7 +29,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-symbol;
+  @apply bg-symbol/10;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -42,11 +42,11 @@ body {
 }
 
 .buy_card {
-  @apply block p-6 bg-primary rounded-lg w-full;
+  @apply block p-6 bg-primary/60 rounded-lg w-full;
 }
 
 .main_btn {
-  @apply py-2 text-black font-semibold rounded-full text-center  relative hover:text-white transition ease-in-out duration-500;
+  @apply py-2 text-white font-semibold rounded-full text-center relative hover:text-white transition ease-in-out duration-500 hover:scale-105;
   background-image: linear-gradient(
     210deg,
     #00eaff 0%,
@@ -57,13 +57,13 @@ body {
   );
 }
 
-.main_btn::before {
+/* .main_btn::before {
   @apply content-[''] absolute h-full  bg-[#e619e6]/10 w-0 top-0 transition-all duration-500 rounded-full;
 }
 
 .main_btn::before:hover {
   @apply w-full right-auto left-0 rounded-full;
-}
+} */
 
 .tr {
   @apply bg-secondary border-t border-symbolBorder cursor-pointer flex justify-between last:rounded-b-lg hover:bg-secondary/80 transition ease-in-out;
@@ -107,4 +107,19 @@ body {
 
 .nav_action .btn_connect {
   @apply w-[156px] h-[40px] rounded-full text-black;
+}
+
+.card {
+  @apply rounded-xl bg-secondary py-8 px-6 w-full max-w-[540px] m-8;
+}
+
+.pulse_bg {
+  background-image: linear-gradient(
+    210deg,
+    #00eaff 0%,
+    #0080ff 25%,
+    #8000ff 50%,
+    #e619e6 75%,
+    #f00 100%
+  );
 }
