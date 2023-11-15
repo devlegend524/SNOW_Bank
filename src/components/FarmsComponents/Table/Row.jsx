@@ -76,7 +76,7 @@ const Row = (props) => {
   const handleRenderRow = () => {
     if (!isXs) {
       return (
-        <div className="tr" onClick={toggleActionPanel}>
+        <tr className="tr" onClick={toggleActionPanel}>
           {Object.keys(props).map((key) => {
             const columnIndex = columnNames.indexOf(key);
             if (columnIndex === -1) {
@@ -119,11 +119,11 @@ const Row = (props) => {
                 );
             }
           })}
-        </div>
+        </tr>
       );
     }
     return (
-      <div className="tr" onClick={toggleActionPanel}>
+      <tr className="tr" onClick={toggleActionPanel}>
         <td>
           <div>
             <AprMobileCell>
@@ -152,7 +152,7 @@ const Row = (props) => {
             </CellLayout>
           </CellInner>
         </td>
-      </div>
+      </tr>
     );
   };
 
