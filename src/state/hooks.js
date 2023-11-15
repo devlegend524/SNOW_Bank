@@ -146,7 +146,7 @@ export const useLpTokenPrice = (symbol) => {
       // Divide total value of all tokens, by the number of LP tokens
       lpTokenPrice = overallValueOfAllTokensInFarm.div(farm.lpTotalSupply);
     }
-  } catch {}
+  } catch { }
   return lpTokenPrice;
 };
 
@@ -267,17 +267,22 @@ export const usePricepWiLDUsdc = () => {
           )
         ).json();
         if (returned && returned.pairs) {
-          const data = returned.pairs.filter(
-            (pair) =>
-              pair.chainId === "bsc" &&
-              pair.pairAddress === addresses.wildWplslp
-          )[0];
+          let data;
+          if (returned.pairs.length === 1) {
+            data = returned.pairs[0];
+          } else {
+            data = returned.pairs.filter(
+              (pair) =>
+                pair.chainId === "pulsechain" &&
+                pair.pairAddress === addresses.wildWplslp
+            )[0];
+          }
 
           setPriceUsd(data?.priceUsd);
           setLiquidity(data?.liquidity?.usd);
           setMarketCap(data?.fdv);
         }
-      } catch {}
+      } catch { }
     }
     fetchData();
   }, [fastRefresh]);
