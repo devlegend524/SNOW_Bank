@@ -1,14 +1,24 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_routerAddress",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidShortString",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "str",
+        "type": "string"
+      }
+    ],
+    "name": "StringTooLong",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -87,34 +97,8 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newDevAddress",
-        "type": "address"
-      }
-    ],
-    "name": "DevAddressUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "pairAddress",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isPair",
-        "type": "bool"
-      }
-    ],
-    "name": "IsPairSet",
+    "inputs": [],
+    "name": "EIP712DomainChanged",
     "type": "event"
   },
   {
@@ -134,19 +118,6 @@
       }
     ],
     "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newSellTax",
-        "type": "uint256"
-      }
-    ],
-    "name": "SellTaxUpdated",
     "type": "event"
   },
   {
@@ -173,6 +144,19 @@
     ],
     "name": "Transfer",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "CLOCK_MODE",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -318,6 +302,19 @@
   },
   {
     "inputs": [],
+    "name": "clock",
+    "outputs": [
+      {
+        "internalType": "uint48",
+        "name": "",
+        "type": "uint48"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "deadAddress",
     "outputs": [
       {
@@ -451,6 +448,49 @@
   },
   {
     "inputs": [],
+    "name": "eip712Domain",
+    "outputs": [
+      {
+        "internalType": "bytes1",
+        "name": "fields",
+        "type": "bytes1"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "version",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "chainId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "verifyingContract",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "salt",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "extensions",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "getCurrentTaxRate",
     "outputs": [
       {
@@ -466,7 +506,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "blockNumber",
+        "name": "timepoint",
         "type": "uint256"
       }
     ],
@@ -490,7 +530,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "blockNumber",
+        "name": "timepoint",
         "type": "uint256"
       }
     ],
@@ -716,19 +756,6 @@
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "sellTax",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
