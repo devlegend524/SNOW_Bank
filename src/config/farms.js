@@ -141,7 +141,7 @@ const farmsConfig = [
     logoB: tokens.wild.logo,
   },
   {
-    pid: 5,
+    pid: 4,
     lpSymbol: "WPLS",
     lpAddresses: addresses.wpls,
     isTokenOnly: true,
@@ -152,7 +152,7 @@ const farmsConfig = [
     logoB: tokens.wpls.logo,
   },
   {
-    pid: 6,
+    pid: 8,
     lpSymbol: "DAI",
     lpAddresses: addresses.dai,
     isTokenOnly: true,
@@ -163,7 +163,7 @@ const farmsConfig = [
     logoB: tokens.dai.logo,
   },
   {
-    pid: 7,
+    pid: 6,
     lpSymbol: "USDT",
     lpAddresses: addresses.usdt,
     isTokenOnly: true,
@@ -174,7 +174,7 @@ const farmsConfig = [
     logoB: tokens.usdt.logo,
   },
   {
-    pid: 8,
+    pid: 7,
     lpSymbol: "USDC",
     lpAddresses: addresses.usdc,
     isTokenOnly: true,
@@ -185,7 +185,7 @@ const farmsConfig = [
     logoB: tokens.usdc.logo,
   },
   {
-    pid: 9,
+    pid: 2,
     lpSymbol: "pWiLDNFT",
     lpAddresses: addresses.nft,
     isTokenOnly: true,

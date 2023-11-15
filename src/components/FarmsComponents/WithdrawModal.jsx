@@ -63,6 +63,7 @@ const WithdrawModal = ({
           {t("Cancel")}
         </Button>
         <Button
+          className="pulse_bg"
           disabled={submitDisabled}
           onClick={async () => {
             setPendingTx(true);

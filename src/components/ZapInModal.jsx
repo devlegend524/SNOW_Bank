@@ -104,11 +104,17 @@ export default function ZapInModal({ open, closeModal, pid }) {
 
   const getAllowance = async () => {
     setIsCheckingAllowance(true);
-    const tokenContract = getErc20Contract(inputToken.lpAddresses, signer);
-    const allowance = await tokenContract.allowance(address, zapAddress, {
-      from: address,
-    });
-    setAllowance(allowance.toString());
+
+    try {
+      const tokenContract = getErc20Contract(inputToken.lpAddresses, signer);
+      const allowance = await tokenContract.allowance(address, zapAddress, {
+        from: address,
+      });
+      setAllowance(allowance.toString());
+    } catch (error) {
+      console.log(error)
+    }
+
     setIsCheckingAllowance(false);
   };
 
