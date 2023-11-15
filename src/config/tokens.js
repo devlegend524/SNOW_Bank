@@ -2,28 +2,22 @@ import addresses from "constants/addresses";
 
 const tokens = {
   eth: {
-    symbol: "BNB",
-    address: addresses.wbnb,
+    symbol: "PLS",
+    address: addresses.wpls,
     decimals: 18,
-    logo: "/assets/tokens/bnb.svg",
+    logo: "/assets/tokens/pls.svg",
   },
   wild: {
-    symbol: "3WiLD",
+    symbol: "pWiLD",
     address: addresses.wild,
     decimals: 18,
     logo: "/assets/tokens/wildx.jpg",
     projectLink: "https://wildbase.farm/", // todo:
   },
-  weth: {
-    symbol: "WBNB",
-    address: addresses.weth,
-    decimals: 18,
-    logo: "https://svgshare.com/getbyhash/sha1-38zdMb/7WVkaVJEus7guQuBuCSU=",
-  },
-  wbnb: {
-    symbol: "WBNB",
-    logo: "/assets/tokens/wbnb.svg",
-    address: addresses.wbnb,
+  wpls: {
+    symbol: "WPLS",
+    logo: "/assets/tokens/wpls.svg",
+    address: addresses.wpls,
     decimals: 18,
   },
   usdc: {
@@ -32,11 +26,11 @@ const tokens = {
     decimals: 18,
     logo: "/assets/tokens/usdc.svg",
   },
-  busd: {
-    symbol: "BUSD",
-    address: addresses.busd,
+  dai: {
+    symbol: "DAI",
+    address: addresses.dai,
     decimals: 18,
-    logo: "/assets/tokens/busd.svg",
+    logo: "/assets/tokens/dai.svg",
   },
   usdt: {
     symbol: "USDT",
@@ -45,7 +39,7 @@ const tokens = {
     logo: "/assets/tokens/usdt.svg",
   },
   nft: {
-    symbol: "3WiLD NFT",
+    symbol: "pWiLD NFT",
     address: addresses.nft,
     decimals: 18,
     logo: "/assets/tokens/nft.png",

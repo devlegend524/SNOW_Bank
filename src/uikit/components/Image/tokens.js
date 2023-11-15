@@ -3,7 +3,7 @@
  */
 const tokens = {
   cake: {
-    symbol: "3WiLD",
+    symbol: "pWiLD",
     address: {
       84531: "0xBba4f9c1838837246452D3504981066b27D883e5",
       56: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -337,7 +337,7 @@ const tokens = {
     projectLink: "https://www.1-b.tc/",
   },
   bscx: {
-    symbol: "BSCX",
+    symbol: "PulseX",
     address: {
       56: "0x5Ac52EE5b2a633895292Ff6d8A89bB9190451587",
       97: "",
@@ -435,8 +435,8 @@ const tokens = {
     decimals: 18,
     projectLink: "https://venus.io/",
   },
-  wbnb: {
-    symbol: "wWBNB",
+  wpls: {
+    symbol: "wpls",
     address: {
       56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       97: "0xae13d989dac2f0debff460ac112a837c89baa7cd",

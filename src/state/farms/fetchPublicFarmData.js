@@ -66,7 +66,7 @@ const fetchPublicFarmData = async (farm) => {
     const quoteTokenBalance = new BigNumber(quoteTokenBalanceLP).div(
       BIG_TEN.pow(quoteTokenDecimals)
     );
-    const stables = ["USDC", "USDT", "BUSD"];
+    const stables = ["USDC", "USDT", "DAI"];
     if (
       stables.includes(farm.token.symbol) &&
       stables.includes(farm.quoteToken.symbol)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FaExternalLinkAlt, FaRegCopy } from "react-icons/fa";
-import { get3WiLDAddress, getWethAddress } from "utils/addressHelpers";
+import { getpWiLDAddress, getWethAddress } from "utils/addressHelpers";
 import { CHAIN_ID, TESTNET_CHAIN_ID, BASE_SWAP_URL, BASE_URL } from "config";
 import { useNetwork } from "wagmi";
 import { formatAddress } from "utils/customHelpers";
@@ -12,10 +12,10 @@ export default function FarmBanner() {
   const [isCopied, setIsCopied] = useState(false);
   const [wildAddress, setWildAddress] = useState("Connect correct wallet");
   const { chain } = useNetwork();
-  const token = get3WiLDAddress();
+  const token = getpWiLDAddress();
   // const provider = useEthersProvider()
 
-  const addWatch3WiLDToken = useCallback(async () => {
+  const addWatchpWiLDToken = useCallback(async () => {
     const provider = window.ethereum;
     if (provider) {
       console.log("asdfasdf", provider);
@@ -27,7 +27,7 @@ export default function FarmBanner() {
             type: "ERC20",
             options: {
               address: token,
-              symbol: "3WiLD",
+              symbol: "pWiLD",
               decimals: "18",
               image: `${BASE_URL}/assets/tokens/wildx.jpg`,
             },
@@ -53,7 +53,7 @@ export default function FarmBanner() {
 
   useEffect(() => {
     if (chain && (chain.id === CHAIN_ID || chain.id === TESTNET_CHAIN_ID)) {
-      const addr = get3WiLDAddress();
+      const addr = getpWiLDAddress();
       setWildAddress(addr);
     }
   }, [chain]);
@@ -61,8 +61,8 @@ export default function FarmBanner() {
     <div className="flex justify-center flex-col md:flex-row bg-secondary rounded-md">
       <div className="p-3 md:p-12 md:w-1/2 w-full text-center md:text-left">
         <h1 className="text-7xl">
-          Earn 3WiLD <br />
-          <span className="text-symbol font-semibold"> on BSC</span>
+          Earn pWiLD <br />
+          <span className="text-symbol font-semibold"> on Pulse</span>
         </h1>
         <p className="pt-4">Don't panic .. it's organic 🤞.</p>
       </div>
@@ -71,16 +71,16 @@ export default function FarmBanner() {
           <div className="flex items-center justify-center gap-3">
             <a
               className="main_btn w-full"
-              href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${get3WiLDAddress()}`}
+              href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${getpWiLDAddress()}`}
               target="_blank"
             >
-              Buy 3WiLD
+              Buy pWiLD
             </a>
             <button
-              onClick={addWatch3WiLDToken}
+              onClick={addWatchpWiLDToken}
               className="main_btn flex items-center justify-center w-full"
             >
-              Add 3WiLD &nbsp;
+              Add pWiLD &nbsp;
               <svg
                 viewBox="0 0 35 33"
                 color="text"

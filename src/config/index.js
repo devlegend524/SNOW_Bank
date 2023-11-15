@@ -4,7 +4,7 @@ import BigNumber from "bignumber.js";
 export const BASE_URL = "https://wildbase.farm";
 export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 
-export const CHAIN_ID = 56;
+export const CHAIN_ID = 369;
 export const TESTNET_CHAIN_ID = 97;
 
 export const DEFAULT_GAS_LIMIT = 2000000;
@@ -16,10 +16,10 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const mainTokenSymbol = "3WiLD";
+export const mainTokenSymbol = "pWiLD";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  56: "https://pancakeswap.finance/",
+  369: "https://pancakeswap.finance/",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];
@@ -35,7 +35,7 @@ export const socials = [
   {
     icon: () => null,
     name: "Docs",
-    href: "https://lodgedocs.gitbook.io/3WiLD-bsc-farm/",
+    href: "https://lodgedocs.gitbook.io/pWiLD-bsc-farm/",
   },
   {
     icon: () => (

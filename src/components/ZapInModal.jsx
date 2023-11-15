@@ -37,20 +37,20 @@ const customStyles = {
 const tokensList = [
   {
     pid: 0,
-    lpSymbol: "BNB",
+    lpSymbol: "PLS",
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/assets/tokens/bnb.svg",
+    logoA: "/assets/tokens/pls.svg",
     logoB: "",
   },
   {
     pid: 1,
-    lpSymbol: "WBNB",
+    lpSymbol: "WPLS",
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/assets/tokens/wbnb.svg",
+    logoA: "/assets/tokens/wpls.svg",
     logoB: "",
   },
   {
@@ -73,11 +73,11 @@ const tokensList = [
   },
   {
     pid: 2,
-    lpSymbol: "BUSD",
+    lpSymbol: "DAI",
     isTokenOnly: true,
-    lpAddresses: tokens.busd.address,
+    lpAddresses: tokens.dai.address,
     decimals: 18,
-    logoA: "/assets/tokens/busd.svg",
+    logoA: "/assets/tokens/dai.svg",
     logoB: "",
   },
 ];
@@ -151,7 +151,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
     try {
       await onZapForFarm(
         inputToken.lpAddresses,
-        inputToken.lpSymbol === "BNB" ? true : false,
+        inputToken.lpSymbol === "PLS" ? true : false,
         fromReadableAmount(amount.toString(), inputToken.decimals),
         targetToken.lpAddresses,
         targetToken.pid
@@ -177,7 +177,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
   const getBalance = async (token) => {
     try {
       setLoadingBalance(true);
-      if (token.lpSymbol === "BNB") {
+      if (token.lpSymbol === "PLS") {
         const balance = await signer.getBalance();
         setBalance(toReadableAmount(balance, token.decimals));
       } else {
@@ -286,7 +286,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
             <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] ">
               <Loading /> Loading...
             </button>
-          ) : inputToken.lpSymbol !== "BNB" &&
+          ) : inputToken.lpSymbol !== "PLS" &&
             Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ? (
             <button
               onClick={handleApprove}

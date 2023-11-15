@@ -8,7 +8,7 @@ export const getFactoryAddress = () => {
   return contractAddresses.factory;
 };
 
-export const get3WiLDAddress = () => {
+export const getpWiLDAddress = () => {
   return tokens.wild.address;
 };
 export const getMasterChefAddress = () => {
@@ -18,7 +18,7 @@ export const getMulticallAddress = () => {
   return contractAddresses.multiCall;
 };
 export const getWethAddress = () => {
-  return tokens.wbnb.address;
+  return tokens.wpls.address;
 };
 export const getNFTAddress = () => {
   return contractAddresses.nft;

@@ -35,7 +35,7 @@ import {
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
-import { usePrice3WiLDUsdc } from "state/hooks";
+import { usePricepWiLDUsdc } from "state/hooks";
 
 const StakedAction = ({
   isTokenOnly,
@@ -60,7 +60,7 @@ const StakedAction = ({
     tokenBalance: tokenBalanceAsString,
     stakedBalance: stakedBalanceAsString,
   } = useFarmUser(pid);
-  const wildPrice = usePrice3WiLDUsdc()[0];
+  const wildPrice = usePricepWiLDUsdc()[0];
 
   const masterChefContract = getMasterchefContract(signer);
 

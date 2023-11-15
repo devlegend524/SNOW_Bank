@@ -2,9 +2,7 @@ import random from "lodash/random";
 
 // Array of available nodes to connect to
 export const nodes = [
-  "https://binance.llamarpc.com",
-  "https://bsc-dataseed.bnbchain.org",
-  "https://bsc.publicnode.com",
+  "https://rpc.pulsechain.com"
 ];
 
 const getNodeUrl = () => {

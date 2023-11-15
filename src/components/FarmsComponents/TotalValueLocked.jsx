@@ -1,10 +1,10 @@
 import React from "react";
 import { useTotalSupply } from "hooks/useTokenBalance";
-import { usePrice3WiLDUsdc, useTotalValue } from "state/hooks";
+import { usePricepWiLDUsdc, useTotalValue } from "state/hooks";
 import CardValue from "./Staking/CardValue";
 import { convertCurrency, toReadableAmount } from "utils/customHelpers";
 import { useContractRead, erc20ABI } from "wagmi";
-import { get3WiLDAddress, getWethAddress } from "utils/addressHelpers";
+import { getpWiLDAddress, getWethAddress } from "utils/addressHelpers";
 import wildABI from "config/abis/wild.json";
 
 export default function TotalValueLocked() {
@@ -12,31 +12,31 @@ export default function TotalValueLocked() {
   const tvl = tvlData
     ? tvlData.toLocaleString("en-US", { maximumFractionDigits: 1 })
     : 0;
-  const liquidity = usePrice3WiLDUsdc()[1];
-  const marketCap = usePrice3WiLDUsdc()[2];
+  const liquidity = usePricepWiLDUsdc()[1];
+  const marketCap = usePricepWiLDUsdc()[2];
 
   const totalSupply = useTotalSupply();
   // 0xeAA13b4f85A98E6CcaF65606361BD590e98DE2Cb
   const tokenABalanceRead = useContractRead({
-    address: get3WiLDAddress(),
+    address: getpWiLDAddress(),
     abi: wildABI,
     functionName: "balanceOf",
     args: ["0x000000000000000000000000000000000000dead"],
-    chainId: 56,
+    chainId: 359,
   });
   const threeWildBalanceRead = useContractRead({
-    address: get3WiLDAddress(),
+    address: getpWiLDAddress(),
     abi: wildABI,
     functionName: "balanceOf",
     args: ["0xeAA13b4f85A98E6CcaF65606361BD590e98DE2Cb"],
-    chainId: 56,
+    chainId: 359,
   });
   const wethBalanceRead = useContractRead({
     address: getWethAddress(),
     abi: erc20ABI,
     functionName: "balanceOf",
     args: ["0xeAA13b4f85A98E6CcaF65606361BD590e98DE2Cb"],
-    chainId: 56,
+    chainId: 359,
   });
 
   const totalMinted =
@@ -55,7 +55,7 @@ export default function TotalValueLocked() {
           <div />
         )}
       </div>
-      <div className="text-3xl text-right mb-5">3WiLD Stats</div>
+      <div className="text-3xl text-right mb-5">pWiLD Stats</div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <p className="font-semibold">Liquidity</p>
