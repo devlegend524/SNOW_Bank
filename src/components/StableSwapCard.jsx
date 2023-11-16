@@ -285,7 +285,7 @@ export default function WildSwapCard() {
     <div className="card">
       <div className="flex justify-between items-center">
         <div className="flex-1">
-          <button className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out">
+          <button className="action_btn shadow-md shadow-black hover:bg-primary  transition ease-in-out">
             <img src="/assets/chart.png" alt="" />
           </button>
         </div>
@@ -295,10 +295,10 @@ export default function WildSwapCard() {
           </div>
         </div>
         <div className="flex-1 flex justify-end items-center">
-          <button className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out">
+          <button className="action_btn shadow-md shadow-black hover:bg-primary  transition ease-in-out">
             <img src="/assets/refresh.png" alt="" />
           </button>
-          <button className="action_btn shadow-md shadow-black hover:bg-black  transition ease-in-out ml-3">
+          <button className="action_btn shadow-md shadow-black hover:bg-primary  transition ease-in-out ml-3">
             <img src="/assets/setting.png" alt="" />
           </button>
         </div>

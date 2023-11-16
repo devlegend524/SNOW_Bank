@@ -98,7 +98,7 @@ export default function  TokenSelect({
             onClick={() => {
               setOpen(true);
             }}
-            className="flex items-center gap-3 hover:bg-black transition ease-in-out rounded-full cursor-pointer p-2 bg-secondary min-w-max mr-2"
+            className="flex items-center gap-3 hover:bg-primary transition ease-in-out rounded-full cursor-pointer p-2 bg-secondary min-w-max mr-2"
           >
             {token.isTokenOnly ? (
               <img
@@ -128,7 +128,7 @@ export default function  TokenSelect({
           {!selectOnly && (
             <div
               onClick={handleMaxAmount}
-              className="bg-secondary shadow-md shadow-gray hover:bg-black rounded-md px-2 py-1 text-[12px] transition ease-in-out"
+              className="bg-secondary shadow-md shadow-gray hover:bg-primary rounded-md px-2 py-1 text-[12px] transition ease-in-out"
             >
               max
             </div>

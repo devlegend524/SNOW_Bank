@@ -28,7 +28,7 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
         className={`flex p-2 justify-between items-center border border-secondary transition ease-in-out relative  ${
           token.lpSymbol === disabledToken
             ? "bg-black opacity-40"
-            : "hover:bg-black hover:bg-opacity-40"
+            : "hover:bg-primary hover:bg-opacity-40"
         }`}
         onClick={(e) => {
           token.lpSymbol !== disabledToken && handleToken(token);

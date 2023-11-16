@@ -307,16 +307,13 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .ReactModal__Content,
 .ReactModal__Content--after-open {
-  background-color: transparent!important;
-  border: none!important;
+  background-color: transparent !important;
+  border: none !important;
 }
 
 .ReactModal__Content,
-.ReactModal__Content--after-open > div {
-  background-color: #1f212a;
-  border: 0.5px solid #989696;
-  border-radius: 10px;
-  padding: 32px;
+.ReactModal__Content--after-open>div {
+  @apply bg-secondary p-8;
 }
 
 .ReactModal__Overlay,
@@ -330,11 +327,11 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .balance {
-  font-size: 14px!important;
+  font-size: 14px !important;
 }
 
 .Toastify__toast-theme--dark {
-  background: #1f212a!important;
+  background: #1f212a !important;
   border: 1px solid #989696;
   border-radius: 14px;
   color: var(--toastify-text-color-dark);

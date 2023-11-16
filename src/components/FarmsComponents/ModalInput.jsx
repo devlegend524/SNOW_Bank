@@ -114,7 +114,7 @@ const ModalInput = ({
             value={value}
           />
           {!isNFTPool && (
-            <Button scale="sm" onClick={onSelectMax} mr="8px" className="pulse_bg text-white">
+            <Button scale="sm" onClick={onSelectMax} mr="8px" className="pulse_bg text-[white!important]">
               {t("Max")}
             </Button>
           )}

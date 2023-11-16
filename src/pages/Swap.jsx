@@ -12,6 +12,7 @@ import { getErc20Contract, getLpContract } from "utils/contractHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { ethers } from "ethers";
 import { notify } from "utils/toastHelper";
+import { RiExchangeDollarLine } from "react-icons/ri";
 
 export default function Swap() {
   const signer = useEthersSigner();
@@ -176,7 +177,7 @@ export default function Swap() {
           </div>
           <div className="flex-1 flex justify-end items-center">
             <button
-              className="action_btn shadow-md hover:bg-black  transition ease-in-out"
+              className="action_btn shadow-md hover:bg-primary  transition ease-in-out"
               onClick={refreshData}
             >
               <img src="/assets/refresh.png" alt="" />
@@ -207,11 +208,7 @@ export default function Swap() {
                 onClick={handleReverse}
                 className="scale-100 hover:scale-110 transition ease-in-out"
               >
-                <img
-                  className="w-7 transition ease-in-out"
-                  src="/assets/swap.png"
-                  alt=""
-                />
+                <RiExchangeDollarLine className="text-3xl"/>
               </button>
             </div>
           </div>

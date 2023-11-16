@@ -69,7 +69,7 @@ export const WalletConnect = () => {
                   </p>
                   <button
                     onClick={openChainModal}
-                    className="hidden sm:inline-flex justify-center items-center hover:bg-symbolHover bg-symbol rounded-full  transition ease-in-out text-black text-xl"
+                    className="hidden sm:inline-flex justify-center items-center rounded-full  transition ease-in-out text-black text-xl"
                   >
                     {chain.iconUrl ? (
                       <img
@@ -78,7 +78,11 @@ export const WalletConnect = () => {
                         className="h-[30px!important] w-[30px!important]"
                       />
                     ) : (
-                      <>?</>
+                      <img
+                        alt={chain.name ?? "Chain icon"}
+                        src='/chain.svg'
+                        className="h-[30px!important] w-[30px!important]"
+                      />
                     )}
                   </button>
                   <button
