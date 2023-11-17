@@ -34,6 +34,7 @@ const DepositModal = ({
     (e) => {
       if (e.currentTarget.validity.valid) {
         setVal(e.currentTarget.value.replace(/,/g, "."));
+        setValueNumber(new BigNumber(e.currentTarget.value.replace(/,/g, ".")))
       }
     },
     [setVal]
@@ -46,7 +47,7 @@ const DepositModal = ({
       setValueNumber(fullBalance)
     } else {
       setVal(fullBalance);
-      setValueNumber(fullBalance)
+      setValueNumber(new BigNumber(fullBalance))
     }
   };
 

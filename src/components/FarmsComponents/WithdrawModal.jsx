@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import React, {useEffect, useCallback, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useMemo, useState } from "react";
 import { Button, Modal, Text } from "uikit";
 import ModalActions from "./ModalActions";
 import ModalInput from "./ModalInput";
@@ -29,6 +29,7 @@ const WithdrawModal = ({
     (e) => {
       if (e.currentTarget.validity.valid) {
         setVal(e.currentTarget.value.replace(/,/g, "."));
+        setValueNumber(new BigNumber(e.currentTarget.value.replace(/,/g, ".")))
       }
     },
     [setVal]
@@ -41,7 +42,7 @@ const WithdrawModal = ({
       setValueNumber(fullBalance)
     } else {
       setVal(fullBalance);
-      setValueNumber(fullBalance)
+      setValueNumber(new BigNumber(fullBalance))
     }
   };
   useEffect(() => {
