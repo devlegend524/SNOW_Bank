@@ -11,14 +11,15 @@ const useUnstake = (pid, isNFTPool) => {
   const tokenDecimals = farm.isTokenOnly ? farm.token.decimals : 18;
 
   const handleUnstake = useCallback(
-    async (amount) => {
+    async (amount, isNFTALL) => {
       await unstake(
         masterChefContract,
         pid,
         amount,
         address,
         tokenDecimals,
-        isNFTPool
+        isNFTPool,
+        isNFTALL
       );
     },
     [address, masterChefContract, pid, tokenDecimals, isNFTPool]

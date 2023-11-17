@@ -9,6 +9,8 @@ import { getFullDisplayBalance } from "utils/formatBalance";
 const DepositModal = ({
   max,
   isNFTPool,
+  isNFTALL,
+  setIsNFTALL,
   onConfirm,
   onDismiss,
   tokenName = "",
@@ -21,7 +23,7 @@ const DepositModal = ({
   const [pendingTx, setPendingTx] = useState(false);
   const { t } = useTranslation();
   const fullBalance = useMemo(() => {
-    return isNFTPool ? max : getFullDisplayBalance(max);
+    return isNFTPool ? new BigNumber(max) : getFullDisplayBalance(max);
   }, [max]);
 
   const valNumber = new BigNumber(val);
@@ -37,8 +39,13 @@ const DepositModal = ({
   );
 
   const handleSelectMax = useCallback(() => {
-    setVal(fullBalance);
-  }, [fullBalance, setVal]);
+    if (isNFTPool) {
+      setIsNFTALL(true)
+      setVal(fullBalance);
+    } else {
+      setVal(fullBalance);
+    }
+  }, [fullBalance, isNFTPool, setIsNFTALL, setVal]);
 
   return (
     <Modal title={t("Stake tokens")} onDismiss={onDismiss}>
@@ -69,7 +76,7 @@ const DepositModal = ({
           disabled={
             pendingTx ||
             !valNumber.isFinite() ||
-            valNumber.eq(0) ||
+            (!isNFTPool && valNumber.eq(0)) ||
             (!isNFTPool && valNumber.gt(fullBalanceNumber))
           }
           onClick={async () => {

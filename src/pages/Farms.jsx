@@ -42,7 +42,7 @@ export default function Farms() {
     NUMBER_OF_FARMS_VISIBLE
   );
   const [observerIsSet, setObserverIsSet] = useState(false);
-  const threeWildPerSecond = usePWiLDPerSecond();
+  const pWildPerSecond = usePWiLDPerSecond();
 
   const { data: farmsData, userDataLoaded } = useFarms();
 
@@ -110,7 +110,7 @@ export default function Farms() {
           new BigNumber(farm.poolWeight),
           wildPrice,
           totalLiquidity,
-          threeWildPerSecond,
+          pWildPerSecond,
           farm.isNFTPool
         );
         return { ...farm, apr, liquidity: totalLiquidity };
@@ -124,7 +124,7 @@ export default function Farms() {
       }
       return farmsToDisplayWithAPR;
     },
-    [wildPrice, query, isActive, threeWildPerSecond]
+    [wildPrice, query, isActive, pWildPerSecond]
   );
 
   useEffect(() => {

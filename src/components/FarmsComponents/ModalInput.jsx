@@ -70,7 +70,7 @@ const ModalInput = ({
       if (inputTitle === "Stake") {
         tokenIds = await nftContract.walletOfOwner(address);
       } else {
-        tokenIds = await masterChefContract.getUserStakedNFTs(9, address);
+        tokenIds = await masterChefContract.getUserStakedNFTs(6, address);
       }
       setUserBalance(
         balance + " : [ " + removeLeadingZeros(tokenIds).toString() + " ]"
@@ -113,11 +113,9 @@ const ModalInput = ({
             placeholder={isNFTPool ? "token Id" : "0"}
             value={value}
           />
-          {!isNFTPool && (
             <Button scale="sm" onClick={onSelectMax} mr="8px" className="pulse_bg text-[white!important]">
               {t("Max")}
             </Button>
-          )}
 
           <Text fontSize="16px" color="textWhite">
             {symbol}

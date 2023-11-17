@@ -8,6 +8,8 @@ import { getFullDisplayBalance } from "utils/formatBalance";
 
 const WithdrawModal = ({
   isNFTPool,
+  isNFTALL,
+  setIsNFTALL,
   onConfirm,
   onDismiss,
   max,
@@ -17,7 +19,7 @@ const WithdrawModal = ({
   const [pendingTx, setPendingTx] = useState(false);
   const { t } = useTranslation();
   const fullBalance = useMemo(() => {
-    return isNFTPool ? max : getFullDisplayBalance(max);
+    return isNFTPool ? new BigNumber(max) : getFullDisplayBalance(max);
   }, [max]);
 
   const valNumber = new BigNumber(val);
@@ -31,16 +33,23 @@ const WithdrawModal = ({
     },
     [setVal]
   );
+  console.log(val)
 
   const handleSelectMax = useCallback(() => {
-    setVal(fullBalance);
-  }, [fullBalance, setVal]);
+    if (isNFTPool) {
+      console.log('setting max for nft')
+      setIsNFTALL(true);
+      setVal(fullBalance);
+    } else {
+      setVal(fullBalance);
+    }
+  }, [fullBalance, isNFTPool, setIsNFTALL, setVal]);
 
   const submitDisabled =
     pendingTx ||
     !valNumber.isFinite() ||
-    valNumber.eq(0) ||
-    !isNFTPool && valNumber.gt(fullBalanceNumber);
+    (!isNFTPool && valNumber.eq(0)) ||
+    (!isNFTPool && valNumber.gt(fullBalanceNumber));
 
   return (
     <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>

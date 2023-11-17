@@ -51,6 +51,7 @@ const StakedAction = ({
   userData,
 }) => {
   const [amountPerNFT, setAmountPerNFT] = useState();
+  const [isNFTALL, setIsNFTALL] = useState(false);
   const { t } = useTranslation();
   const { address } = useAccount();
   const signer = useEthersSigner();
@@ -90,7 +91,8 @@ const StakedAction = ({
   const handleStake = async (amount, daysToLock) => {
     try {
       if (!isApproved) await handleApprove();
-      await onStake(amount);
+      console.log('amount...', amount)
+      await onStake(amount, isNFTALL);
       dispatch(fetchFarmUserDataAsync({ account: address, pids: [pid] }));
     } catch (e) {
       console.log(e);
@@ -99,7 +101,7 @@ const StakedAction = ({
 
   const handleUnstake = async (amount) => {
     try {
-      await onUnstake(amount);
+      await onUnstake(amount, isNFTALL);
       dispatch(fetchFarmUserDataAsync({ account: address, pids: [pid] }));
     } catch (e) {
       console.log(e);
@@ -124,6 +126,8 @@ const StakedAction = ({
     <DepositModal
       pid={pid}
       isNFTPool={isNFTPool}
+      isNFTALL={isNFTALL}
+      setIsNFTALL={setIsNFTALL}
       account={address}
       max={tokenBalance}
       onConfirm={handleStake}
@@ -137,6 +141,8 @@ const StakedAction = ({
   const [onPresentWithdraw] = useModal(
     <WithdrawModal
       isNFTPool={isNFTPool}
+      isNFTALL={isNFTALL}
+      setIsNFTALL={setIsNFTALL}
       max={stakedBalance}
       onConfirm={handleUnstake}
       tokenName={lpSymbol}

@@ -17,7 +17,7 @@ const getFarmBaseTokenPrice = (
   farm,
   quoteTokenFarm,
   wethPriceUsdt,
-  threeWildPriceUsdt
+  pWildPriceUsdt
 ) => {
   const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote);
   if (["USDC", "USDT", "DAI"].includes(farm.quoteToken.symbol)) {
@@ -32,7 +32,7 @@ const getFarmBaseTokenPrice = (
   }
   if (farm.quoteToken.symbol === "pWiLD") {
     return hasTokenPriceVsQuote
-      ? threeWildPriceUsdt.times(farm.tokenPriceVsQuote)
+      ? pWildPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
 
@@ -70,13 +70,13 @@ const getFarmQuoteTokenPrice = (
   farm,
   quoteTokenFarm,
   wethPriceUsdt,
-  threeWildPriceUsdt
+  pWildPriceUsdt
 ) => {
   if (["USDC", "USDT", "DAI"].includes(farm.quoteToken.symbol)) {
     return BIG_ONE;
   }
   if (farm.quoteToken.symbol === "pWiLD") {
-    return threeWildPriceUsdt;
+    return pWildPriceUsdt;
   }
   if (farm.quoteToken.symbol === "WPLS") {
     return wethPriceUsdt;
@@ -100,10 +100,10 @@ const fetchFarmsPrices = async (farms) => {
     wethUsdtFarm.tokenPriceVsQuote > 0
       ? BIG_ONE.div(wethUsdtFarm.tokenPriceVsQuote)
       : BIG_ZERO;
-  const threeWildUsdtFarm = farms.find((farm) => farm.pid === wildWethFarmPid);
-  const threeWildPriceUsdt =
-    threeWildUsdtFarm.tokenPriceVsQuote > 0
-      ? new BigNumber(threeWildUsdtFarm.tokenPriceVsQuote).times(wethPriceUsdt)
+  const pWildUsdtFarm = farms.find((farm) => farm.pid === wildWethFarmPid);
+  const pWildPriceUsdt =
+    pWildUsdtFarm.tokenPriceVsQuote > 0
+      ? new BigNumber(pWildUsdtFarm.tokenPriceVsQuote).times(wethPriceUsdt)
       : BIG_ZERO;
   const farmsWithPrices = farms.map((farm) => {
     const quoteTokenFarm = getFarmFromTokenSymbol(
@@ -114,13 +114,13 @@ const fetchFarmsPrices = async (farms) => {
       farm,
       quoteTokenFarm,
       wethPriceUsdt,
-      threeWildPriceUsdt
+      pWildPriceUsdt
     );
     const quoteTokenPrice = getFarmQuoteTokenPrice(
       farm,
       quoteTokenFarm,
       wethPriceUsdt,
-      threeWildPriceUsdt
+      pWildPriceUsdt
     );
 
     const token = { ...farm.token, usdcPrice: baseTokenPrice.toJSON() };

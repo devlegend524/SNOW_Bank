@@ -7,8 +7,8 @@ export default function CurrentSaleTax() {
   const provider = useEthersProvider();
   const getCurrentTaxRate = async () => {
     try {
-      const threeWildContract = getpWiLDContract(provider);
-      const currentRate = await threeWildContract.getCurrentTaxRate();
+      const pWildContract = getpWiLDContract(provider);
+      const currentRate = await pWildContract.getCurrentTaxRate();
       setTaxRate(Number(currentRate) / 100);
     } catch (e) {
       console.log(e);

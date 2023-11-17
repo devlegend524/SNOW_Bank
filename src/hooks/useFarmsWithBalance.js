@@ -21,7 +21,7 @@ export const useFarmsWithBalance = () => {
         .filter((farm) => farm.pid || farm.pid === 0)
         .map((farm) => ({
           address: getMasterChefAddress(),
-          name: "pendingThreeWild",
+          name: "pendingPWild",
           params: [farm.pid, address],
         }));
       try {

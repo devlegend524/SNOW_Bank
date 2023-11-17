@@ -17,13 +17,13 @@ export const approve = async (
 ) => {
   return (await isNFTPool)
     ? lpContract.setApprovalForAll(masterChefContract.address, true, {
-        from: address,
-      })
+      from: address,
+    })
     : lpContract.approve(
-        masterChefContract.address,
-        ethers.constants.MaxUint256,
-        { from: address }
-      );
+      masterChefContract.address,
+      ethers.constants.MaxUint256,
+      { from: address }
+    );
 };
 
 export const stake = async (
@@ -31,13 +31,16 @@ export const stake = async (
   pid,
   amount,
   decimals = 18,
-  isNFTPool
+  isNFTPool,
+  isNFTALL
 ) => {
   try {
     const tx = await masterChefContract.deposit(
       pid,
-      isNFTPool ? amount : fromReadableAmount(amount, decimals)
+      isNFTPool ? amount : fromReadableAmount(amount, decimals),
+      isNFTALL
     );
+    await tx.wait()
     notify("success", "Transaction successful!");
   } catch (e) {
     if (didUserReject(e)) {
@@ -55,12 +58,15 @@ export const unstake = async (
   amount,
   address,
   decimals = 18,
-  isNFTPool
+  isNFTPool,
+  isNFTALL
 ) => {
+
   try {
     const tx = await masterChefContract.withdraw(
       pid,
       isNFTPool ? amount : fromReadableAmount(amount, decimals),
+      isNFTALL,
       { from: address }
     );
     await tx.wait();
