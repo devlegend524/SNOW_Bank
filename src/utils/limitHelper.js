@@ -24,7 +24,7 @@ function compareTimeStrings(timeString1, timeString2) {
 }
 
 export async function limitedFunction(isSuccess, address) {
-  const dbRef = ref(db, "/callCounts");
+  const dbRef = ref(db, "/callPlsCounts");
   const currentDate = new Date().toLocaleDateString();
 
   /////
@@ -45,7 +45,7 @@ export async function limitedFunction(isSuccess, address) {
   /////
 
   const dbQuery = query(
-    ref(db, "callCounts"),
+    ref(db, "callPlsCounts"),
     orderByChild("address"),
     equalTo(address)
   );
@@ -70,10 +70,10 @@ export async function limitedFunction(isSuccess, address) {
         callCounts?.address &&
         compareTimeStrings(callCounts?.lastCalled, currentDate.toString())
       ) {
-        const dbRef = ref(db, `/callCounts/${Object.keys(exist)[0]}`);
+        const dbRef = ref(db, `/callPlsCounts/${Object.keys(exist)[0]}`);
         update(dbRef, { callCount: Number(callCounts?.callCount) + 1 });
       } else {
-        const dbRef = ref(db, `/callCounts/${Object.keys(exist)[0]}`);
+        const dbRef = ref(db, `/callPlsCounts/${Object.keys(exist)[0]}`);
         update(dbRef, {
           callCount: 1,
           lastCalled: currentDate.toString(),
@@ -101,7 +101,7 @@ export async function limitedFunction(isSuccess, address) {
 export async function getCounts(address) {
   const currentDate = new Date().toLocaleDateString();
   const dbQuery = query(
-    ref(db, "callCounts"),
+    ref(db, "callPlsCounts"),
     orderByChild("address"),
     equalTo(address)
   );
