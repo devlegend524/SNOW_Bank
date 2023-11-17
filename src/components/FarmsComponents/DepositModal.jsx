@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useMemo, useState } from "react";
 import { Button, Modal, Skeleton } from "uikit";
 import BigNumber from "bignumber.js";
 import ModalActions from "./ModalActions";
@@ -50,6 +50,9 @@ const DepositModal = ({
     }
   }, [fullBalance, isNFTPool, setIsNFTALL, setVal]);
 
+  useEffect(() => {
+    setIsNFTALL(false)
+  }, [])
   return (
     <Modal title={t("Stake tokens")} onDismiss={onDismiss}>
       <ModalInput

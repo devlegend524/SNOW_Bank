@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import React, { useCallback, useMemo, useState } from "react";
+import React, {useEffect, useCallback, useMemo, useState } from "react";
 import { Button, Modal, Text } from "uikit";
 import ModalActions from "./ModalActions";
 import ModalInput from "./ModalInput";
@@ -44,7 +44,9 @@ const WithdrawModal = ({
       setValueNumber(fullBalance)
     }
   };
-
+  useEffect(() => {
+    setIsNFTALL(false)
+  }, [])
   return (
     <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>
       <ModalInput

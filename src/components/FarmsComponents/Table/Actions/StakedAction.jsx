@@ -221,8 +221,8 @@ const StakedAction = ({
               value={
                 isNFTPool
                   ? stakedBalance
-                      .times(new BigNumber(amountPerNFT))
-                      .times(wildPrice)
+                    .times(new BigNumber(amountPerNFT))
+                    .times(wildPrice)
                   : getBalanceNumber(lpPrice.times(stakedBalance))
               }
               unit=" USD"
@@ -235,7 +235,10 @@ const StakedAction = ({
             variant="secondary"
             data-tooltip-id="unstake-tooltip"
             data-tooltip-content="Unstake Pool"
-            onClick={onPresentWithdraw}
+            onClick={() => {
+              setIsNFTALL(false)
+              onPresentWithdraw()
+            }}
             mr="6px"
           >
             <MinusIcon color="primary" width="14px" />
@@ -244,7 +247,10 @@ const StakedAction = ({
             variant="secondary"
             data-tooltip-id="stake-tooltip"
             data-tooltip-content="Stake pool"
-            onClick={onPresentDeposit}
+            onClick={() => {
+              setIsNFTALL(false)
+              onPresentDeposit()
+            }}
             disabled={["history", "archived"].some((item) =>
               location.pathname.includes(item)
             )}
