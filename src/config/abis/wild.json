@@ -762,6 +762,19 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_pair",
+        "type": "address"
+      }
+    ],
+    "name": "setPair",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_proxy",
         "type": "address"
       }
