@@ -60,7 +60,7 @@ export const WalletConnect = () => {
               return (
                 <div className="flex items-center">
                   <img
-                    src="/logo.jpg"
+                    src="/logo.png"
                     alt="logo"
                     className="w-[25.3px] h-[25px] mx-1"
                   />
@@ -80,7 +80,7 @@ export const WalletConnect = () => {
                     ) : (
                       <img
                         alt={chain.name ?? "Chain icon"}
-                        src='/chain.svg'
+                        src="/chain.svg"
                         className="h-[30px!important] w-[30px!important]"
                       />
                     )}

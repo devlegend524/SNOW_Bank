@@ -13,7 +13,7 @@ export default function Zap() {
   const [nfts, setNfts] = useState(0);
   const [myTokenIds, setMyTokenIds] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [stats, setStats] = useState(true)
+  const [stats, setStats] = useState(true);
   const nftContract = useNFTContract();
   const { fastRefresh } = useRefresh();
   const signer = useEthersSigner();
@@ -56,12 +56,18 @@ export default function Zap() {
   return (
     <div className="container">
       <div className="flex my-6 py-1 bg-[#0d223de8] w-fit mx-auto rounded-full">
-        <button onClick={() => setStats(true)} className="text-center w-32 py-2 px-4 rounded-l-full border-[#243753e8]    transition ease-in-out">My NFTs</button>
+        <button
+          onClick={() => setStats(true)}
+          className="text-center w-32 py-2 px-4 rounded-l-full border-[#243753e8]    transition ease-in-out"
+        >
+          My NFTs
+        </button>
       </div>
 
-      {
-        !stats ? <RecentBuys last={12} /> : <>
-
+      {!stats ? (
+        <RecentBuys last={12} />
+      ) : (
+        <>
           <div className="flex justify-center gap-4 mt-16">
             {myTokenIds && myTokenIds.length > 0 ? (
               myTokenIds.map((tokenId, index) => (
@@ -72,7 +78,7 @@ export default function Zap() {
             ) : (
               <div className="w-full max-w-[300px] max-h-[400px] p-4 rounded-lg bg-[#0d223de8]">
                 <img
-                  src={"/logo.jpg"}
+                  src={"/logo.png"}
                   alt="token"
                   className="w-full rounded-full border-opacity-30"
                 />
@@ -112,9 +118,7 @@ export default function Zap() {
             </button>
           </div>
         </>
-      }
-
-
+      )}
     </div>
   );
 }

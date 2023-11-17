@@ -14,7 +14,11 @@ export default function Header() {
           <div className="flex justify-between">
             <div className="hidden sm:block logo">
               <a href="/">
-                <img src="/logo.jpg" className="h-14 w-14 rounded-full"  alt="" />
+                <img
+                  src="/logo.png"
+                  className="h-14 w-14 rounded-full"
+                  alt=""
+                />
                 {/* <span className="text-symbol">3</span>WiLD */}
               </a>
             </div>
@@ -41,9 +45,7 @@ export default function Header() {
                     </div>
                   </li>
                 ))}
-                <li
-                  className="list_item"
-                >
+                <li className="list_item">
                   <a
                     href="https://lodgedocs.gitbook.io/pWiLD-bsc-farm/"
                     target="_blank"
