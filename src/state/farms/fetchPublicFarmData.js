@@ -51,9 +51,9 @@ const fetchPublicFarmData = async (farm) => {
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC);
     const amountPerNFT = await masterChef.getAmountPerNFT();
     if (new BigNumber(tokenBalanceLP).comparedTo(0) > 0) {
-      tokenPriceVsQuote = new BigNumber(Number(amountPerNFT));
+      tokenPriceVsQuote = new BigNumber(Number(toReadableAmount(amountPerNFT)));
     }
-    lpTotalInQuoteToken = new BigNumber(Number(amountPerNFT)).times(
+    lpTotalInQuoteToken = new BigNumber(Number(toReadableAmount(amountPerNFT))).times(
       tokenBalanceLP
     );
   } else if (!farm.isNFTPool && farm.isTokenOnly) {

@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { BIG_ONE, BIG_ZERO } from "utils/bigNumber";
+import { BIG_ONE, BIG_TEN, BIG_ZERO } from "utils/bigNumber";
 import { filterFarmsByQuoteToken } from "utils/farmsPriceHelpers";
 import { wildWethFarmPid, wethUsdcFarmPid } from "config";
 const getFarmFromTokenSymbol = (farms, tokenSymbol, preferredQuoteTokens) => {
@@ -98,13 +98,15 @@ const fetchFarmsPrices = async (farms) => {
   const wethUsdtFarm = farms.find((farm) => farm.pid === wethUsdcFarmPid);
   const wethPriceUsdt =
     wethUsdtFarm.tokenPriceVsQuote > 0
-      ? BIG_ONE.div(wethUsdtFarm.tokenPriceVsQuote)
+      ? BIG_ONE.div(wethUsdtFarm.tokenPriceVsQuote).times(BIG_TEN.pow(new BigNumber(12)))
       : BIG_ZERO;
+
   const pWildUsdtFarm = farms.find((farm) => farm.pid === wildWethFarmPid);
   const pWildPriceUsdt =
     pWildUsdtFarm.tokenPriceVsQuote > 0
       ? new BigNumber(pWildUsdtFarm.tokenPriceVsQuote).times(wethPriceUsdt)
       : BIG_ZERO;
+
   const farmsWithPrices = farms.map((farm) => {
     const quoteTokenFarm = getFarmFromTokenSymbol(
       farms,
