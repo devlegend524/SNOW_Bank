@@ -138,7 +138,7 @@ export default function FarmStaking() {
                 pendingTx ? (
                   <Loading />
                 ) : (
-                  `Harvest all ${balancesWithValue.length}`
+                  `Harvest all ( ${balancesWithValue.length} )`
                 )
               }
             </button>
@@ -152,7 +152,7 @@ export default function FarmStaking() {
                 compoundPendingTx ? (
                   <Loading />
                 ) : (
-                  `Compound all ${balancesWithValue.length}`
+                  `Compound all ( ${balancesWithValue.length} )`
                 )
               }
             </button>
