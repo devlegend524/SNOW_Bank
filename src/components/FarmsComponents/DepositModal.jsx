@@ -19,14 +19,15 @@ const DepositModal = ({
   depositFee,
 }) => {
   const [val, setVal] = useState("");
+  const [valNumber, setValueNumber] = useState(new BigNumber(0));
+
   const [lockPeriod, setLockPeriod] = useState(0);
   const [pendingTx, setPendingTx] = useState(false);
   const { t } = useTranslation();
   const fullBalance = useMemo(() => {
-    return isNFTPool ? new BigNumber(max) : getFullDisplayBalance(max);
+    return isNFTPool ? max : getFullDisplayBalance(max);
   }, [max]);
 
-  const valNumber = new BigNumber(val);
   const fullBalanceNumber = new BigNumber(fullBalance);
 
   const handleChange = useCallback(
@@ -42,8 +43,10 @@ const DepositModal = ({
     if (isNFTPool) {
       setIsNFTALL(true)
       setVal(fullBalance);
+      setValueNumber(fullBalance)
     } else {
       setVal(fullBalance);
+      setValueNumber(fullBalance)
     }
   }, [fullBalance, isNFTPool, setIsNFTALL, setVal]);
 

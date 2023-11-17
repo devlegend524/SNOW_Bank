@@ -101,6 +101,7 @@ const StakedAction = ({
 
   const handleUnstake = async (amount) => {
     try {
+      console.log("is unstaking...")
       await onUnstake(amount, isNFTALL);
       dispatch(fetchFarmUserDataAsync({ account: address, pids: [pid] }));
     } catch (e) {

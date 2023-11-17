@@ -16,13 +16,13 @@ const WithdrawModal = ({
   tokenName = "",
 }) => {
   const [val, setVal] = useState("");
+  const [valNumber, setValueNumber] = useState(new BigNumber(0));
   const [pendingTx, setPendingTx] = useState(false);
   const { t } = useTranslation();
   const fullBalance = useMemo(() => {
-    return isNFTPool ? new BigNumber(max) : getFullDisplayBalance(max);
+    return isNFTPool ? max : getFullDisplayBalance(max);
   }, [max]);
 
-  const valNumber = new BigNumber(val);
   const fullBalanceNumber = new BigNumber(fullBalance);
 
   const handleChange = useCallback(
@@ -33,23 +33,17 @@ const WithdrawModal = ({
     },
     [setVal]
   );
-  console.log(val)
 
-  const handleSelectMax = useCallback(() => {
+  const handleSelectMax = () => {
     if (isNFTPool) {
-      console.log('setting max for nft')
       setIsNFTALL(true);
       setVal(fullBalance);
+      setValueNumber(fullBalance)
     } else {
       setVal(fullBalance);
+      setValueNumber(fullBalance)
     }
-  }, [fullBalance, isNFTPool, setIsNFTALL, setVal]);
-
-  const submitDisabled =
-    pendingTx ||
-    !valNumber.isFinite() ||
-    (!isNFTPool && valNumber.eq(0)) ||
-    (!isNFTPool && valNumber.gt(fullBalanceNumber));
+  };
 
   return (
     <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>
@@ -73,7 +67,10 @@ const WithdrawModal = ({
         </Button>
         <Button
           className="pulse_bg text-[white!important]"
-          disabled={submitDisabled}
+          disabled={pendingTx ||
+            !valNumber.isFinite() ||
+            (!isNFTPool && valNumber.eq(0)) ||
+            (!isNFTPool && valNumber.gt(fullBalanceNumber))}
           onClick={async () => {
             setPendingTx(true);
             await onConfirm(val);

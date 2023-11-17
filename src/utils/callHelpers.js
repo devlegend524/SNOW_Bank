@@ -37,7 +37,7 @@ export const stake = async (
   try {
     const tx = await masterChefContract.deposit(
       pid,
-      isNFTPool ? amount : fromReadableAmount(amount, decimals),
+      isNFTPool ? Number(amount).toString() : fromReadableAmount(amount, decimals),
       isNFTALL
     );
     await tx.wait()
@@ -61,11 +61,11 @@ export const unstake = async (
   isNFTPool,
   isNFTALL
 ) => {
-
   try {
+    console.log(isNFTALL, "isNFT ALL")
     const tx = await masterChefContract.withdraw(
       pid,
-      isNFTPool ? amount : fromReadableAmount(amount, decimals),
+      isNFTPool ? Number(amount).toString() : fromReadableAmount(amount, decimals),
       isNFTALL,
       { from: address }
     );
