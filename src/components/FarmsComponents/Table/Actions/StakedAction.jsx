@@ -36,6 +36,7 @@ import {
 } from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
 import { usePricepWiLDUsdc } from "state/hooks";
+import { toReadableAmount } from "utils/customHelpers";
 
 const StakedAction = ({
   isTokenOnly,
@@ -91,7 +92,7 @@ const StakedAction = ({
   const handleStake = async (amount, daysToLock) => {
     try {
       if (!isApproved) await handleApprove();
-      console.log('amount...', amount)
+      console.log("amount...", amount);
       await onStake(amount, isNFTALL);
       dispatch(fetchFarmUserDataAsync({ account: address, pids: [pid] }));
     } catch (e) {
@@ -101,7 +102,7 @@ const StakedAction = ({
 
   const handleUnstake = async (amount) => {
     try {
-      console.log("is unstaking...")
+      console.log("is unstaking...");
       await onUnstake(amount, isNFTALL);
       dispatch(fetchFarmUserDataAsync({ account: address, pids: [pid] }));
     } catch (e) {
@@ -169,7 +170,7 @@ const StakedAction = ({
 
   const getAmountPerNFT = async () => {
     const _amountPerNFT = await masterChefContract.getAmountPerNFT();
-    setAmountPerNFT(_amountPerNFT.toString());
+    setAmountPerNFT(toReadableAmount(_amountPerNFT.toString()));
   };
   useEffect(() => {
     if (signer) {
@@ -221,8 +222,8 @@ const StakedAction = ({
               value={
                 isNFTPool
                   ? stakedBalance
-                    .times(new BigNumber(amountPerNFT))
-                    .times(wildPrice)
+                      .times(new BigNumber(amountPerNFT))
+                      .times(wildPrice)
                   : getBalanceNumber(lpPrice.times(stakedBalance))
               }
               unit=" USD"
@@ -236,8 +237,8 @@ const StakedAction = ({
             data-tooltip-id="unstake-tooltip"
             data-tooltip-content="Unstake Pool"
             onClick={() => {
-              setIsNFTALL(false)
-              onPresentWithdraw()
+              setIsNFTALL(false);
+              onPresentWithdraw();
             }}
             mr="6px"
           >
@@ -248,8 +249,8 @@ const StakedAction = ({
             data-tooltip-id="stake-tooltip"
             data-tooltip-content="Stake pool"
             onClick={() => {
-              setIsNFTALL(false)
-              onPresentDeposit()
+              setIsNFTALL(false);
+              onPresentDeposit();
             }}
             disabled={["history", "archived"].some((item) =>
               location.pathname.includes(item)
