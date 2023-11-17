@@ -125,33 +125,37 @@ export default function FarmStaking() {
         </div>
       </div>
 
-      {/* <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
+      <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
         {address ? (
           <>
-            <Button
+            <button
               id="harvest-all"
               disabled={balancesWithValue.length <= 0 || pendingTx}
+              className="rounded-full w-full main_btn"
               onClick={harvestAllFarms}
-              label={
+            >
+              {
                 pendingTx ? (
                   <Loading />
                 ) : (
                   `Harvest all ${balancesWithValue.length}`
                 )
               }
-            />
-            <Button
+            </button>
+            <button
               id="compound-all"
-              // disabled={balancesWithValue.length <= 0}
+              disabled={balancesWithValue.length <= 0}
               onClick={openModal}
-              label={
+              className="rounded-full w-full main_btn"
+            >
+              {
                 compoundPendingTx ? (
                   <Loading />
                 ) : (
                   `Compound all ${balancesWithValue.length}`
                 )
               }
-            />
+            </button>
           </>
         ) : (
           <ConnectButton />
@@ -165,7 +169,7 @@ export default function FarmStaking() {
           pid={pids}
           isAll={true}
         />
-      )} */}
+      )}
     </div>
   );
 }
