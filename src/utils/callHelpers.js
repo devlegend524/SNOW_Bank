@@ -176,6 +176,7 @@ export const harvest = async (masterChefContract, pid, address) => {
       notify("error", "User rejected transaction");
     } else {
       notify("error", e.reason);
+      console.log(e)
     }
     return null;
   }

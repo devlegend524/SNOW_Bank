@@ -50,6 +50,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
     try {
       setPendingTx(true);
       const res = await onReward(false);
+      console.log('harvest', res)
       if (res === false) {
         setPendingTx(false);
         return;
