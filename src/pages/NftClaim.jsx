@@ -56,8 +56,7 @@ export default function Zap() {
   return (
     <div className="container">
       <div className="flex my-6 py-1 bg-[#0d223de8] w-fit mx-auto rounded-full">
-        <button onClick={() => setStats(true)} className="text-center w-32 py-2 px-4 border-r rounded-l-full border-[#243753e8]  hover:bg-[#142235e8]  transition ease-in-out">My NFTs</button>
-        <button onClick={() => setStats(false)} className="text-center w-32 py-2 px-4 hover:bg-[#142235e8] transition ease-in-out rounded-r-full">Recent buys</button>
+        <button onClick={() => setStats(true)} className="text-center w-32 py-2 px-4 rounded-l-full border-[#243753e8]    transition ease-in-out">My NFTs</button>
       </div>
 
       {
