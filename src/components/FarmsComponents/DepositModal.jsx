@@ -39,7 +39,7 @@ const DepositModal = ({
     [setVal]
   );
 
-  const handleSelectMax = useCallback(() => {
+  const handleSelectMax = () => {
     if (isNFTPool) {
       setIsNFTALL(true)
       setVal(fullBalance);
@@ -48,7 +48,7 @@ const DepositModal = ({
       setVal(fullBalance);
       setValueNumber(fullBalance)
     }
-  }, [fullBalance, isNFTPool, setIsNFTALL, setVal]);
+  };
 
   useEffect(() => {
     setIsNFTALL(false)
