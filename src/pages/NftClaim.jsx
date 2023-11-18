@@ -92,7 +92,7 @@ export default function Zap() {
               onClick={() => claimNFT()}
             >
 
-              <>{address && !nfts && (
+              <>{(address && !nfts) || !address && (
                 <p className="text-center text-blacks">
                   You don't have any NFTs to claim.
                 </p>
