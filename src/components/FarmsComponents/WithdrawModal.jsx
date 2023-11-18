@@ -5,6 +5,7 @@ import ModalActions from "./ModalActions";
 import ModalInput from "./ModalInput";
 import { useTranslation } from "context/Localization";
 import { getFullDisplayBalance } from "utils/formatBalance";
+import LogoLoading from "components/LogoLoading";
 
 const WithdrawModal = ({
   isNFTPool,
@@ -49,44 +50,47 @@ const WithdrawModal = ({
     setIsNFTALL(false)
   }, [])
   return (
-    <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>
-      <ModalInput
-        onSelectMax={handleSelectMax}
-        onChange={handleChange}
-        value={val}
-        max={fullBalance}
-        isNFTPool={isNFTPool}
-        symbol={tokenName}
-        inputTitle={t("Unstake")}
-      />
-      <ModalActions>
-        <Button
-          variant="secondary"
-          onClick={onDismiss}
-          width="100%"
-          disabled={pendingTx}
-        >
-          {t("Cancel")}
-        </Button>
-        <Button
-          className="pulse_bg text-[white!important]"
-          disabled={pendingTx ||
-            !valNumber.isFinite() ||
-            (!isNFTPool && valNumber.eq(0)) ||
-            (!isNFTPool && valNumber.gt(fullBalanceNumber))}
-          onClick={async () => {
-            setPendingTx(true);
-            await onConfirm(val);
-            setPendingTx(false);
-            onDismiss();
-          }}
-          width="100%"
-          style={{ alignSelf: "center", color: "black" }}
-        >
-          {pendingTx ? t("Pending Confirmation") : t("Confirm")}
-        </Button>
-      </ModalActions>
-    </Modal>
+    <>
+      <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>
+        <ModalInput
+          onSelectMax={handleSelectMax}
+          onChange={handleChange}
+          value={val}
+          max={fullBalance}
+          isNFTPool={isNFTPool}
+          symbol={tokenName}
+          inputTitle={t("Unstake")}
+        />
+        <ModalActions>
+          <Button
+            variant="secondary"
+            onClick={onDismiss}
+            width="100%"
+            disabled={pendingTx}
+          >
+            {t("Cancel")}
+          </Button>
+          <Button
+            className="pulse_bg text-[white!important]"
+            disabled={pendingTx ||
+              !valNumber.isFinite() ||
+              (!isNFTPool && valNumber.eq(0)) ||
+              (!isNFTPool && valNumber.gt(fullBalanceNumber))}
+            onClick={async () => {
+              setPendingTx(true);
+              await onConfirm(val);
+              setPendingTx(false);
+              onDismiss();
+            }}
+            width="100%"
+            style={{ alignSelf: "center", color: "black" }}
+          >
+            {t("Confirm")}
+          </Button>
+        </ModalActions>
+      </Modal>
+      {pendingTx && <LogoLoading title="Pending Confirmation..." />}
+    </>
   );
 };
 

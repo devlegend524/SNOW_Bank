@@ -5,6 +5,7 @@ import ModalActions from "./ModalActions";
 import ModalInput from "./ModalInput";
 import { useTranslation } from "context/Localization";
 import { getFullDisplayBalance } from "utils/formatBalance";
+import LogoLoading from "components/LogoLoading";
 
 const DepositModal = ({
   max,
@@ -55,49 +56,53 @@ const DepositModal = ({
     setIsNFTALL(false)
   }, [])
   return (
-    <Modal title={t("Stake tokens")} onDismiss={onDismiss}>
-      <ModalInput
-        value={val}
-        onSelectMax={handleSelectMax}
-        onChange={handleChange}
-        max={fullBalance}
-        isNFTPool={isNFTPool}
-        symbol={tokenName}
-        addLiquidityUrl={addLiquidityUrl}
-        inputTitle={t("Stake")}
-        decimals={decimals}
-      />
-      <ModalActions>
-        <Button
-          variant="secondary"
-          onClick={onDismiss}
-          width="100%"
-          disabled={pendingTx}
-          style={{ alignSelf: "center", color: "white" }}
-        >
-          {t("Cancel")}
-        </Button>
-        <Button
-          className="pulse_bg text-white"
-          width="100%"
-          disabled={
-            pendingTx ||
-            !valNumber.isFinite() ||
-            (!isNFTPool && valNumber.eq(0)) ||
-            (!isNFTPool && valNumber.gt(fullBalanceNumber))
-          }
-          onClick={async () => {
-            setPendingTx(true);
-            await onConfirm(val, lockPeriod);
-            setPendingTx(false);
-            onDismiss();
-          }}
-          style={{ alignSelf: "center", color: "black" }}
-        >
-          {pendingTx ? t("Pending Confirmation") : t("Confirm")}
-        </Button>
-      </ModalActions>
-    </Modal>
+    <>
+      <Modal title={t("Stake tokens")} onDismiss={onDismiss}>
+        <ModalInput
+          value={val}
+          onSelectMax={handleSelectMax}
+          onChange={handleChange}
+          max={fullBalance}
+          isNFTPool={isNFTPool}
+          symbol={tokenName}
+          addLiquidityUrl={addLiquidityUrl}
+          inputTitle={t("Stake")}
+          decimals={decimals}
+        />
+        <ModalActions>
+          <Button
+            variant="secondary"
+            onClick={onDismiss}
+            width="100%"
+            disabled={pendingTx}
+            style={{ alignSelf: "center", color: "white" }}
+          >
+            {t("Cancel")}
+          </Button>
+          <Button
+            className="pulse_bg text-white"
+            width="100%"
+            disabled={
+              pendingTx ||
+              !valNumber.isFinite() ||
+              (!isNFTPool && valNumber.eq(0)) ||
+              (!isNFTPool && valNumber.gt(fullBalanceNumber))
+            }
+            onClick={async () => {
+              setPendingTx(true);
+              await onConfirm(val, lockPeriod);
+              setPendingTx(false);
+              onDismiss();
+            }}
+            style={{ alignSelf: "center", color: "black" }}
+          >
+            {t("Confirm")}
+          </Button>
+        </ModalActions>
+      </Modal>
+      {
+        pendingTx && <LogoLoading title="Pending Confirmation..." />
+      }</>
   );
 };
 
