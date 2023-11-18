@@ -5,7 +5,7 @@ const tokens = {
     symbol: "PLS",
     address: addresses.wpls,
     decimals: 18,
-    logo: "/assets/tokens/pls.svg",
+    logo: "/assets/tokens/pls.png",
   },
   wild: {
     symbol: "pWiLD",
@@ -16,7 +16,7 @@ const tokens = {
   },
   wpls: {
     symbol: "WPLS",
-    logo: "/assets/tokens/wpls.svg",
+    logo: "/assets/tokens/wpls.png",
     address: addresses.wpls,
     decimals: 18,
   },

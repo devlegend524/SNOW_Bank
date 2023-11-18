@@ -23,6 +23,7 @@ import { sleep } from "utils/customHelpers";
 import tokens from "config/tokens";
 import { fromReadableAmount } from "utils";
 import { getCounts } from "utils/limitHelper";
+import LogoLoading from "./LogoLoading";
 
 const customStyles = {
   content: {
@@ -181,7 +182,7 @@ export default function CompoundModal({
   }, [address, signer]);
 
   return (
-    <Modal
+    <><Modal
       isOpen={open}
       onRequestClose={closeModal}
       style={customStyles}
@@ -260,7 +261,7 @@ export default function CompoundModal({
                 Number(earnings) === 0 || pendingZapTx || currentCounts === 0
               }
             >
-              {pendingZapTx ? <Loading /> : t("Compound")}
+              {t("Compound")}
             </button>
           )}
         </div>
@@ -274,5 +275,8 @@ export default function CompoundModal({
         )}
       </div>
     </Modal>
+      {pendingZapTx && <LogoLoading title="Compounding..." />}
+    </>
+    
   );
 }

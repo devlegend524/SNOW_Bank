@@ -20,6 +20,7 @@ import {
   toReadableAmount,
 } from "utils/customHelpers";
 import tokens from "config/tokens";
+import LogoLoading from "./LogoLoading";
 
 const customStyles = {
   content: {
@@ -41,7 +42,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/assets/tokens/pls.svg",
+    logoA: "/assets/tokens/pls.png",
     logoB: "",
   },
   {
@@ -50,7 +51,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/assets/tokens/wpls.svg",
+    logoA: "/assets/tokens/wpls.png",
     logoB: "",
   },
   {
@@ -217,7 +218,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
     setAmount(Number(balance) - Number(0.00001));
   };
   return (
-    <Modal
+    <><Modal
       isOpen={open}
       onRequestClose={closeModal}
       style={customStyles}
@@ -299,13 +300,8 @@ export default function ZapInModal({ open, closeModal, pid }) {
               disabled={isApproving}
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
             >
-              {isApproving ? (
-                <div className="flex justify-center gap-1">
-                  <Loading /> Approving...
-                </div>
-              ) : (
-                "Approve"
-              )}{" "}
+
+              Approve
             </button>
           ) : (
             <button
@@ -313,11 +309,17 @@ export default function ZapInModal({ open, closeModal, pid }) {
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
               disabled={Number(amount) === 0 || pendingZapTx}
             >
-              {pendingZapTx ? <Loading title="Zapping in..." /> : t("Zap in")}
+              {t("Zap in")}
             </button>
           )}
         </div>
       </div>
     </Modal>
+
+      {isApproving &&
+        <LogoLoading title="Approving..." />}
+      {pendingZapTx &&
+        <LogoLoading title="Zapping in..." />}</>
+
   );
 }

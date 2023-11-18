@@ -18,6 +18,7 @@ import ZapInModal from "components/ZapInModal";
 import CompoundModal from "components/CompoundModal";
 import { didUserReject } from "utils/customHelpers";
 import { useMasterchef } from "hooks/useContract";
+import LogoLoading from "components/LogoLoading";
 
 const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   const [pendingCompoundTx, setCompoundPendingTx] = useState(false);
@@ -123,7 +124,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           onClick={handleHavest}
           className="rounded-md p-1  text-center text-white font-medium pulse_bg "
         >
-          {pendingTx ? <Loading title="Harvesting..." /> : t(`Harvest`)}
+          {t(`Harvest`)}
         </button>
 
         <div className="flex flex-col lg:flex-row gap-2 w-full">
@@ -140,11 +141,9 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
                 onClick={openCompoundModal}
               >
-                {pendingCompoundTx ? (
-                  <Loading title="Compounding..." />
-                ) : (
-                  t(`Compound`)
-                )}
+
+                {t(`Compound`)
+                }
               </button>
               <button
                 className="rounded-md w-full lg:w-1/2 px-2 py-1 text-white text-center font-medium pulse_bg hover:bg-symbolHover"
@@ -172,6 +171,10 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           isAll={false}
         />
       )}
+
+      {pendingTx && <LogoLoading title="Harvesting..." />}
+      {pendingCompoundTx &&
+        <Loading title="Compounding..." />}
     </div>
   );
 };

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import TokenSelectModal from "components/TokenSelectModal";
-import TokenSelect from "components/TokenSelect";
 import { fromReadableAmount, getAllowance } from "utils";
 import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import { zapList } from "config/farms";
-import Loading from "components/Loading";
-import useZap from "hooks/useZap";
 import { getZapAddress } from "utils/addressHelpers";
 import { getErc20Contract, getLpContract } from "utils/contractHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { ethers } from "ethers";
 import { notify } from "utils/toastHelper";
 import { RiExchangeDollarLine } from "react-icons/ri";
+import TokenSelectModal from "components/TokenSelectModal";
+import TokenSelect from "components/TokenSelect";
+import Loading from "components/Loading";
+import LogoLoading from "components/LogoLoading";
+import useZap from "hooks/useZap";
 
 export default function Swap() {
   const signer = useEthersSigner();
@@ -198,7 +199,7 @@ export default function Swap() {
             setStates={handleSetTokenAAvailable}
             setInsufficient={handleSetInsufficientA}
             updateBalance={updateBalance}
-            setDirection={() => {}}
+            setDirection={() => { }}
             tokenType=""
           />
 
@@ -208,7 +209,7 @@ export default function Swap() {
                 onClick={handleReverse}
                 className="scale-100 hover:scale-110 transition ease-in-out"
               >
-                <RiExchangeDollarLine className="text-3xl"/>
+                <RiExchangeDollarLine className="text-3xl" />
               </button>
             </div>
           </div>
@@ -222,7 +223,7 @@ export default function Swap() {
             setStates={handleSetTokenBAvailable}
             setInsufficient={handleSetInsufficientB}
             updateBalance={updateBalance}
-            setDirection={() => {}}
+            setDirection={() => { }}
             tokenType=""
           />
 
@@ -238,13 +239,7 @@ export default function Swap() {
               disabled={isApproving}
               className="main_btn mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700"
             >
-              {isApproving ? (
-                <div className="flex justify-center gap-1">
-                  <Loading title="Approving..." />
-                </div>
-              ) : (
-                "Approve"
-              )}{" "}
+              Approve
             </button>
           ) : (
             <button
@@ -258,13 +253,7 @@ export default function Swap() {
               }
               className="main_btn mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700"
             >
-              {pendingTx ? (
-                <div className="flex justify-center gap-1">
-                  <Loading title="Zapping..." />
-                </div>
-              ) : (
-                `Swap ${tokenA.lpSymbol} into ${tokenB.lpSymbol}`
-              )}{" "}
+              {`Swap ${tokenA.lpSymbol} into ${tokenB.lpSymbol}`}
             </button>
           )}
         </div>
@@ -285,6 +274,10 @@ export default function Swap() {
           tokens={zapList}
         />
       </div>
+      {pendingTx &&
+        <LogoLoading title="Zapping..." />}
+      {isApproving &&
+        <LogoLoading title="Approving..." />}
     </div>
   );
 }

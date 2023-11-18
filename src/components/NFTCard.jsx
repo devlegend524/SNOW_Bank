@@ -18,13 +18,13 @@ export default function NFTCard({ tokenId }) {
     getTokenUri(tokenId);
   }, [tokenId]);
   return (
-    <div className="flex justify-center items-center p-2 border">
+    <div className="w-full max-w-[300px] max-h-[400px] p-4 rounded-lg bg-[#0d223de8]">
       <img
         src={tokenUri}
         onError={handleImageError}
         alt="NFT"
         srcSet=""
-        className="w-[200px] h-[200px]"
+        className="w-full rounded-full border-opacity-30"
       />
     </div>
   );

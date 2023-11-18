@@ -125,7 +125,7 @@ export default function FarmStaking() {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
+      {/* <div className="mt-5 flex flex-col md:flex-row justify-between gap-3">
         {address ? (
           <>
             <button
@@ -160,7 +160,7 @@ export default function FarmStaking() {
         ) : (
           <ConnectButton />
         )}
-      </div>
+      </div> */}
       {open && (
         <CompoundModal
           open={open}

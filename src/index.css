@@ -42,7 +42,7 @@ body {
 }
 
 .buy_card {
-  @apply block p-6 bg-primary/60 rounded-lg w-full;
+  @apply p-6 bg-primary/40 rounded-lg w-full;
 }
 
 .main_btn {
@@ -66,11 +66,11 @@ body {
 } */
 
 .tr {
-  @apply bg-secondary border-t border-symbolBorder cursor-pointer last:rounded-b-lg hover:bg-secondary/80 transition ease-in-out;
+  @apply bg-secondary border-t border-symbolBorder cursor-pointer last:rounded-b-lg hover:bg-primary transition ease-in-out;
 }
 
 .action_panel_container {
-  @apply flex flex-col md:flex-row justify-between p-2 lg:p-3 w-full border border-symbolBorder last:rounded-b-md;
+  @apply flex flex-col md:flex-row justify-between p-2 lg:p-3 w-full border border-symbolBorder last:rounded-b-md bg-primary;
 }
 
 .action_panel {
@@ -150,5 +150,24 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+td {
+  @apply p-0;
+}
+
+.bounce_animation {
+  animation: bounce 2.6s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }

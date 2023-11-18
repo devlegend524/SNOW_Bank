@@ -4,8 +4,8 @@ import { getZapAddress } from "utils/addressHelpers";
 import farms from "config/farms";
 import { useZapForFarm } from "hooks/useZap";
 import Modal from "react-modal";
+import tokens from "config/tokens";
 import { ethers } from "ethers";
-import Loading from "components/Loading";
 import { useEthersSigner } from "hooks/useEthers";
 import { useAccount } from "wagmi";
 import { getpWiLDContract } from "utils/contractHelpers";
@@ -18,8 +18,9 @@ import { fetchFarmUserDataAsync } from "state/farms";
 import { getFarmFromPid } from "utils/farmHelpers";
 import { didUserReject } from "utils/customHelpers";
 import { sleep } from "utils/customHelpers";
-import tokens from "config/tokens";
 import { getCounts } from "utils/limitHelper";
+import Loading from "components/Loading";
+import LogoLoading from "components/LogoLoading";
 
 const customStyles = {
   content: {
@@ -169,7 +170,7 @@ export default function CompoundModal({
   }, []);
 
   return (
-    <Modal
+    <><Modal
       isOpen={open}
       onRequestClose={closeModal}
       style={customStyles}
@@ -241,13 +242,7 @@ export default function CompoundModal({
               disabled={isApproving}
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
             >
-              {isApproving ? (
-                <div className="flex justify-center gap-1">
-                  <Loading /> Approving...
-                </div>
-              ) : (
-                "Approve"
-              )}{" "}
+              Approve
             </button>
           ) : (
             <button
@@ -257,7 +252,7 @@ export default function CompoundModal({
                 Number(earnings) === 0 || pendingZapTx || currentCounts === 0
               }
             >
-              {pendingZapTx ? <Loading /> : "Compound"}
+              Compound
             </button>
           )}
         </div>
@@ -269,6 +264,12 @@ export default function CompoundModal({
           <p className="mt-2">{`You are able to compound or harvest ${currentCounts} time(s) today.`}</p>
         )}
       </div>
+
     </Modal>
+      {isApproving &&
+        <LogoLoading title="Approving..." />}
+      {pendingZapTx && <LogoLoading title="Compounding..." />}
+    </>
+
   );
 }

@@ -4,10 +4,11 @@ import { useNFTContract } from "hooks/useContract";
 import NFTCard from "components/NFTCard";
 import { notify } from "utils/toastHelper";
 import useRefresh from "hooks/useRefresh";
-import Loading from "components/Loading";
 import { didUserReject } from "utils/customHelpers";
 import { useEthersSigner } from "hooks/useEthers";
 import RecentBuys from "components/RecentBuys";
+import LogoLoading from "components/LogoLoading";
+
 export default function Zap() {
   const { address } = useAccount();
   const [nfts, setNfts] = useState(0);
@@ -71,9 +72,7 @@ export default function Zap() {
           <div className="flex justify-center gap-4 mt-16">
             {myTokenIds && myTokenIds.length > 0 ? (
               myTokenIds.map((tokenId, index) => (
-                <div className="w-[200px] h-[200px]">
-                  <NFTCard key={index} tokenId={tokenId} />
-                </div>
+                <NFTCard key={index} tokenId={tokenId} />
               ))
             ) : (
               <div className="w-full max-w-[300px] max-h-[400px] p-4 rounded-lg bg-[#0d223de8]">
@@ -86,39 +85,32 @@ export default function Zap() {
             )}
           </div>
 
-          <div className="mt-12 md:mt-24">
-            {address && !nfts && (
-              <p className="mt-3 text-center text-2xl">
-                You don't have any NFTs to claim.
-              </p>
-            )}
-
-            {address && nfts ? (
-              <p className="mt-3 text-center text-2xl">
-                You have {nfts} NFT(s) to claim.
-              </p>
-            ) : (
-              ""
-            )}
-          </div>
-
           <div className="flex justify-center items-center pb-16 m-2 mt-12">
             <button
-              className="main_btn rounded-xl w-full max-w-sm flex justify-center px-6 py-3 hover:scale-105 transition ease-in-out"
-              // disabled={!address && !nfts}
+              className="main_btn rounded-xl w-full max-w-sm flex justify-center px-6 py-3 hover:scale-105 transition ease-in-out mt-9"
+              disabled={!address && !nfts}
               onClick={() => claimNFT()}
             >
-              {isProcessing ? (
-                <Loading title="Claiming NFT..." />
-              ) : nfts ? (
-                "Claim NFT"
-              ) : (
-                "Nothing to claim"
+
+              <>{address && !nfts && (
+                <p className="text-center text-blacks">
+                  You don't have any NFTs to claim.
+                </p>
               )}
+
+                {address && nfts ? (
+                  <p className="text-center text-blacks">
+                    You have {nfts} NFT(s) to claim.
+                  </p>
+                ) : (
+                  ""
+                )}</>
             </button>
           </div>
         </>
       )}
+      {isProcessing &&
+        <LogoLoading title="Claiming NFT..." />}
     </div>
   );
 }
