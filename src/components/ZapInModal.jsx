@@ -190,7 +190,6 @@ export default function ZapInModal({ open, closeModal, pid }) {
       } else {
         const tokenContract = getErc20Contract(token.lpAddresses, signer);
         const balance1 = await tokenContract.balanceOf(address);
-        console.log(balance1.toString(), token.decimals, '---zapin----')
         setBalance(toReadableAmount(balance1, token.decimals));
       }
       setLoadingBalance(false);
