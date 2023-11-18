@@ -23,7 +23,7 @@ const tokens = {
   usdc: {
     symbol: "USDC",
     address: addresses.usdc,
-    decimals: 18,
+    decimals: 6,
     logo: "/assets/tokens/usdc.svg",
   },
   dai: {
@@ -35,7 +35,7 @@ const tokens = {
   usdt: {
     symbol: "USDT",
     address: addresses.usdt,
-    decimals: 18,
+    decimals: 6,
     logo: "/assets/tokens/usdt.svg",
   },
   nft: {

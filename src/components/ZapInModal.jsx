@@ -49,7 +49,7 @@ const tokensList = [
     pid: 1,
     lpSymbol: "WPLS",
     isTokenOnly: true,
-    lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    lpAddresses: "0xA1077a294dDE1B09bB078844df40758a5D0f9a27",
     decimals: 18,
     logoA: "/assets/tokens/wpls.png",
     logoB: "",
@@ -59,7 +59,7 @@ const tokensList = [
     lpSymbol: "USDC",
     isTokenOnly: true,
     lpAddresses: tokens.usdc.address,
-    decimals: 18,
+    decimals: 6,
     logoA: "/assets/tokens/usdc.svg",
     logoB: "",
   },
@@ -68,7 +68,7 @@ const tokensList = [
     lpSymbol: "USDT",
     isTokenOnly: true,
     lpAddresses: tokens.usdt.address,
-    decimals: 18,
+    decimals: 6,
     logoA: "/assets/tokens/usdt.svg",
     logoB: "",
   },
@@ -190,6 +190,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
       } else {
         const tokenContract = getErc20Contract(token.lpAddresses, signer);
         const balance1 = await tokenContract.balanceOf(address);
+        console.log(balance1.toString(), token.decimals, '---zapin----')
         setBalance(toReadableAmount(balance1, token.decimals));
       }
       setLoadingBalance(false);
