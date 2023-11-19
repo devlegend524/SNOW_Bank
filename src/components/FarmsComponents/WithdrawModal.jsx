@@ -79,6 +79,7 @@ const WithdrawModal = ({
             onClick={async () => {
               setPendingTx(true);
               await onConfirm(val);
+              setIsNFTALL(false);
               setPendingTx(false);
               onDismiss();
             }}

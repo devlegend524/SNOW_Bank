@@ -91,6 +91,7 @@ const DepositModal = ({
             onClick={async () => {
               setPendingTx(true);
               await onConfirm(val, lockPeriod);
+              setIsNFTALL(false);
               setPendingTx(false);
               onDismiss();
             }}
