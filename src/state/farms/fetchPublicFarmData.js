@@ -58,13 +58,13 @@ const fetchPublicFarmData = async (farm) => {
     );
   } else if (!farm.isNFTPool && farm.isTokenOnly) {
     tokenAmountTotal = new BigNumber(lpTokenBalanceMC).div(
-      BIG_TEN.pow(tokenDecimals)
+      BIG_TEN.pow(token.decimals)
     );
     const tokenBalance = new BigNumber(tokenBalanceLP).div(
-      BIG_TEN.pow(tokenDecimals)
+      BIG_TEN.pow(token.decimals)
     );
     const quoteTokenBalance = new BigNumber(quoteTokenBalanceLP).div(
-      BIG_TEN.pow(quoteTokenDecimals)
+      BIG_TEN.pow(token.decimals)
     );
     const stables = ["USDC", "USDT", "DAI"];
     if (
