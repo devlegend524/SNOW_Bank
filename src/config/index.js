@@ -35,7 +35,7 @@ export const socials = [
   {
     icon: () => null,
     name: "Docs",
-    href: "https://lodgedocs.gitbook.io/pWiLD-bsc-farm/",
+    href: "https://lodgedocs.gitbook.io/pwild-pulsechain-farm/",
   },
   {
     icon: () => (

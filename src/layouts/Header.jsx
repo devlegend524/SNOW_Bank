@@ -47,7 +47,7 @@ export default function Header() {
                 ))}
                 <li className="list_item">
                   <a
-                    href="https://lodgedocs.gitbook.io/pWiLD-bsc-farm/"
+                    href="https://lodgedocs.gitbook.io/pwild-pulsechain-farm/"
                     target="_blank"
                     className={`p-3`}
                     rel="noopener noreferrer"
@@ -90,7 +90,7 @@ export default function Header() {
               ))}
               <li className={`list_item`}>
                 <a
-                  href="https://lodgedocs.gitbook.io/pWiLD-bsc-farm/"
+                  href="https://lodgedocs.gitbook.io/pwild-pulsechain-farm/"
                   target="_blank"
                   className={`p-3`}
                   rel="noopener noreferrer"
