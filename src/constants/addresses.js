@@ -1,5 +1,5 @@
 const contractAddresses = {
-  masterChef: "0x2Dd7E80390eEe49EA15c044ae81D24Edd83E557f",
+  masterChef: "0x1eE9FF255c17c364Cea9a8bbbEc1F2720B20447f",
   multiCall: "0xb00310683Ee98dca887e2e6AEfe6510F085802e1",
   zap: "0xd88927A667e9883e101CEf509A8Da100F00c71fd",
   router: "0x165C3410fC91EF562C50559f7d2289fEbed552d9",

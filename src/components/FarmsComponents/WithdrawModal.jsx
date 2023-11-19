@@ -83,7 +83,7 @@ const WithdrawModal = ({
               onDismiss();
             }}
             width="100%"
-            style={{ alignSelf: "center", color: "black" }}
+            style={{ alignSelf: "center", color: "white" }}
           >
             {t("Confirm")}
           </Button>

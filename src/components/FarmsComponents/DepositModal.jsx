@@ -94,7 +94,7 @@ const DepositModal = ({
               setPendingTx(false);
               onDismiss();
             }}
-            style={{ alignSelf: "center", color: "black" }}
+            style={{ alignSelf: "center", color: "white" }}
           >
             {t("Confirm")}
           </Button>

@@ -54,6 +54,27 @@ export default function Zap() {
     if (signer && address) getAvailableNFTs();
   }, [fastRefresh, signer, address]);
 
+
+  const NFTClaim = () => {
+    if (!address) {
+      return <p className="text-center text-blacks">
+        Please connect wallet.
+      </p>
+    }
+
+    if (nfts === 0) {
+      return <p className="text-center text-blacks">
+        You don't have any NFT(s) to claim.
+      </p>
+    }
+
+    if (nfts) {
+      return <p className="text-center text-blacks">
+        You have {nfts} NFT(s) to claim.
+      </p>
+    }
+  }
+
   return (
     <div className="container">
       <div className="flex my-6 py-1 bg-[#0d223de8] w-fit mx-auto rounded-full">
@@ -69,13 +90,13 @@ export default function Zap() {
         <RecentBuys last={12} />
       ) : (
         <>
-          <div className="flex justify-center gap-4 mt-16">
+          <div className={`grid ${myTokenIds.length >= 3 ? 'md:grid-cols-3' : myTokenIds.length == 0 ? 'md:grid-cols-1' : 'md:grid-cols-' + myTokenIds.length} grid-cols-1 gap-4 mt-16 max-w-[800px] mx-auto`}>
             {myTokenIds && myTokenIds.length > 0 ? (
               myTokenIds.map((tokenId, index) => (
                 <NFTCard key={index} tokenId={tokenId} />
               ))
             ) : (
-              <div className="w-full max-w-[300px] max-h-[400px] p-4 rounded-lg bg-[#0d223de8]">
+              <div className="w-full max-w-[250px] max-h-[300px] p-4 rounded-lg bg-[#0d223de8] mx-auto">
                 <img
                   src={"/logo.png"}
                   alt="token"
@@ -91,20 +112,7 @@ export default function Zap() {
               disabled={!address && !nfts}
               onClick={() => claimNFT()}
             >
-
-              <>{(address && !nfts) || !address && (
-                <p className="text-center text-blacks">
-                  You don't have any NFTs to claim.
-                </p>
-              )}
-
-                {address && nfts ? (
-                  <p className="text-center text-blacks">
-                    You have {nfts} NFT(s) to claim.
-                  </p>
-                ) : (
-                  ""
-                )}</>
+              {NFTClaim()}
             </button>
           </div>
         </>

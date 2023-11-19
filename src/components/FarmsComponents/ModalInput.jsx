@@ -73,8 +73,11 @@ const ModalInput = ({
         tokenIds = await masterChefContract.getUserStakedNFTs(6, address);
       }
       setUserBalance(
-        balance + " : [ " + removeLeadingZeros(tokenIds).toString() + " ]"
+        balance
       );
+      // setUserBalance(
+      //   balance + " : [ " + removeLeadingZeros(tokenIds).toString() + " ]"
+      // );
     } else {
       const balanceBigNumber = new BigNumber(balance);
       if (balanceBigNumber.gt(0) && balanceBigNumber.lt(0.0001)) {
@@ -110,7 +113,7 @@ const ModalInput = ({
             step="any"
             min="0"
             onChange={onChange}
-            placeholder={isNFTPool ? "token Id" : "0"}
+            placeholder={isNFTPool ? "amount of NFT(s)" : "0"}
             value={value}
           />
             <Button scale="sm" onClick={onSelectMax} mr="8px" className="pulse_bg text-[white!important]">
