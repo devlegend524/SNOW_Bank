@@ -269,7 +269,9 @@ export const usePricepWiLDUsdc = () => {
         if (returned && returned.pairs) {
           let data;
           if (returned.pairs.length === 1) {
-            data = returned.pairs[0];
+
+            data = returned.pairs[0].chainId === "pulsechain" &&
+              returned.pairs[0].pairAddress === addresses.wildWplslp && returned.pairs[0];
           } else {
             data = returned.pairs.filter(
               (pair) =>
