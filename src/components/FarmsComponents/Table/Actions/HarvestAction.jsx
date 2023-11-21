@@ -118,20 +118,20 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           />
         )}
       </div>
-      <div className="flex flex-col justify-center gap-2 lg:min-w-[180px] min-w-[130px]">
+      <div className="flex flex-col justify-center gap-2 lg:min-w-[200px] min-w-[130px]">
         <button
           disabled={earnings.eq(0) || pendingTx || !userDataReady}
           onClick={handleHavest}
-          className="rounded-md p-1  text-center text-white font-medium base_bg "
+          className="rounded-md p-1  text-center text-white font-medium base_bg duration-300 hover:text-white hover:bg-symbolHover transition ease-in-out hover:scale-105"
         >
           {t(`Harvest`)}
         </button>
 
-        <div className="flex flex-col lg:flex-row gap-2 w-full">
+        <div className="flex flex-col lg:flex-row gap-1 w-full">
           {!isNFTPool && (
             <>
               <button
-                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-white font-medium base_bg hover:bg-symbolHover"
+                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-white font-medium duration-300 hover:text-white transition ease-in-out hover:scale-105  base_bg hover:bg-symbolHover"
                 data-tooltip-id="compound-tooltip"
                 data-tooltip-content={
                   earnings.eq(0) || pendingCompoundTx || !userDataReady
@@ -146,7 +146,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 }
               </button>
               <button
-                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-white text-center font-medium base_bg hover:bg-symbolHover"
+                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-white text-center font-medium duration-300 hover:text-white transition ease-in-out hover:scale-105  base_bg hover:bg-symbolHover"
                 data-tooltip-id="zap-tooltip"
                 data-tooltip-content="Stake to this pool from your wallet"
                 disabled={!userDataReady}

@@ -16,7 +16,7 @@ export default function Header() {
               <a href="/">
                 <img
                   src="/logo.png"
-                  className="h-14 w-14 rounded-full"
+                  className="h-16 w-18"
                   alt=""
                 />
                 {/* <span className="text-symbol">3</span>WiLD */}
