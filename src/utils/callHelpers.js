@@ -168,7 +168,7 @@ export const harvest = async (masterChefContract, pid, address) => {
   }
 
   try {
-    const tx = await masterChefContract.withdraw(pid, "0", false);
+    const tx = await masterChefContract.deposit(pid, "0", false);
     await tx.wait();
     limitedFunction(true, address);
     notify("success", "Harvest successful!");
