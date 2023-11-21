@@ -16,9 +16,9 @@ const WILDXHarvestBalance = ({ farmsWithBalance }) => {
     }
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber();
   }, 0);
-  const wildPriceUsdt = usePriceWILDXUsdc()[0];
+  const wildPriceUsdc = usePriceWILDXUsdc()[0];
   const earningsUsdt = new BigNumber(earningsSum)
-    .multipliedBy(wildPriceUsdt)
+    .multipliedBy(wildPriceUsdc)
     .toNumber();
 
   if (!signer) {
@@ -32,7 +32,7 @@ const WILDXHarvestBalance = ({ farmsWithBalance }) => {
   return (
     <div>
       <CardValue value={earningsSum} lineHeight="1.5" color="#fff" />
-      {wildPriceUsdt.gt(0) && <CardUsdValue value={earningsUsdt} />}
+      {wildPriceUsdc.gt(0) && <CardUsdValue value={earningsUsdt} />}
     </div>
   );
 };

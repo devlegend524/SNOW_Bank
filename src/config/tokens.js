@@ -2,22 +2,22 @@ import addresses from "constants/addresses";
 
 const tokens = {
   eth: {
-    symbol: "PLS",
-    address: addresses.wpls,
+    symbol: "ETH",
+    address: addresses.weth,
     decimals: 18,
-    logo: "/assets/tokens/pls.png",
+    logo: "/assets/tokens/eth.svg",
   },
   wild: {
-    symbol: "pWiLD",
+    symbol: "XXWiLD",
     address: addresses.wild,
     decimals: 18,
     logo: "/assets/tokens/wildx.jpg",
     projectLink: "https://wildbase.farm/", // todo:
   },
-  wpls: {
-    symbol: "WPLS",
-    logo: "/assets/tokens/wpls.png",
-    address: addresses.wpls,
+  weth: {
+    symbol: "WETH",
+    logo: "/assets/tokens/weth.png",
+    address: addresses.weth,
     decimals: 18,
   },
   usdc: {
@@ -32,14 +32,14 @@ const tokens = {
     decimals: 18,
     logo: "/assets/tokens/dai.svg",
   },
-  usdt: {
-    symbol: "USDT",
-    address: addresses.usdt,
+  mim: {
+    symbol: "MIM",
+    address: addresses.mim,
     decimals: 6,
-    logo: "/assets/tokens/usdt.svg",
+    logo: "/assets/tokens/mim.svg",
   },
   nft: {
-    symbol: "pWiLD NFT",
+    symbol: "XXWiLD NFT",
     address: addresses.nft,
     decimals: 18,
     logo: "/assets/tokens/nft.png",

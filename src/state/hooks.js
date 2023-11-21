@@ -11,9 +11,9 @@ import { filterFarmsByQuoteToken } from "utils/farmsPriceHelpers";
 import { useEthersProvider } from "hooks/useEthers";
 import {
   fetchFarmsPublicDataAsync,
-  // fetchpWiLDVaultPublicData,
-  // fetchpWiLDVaultUserData,
-  // fetchpWiLDVaultFees,
+  // fetchXXWiLDVaultPublicData,
+  // fetchXXWiLDVaultUserData,
+  // fetchXXWiLDVaultFees,
   setBlock,
 } from "./actions";
 import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
@@ -39,7 +39,7 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 0 = pWiLD-ETH LP
+ * 0 = XXWiLD-ETH LP
  *
  */
 export const usePollCoreFarmData = () => {
@@ -127,12 +127,12 @@ export const useUSDCPriceFromToken = (tokenSymbol) => {
 export const useLpTokenPrice = (symbol) => {
   const farm = useFarmFromLpSymbol(symbol);
   const wethPrice = usePriceEthUsdc();
-  const farmTokenPriceInUsd = usePricepWiLDUsdc()[0];
+  const farmTokenPriceInUsd = usePriceXXWiLDUsdc()[0];
   let lpTokenPrice = BIG_ZERO;
-  const stables = ["USDC", "USDT", "DAI"];
+  const stables = ["USDC", "MIM", "DAI"];
   if (stables.includes(symbol)) return new BigNumber(1);
 
-  if (symbol === "WPLS") return wethPrice;
+  if (symbol === "WETH") return wethPrice;
   if (farm.isTokenOnly) return farmTokenPriceInUsd;
 
   try {
@@ -152,18 +152,18 @@ export const useLpTokenPrice = (symbol) => {
 
 // Pools
 
-export const useFetchpWiLDVault = () => {
+export const useFetchXXWiLDVault = () => {
   // const { account } = useWeb3React()
   // const { fastRefresh } = useRefresh()
   // const dispatch = useAppDispatch()
   // useEffect(() => {
-  //   dispatch(fetchpWiLDVaultPublicData())
+  //   dispatch(fetchXXWiLDVaultPublicData())
   // }, [dispatch, fastRefresh])
   // useEffect(() => {
-  //   dispatch(fetchpWiLDVaultUserData({ account }))
+  //   dispatch(fetchXXWiLDVaultUserData({ account }))
   // }, [dispatch, fastRefresh, account])
   // useEffect(() => {
-  //   dispatch(fetchpWiLDVaultFees())
+  //   dispatch(fetchXXWiLDVaultFees())
   // }, [dispatch])
 };
 
@@ -171,9 +171,9 @@ export const usePWiLDVault = () => {
   const {
     totalShares: totalSharesAsString,
     pricePerFullShare: pricePerFullShareAsString,
-    totalpWiLDInVault: totalpWiLDInVaultAsString,
-    estimatedpWiLDBountyReward: estimatedpWiLDBountyRewardAsString,
-    totalPendingpWiLDHarvest: totalPendingpWiLDHarvestAsString,
+    totalXXWiLDInVault: totalXXWiLDInVaultAsString,
+    estimatedXXWiLDBountyReward: estimatedXXWiLDBountyRewardAsString,
+    totalPendingXXWiLDHarvest: totalPendingXXWiLDHarvestAsString,
     fees: { performanceFee, callFee, withdrawalFee, withdrawalFeePeriod },
     userData: {
       isLoading,
@@ -184,13 +184,13 @@ export const usePWiLDVault = () => {
     },
   } = useSelector((state) => state.pools.wildVault);
 
-  const estimatedpWiLDBountyReward = useMemo(() => {
-    return new BigNumber(estimatedpWiLDBountyRewardAsString);
-  }, [estimatedpWiLDBountyRewardAsString]);
+  const estimatedXXWiLDBountyReward = useMemo(() => {
+    return new BigNumber(estimatedXXWiLDBountyRewardAsString);
+  }, [estimatedXXWiLDBountyRewardAsString]);
 
-  const totalPendingpWiLDHarvest = useMemo(() => {
-    return new BigNumber(totalPendingpWiLDHarvestAsString);
-  }, [totalPendingpWiLDHarvestAsString]);
+  const totalPendingXXWiLDHarvest = useMemo(() => {
+    return new BigNumber(totalPendingXXWiLDHarvestAsString);
+  }, [totalPendingXXWiLDHarvestAsString]);
 
   const totalShares = useMemo(() => {
     return new BigNumber(totalSharesAsString);
@@ -200,9 +200,9 @@ export const usePWiLDVault = () => {
     return new BigNumber(pricePerFullShareAsString);
   }, [pricePerFullShareAsString]);
 
-  const totalpWiLDInVault = useMemo(() => {
-    return new BigNumber(totalpWiLDInVaultAsString);
-  }, [totalpWiLDInVaultAsString]);
+  const totalXXWiLDInVault = useMemo(() => {
+    return new BigNumber(totalXXWiLDInVaultAsString);
+  }, [totalXXWiLDInVaultAsString]);
 
   const userShares = useMemo(() => {
     return new BigNumber(userSharesAsString);
@@ -215,9 +215,9 @@ export const usePWiLDVault = () => {
   return {
     totalShares,
     pricePerFullShare,
-    totalpWiLDInVault,
-    estimatedpWiLDBountyReward,
-    totalPendingpWiLDHarvest,
+    totalXXWiLDInVault,
+    estimatedXXWiLDBountyReward,
+    totalPendingXXWiLDHarvest,
     fees: {
       performanceFee,
       callFee,
@@ -251,7 +251,7 @@ export const usePriceEthUsdc = () => {
   return new BigNumber(ethUsdcFarm.quoteToken.usdcPrice);
 };
 
-export const usePricepWiLDUsdc = () => {
+export const usePriceXXWiLDUsdc = () => {
   // const wildEthFarm = useFarmFromPid(wildWethFarmPid)
   const [priceUsd, setPriceUsd] = useState(0);
   const [liquidity, setLiquidity] = useState(0);
@@ -273,13 +273,13 @@ export const usePricepWiLDUsdc = () => {
           // if (returned.pairs.length === 1) {
 
           //   data = returned.pairs[0].chainId === "pulsechain" &&
-          //     returned.pairs[0].pairAddress === addresses.wildWplslp? returned.pairs[0]: undefined;
+          //     returned.pairs[0].pairAddress === addresses.wildWethlp? returned.pairs[0]: undefined;
           // } else {
           //   console.log('------dd')
           //   data = returned.pairs.filter(
           //     (pair) =>
           //       pair.chainId == "pulsechain" &&
-          //       pair.pairAddress == addresses.wildWplslp
+          //       pair.pairAddress == addresses.wildWethlp
           //   )[0];
           //   console.log(data)
           // }
@@ -408,15 +408,15 @@ export const useGetLastOraclePrice = () => {
 export const useTotalValue = () => {
   const farms = useFarms();
   const wethPrice = usePriceEthUsdc();
-  const wildPrice = usePricepWiLDUsdc()[0];
+  const wildPrice = usePriceXXWiLDUsdc()[0];
   let value = new BigNumber(0);
   for (let i = 0; i < farms.data.length; i++) {
     const farm = farms.data[i];
     if (farm.lpTotalInQuoteToken) {
       let val;
-      if (farm.quoteToken.symbol === "WPLS" && wethPrice) {
+      if (farm.quoteToken.symbol === "WETH" && wethPrice) {
         val = wethPrice.times(farm.lpTotalInQuoteToken);
-      } else if (farm.quoteToken.symbol === "pWiLD") {
+      } else if (farm.quoteToken.symbol === "XXWiLD") {
         val = wildPrice.times(farm.lpTotalInQuoteToken);
       } else {
         val = new BigNumber(farm.lpTotalInQuoteToken);

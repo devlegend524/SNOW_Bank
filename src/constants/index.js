@@ -1,5 +1,5 @@
 export const EXPLORER_URL = {
-  369: "https://scan.pulsechain.com/",
+  8453: "https://basescan.org",
 };
 
 export const getSortOptions = () => {

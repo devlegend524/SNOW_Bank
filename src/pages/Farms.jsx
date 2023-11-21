@@ -20,7 +20,7 @@ import { getBalanceNumber } from "utils/formatBalance";
 import isArchivedPid from "utils/farmHelpers";
 import { usePWiLDPerSecond } from "hooks/useTokenBalance";
 import { NUMBER_OF_FARMS_VISIBLE } from "config";
-import { useFarms, usePollFarmsData, usePricepWiLDUsdc } from "state/hooks";
+import { useFarms, usePollFarmsData, usePriceXXWiLDUsdc } from "state/hooks";
 import { useAccount } from "wagmi";
 
 export default function Farms() {
@@ -31,7 +31,7 @@ export default function Farms() {
   const isActive = !isInactive && !isArchived;
   usePollFarmsData(isArchived);
 
-  const wildPrice = usePricepWiLDUsdc()[0];
+  const wildPrice = usePriceXXWiLDUsdc()[0];
   const loadMoreRef = useRef();
 
   const [userDataReady, setUserDataReady] = useState("hot");

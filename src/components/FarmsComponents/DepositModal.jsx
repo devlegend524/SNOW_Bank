@@ -80,7 +80,7 @@ const DepositModal = ({
             {t("Cancel")}
           </Button>
           <Button
-            className="pulse_bg text-white"
+            className="base_bg text-white"
             width="100%"
             disabled={
               pendingTx ||

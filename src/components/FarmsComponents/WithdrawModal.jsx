@@ -71,7 +71,7 @@ const WithdrawModal = ({
             {t("Cancel")}
           </Button>
           <Button
-            className="pulse_bg text-[white!important]"
+            className="base_bg text-[white!important]"
             disabled={pendingTx ||
               !valNumber.isFinite() ||
               (!isNFTPool && valNumber.eq(0)) ||

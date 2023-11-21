@@ -10,7 +10,7 @@ import Loading from "components/Loading";
 import { useTranslation } from "context/Localization";
 import { useEthersSigner } from "hooks/useEthers";
 import { useAccount } from "wagmi";
-import { getpWiLDContract } from "utils/contractHelpers";
+import { getXXWiLDContract } from "utils/contractHelpers";
 import { useHarvest } from "hooks/useHarvest";
 import { notify } from "utils/toastHelper";
 import { harvestMany } from "utils/callHelpers";
@@ -60,7 +60,7 @@ export default function CompoundModal({
 
   const { address } = useAccount();
   const zapAddress = getZapAddress();
-  const wildXContract = getpWiLDContract(signer);
+  const wildXContract = getXXWiLDContract(signer);
   const { onReward } = useHarvest(pid[0]);
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
@@ -210,7 +210,7 @@ export default function CompoundModal({
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
-                  if (item.lpSymbol === "WPLS-pWiLD")
+                  if (item.lpSymbol === "WETH-XXWiLD")
                     return (
                       <option
                         key={key}
@@ -240,7 +240,7 @@ export default function CompoundModal({
           Pool
         </p>
         <p className="text-center my-2">
-          Available: {Number(earnings.toString()).toFixed(3)} pWiLD
+          Available: {Number(earnings.toString()).toFixed(3)} XXWiLD
         </p>
         <div className="flex gap-3 pt-4">
           <button

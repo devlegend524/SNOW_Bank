@@ -6,7 +6,7 @@ import { BIG_ZERO } from "utils/bigNumber";
 import { getBalanceAmount } from "utils/formatBalance";
 import { useAppDispatch } from "state";
 import { fetchFarmUserDataAsync } from "state/farms";
-import { usePricepWiLDUsdc } from "state/hooks";
+import { usePriceXXWiLDUsdc } from "state/hooks";
 import { useHarvest } from "hooks/useHarvest";
 import { useTranslation } from "context/Localization";
 import { Earned } from "./styles";
@@ -34,7 +34,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { address } = useAccount();
-  const wildPrice = usePricepWiLDUsdc()[0];
+  const wildPrice = usePriceXXWiLDUsdc()[0];
   const masterChefContract = useMasterchef();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
   //   try {
   //     setCompoundPendingTx(true)
   //     await harvestMany(masterChefContract, [pid], true, address)
-  //     notify('success', 'You have successfully claimed pWiLD tokens')
+  //     notify('success', 'You have successfully claimed XXWiLD tokens')
   //     dispatch(fetchFarmUserDataAsync({ address, pids: [pid] }))
   //     setCompoundPendingTx(false)
   //   } catch (e) {
@@ -103,7 +103,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
     <div className="flex flex-row items-center  justify-between md:justify-around gap-4  p-2 lg:p-4 w-full">
       <div className="flex flex-col justify-between gap-2 w-full">
         <div className="text-white text-md font-semibold">
-          pWiLD &nbsp;
+          XXWiLD &nbsp;
           {t("Earned")}
         </div>
         <Earned>{displayBalance}</Earned>
@@ -122,7 +122,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
         <button
           disabled={earnings.eq(0) || pendingTx || !userDataReady}
           onClick={handleHavest}
-          className="rounded-md p-1  text-center text-white font-medium pulse_bg "
+          className="rounded-md p-1  text-center text-white font-medium base_bg "
         >
           {t(`Harvest`)}
         </button>
@@ -131,12 +131,12 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           {!isNFTPool && (
             <>
               <button
-                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-white font-medium pulse_bg hover:bg-symbolHover"
+                className="rounded-md w-full lg:w-1/2 px-2 py-1  text-center text-white font-medium base_bg hover:bg-symbolHover"
                 data-tooltip-id="compound-tooltip"
                 data-tooltip-content={
                   earnings.eq(0) || pendingCompoundTx || !userDataReady
                     ? "Stake tokens first to use it"
-                    : "Restake your pWiLD profit to pWiLD pool"
+                    : "Restake your XXWiLD profit to XXWiLD pool"
                 }
                 disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
                 onClick={openCompoundModal}
@@ -146,7 +146,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
                 }
               </button>
               <button
-                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-white text-center font-medium pulse_bg hover:bg-symbolHover"
+                className="rounded-md w-full lg:w-1/2 px-2 py-1 text-white text-center font-medium base_bg hover:bg-symbolHover"
                 data-tooltip-id="zap-tooltip"
                 data-tooltip-content="Stake to this pool from your wallet"
                 disabled={!userDataReady}

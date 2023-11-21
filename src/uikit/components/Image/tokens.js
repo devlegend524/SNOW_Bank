@@ -3,7 +3,7 @@
  */
 const tokens = {
   cake: {
-    symbol: "pWiLD",
+    symbol: "XXWiLD",
     address: {
       84531: "0xBba4f9c1838837246452D3504981066b27D883e5",
       56: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -435,8 +435,8 @@ const tokens = {
     decimals: 18,
     projectLink: "https://venus.io/",
   },
-  wpls: {
-    symbol: "wpls",
+  weth: {
+    symbol: "weth",
     address: {
       56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       97: "0xae13d989dac2f0debff460ac112a837c89baa7cd",
@@ -742,8 +742,8 @@ const tokens = {
     decimals: 18,
     projectLink: "https://chain.link/",
   },
-  usdt: {
-    symbol: "USDT",
+  mim: {
+    symbol: "MIM",
     address: {
       56: "0x55d398326f99059fF775485246999027B3197955",
       97: "0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5",

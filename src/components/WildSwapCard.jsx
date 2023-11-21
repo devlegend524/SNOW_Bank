@@ -239,7 +239,7 @@ export default function WildSwapCard() {
         (amount_out * (100 - slippage)) / 100
       )?.toString();
 
-      if (tokenA.address === "WPLS") {
+      if (tokenA.address === "WETH") {
         await contracts.routerSigner.swapExactETHForTokens(
           amount_out,
           [tokenA.address, tokenB.address],
@@ -249,7 +249,7 @@ export default function WildSwapCard() {
             value: Web3.utils.toWei(tokenAAmount, "ether"),
           }
         );
-      } else if (tokenB.address === "WPLS") {
+      } else if (tokenB.address === "WETH") {
         await contracts.routerSigner.swapExactTokensForETH(
           amount_in,
           amount_out,

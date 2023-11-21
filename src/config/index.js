@@ -4,8 +4,8 @@ import BigNumber from "bignumber.js";
 export const BASE_URL = "https://wildbase.farm";
 export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 
-export const CHAIN_ID = 369;
-export const TESTNET_CHAIN_ID = 97;
+export const CHAIN_ID = 8453;
+export const TESTNET_CHAIN_ID = 84531;
 
 export const DEFAULT_GAS_LIMIT = 2000000;
 export const DEFAULT_GAS_PRICE = 2;
@@ -16,10 +16,10 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const mainTokenSymbol = "pWiLD";
+export const mainTokenSymbol = "XXWiLD";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  369: "https://app.pulsex.com",
+  8453: "https://baseswap.fi",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];

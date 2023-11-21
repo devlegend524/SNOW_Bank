@@ -35,7 +35,7 @@ import {
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
-import { usePricepWiLDUsdc } from "state/hooks";
+import { usePriceXXWiLDUsdc } from "state/hooks";
 import { toReadableAmount } from "utils/customHelpers";
 
 const StakedAction = ({
@@ -62,7 +62,7 @@ const StakedAction = ({
     tokenBalance: tokenBalanceAsString,
     stakedBalance: stakedBalanceAsString,
   } = useFarmUser(pid);
-  const wildPrice = usePricepWiLDUsdc()[0];
+  const wildPrice = usePriceXXWiLDUsdc()[0];
 
   const masterChefContract = getMasterchefContract(signer);
 
@@ -276,7 +276,7 @@ const StakedAction = ({
           disabled={["history", "archived"].some((item) =>
             location.pathname.includes(item)
           )}
-          className="rounded-md p-1  text-center text-white font-medium pulse_bg hover:text-gray-500  max-w-[200px] w-full"
+          className="rounded-md p-1  text-center text-white font-medium base_bg hover:text-gray-500  max-w-[200px] w-full"
         >
           {t("Stake")}
         </button>

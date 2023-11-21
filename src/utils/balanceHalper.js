@@ -6,7 +6,7 @@ import { toReadableAmount } from "./customHelpers";
 export async function getBalance(address, token, provider) {
   if (!token || !address || !provider) return;
   try {
-    if (token.lpSymbol === "PLS") {
+    if (token.lpSymbol === "ETH") {
       const balance = await provider?.getBalance(address);
       return toReadableAmount(balance, 18);
     } else {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 import {
   getErc20Contract,
-  getpWiLDContract,
+  getXXWiLDContract,
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { BIG_ZERO } from "utils/bigNumber";
@@ -57,7 +57,7 @@ export const useTotalSupply = () => {
   const provider = useEthersProvider();
   useEffect(() => {
     async function fetchTotalSupply() {
-      const wildContract = getpWiLDContract(
+      const wildContract = getXXWiLDContract(
         provider,
         chain ? chain.id : CHAIN_ID
       );
@@ -119,7 +119,7 @@ export const usePWiLDBurnedBalance = () => {
   const provider = useEthersProvider();
   useEffect(() => {
     const fetchBalance = async () => {
-      const wildContract = getpWiLDContract(
+      const wildContract = getXXWiLDContract(
         provider,
         chain ? chain.id : CHAIN_ID
       );

@@ -116,7 +116,7 @@ const ModalInput = ({
             placeholder={isNFTPool ? "amount of NFT(s)" : "0"}
             value={value}
           />
-            <Button scale="sm" onClick={onSelectMax} mr="8px" className="pulse_bg text-[white!important]">
+            <Button scale="sm" onClick={onSelectMax} mr="8px" className="base_bg text-[white!important]">
               {t("Max")}
             </Button>
 

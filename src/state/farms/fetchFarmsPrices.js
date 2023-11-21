@@ -17,22 +17,22 @@ const getFarmBaseTokenPrice = (
   farm,
   quoteTokenFarm,
   wethPriceUsdt,
-  pWildPriceUsdt
+  pWildPriceUsdc
 ) => {
   const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote);
-  if (["USDC", "USDT", "DAI"].includes(farm.quoteToken.symbol)) {
+  if (["USDC", "MIM", "DAI"].includes(farm.quoteToken.symbol)) {
     return hasTokenPriceVsQuote
       ? new BigNumber(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
-  if (farm.quoteToken.symbol === "WPLS") {
+  if (farm.quoteToken.symbol === "WETH") {
     return hasTokenPriceVsQuote
       ? wethPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
-  if (farm.quoteToken.symbol === "pWiLD") {
+  if (farm.quoteToken.symbol === "XXWiLD") {
     return hasTokenPriceVsQuote
-      ? pWildPriceUsdt.times(farm.tokenPriceVsQuote)
+      ? pWildPriceUsdc.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
 
@@ -46,7 +46,7 @@ const getFarmBaseTokenPrice = (
   // If the farm's quote token isn't USDC or wWBNB, we then use the quote token, of the original farm's quote token
   // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - WBNB, (pBTC - WBNB)
   // from the WBNB - pBTC price, we can calculate the PNT - USDC price
-  if (quoteTokenFarm.quoteToken.symbol === "WPLS") {
+  if (quoteTokenFarm.quoteToken.symbol === "WETH") {
     const quoteTokenInUsdc = wethPriceUsdt.times(
       quoteTokenFarm.tokenPriceVsQuote
     );
@@ -55,7 +55,7 @@ const getFarmBaseTokenPrice = (
       : BIG_ZERO;
   }
 
-  if (["USDC", "USDT", "DAI"].includes(quoteTokenFarm.quoteToken.symbol)) {
+  if (["USDC", "MIM", "DAI"].includes(quoteTokenFarm.quoteToken.symbol)) {
     const quoteTokenInUsdc = quoteTokenFarm.tokenPriceVsQuote;
     return hasTokenPriceVsQuote && quoteTokenInUsdc
       ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInUsdc)
@@ -70,22 +70,22 @@ const getFarmQuoteTokenPrice = (
   farm,
   quoteTokenFarm,
   wethPriceUsdt,
-  pWildPriceUsdt
+  pWildPriceUsdc
 ) => {
-  if (["USDC", "USDT", "DAI"].includes(farm.quoteToken.symbol)) {
+  if (["USDC", "MIM", "DAI"].includes(farm.quoteToken.symbol)) {
     return BIG_ONE;
   }
-  if (farm.quoteToken.symbol === "pWiLD") {
-    return pWildPriceUsdt;
+  if (farm.quoteToken.symbol === "XXWiLD") {
+    return pWildPriceUsdc;
   }
-  if (farm.quoteToken.symbol === "WPLS") {
+  if (farm.quoteToken.symbol === "WETH") {
     return wethPriceUsdt;
   }
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }
 
-  if (quoteTokenFarm.quoteToken.symbol === "WPLS") {
+  if (quoteTokenFarm.quoteToken.symbol === "WETH") {
     return quoteTokenFarm.tokenPriceVsQuote
       ? wethPriceUsdt.times(quoteTokenFarm.tokenPriceVsQuote)
       : BIG_ZERO;
@@ -102,7 +102,7 @@ const fetchFarmsPrices = async (farms) => {
       : BIG_ZERO;
 
   const pWildUsdtFarm = farms.find((farm) => farm.pid === wildWethFarmPid);
-  const pWildPriceUsdt =
+  const pWildPriceUsdc =
     pWildUsdtFarm.tokenPriceVsQuote > 0
       ? new BigNumber(pWildUsdtFarm.tokenPriceVsQuote).times(wethPriceUsdt)
       : BIG_ZERO;
@@ -116,13 +116,13 @@ const fetchFarmsPrices = async (farms) => {
       farm,
       quoteTokenFarm,
       wethPriceUsdt,
-      pWildPriceUsdt
+      pWildPriceUsdc
     );
     const quoteTokenPrice = getFarmQuoteTokenPrice(
       farm,
       quoteTokenFarm,
       wethPriceUsdt,
-      pWildPriceUsdt
+      pWildPriceUsdc
     );
 
     const token = { ...farm.token, usdcPrice: baseTokenPrice.toJSON() };

@@ -8,6 +8,7 @@ import nftABI from "config/abis/nft.json";
 import { getMasterchefContract } from "utils/contractHelpers";
 import httpProvider from "utils/providerHelpers";
 import { toReadableAmount } from "utils/customHelpers";
+
 const fetchPublicFarmData = async (farm) => {
   const { pid, lpAddresses, token, quoteToken, isNFTPool } = farm;
   const lpAddress = lpAddresses;
@@ -66,7 +67,7 @@ const fetchPublicFarmData = async (farm) => {
     const quoteTokenBalance = new BigNumber(quoteTokenBalanceLP).div(
       BIG_TEN.pow(token.decimals)
     );
-    const stables = ["USDC", "USDT", "DAI"];
+    const stables = ["USDC", "MIM", "DAI"];
     if (
       stables.includes(farm.token.symbol) &&
       stables.includes(farm.quoteToken.symbol)

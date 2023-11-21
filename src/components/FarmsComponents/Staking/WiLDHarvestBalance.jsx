@@ -2,7 +2,7 @@ import React from "react";
 import BigNumber from "bignumber.js";
 import { DEFAULT_TOKEN_DECIMAL } from "config";
 
-import { usePricepWiLDUsdc } from "state/hooks";
+import { usePriceXXWiLDUsdc } from "state/hooks";
 import CardValue from "./CardValue";
 import CardUsdValue from "./CardUsdValue";
 import { useEthersSigner } from "hooks/useEthers";
@@ -16,9 +16,9 @@ const WiLDHarvestBalance = ({ farmsWithBalance }) => {
     }
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber();
   }, 0);
-  const wildPriceUsdt = usePricepWiLDUsdc()[0];
+  const wildPriceUsdc = usePriceXXWiLDUsdc()[0];
   const earningsUsdt = new BigNumber(earningsSum)
-    .multipliedBy(wildPriceUsdt)
+    .multipliedBy(wildPriceUsdc)
     .toNumber();
 
   if (!signer) {
@@ -32,7 +32,7 @@ const WiLDHarvestBalance = ({ farmsWithBalance }) => {
   return (
     <div>
       <CardValue value={earningsSum} lineHeight="1.5" color="#fff" />
-      {wildPriceUsdt.gt(0) && <CardUsdValue value={earningsUsdt} />}
+      {wildPriceUsdc.gt(0) && <CardUsdValue value={earningsUsdt} />}
     </div>
   );
 };

@@ -12,7 +12,7 @@ import { notify } from "utils/toastHelper";
 export default function SaleComponent({
   totalRaised,
   isPrivateParticipant,
-  buypWiLDToken,
+  buyXXWiLDToken,
   userDeposited,
   hasNFT,
   started,
@@ -63,7 +63,7 @@ export default function SaleComponent({
       notify("warning", "Insufficient Balance");
       return;
     }
-    buypWiLDToken(amount);
+    buyXXWiLDToken(amount);
   };
 
   return (
@@ -109,12 +109,12 @@ export default function SaleComponent({
         disabled={!hasNFT || !started || finished ? "dissabled" : ""}
       >
         {!hasNFT
-          ? "You must have pWiLD NFT to buy token!"
+          ? "You must have XXWiLD NFT to buy token!"
           : !started
           ? "Presale is not started yet"
           : finished
           ? "Preslae is ended"
-          : "BUY pWiLD"}
+          : "BUY XXWiLD"}
       </button>
     </div>
   );

@@ -187,7 +187,7 @@ export default function SupplyLiquidity(props) {
       const amount_in = fromReadableAmount(tokenAAmount, tokenA.decimals);
       const amount_out = fromReadableAmount(tokenBAmount, tokenB.decimals);
 
-      if (tokenA.symbol === "WPLS") {
+      if (tokenA.symbol === "WETH") {
         await contracts.routerSigner.addLiquidityETH(
           tokenB.address,
           amount_out,
@@ -199,7 +199,7 @@ export default function SupplyLiquidity(props) {
             value: amount_in,
           }
         );
-      } else if (tokenB.address === "WPLS") {
+      } else if (tokenB.address === "WETH") {
         await contracts.routerSigner.addLiquidityETH(
           tokenA.address,
           amount_in,
