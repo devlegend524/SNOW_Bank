@@ -42,19 +42,11 @@ body {
 }
 
 .buy_card {
-  @apply p-6 bg-primary/40 rounded-lg w-full;
+  @apply p-6 bg-primary/40 rounded-lg w-full grid grid-cols-12;
 }
 
 .main_btn {
-  @apply py-2 text-white font-semibold rounded-full text-center relative hover:text-white transition ease-in-out duration-500 hover:scale-105;
-  background-image: linear-gradient(
-    210deg,
-    #00eaff 0%,
-    #0080ff 25%,
-    #8000ff 50%,
-    #e619e6 75%,
-    #f00 100%
-  );
+  @apply py-2 font-semibold  rounded-full text-center relative hover:text-white transition ease-in-out duration-500 hover:scale-105 hover:bg-symbolHover bg-white border-[5px] border-[#0052ff] text-black;
 }
 
 /* .main_btn::before {
@@ -113,15 +105,8 @@ body {
   @apply rounded-xl bg-secondary py-8 px-6 w-full max-w-[540px] m-8;
 }
 
-.base_bg {
-  background-image: linear-gradient(
-    210deg,
-    #00eaff 0%,
-    #0080ff 25%,
-    #8000ff 50%,
-    #e619e6 75%,
-    #f00 100%
-  );
+.base_bg  {
+  @apply bg-white text-black border-[4px] border-blue-700 rounded-full;
 }
 
 .IKcpG {

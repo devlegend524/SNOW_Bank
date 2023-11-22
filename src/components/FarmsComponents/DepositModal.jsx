@@ -70,17 +70,17 @@ const DepositModal = ({
           decimals={decimals}
         />
         <ModalActions>
-          <Button
+          <button
             variant="secondary"
             onClick={onDismiss}
             width="100%"
             disabled={pendingTx}
-            style={{ alignSelf: "center", color: "white" }}
+            className="main_btn w-full bg-[transparent!important] text-[white!important]"
           >
             {t("Cancel")}
-          </Button>
-          <Button
-            className="base_bg text-white"
+          </button>
+          <button
+            className="main_btn w-full"
             width="100%"
             disabled={
               pendingTx ||
@@ -95,10 +95,9 @@ const DepositModal = ({
               setPendingTx(false);
               onDismiss();
             }}
-            style={{ alignSelf: "center", color: "white" }}
           >
             {t("Confirm")}
-          </Button>
+          </button>
         </ModalActions>
       </Modal>
       {

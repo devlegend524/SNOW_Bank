@@ -77,7 +77,7 @@ export default function Zap() {
 
   return (
     <div className="container">
-      <div className="flex my-6 py-1 bg-[#0d223de8] w-fit mx-auto rounded-full">
+      <div className="flex my-6 py-1 bg-secondary w-fit mx-auto rounded-full">
         <button
           onClick={() => setStats(true)}
           className="text-center w-32 py-2 px-4 rounded-l-full border-[#243753e8]    transition ease-in-out"
@@ -96,7 +96,7 @@ export default function Zap() {
                 <NFTCard key={index} tokenId={tokenId} />
               ))
             ) : (
-              <div className="w-full max-w-[250px] max-h-[300px] p-4 rounded-lg bg-[#0d223de8] mx-auto">
+              <div className="w-full max-w-[250px] max-h-[300px] p-4 rounded-lg bg-secondary mx-auto">
                 <img
                   src={"/logo.png"}
                   alt="token"

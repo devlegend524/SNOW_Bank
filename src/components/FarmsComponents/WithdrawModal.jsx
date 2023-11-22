@@ -62,16 +62,17 @@ const WithdrawModal = ({
           inputTitle={t("Unstake")}
         />
         <ModalActions>
-          <Button
+          <button
+            className="main_btn bg-[transparent!important] text-[white!important] w-full"
             variant="secondary"
             onClick={onDismiss}
             width="100%"
             disabled={pendingTx}
           >
             {t("Cancel")}
-          </Button>
-          <Button
-            className="base_bg text-[white!important]"
+          </button>
+          <button
+            className="main_btn w-full"
             disabled={pendingTx ||
               !valNumber.isFinite() ||
               (!isNFTPool && valNumber.eq(0)) ||
@@ -83,11 +84,9 @@ const WithdrawModal = ({
               setPendingTx(false);
               onDismiss();
             }}
-            width="100%"
-            style={{ alignSelf: "center", color: "white" }}
           >
             {t("Confirm")}
-          </Button>
+          </button>
         </ModalActions>
       </Modal>
       {pendingTx && <LogoLoading title="Pending Confirmation..." />}

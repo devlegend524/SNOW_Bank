@@ -42,7 +42,7 @@ const tokensList = [
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     decimals: 18,
-    logoA: "/assets/tokens/eth.png",
+    logoA: "/assets/tokens/eth.jpg",
     logoB: "",
   },
   {

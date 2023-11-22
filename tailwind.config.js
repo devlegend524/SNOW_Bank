@@ -4,11 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#020d1e',
-        secondary: '#16273bf5',
-        symbol: '#fd2fff',
-        symbolHover: '#ca21cb',
-        symbolBorder: '#ac26d53d'
+        primary: 'black',
+        secondary: '#0b1939',
+        symbol: '#0052ff',
+        symbolHover: '#073ba9',
+        symbolBorder: '#07338f9e'
       }
     },
   },
