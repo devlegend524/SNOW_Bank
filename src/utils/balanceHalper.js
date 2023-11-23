@@ -18,7 +18,6 @@ export async function getBalance(address, token, provider) {
         );
         const balance = await contract.balanceOf(address);
         const decimals = await contract.decimals();
-        console.log(decimals, balance, '--------', token.lpSymbol)
         return toReadableAmount(balance, token.decimals);
       } else {
         const contract = new ethers.Contract(
