@@ -18,7 +18,6 @@ export default function FarmBanner() {
   const addWatchpWiLDToken = useCallback(async () => {
     const provider = window.ethereum;
     if (provider) {
-      console.log("asdfasdf", provider);
       try {
         // wasAdded is a boolean. Like any RPC method, an error may be thrown.
         await provider.request({
@@ -66,9 +65,9 @@ export default function FarmBanner() {
         </h1>
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2">
-        <div className="buy_card flex gap-2">
-          <img src="/assets/stickers/sticker4.webp" className="w-[180px] h-[180px]" alt="sticker" />
-          <div className="w-full">
+        <div className="buy_card grid grid-cols-12">
+          <img src="/assets/stickers/sticker4.webp" className="w-[180px] h-[180px] max-w-[180px]  mx-auto col-span-12 lg:col-span-4" alt="sticker" />
+          <div className="col-span-12 lg:col-span-8">
             <div className="flex items-center justify-center gap-3">
               <a
                 className="main_btn w-full"

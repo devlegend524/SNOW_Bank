@@ -257,9 +257,9 @@ export default function CompoundModal({
             <button
               onClick={handleDeposit}
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
-              // disabled={
-              //   Number(earnings) === 0 || pendingZapTx || currentCounts === 0
-              // }
+              disabled={
+                Number(earnings) === 0 || pendingZapTx || currentCounts === 0
+              }
             >
               {t("Compound")}
             </button>
