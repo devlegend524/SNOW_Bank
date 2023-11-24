@@ -24,6 +24,7 @@ import tokens from "config/tokens";
 import { fromReadableAmount } from "utils";
 import { getCounts } from "utils/limitHelper";
 import LogoLoading from "./LogoLoading";
+import { useCompound } from "hooks/useCompound";
 
 const customStyles = {
   content: {
@@ -63,6 +64,7 @@ export default function CompoundModal({
   const wildXContract = getpWiLDContract(signer);
   const { onReward } = useHarvest(pid[0]);
   const { onZapForFarm } = useZapForFarm();
+  const { onCompound } = useCompound(pid[0])
   const masterChefContract = useMasterchef();
 
   const getCurrentCounts = async (address) => {
@@ -129,34 +131,29 @@ export default function CompoundModal({
   async function handleDeposit() {
     setZapPendingTx(true);
     try {
-      if (isAll) {
-        const res = await harvestMany(masterChefContract, pid, false, address);
-        // const res = await onReward(false);
-        if (res === false) {
-          setZapPendingTx(false);
-          return;
-        }
-      } else {
-        const res = await onReward(false);
-        if (res === false) {
-          setZapPendingTx(false);
-          return;
-        }
-      }
-      await sleep(2000);
+      // if (isAll) {
+      //   const res = await harvestMany(masterChefContract, pid, false, address);
+      //   // const res = await onReward(false);
+      //   if (res === false) {
+      //     setZapPendingTx(false);
+      //     return;
+      //   }
+      // } else {
+      //   const res = await onReward(false);
+      //   if (res === false) {
+      //     setZapPendingTx(false);
+      //     return;
+      //   }
+      // }
+      // await sleep(2000);
 
-      const allowanceAfterHarvest = await getAllowance();
-      if (allowanceAfterHarvest < Number(earnings)) {
-        await handleApprove();
-      }
+      // const allowanceAfterHarvest = await getAllowance();
+      // if (allowanceAfterHarvest < Number(earnings)) {
+      //   await handleApprove();
+      // }
 
-      await onZapForFarm(
-        tokens.wild.address,
-        false,
-        fromReadableAmount(earnings),
-        targetToken.lpAddresses,
-        targetToken.pid
-      );
+      console.log('comp')
+      await onCompound(pid[0]);
 
       dispatch(fetchFarmUserDataAsync({ account: address, pids: pid }));
       closeModal();
@@ -257,9 +254,9 @@ export default function CompoundModal({
             <button
               onClick={handleDeposit}
               className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
-              disabled={
-                Number(earnings) === 0 || pendingZapTx || currentCounts === 0
-              }
+              // disabled={
+              //   Number(earnings) === 0 || pendingZapTx || currentCounts === 0
+              // }
             >
               {t("Compound")}
             </button>

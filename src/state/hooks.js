@@ -20,6 +20,7 @@ import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
 import { useAccount } from "wagmi";
 import { wildWethFarmPid, mainTokenSymbol, wethUsdcFarmPid } from "config";
 import addresses from "constants/addresses";
+
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch();
   const { fastRefresh } = useRefresh();
