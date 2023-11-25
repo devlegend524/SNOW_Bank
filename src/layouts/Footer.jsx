@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="flex justify-around items-center absolute bottom-0 w-full mb-2">
       <div className="text-md">
-        @{moment().format("YYYY")} Pulse.pWild.FARM{" "}
+        @{moment().format("YYYY")} Pulse.bWild.FARM{" "}
         <span className="font-semibold mx-2">( v1.0 )</span> All Rights
         Reserved.
       </div>

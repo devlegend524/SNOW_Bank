@@ -162,11 +162,11 @@ export const zapForFarm = async (
 };
 
 export const harvest = async (masterChefContract, pid, address) => {
-  // const res = await limitedFunction(false, address);
-  // if (!res?.success) {
-  //   notify("error", "You can not harvest or compound three times a day.");
-  //   return false;
-  // }
+  const res = await limitedFunction(false, address);
+  if (!res?.success) {
+    notify("error", "You can not harvest or compound three times a day.");
+    return false;
+  }
 
   try {
     console.log(pid)
@@ -204,6 +204,29 @@ export const harvestMany = async (masterChefContract, pids, address) => {
       notify("error", "User rejected transaction");
     } else {
       notify("error", e.reason);
+    }
+    return null;
+  }
+};
+
+export const compound  = async (masterChefContract, pid, address) => {
+  const res = await limitedFunction(false, address);
+  if (!res?.success) {
+    notify("error", "You can not harvest or compound three times a day.");
+    return false;
+  }
+
+  try {
+    const tx = await masterChefContract.compound(pid);
+    await tx.wait();
+    limitedFunction(true, address);
+    notify("success", "Harvest successful!");
+  } catch (e) {
+    if (didUserReject(e)) {
+      notify("error", "User rejected transaction");
+    } else {
+      notify("error", e.reason);
+      console.log(e)
     }
     return null;
   }

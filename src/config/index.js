@@ -16,10 +16,10 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const mainTokenSymbol = "pWiLD";
+export const mainTokenSymbol = "bWild";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  8453: "https://baseswap.fi",
+  8453: "https://app.alienbase.xyz/",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];
@@ -31,11 +31,15 @@ export const ARCHIVED_NODE = "https://developer-access-mainnet.base.org";
 // export const YEAR = 60 * 60 * 24 * 365
 // export const YEAR_BN = new BigNumber(YEAR)
 
+
+export const privateWILDPrice = 12;
+export const BASE_EXPLORER = "https://basescan.org/";
+
 export const socials = [
   {
     icon: () => null,
     name: "Docs",
-    href: "https://lodgedocs.gitbook.io/pwild-pulsechain-farm/",
+    href: "https://lodgedocs.gitbook.io/wildbase-farm/protocol/about-bwild",
   },
   {
     icon: () => (
@@ -111,5 +115,9 @@ export const routes = [
   {
     name: "NFT Claim",
     url: "/nft-claim",
+  },
+  {
+    name: "Presale",
+    url: "/presale",
   },
 ];

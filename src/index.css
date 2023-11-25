@@ -78,7 +78,7 @@ body {
 }
 
 .tab_panel .tab_button.active {
-  @apply text-symbol  bg-primary border border-symbol;
+  @apply text-symbol  bg-primary/60 border border-symbol;
 }
 
 .nav_action {
