@@ -23,7 +23,7 @@ import oracleABI from "config/abis/oracle.json";
 import routerABI from "config/abis/router.json";
 import factoryABI from "config/abis/factory.json";
 import nftABI from "config/abis/nft.json";
-import PresaleABI from "config/abis/nft.json";
+import PresaleABI from "config/abis/presale.json";
 
 import { DEFAULT_GAS_PRICE } from "config";
 // import { getSettings, getGasPriceInWei } from './settings'

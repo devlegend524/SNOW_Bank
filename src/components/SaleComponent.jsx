@@ -1,23 +1,18 @@
-import React, { useState,  useEffect } from "react";
-import { formatAddress } from "utils/customHelpers";
+import React, { useState, useEffect } from "react";
+import {
+  didUserReject,
+  formatAddress,
+  fromReadableAmount,
+} from "utils/customHelpers";
 import { getPresaleAddress } from "utils/addressHelpers";
 import { useBalance, useAccount } from "wagmi";
-import {
-  privateWILDPrice,
-  BASE_EXPLORER
-} from "config";
+import { privateWILDPrice, BASE_EXPLORER } from "config";
 import { notify } from "utils/toastHelper";
+import { usePresaleContract } from "hooks/useContract";
 
-export default function SaleComponent({
-  totalRaised,
-  isPrivateParticipant,
-  buyWILDToken,
-  userDeposited,
-  started,
-  finished,
-}) {
-  const [amount, setAmount] = useState('');
-
+export default function SaleComponent({ saleData }) {
+  const presaleContract = usePresaleContract();
+  const [amount, setAmount] = useState("");
   const { address } = useAccount();
   const { data } = useBalance({
     address: address,
@@ -27,13 +22,12 @@ export default function SaleComponent({
     setAmount(value);
   };
 
-
-  const handleBuyWild = () => {
-    if (!started) {
+  const handleBuyWild = async () => {
+    if (!saleData?.enabled) {
       notify("error", "Presale is not started yet");
       return;
     }
-    if (finished) {
+    if (saleData?.sale_finalized) {
       notify("error", "Presale is ended");
       return;
     }
@@ -42,7 +36,28 @@ export default function SaleComponent({
       notify("warning", "Insufficient Balance");
       return;
     }
-    buyWILDToken(amount);
+
+    try {
+      if (2076 * amount >= 12) {
+        console.log(amount)
+        const tx = await presaleContract.buyWILD({
+          from: address,
+          value: fromReadableAmount(Number(amount)),
+        });
+        await tx.wait();
+        notify("success", "You have deposited successfully");
+      } else {
+        notify("warning", "Amount should be greater than the minimum ($12) amount.");
+      }
+    } catch (error) {
+      if (didUserReject(error)) {
+        notify("warning", "User Rejected transaction");
+        return;
+      } else {
+        notify("warning", error.reason);
+        return;
+      }
+    }
   };
 
   return (
@@ -51,11 +66,11 @@ export default function SaleComponent({
         <div className="my-8">
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
             <div> Total Raised:</div>
-            <div>{totalRaised} ETH</div>
+            <div>{saleData?.total_deposited || "0"} ETH</div>
           </div>
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
             <div> Your Commited:</div>
-            <div>{userDeposited} ETH</div>
+            <div>{saleData?.user_deposits || "0"} ETH</div>
           </div>
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
             <div> Token Sale Contract:</div>
@@ -72,14 +87,14 @@ export default function SaleComponent({
           </div>
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
             <div> Price Per WILD:</div>
-            <div> <p className="flex gap-1">
-              <span
-                className={
-                  isPrivateParticipant ? "font-semibold text-green-500" : ""
-                }
-              >
-                ${privateWILDPrice}
-              </span></p></div>
+            <div>
+              {" "}
+              <p className="flex gap-1">
+                <span className={"font-semibold text-green-500"}>
+                  ${privateWILDPrice}
+                </span>
+              </p>
+            </div>
           </div>
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
             <div> Your ETH Balance:</div>
@@ -104,11 +119,11 @@ export default function SaleComponent({
       <button
         className="main_btn w-full py-[3px!important] my-2"
         onClick={() => handleBuyWild()}
-        disabled={ !started || finished ? "dissabled" : ""}
+        disabled={!saleData?.enabled || saleData?.sale_finalized}
       >
-        { !started
+        {!saleData?.enabled
           ? "Presale is not started yet"
-          : finished
+          : saleData?.sale_finalized
           ? "Preslae is ended"
           : "BUY WILD"}
       </button>
