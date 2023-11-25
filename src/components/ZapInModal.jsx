@@ -35,6 +35,7 @@ const customStyles = {
     border: "none",
   },
 };
+
 const tokensList = [
   {
     pid: 0,
@@ -49,7 +50,7 @@ const tokensList = [
     pid: 1,
     lpSymbol: "WPLS",
     isTokenOnly: true,
-    lpAddresses: "0xA1077a294dDE1B09bB078844df40758a5D0f9a27",
+    lpAddresses: tokens.wpls.address,
     decimals: 18,
     logoA: "/assets/tokens/wpls.png",
     logoB: "",
@@ -179,6 +180,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
   const handleChangeToken = (e) => {
     setInputToken(tokensList[Number(e)]);
     getBalance(tokensList[Number(e)]);
+    getAllowance();
   };
 
   const getBalance = async (token) => {
@@ -206,7 +208,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
 
   useEffect(() => {
     getAllowance();
-  }, []);
+  }, [inputToken]);
 
   const onChange = (e) => {
     if (Number(e.target.value) > Number(balance)) {
@@ -217,6 +219,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
   const setMaxAmount = () => {
     setAmount(Number(balance) - Number(0.00001));
   };
+  
   return (
     <><Modal
       isOpen={open}
