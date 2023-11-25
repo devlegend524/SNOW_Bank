@@ -18,7 +18,6 @@ export default function FarmBanner() {
   const addWatchBWiLDToken = useCallback(async () => {
     const provider = window.ethereum;
     if (provider) {
-      console.log("asdfasdf", provider);
       try {
         // wasAdded is a boolean. Like any RPC method, an error may be thrown.
         await provider.request({
