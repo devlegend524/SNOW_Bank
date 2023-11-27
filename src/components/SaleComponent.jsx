@@ -32,23 +32,33 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
-    if (Number(data?.formatted) < Number(amount)) {
-      notify("warning", "Insufficient Balance");
+    let ethPrice;
+    const priceData = await fetch(
+      "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
+    );
+    const res = await priceData.json();
+    if (res && res.USD) {
+      ethPrice = res.USD;
+    }
+
+    if (!ethPrice) {
+      notify("danger", "Can't get eth price.");
       return;
     }
 
     try {
-      if (2076 * amount >= 12) {
-        console.log(amount)
-        const tx = await presaleContract.buyWILD({
-          from: address,
-          value: fromReadableAmount(Number(amount)),
-        });
-        await tx.wait();
-        notify("success", "You have deposited successfully");
-      } else {
-        notify("warning", "Amount should be greater than the minimum ($12) amount.");
+      const ethAmountToSend = (amount * 12) / Number(ethPrice);
+      if (Number(data?.formatted) <= Number(ethAmountToSend)) {
+        notify("warning", "Insufficient Balance");
+        return;
       }
+
+      const tx = await presaleContract.buyWILD({
+        from: address,
+        value: fromReadableAmount(Number(ethAmountToSend).toFixed(5)),
+      });
+      await tx.wait();
+      notify("success", `You bought ${amount} BWILD successfully`);
     } catch (error) {
       if (didUserReject(error)) {
         notify("warning", "User Rejected transaction");
@@ -64,15 +74,15 @@ export default function SaleComponent({ saleData }) {
     <div>
       <div className="balance_form">
         <div className="my-8">
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Total Raised:</div>
             <div>{saleData?.total_deposited || "0"} ETH</div>
           </div>
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Your Commited:</div>
             <div>{saleData?.user_deposits || "0"} ETH</div>
           </div>
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Token Sale Contract:</div>
             <div>
               <a
@@ -85,7 +95,7 @@ export default function SaleComponent({ saleData }) {
               </a>
             </div>
           </div>
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Price Per WILD:</div>
             <div>
               {" "}
@@ -96,7 +106,7 @@ export default function SaleComponent({ saleData }) {
               </p>
             </div>
           </div>
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Your ETH Balance:</div>
             <div>
               {Number(data?.formatted).toFixed(5) === "NaN"
@@ -107,25 +117,30 @@ export default function SaleComponent({ saleData }) {
           </div>
         </div>
         <div>
+          <div> BWILD Amount to Buy</div>
           <input
             className="w-full rounded-md py-1 bg-primary/20 px-3 mb-3 hover:outline-none focus-visible:outline-none border border-symbol/70"
             type="number"
-            placeholder="0"
+            placeholder="Input BWILD amount to Buy."
             value={amount}
             onChange={(e) => handleChange(e.target.value)}
           />
         </div>
       </div>
       <button
-        className="main_btn w-full py-[3px!important] my-2"
+        className="main_btn w-full my-2"
         onClick={() => handleBuyWild()}
-        disabled={!saleData?.enabled || saleData?.sale_finalized}
+        disabled={
+          !saleData?.enabled ||
+          saleData?.sale_finalized ||
+          250 <= Number(saleData?.WILDOwned) + Number(amount)
+        }
       >
         {!saleData?.enabled
           ? "Presale is not started yet"
           : saleData?.sale_finalized
           ? "Preslae is ended"
-          : "BUY WILD"}
+          : 250 <= Number(saleData?.WILDOwned) + Number(amount)? "Exceed Maximum Amount": "BUY BWILD"}
       </button>
     </div>
   );

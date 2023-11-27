@@ -66,9 +66,9 @@ export default function FarmBanner() {
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2">
         <div className="buy_card">
-          <img src="/assets/stickers/sticker4.webp" className="w-[180px] h-[180px] min-w-[180px] col-span-12 lg:col-span-4 mx-auto my-1" alt="sticker" />
-          <div className="w-full col-span-12 lg:col-span-8">
-            <div className="flex items-center justify-center gap-3">
+          <img src="/assets/stickers/sticker4.webp" className="w-[150px] h-[150px] min-w-[150px] col-span-12 lg:col-span-5 mx-auto my-1" alt="sticker" />
+          <div className="w-full col-span-12 lg:col-span-7">
+            <div className="flex items-center justify-center gap-2">
               <a
                 className="main_btn w-full"
                 href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${getBWiLDAddress()}`}

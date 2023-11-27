@@ -337,7 +337,7 @@ const tokens = {
     projectLink: "https://www.1-b.tc/",
   },
   bscx: {
-    symbol: "PulseX",
+    symbol: "BaseX",
     address: {
       56: "0x5Ac52EE5b2a633895292Ff6d8A89bB9190451587",
       97: "",

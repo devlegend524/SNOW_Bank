@@ -16,7 +16,7 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const mainTokenSymbol = "bWild";
+export const mainTokenSymbol = "BWiLD";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
   8453: "https://app.alienbase.xyz/",
@@ -36,6 +36,11 @@ export const privateWILDPrice = 12;
 export const BASE_EXPLORER = "https://basescan.org/";
 
 export const socials = [
+  {
+    icon: () => null,
+    name: "BSC Wildbase.farm",
+    href: "https://basc-wildbase-farm.vercel.app/",
+  },
   {
     icon: () => null,
     name: "Docs",

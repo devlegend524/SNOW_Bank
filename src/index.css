@@ -46,7 +46,7 @@ body {
 }
 
 .main_btn {
-  @apply py-2 font-semibold  rounded-full text-center relative hover:text-white transition ease-in-out duration-500 hover:scale-105 hover:bg-symbolHover bg-white border-[5px] border-[#0052ff] text-black;
+  @apply py-2 font-semibold  rounded-full text-center relative hover:text-white transition ease-in-out duration-500 hover:scale-105 hover:bg-symbolHover bg-white shadow-black shadow-2xl  text-black;
 }
 
 /* .main_btn::before {
@@ -106,7 +106,7 @@ body {
 }
 
 .base_bg  {
-  @apply bg-white text-black border-[4px] border-blue-700 rounded-full;
+  @apply bg-white text-black rounded-full;
 }
 
 .IKcpG {

@@ -8,6 +8,7 @@ import useRefresh from "hooks/useRefresh";
 import PresaleABI from "config/abis/presale.json";
 import { getPresaleAddress } from "utils/addressHelpers";
 import multicall from "utils/multicall";
+import { CountDownComponent } from "../components/CountDown";
 
 export default function Presale() {
   const preslaeContractAddress = getPresaleAddress();
@@ -34,11 +35,6 @@ export default function Presale() {
         },
         {
           address: preslaeContractAddress,
-          name: "WILDOwned",
-          params: [address],
-        },
-        {
-          address: preslaeContractAddress,
           name: "finishedTimestamp",
           params: [],
         },
@@ -46,6 +42,40 @@ export default function Presale() {
           address: preslaeContractAddress,
           name: "total_deposited",
           params: [],
+        },
+      ];
+
+      try {
+        const rawResults = await multicall(PresaleABI, calls);
+        rawResults.map((data, index) => {
+          const newData =
+            index < 2
+              ? { [calls[index]["name"]]: data[0] }
+              : {
+                  [calls[index]["name"]]: toReadableAmount(
+                    rawResults[index].toString(),
+                    18,
+                    6
+                  ),
+                };
+
+          setPresaleData((value) => ({ ...value, ...newData }));
+        });
+      } catch (e) {
+        console.log("Fetch Farms With Balance Error:", e);
+      }
+    };
+
+    fetchData();
+  }, [fastRefresh]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const calls = [
+        {
+          address: preslaeContractAddress,
+          name: "WILDOwned",
+          params: [address],
         },
         {
           address: preslaeContractAddress,
@@ -72,15 +102,12 @@ export default function Presale() {
       try {
         const rawResults = await multicall(PresaleABI, calls);
         rawResults.map((data, index) => {
-          const newData =
-            index < 2
-              ? { [calls[index]["name"]]: data[0] }
-              : {
-                  [calls[index]["name"]]:
-                    index === 8
-                      ? Number(rawResults[index])
-                      : toReadableAmount(rawResults[index].toString(), 18, 6)
-                };
+          const newData = {
+            [calls[index]["name"]]:
+              index === 4
+                ? Number(rawResults[index])
+                : toReadableAmount(rawResults[index].toString(), 18, 6),
+          };
 
           setPresaleData((value) => ({ ...value, ...newData }));
         });
@@ -89,13 +116,15 @@ export default function Presale() {
       }
     };
 
-    if (signer && chain) {
+    if (address) {
       fetchData();
     }
-  }, [signer, chain, fastRefresh]);
+  }, [address]);
 
   return (
     <div className="w-full container max-w-[500px] mx-3">
+      <CountDownComponent />
+
       <div className="tab_panel mx-auto">
         <div
           className={`tab_button py-[2px!important]  ${

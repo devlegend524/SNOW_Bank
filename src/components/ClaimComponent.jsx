@@ -44,19 +44,19 @@ export default function ClaimComponent({ saleData }) {
   return (
     <div className="claim_card">
       <div className="py-8">
-        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Total Earned BWiLD:</div>
-          <div>{saleData?.WILDOwned} &nbsp; BWiLD</div>
+          <div>{saleData?.WILDOwned || '0.00'} &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span> </div>
         </div>
-        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Total Claimed BWiLD:</div>
-          <div>{saleData?.user_withdraw_amount}  &nbsp; BWiLD</div>
+          <div>{saleData?.user_withdraw_amount || '0.00'}  &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span></div>
         </div>
-        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Next Claimable BWiLD:</div>
-          <div>{saleData?.getAmountToWithdraw}  &nbsp; BWiLD</div>
+          <div>{saleData?.getAmountToWithdraw || '0.00'}  &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span></div>
         </div>
-        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Last Claimed Time:</div>
           <div>
             {lastClaimedTime
@@ -64,7 +64,7 @@ export default function ClaimComponent({ saleData }) {
               : "0000-00-00 00:00:00"}{" "}
           </div>
         </div>
-        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1 text-sm">
+        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Next Claimable Time:</div>
           <div>
             {saleData?.user_withdraw_timestamp
@@ -77,7 +77,7 @@ export default function ClaimComponent({ saleData }) {
       </div>
 
       <button
-        className="main_btn w-full py-[2px!important]"
+        className="main_btn w-full"
         onClick={() => handleClaim()}
         disabled={!Boolean(saleData?.sale_finalized) ? "disabled" : ""}
       >
