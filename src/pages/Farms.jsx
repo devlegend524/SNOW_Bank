@@ -318,7 +318,6 @@ export default function Farms() {
         {renderContent()}
         <div ref={loadMoreRef} />
       </div>
-      <LogoLoading/>
     </div>
   );
 }
