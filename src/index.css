@@ -126,7 +126,10 @@ body {
 
 .circle_animation {
   animation: spin 5s linear infinite;
+}
 
+.bg-secondary {
+  @apply bg-secondary/90 backdrop-blur-sm;
 }
 
 @keyframes spin {

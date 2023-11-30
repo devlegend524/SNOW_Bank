@@ -73,11 +73,12 @@ export default function SaleComponent({ saleData }) {
   return (
     <div>
       <div className="balance_form">
+        <p className="text-center text-lg font-semibold">Presale is now until timer expires.</p>
         <div className="my-8">
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
+          {/* <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Total Raised:</div>
             <div>{saleData?.total_deposited || "0"} ETH</div>
-          </div>
+          </div> */}
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Your Commited:</div>
             <div>{saleData?.user_deposits || "0"} ETH</div>
@@ -140,7 +141,9 @@ export default function SaleComponent({ saleData }) {
           ? "Presale is not started yet"
           : saleData?.sale_finalized
           ? "Preslae is ended"
-          : 250 <= Number(saleData?.WILDOwned) + Number(amount)? "Exceed Maximum Amount": "BUY BWILD"}
+          : 250 <= Number(saleData?.WILDOwned) + Number(amount)
+          ? "Exceed Maximum Amount"
+          : "BUY BWILD"}
       </button>
     </div>
   );

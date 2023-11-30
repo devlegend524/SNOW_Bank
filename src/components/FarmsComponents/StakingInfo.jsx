@@ -91,8 +91,8 @@ export default function FarmStaking() {
 
   return (
     <div className="flex-1 bg-secondary p-8 rounded-md ">
-      <div className="text-3xl text-end font-semibold text-symbol mb-5">
-        Farms & Staking
+      <div className="text-3xl text-end font-semibold text-symbol mb-5 h-3.5">
+        {/* Farms & Staking */}
       </div>
       <div className="flex justify-between flex-col md:flex-row">
         <div>
@@ -109,7 +109,8 @@ export default function FarmStaking() {
         </div>
         <div>
           {" "}
-          <div className="text-base font-semibold text-right">
+          <img src="/assets/stickers/sticker3.png" alt="sticker" className="w-full lg:max-w-[200px] md:max-w-[180px] sm:max-w-[160px]  mx-auto" />
+          {/* <div className="text-base font-semibold text-right">
             Current Sales Tax:
           </div>
           <div className="mb-1">
@@ -121,7 +122,7 @@ export default function FarmStaking() {
               ( Sales tax burns all of the BWiLD automatically. <br /> The sales
               tax will drop over the next week to 8% )
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
 
