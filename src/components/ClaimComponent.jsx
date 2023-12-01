@@ -44,16 +44,16 @@ export default function ClaimComponent({ saleData }) {
   return (
     <div className="claim_card">
       <div className="py-8">
-        <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
+        {/* <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Total Earned BWiLD:</div>
           <div>{saleData?.WILDOwned || '0.00'} &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span> </div>
-        </div>
+        </div> */}
         <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-          <div> Total Claimed BWiLD:</div>
+          <div> Your BWiLD:</div>
           <div>{saleData?.user_withdraw_amount || '0.00'}  &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span></div>
         </div>
         <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-          <div> Next Claimable BWiLD:</div>
+          <div> Next Claim:</div>
           <div>{saleData?.getAmountToWithdraw || '0.00'}  &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span></div>
         </div>
         <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
@@ -81,11 +81,12 @@ export default function ClaimComponent({ saleData }) {
         onClick={() => handleClaim()}
         disabled={!Boolean(saleData?.sale_finalized) ? "disabled" : ""}
       >
-        {!Boolean(saleData?.sale_finalized)
+        {/* {!Boolean(saleData?.sale_finalized)
           ? "Preslae is not ended yet"
           : Number(saleData?.getAmountToWithdraw)
           ? "You don't have any tokens to claim"
-          : "ClAIM WILD"}
+          : "ClAIM WILD"} */}
+          CLAIM YOUR BWiLD
       </button>
     </div>
   );

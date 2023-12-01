@@ -123,7 +123,7 @@ export default function Presale() {
 
   return (
     <div className="w-full container max-w-[500px] mx-3">
-      <p className="text-center text-3xl font-bold shadow-md shadow-black/50 py-3 bg-secondary/40 rounded-md mb-2 backdrop-blur-sm">Farms Starts In: </p>
+      <p className="text-center text-3xl font-bold shadow-md shadow-black/50 py-3 bg-secondary/40 rounded-md mb-2 backdrop-blur-sm">BWiLD SALE ENDS IN: </p>
       <CountDownComponent />
       <div className="tab_panel mx-auto">
         <div
