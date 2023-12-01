@@ -47,7 +47,9 @@ const Apr = ({
     quoteTokenAddress,
     tokenAddress,
   });
-  const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`;
+  // const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`;
+  const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}`;
+
   return originalValue !== 0 ? (
     <Container>
       {originalValue ? (

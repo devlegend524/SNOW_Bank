@@ -19,7 +19,7 @@ export const YEAR_BN = new BigNumber(YEAR);
 export const mainTokenSymbol = "BWiLD";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  8453: "https://app.alienbase.xyz/",
+  8453: "https://www.dackieswap.xyz",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];
