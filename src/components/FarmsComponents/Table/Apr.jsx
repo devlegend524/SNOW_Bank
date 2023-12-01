@@ -23,13 +23,13 @@ const Container = styled.div`
 
 const initialAPR = (key) => {
   if (key === 0) {
-    return <div className="min-w-[60px] text-left text-symbol">45,854%</div>;
+    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">45,854%</div>;
   } else if (key === 1) {
-    return <div className="min-w-[60px] text-left text-symbol">11,139%</div>;
+    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">11,139%</div>;
   } else if (key === 2) {
-    return <div className="min-w-[60px] text-left text-symbol">5,570%</div>;
+    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">5,570%</div>;
   } else {
-    return <div className="min-w-[60px] text-left text-symbol">3,939%</div>;
+    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">3,939%</div>;
   }
 };
 
@@ -52,7 +52,7 @@ const Apr = ({
     <Container>
       {originalValue ? (
         <>
-          <div className="min-w-[60px] text-left text-symbol">{value}%</div>
+          <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">{value}%</div>
 
           {!hideButton && (
             <ApyButton
@@ -70,7 +70,7 @@ const Apr = ({
   ) : (
     <Container>
       {originalValue !== 0 ? (
-        <div className="min-w-[60px] text-left text-symbol">
+        <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
           {originalValue}%
         </div>
       ) : (
