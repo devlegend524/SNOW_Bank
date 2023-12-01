@@ -219,11 +219,19 @@ export default function ZapInModal({ open, closeModal, pid }) {
             onChange={(e) => handleChangeToken(e.target.value)}
           >
             {tokensList.map((item, key) => {
-              return (
-                <option key={key} className="bg-primary" value={key}>
-                  {item?.lpSymbol}
-                </option>
-              );
+              if (pid === 3) {
+                if (key > 0) {
+                  return <option key={key} className="bg-primary" value={key}>
+                    {item?.lpSymbol}
+                  </option>
+                }
+              } else {
+                return (
+                  <option key={key} className="bg-primary" value={key}>
+                    {item?.lpSymbol}
+                  </option>
+                );
+              }
             })}
           </select>
         </div>

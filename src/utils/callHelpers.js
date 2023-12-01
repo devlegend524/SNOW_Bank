@@ -212,11 +212,11 @@ export const harvestMany = async (masterChefContract, pids, address) => {
 };
 
 export const compound = async (masterChefContract, pid, address) => {
-  const res = await limitedFunction(false, address);
-  if (!res?.success) {
-    notify("error", "You can not harvest or compound three times a day.");
-    return false;
-  }
+  // const res = await limitedFunction(false, address);
+  // if (!res?.success) {
+  //   notify("error", "You can not harvest or compound three times a day.");
+  //   return false;
+  // }
 
   try {
     const tx = await masterChefContract.compound(pid);
