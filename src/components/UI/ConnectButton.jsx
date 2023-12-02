@@ -1,4 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import contractAddresses from "constants/addresses";
 import { FaAngleDown } from "react-icons/fa";
 import { usePriceBWiLDUsdc } from "state/hooks";
 export const WalletConnect = () => {
@@ -59,14 +60,18 @@ export const WalletConnect = () => {
               }
               return (
                 <div className="flex items-center">
-                  <img
-                    src="/logo.png"
-                    alt="logo"
-                    className="w-[25px] h-[25px] mx-1"
-                  />
-                  <p className="hidden sm:flex items-center text-symbol">
+                  <a
+                    href={`https://dexscreener.com/base/${contractAddresses.wildWethlp}`}
+                    target="_blank"
+                    className="hidden sm:flex items-center text-symbol"
+                  >
+                    <img
+                      src="/logo.png"
+                      alt="logo"
+                      className="w-[25px] h-[25px] mx-1"
+                    />
                     {Number(priceData[0]) ? `~ ${priceData[0].toString()}` : ""}
-                  </p>
+                  </a>
                   <button
                     onClick={openChainModal}
                     className="hidden sm:inline-flex justify-center items-center rounded-full  transition ease-in-out text-black text-xl"

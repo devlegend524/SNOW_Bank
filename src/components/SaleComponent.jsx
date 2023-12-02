@@ -99,7 +99,6 @@ export default function SaleComponent({ saleData }) {
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Presale Price:</div>
             <div>
-              {" "}
               <p className="flex gap-1">
                 <span className={"font-semibold text-green-500"}>
                   ${privateWILDPrice}
@@ -110,10 +109,9 @@ export default function SaleComponent({ saleData }) {
           <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Launch Price:</div>
             <div>
-              {" "}
               <p className="flex gap-1">
                 <span className={"font-semibold text-green-500"}>
-                  ${privateWILDPrice}
+                  $14
                 </span>
               </p>
             </div>
