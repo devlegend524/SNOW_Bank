@@ -12,13 +12,12 @@ import { CountDownComponent } from "../components/CountDown";
 
 export default function Presale() {
   const preslaeContractAddress = getPresaleAddress();
-  const signer = useEthersSigner();
   const { address } = useAccount();
-  const { chain } = useNetwork();
   const { fastRefresh } = useRefresh();
 
   const [active, setActive] = useState(0);
   const [presaleData, setPresaleData] = useState({});
+  const [ended, setEnded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,8 +122,15 @@ export default function Presale() {
 
   return (
     <div className="w-full container max-w-[500px] mx-3">
-      <p className="text-center text-3xl font-bold shadow-md shadow-black/50 py-3 bg-secondary/40 rounded-md mb-2 backdrop-blur-sm">BWiLD SALE ENDS IN: </p>
-      <CountDownComponent />
+      {(!presaleData?.sale_finalized && !ended) && (
+        <>
+          <p className="text-center text-3xl font-bold shadow-md shadow-black/50 py-3 bg-secondary/40 rounded-md mb-2 backdrop-blur-sm">
+            BWiLD SALE ENDS IN:
+          </p>
+          <CountDownComponent setEnded={setEnded}/>
+        </>
+      )}
+
       <div className="tab_panel mx-auto">
         <div
           className={`tab_button py-[2px!important]  ${

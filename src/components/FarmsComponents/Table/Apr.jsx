@@ -23,13 +23,29 @@ const Container = styled.div`
 
 const initialAPR = (key) => {
   if (key === 0) {
-    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">45,854%</div>;
+    return (
+      <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+        {(45854 / 365).toFixed(2)}%
+      </div>
+    );
   } else if (key === 1) {
-    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">11,139%</div>;
+    return (
+      <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+        {(11139 / 365).toFixed(2)}%
+      </div>
+    );
   } else if (key === 2) {
-    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">5,570%</div>;
+    return (
+      <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+        {(5570 / 365).toFixed(2)}%
+      </div>
+    );
   } else {
-    return <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">3,939%</div>;
+    return (
+      <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+        {(3939 / 365).toFixed(2)}%
+      </div>
+    );
   }
 };
 
@@ -54,13 +70,14 @@ const Apr = ({
     <Container>
       {originalValue ? (
         <>
-          <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">{value}%</div>
-
+          <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+            {(Number(value) / 365).toFixed(2)}%
+          </div>
           {!hideButton && (
             <ApyButton
               lpLabel={lpLabel}
               wildPrice={wildPrice}
-              apr={originalValue}
+              apr={(Number(originalValue) / 365).toFixed(2)}
               addLiquidityUrl={addLiquidityUrl}
             />
           )}
@@ -73,7 +90,7 @@ const Apr = ({
     <Container>
       {originalValue !== 0 ? (
         <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
-          {originalValue}%
+          {(Number(originalValue) / 365).toFixed(2)}%
         </div>
       ) : (
         initialAPR(index)

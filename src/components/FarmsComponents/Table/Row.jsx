@@ -98,7 +98,7 @@ const Row = (props) => {
                 return (
                   <td key={key}>
                     <CellInner>
-                      <CellLayout label={t("APR")}>
+                      <CellLayout label={t("APR (daily)")}>
                         <Apr
                           {...props.apr}
                           hideButton={isMobile}
@@ -140,7 +140,7 @@ const Row = (props) => {
         <td>
           <div>
             <AprMobileCell>
-              <CellLayout label={t("APR")}>
+              <CellLayout label={t("APR (daily)")}>
                 <Apr {...props.apr} hideButton index={props.index} />
               </CellLayout>
             </AprMobileCell>
