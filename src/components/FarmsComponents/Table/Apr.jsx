@@ -68,33 +68,25 @@ const Apr = ({
 
   return originalValue !== 0 ? (
     <Container>
-      {originalValue ? (
-        <>
-          <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
-            {(Number(value) / 365).toFixed(2)}%
-          </div>
-          {!hideButton && (
-            <ApyButton
-              lpLabel={lpLabel}
-              wildPrice={wildPrice}
-              apr={(Number(originalValue) / 365).toFixed(2)}
-              addLiquidityUrl={addLiquidityUrl}
-            />
-          )}
-        </>
-      ) : (
-        initialAPR(index)
-      )}
+      <>
+        <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+          {value}%
+        </div>
+        {!hideButton && (
+          <ApyButton
+            lpLabel={lpLabel}
+            wildPrice={wildPrice}
+            apr={originalValue}
+            addLiquidityUrl={addLiquidityUrl}
+          />
+        )}
+      </>
     </Container>
   ) : (
     <Container>
-      {originalValue !== 0 ? (
-        <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
-          {(Number(originalValue) / 365).toFixed(2)}%
-        </div>
-      ) : (
-        initialAPR(index)
-      )}
+      <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
+        {originalValue}%
+      </div>
     </Container>
   );
 };

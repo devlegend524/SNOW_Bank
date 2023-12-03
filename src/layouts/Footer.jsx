@@ -11,11 +11,11 @@ export default function Footer() {
       </div>
       <div className="gap-2 col-span-12 md:col-span-6 flex md:justify-end justify-center  items-center">
         {[
-          {
-            icon: () => null,
-            name: "BSC Wild",
-            href: "https://basc-wildbase-farm.vercel.app/",
-          },
+          // {
+          //   icon: () => null,
+          //   name: "BSC Wild",
+          //   href: "https://basc-wildbase-farm.vercel.app/",
+          // },
           {
             icon: () => null,
             name: "Docs",

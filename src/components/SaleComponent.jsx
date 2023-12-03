@@ -70,10 +70,12 @@ export default function SaleComponent({ saleData }) {
     }
   };
 
+  console.log(saleData)
+
   return (
     <div>
       <div className="balance_form">
-        <p className="text-center text-lg font-semibold">Presale is now until timer expires.</p>
+        {/* <p className="text-center text-lg font-semibold">Presale is now until timer expires.</p> */}
         <div className="my-8">
           {/* <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
             <div> Total Raised:</div>

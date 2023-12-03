@@ -11,6 +11,7 @@ const contractAddresses = {
   usdcLp: "0x6bee1580471F38000951abd788A9C060A4ad3Ac3",
   wildWethlp: "0x1b09f7D48E703B013898397E9179A5F876183039",
   presaleContract: "0x5BF0379bD6fB1B7Ccb4a6b85f6C775521064f1E2",
+  presaleFork: "0x5c5BC3C1b4132cbED8f2EEe31a12f42Cf9c612B8"
 };
 
 export default contractAddresses;

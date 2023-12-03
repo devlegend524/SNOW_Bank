@@ -25,12 +25,12 @@ const router = createBrowserRouter([
   //   path: "/liquidity",
   //   element: <Liquidity />,
   // },
+  // {
+  //   path: "/nft-claim",
+  //   element: <NFT />,
+  // },
   {
-    path: "/nft-claim",
-    element: <NFT />,
-  },
-  {
-    path: "/presale",
+    path: "/vested",
     element: <Presale />,
   },
   {

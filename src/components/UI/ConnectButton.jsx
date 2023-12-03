@@ -63,14 +63,14 @@ export const WalletConnect = () => {
                   <a
                     href={`https://dexscreener.com/base/${contractAddresses.wildWethlp}`}
                     target="_blank"
-                    className="hidden sm:flex items-center text-symbol"
+                    className="hidden sm:flex items-center text-white"
                   >
                     <img
                       src="/logo.png"
                       alt="logo"
-                      className="w-[25px] h-[25px] mx-1"
-                    />
-                    {Number(priceData[0]) ? `~ ${priceData[0].toString()}` : ""}
+                      className="w-[33.5px] h-[33.5px] mx-1"
+                      />
+                      {Number(priceData[0]) ? `${priceData[0].toString()}` : ""}
                   </a>
                   <button
                     onClick={openChainModal}

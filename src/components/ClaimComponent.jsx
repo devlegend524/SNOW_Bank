@@ -1,14 +1,19 @@
 import React from "react";
 import { notify } from "utils/toastHelper";
 import moment from "moment";
-import { didUserReject, toReadableAmount } from "utils/customHelpers";
-import { getPresaleContract } from "utils/contractHelpers";
+import { didUserReject } from "utils/customHelpers";
+import {
+  getPresaleContract,
+  getPresaleForkContract,
+} from "utils/contractHelpers";
 import { useAccount } from "wagmi";
+import { useEthersSigner } from "hooks/useEthers";
 
 export default function ClaimComponent({ saleData }) {
   const { address } = useAccount();
   const lastClaimedTime = window.localStorage.getItem("lastClaimedTime");
-  const presaleContract = getPresaleContract();
+  const signer = useEthersSigner();
+  const presaleContract = getPresaleForkContract(signer);
 
   const handleClaim = async () => {
     if (!Boolean(saleData.sale_finalized)) {
@@ -32,10 +37,7 @@ export default function ClaimComponent({ saleData }) {
         notify("warning", "User Rejected transaction");
         return;
       } else {
-        notify(
-          "warning",
-          "Please check your network status or You are not available to claim tokens yet"
-        );
+        notify("warning", error.reason);
         return;
       }
     }
@@ -49,12 +51,20 @@ export default function ClaimComponent({ saleData }) {
           <div>{saleData?.WILDOwned || '0.00'} &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span> </div>
         </div> */}
         <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-          <div> Your BWiLD:</div>
-          <div>{saleData?.user_withdraw_amount || '0.00'}  &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span></div>
+          <div> Your Claimed BWiLD:</div>
+          <div>
+            {saleData?.user_withdraw_amount || "0.00"} &nbsp;{" "}
+            <span className="text-[10.5px] text-sm">BWiLD</span>
+          </div>
         </div>
         <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-          <div> Next Claim:</div>
-          <div>{saleData?.getAmountToWithdraw || '0.00'}  &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span></div>
+          <div> Next Claimable BWiLD:</div>
+          <div>
+            {(saleData?.user_first_claim?.toString() == "1e"
+              ? saleData?.WILDOwned * 0.05
+              : saleData?.WILDOwned * 0.1) || "0.00"}{" "}
+            &nbsp; <span className="text-[10.5px] text-sm">BWiLD</span>
+          </div>
         </div>
         <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
           <div> Last Claimed Time:</div>
@@ -68,7 +78,7 @@ export default function ClaimComponent({ saleData }) {
           <div> Next Claimable Time:</div>
           <div>
             {saleData?.user_withdraw_timestamp
-              ? moment(Number(saleData?.user_withdraw_timestamp))
+              ? moment(Number(saleData?.user_withdraw_timestamp) * 1000)
                   .add(1, "d")
                   .format("YYYY-MM-DD HH:mm:ss")
               : "0000-00-00 00:00:00"}
@@ -86,7 +96,7 @@ export default function ClaimComponent({ saleData }) {
           : Number(saleData?.getAmountToWithdraw)
           ? "You don't have any tokens to claim"
           : "ClAIM WILD"} */}
-          CLAIM YOUR BWiLD
+        CLAIM YOUR BWiLD
       </button>
     </div>
   );

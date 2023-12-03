@@ -122,12 +122,12 @@ export const routes = [
   //   name: "Liquidity",
   //   url: "/liquidity",
   // },
+  // {
+  //   name: "NFT Claim",
+  //   url: "/nft-claim",
+  // },
   {
-    name: "NFT Claim",
-    url: "/nft-claim",
-  },
-  {
-    name: "Presale",
-    url: "/presale",
+    name: "Vested",
+    url: "/vested",
   },
 ];
