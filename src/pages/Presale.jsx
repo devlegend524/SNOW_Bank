@@ -28,22 +28,22 @@ export default function Presale() {
     const fetchData = async () => {
       const calls = [
         {
-          address: preslaeContractForkAddress,
+          address: preslaeContractAddress,
           name: "enabled",
           params: [],
         },
         {
-          address: preslaeContractForkAddress,
+          address: preslaeContractAddress,
           name: "sale_finalized",
           params: [],
         },
         {
-          address: preslaeContractForkAddress,
+          address: preslaeContractAddress,
           name: "finishedTimestamp",
           params: [],
         },
         {
-          address: preslaeContractForkAddress,
+          address: preslaeContractAddress,
           name: "total_deposited",
           params: [],
         },
@@ -77,44 +77,32 @@ export default function Presale() {
     const fetchData = async () => {
       const calls = [
         {
-          address: preslaeContractForkAddress,
-          name: "WILDOwned",
-          params: [address],
-        },
-        {
-          address: preslaeContractForkAddress,
-          name: "user_withdraw_amount",
-          params: [address],
-        },
-        {
-          address: preslaeContractForkAddress,
-          name: "getAmountToWithdraw",
-          params: [address],
-        },
-        {
-          address: preslaeContractForkAddress,
-          name: "user_withdraw_timestamp",
-          params: [address],
-        },
-        {
-          address: preslaeContractForkAddress,
-          name: "user_synced",
-          params: [address],
-        },
-        {
-          address: preslaeContractForkAddress,
-          name: "user_first_claim",
-          params: [address],
-        },
-      ];
-
-      const calls2 = [
-        {
           address: preslaeContractAddress,
           name: "user_deposits",
           params: [address],
         },
+        {
+          address: preslaeContractAddress,
+          name: "WILDOwned",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "user_withdraw_amount",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "getAmountToWithdraw",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "user_withdraw_timestamp",
+          params: [address],
+        }
       ];
+
 
       try {
         const rawResults = await multicall(PresaleForkABI, calls);
@@ -129,17 +117,6 @@ export default function Presale() {
           setPresaleData((value) => ({ ...value, ...newData }));
         });
 
-        const rawResults2 = await multicall(PresaleForkABI, calls2);
-        rawResults2.map((data, index) => {
-          const newData2 = {
-            [calls2[index]["name"]]: toReadableAmount(
-              rawResults2[index].toString(),
-              18,
-              6
-            ),
-          };
-          setPresaleData((value) => ({ ...value, ...newData2 }));
-        });
       } catch (e) {
         console.log("Fetch Farms With Balance Error:", e);
       }
@@ -150,36 +127,38 @@ export default function Presale() {
     }
   }, [address]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (presaleData && presaleData?.user_synced === 0 && signer && !synced) {
-      setSynced(true)
-      async function sync() {
-        const calls = [
-          {
-            address: preslaeContractAddress,
-            name: "user_deposits",
-            params: [address],
-          },
-          {
-            address: preslaeContractAddress,
-            name: "user_withdraw_amount",
-            params: [address],
-          },
-          {
-            address: preslaeContractAddress,
-            name: "WILDOwned",
-            params: [address],
-          },
-        ];
+  //   if (presaleData && presaleData?.user_synced === 0 && signer && !synced) {
+  //     setSynced(true)
+  //     async function sync() {
+  //       const calls = [
+  //         {
+  //           address: preslaeContractAddress,
+  //           name: "user_deposits",
+  //           params: [address],
+  //         },
+  //         {
+  //           address: preslaeContractAddress,
+  //           name: "user_withdraw_amount",
+  //           params: [address],
+  //         },
+  //         {
+  //           address: preslaeContractAddress,
+  //           name: "WILDOwned",
+  //           params: [address],
+  //         },
+  //       ];
 
-        const rawResults = await multicall(PresaleForkABI, calls);
-        const oPresaleContract = getPresaleForkContract(signer);
-        await oPresaleContract.syncData(rawResults[0].toString(), rawResults[1].toString(), rawResults[2].toString())
-      }
-      sync();
-    }
-  }, [presaleData, signer]);
+  //       const rawResults = await multicall(PresaleForkABI, calls);
+  //       const oPresaleContract = getPresaleForkContract(signer);
+  //       await oPresaleContract.syncData(rawResults[0].toString(), rawResults[1].toString(), rawResults[2].toString())
+  //     }
+  //     sync();
+  //   }
+  // }, [presaleData, signer]);
+
+  console.log(presaleData)
 
   return (
     <div className="w-full container max-w-[500px] mx-3">

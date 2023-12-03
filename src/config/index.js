@@ -128,6 +128,6 @@ export const routes = [
   // },
   {
     name: "Vested",
-    url: "/vested",
+    url: "/presale",
   },
 ];

@@ -30,7 +30,7 @@ const router = createBrowserRouter([
   //   element: <NFT />,
   // },
   {
-    path: "/vested",
+    path: "/presale",
     element: <Presale />,
   },
   {
