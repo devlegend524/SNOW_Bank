@@ -68,9 +68,9 @@ export default function ClaimComponent({ saleData }) {
           <div> Next Claimable Time:</div>
           <div>
             {saleData?.user_withdraw_timestamp
-              ? moment(Number(saleData?.user_withdraw_timestamp))
-                  .add(1, "d")
-                  .format("YYYY-MM-DD HH:mm:ss")
+              ? moment(Number(saleData?.user_withdraw_timestamp) * 1000)
+                .add(1, "d")
+                .format("YYYY-MM-DD HH:mm:ss")
               : "0000-00-00 00:00:00"}
           </div>
         </div>
@@ -84,8 +84,8 @@ export default function ClaimComponent({ saleData }) {
         {!Boolean(saleData?.sale_finalized)
           ? "Preslae is not ended yet"
           : Number(saleData?.getAmountToWithdraw)
-          ? "You don't have any tokens to claim"
-          : "ClAIM WILD"}
+            ? "You don't have any tokens to claim"
+            : "ClAIM WILD"}
       </button>
     </div>
   );
