@@ -94,7 +94,7 @@ export default function TotalValueLocked() {
             )}
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <p className="font-semibold">Circulating Supply</p>
           <div>
             {totalSupply && (
@@ -106,7 +106,7 @@ export default function TotalValueLocked() {
               />
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

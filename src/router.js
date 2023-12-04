@@ -7,20 +7,21 @@ const NotFound = lazy(() => import("pages/Notfound"));
 const Farms = lazy(() => import("pages/Farms"));
 const NFT = lazy(() => import("pages/NftClaim"));
 const Presale = lazy(() => import("pages/Presale"));
+const SnowPresale = lazy(() => import("pages/SnowPresale"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Farms />,
+    element: <SnowPresale />,
   },
-  {
-    path: "/farms",
-    element: <Farms />,
-  },
-  {
-    path: "/swap",
-    element: <Swap />,
-  },
+  // {
+  //   path: "/farms",
+  //   element: <Farms />,
+  // },
+  // {
+  //   path: "/swap",
+  //   element: <Swap />,
+  // },
   // {
   //   path: "/liquidity",
   //   element: <Liquidity />,
@@ -29,10 +30,10 @@ const router = createBrowserRouter([
   //   path: "/nft-claim",
   //   element: <NFT />,
   // },
-  {
-    path: "/presale",
-    element: <Presale />,
-  },
+  // {
+  //   path: "/presale",
+  //   element: <Presale />,
+  // },
   {
     path: "*",
     element: <NotFound />,

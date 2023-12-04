@@ -69,8 +69,13 @@ const Apr = ({
   return originalValue !== 0 ? (
     <Container>
       <>
-        <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
-          {value}%
+        <div>
+          <div className="min-w-[60px] text-left text-white text-[11px] md:text-sm font-semibold">
+            {value || "0.00"} %
+          </div>
+          {/* <div className="min-w-[60px] text-left text-white text-[11px] md:text-sm font-semibold">
+            {value || "0.00"} %
+          </div> */}
         </div>
         {!hideButton && (
           <ApyButton
@@ -84,8 +89,13 @@ const Apr = ({
     </Container>
   ) : (
     <Container>
-      <div className="min-w-[60px] text-left text-symbol text-[11px] md:text-sm font-semibold">
-        {originalValue}%
+      <div>
+        <div className="min-w-[60px] text-left text-white text-[11px] md:text-sm font-semibold">
+          {originalValue || "0.00"} %
+        </div>
+        {/* <div className="min-w-[60px] text-left text-white text-[11px] md:text-sm font-semibold">
+          {originalValue || "0.00"} %
+        </div> */}
       </div>
     </Container>
   );

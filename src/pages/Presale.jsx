@@ -17,7 +17,7 @@ export default function Presale() {
   const preslaeContractForkAddress = getPresaleForkAddress();
   const { address } = useAccount();
   const { fastRefresh } = useRefresh();
-  const signer = useEthersSigner()
+  const signer = useEthersSigner();
 
   const [active, setActive] = useState(1);
   const [presaleData, setPresaleData] = useState({});
@@ -53,8 +53,11 @@ export default function Presale() {
         const rawResults = await multicall(PresaleForkABI, calls);
         rawResults.map((data, index) => {
           const newData =
-            index < 2
-              ? { [calls[index]["name"]]: data[0] }
+            index <= 2
+              ? {
+                  [calls[index]["name"]]:
+                    index === 2 ? Number(data[0]) : data[0],
+                }
               : {
                   [calls[index]["name"]]: toReadableAmount(
                     rawResults[index].toString(),
@@ -93,21 +96,19 @@ export default function Presale() {
         },
         {
           address: preslaeContractAddress,
-          name: "getAmountToWithdraw",
+          name: "user_withdraw_timestamp",
           params: [address],
         },
         {
           address: preslaeContractAddress,
-          name: "user_withdraw_timestamp",
+          name: "getAmountToWithdraw",
           params: [address],
-        }
+        },
       ];
-
 
       try {
         const rawResults = await multicall(PresaleForkABI, calls);
         rawResults.map((data, index) => {
-          console.log(Number(rawResults[index]));
           const newData = {
             [calls[index]["name"]]:
               index === 3
@@ -116,7 +117,6 @@ export default function Presale() {
           };
           setPresaleData((value) => ({ ...value, ...newData }));
         });
-
       } catch (e) {
         console.log("Fetch Farms With Balance Error:", e);
       }
@@ -126,39 +126,6 @@ export default function Presale() {
       fetchData();
     }
   }, [address]);
-
-  // useEffect(() => {
-
-  //   if (presaleData && presaleData?.user_synced === 0 && signer && !synced) {
-  //     setSynced(true)
-  //     async function sync() {
-  //       const calls = [
-  //         {
-  //           address: preslaeContractAddress,
-  //           name: "user_deposits",
-  //           params: [address],
-  //         },
-  //         {
-  //           address: preslaeContractAddress,
-  //           name: "user_withdraw_amount",
-  //           params: [address],
-  //         },
-  //         {
-  //           address: preslaeContractAddress,
-  //           name: "WILDOwned",
-  //           params: [address],
-  //         },
-  //       ];
-
-  //       const rawResults = await multicall(PresaleForkABI, calls);
-  //       const oPresaleContract = getPresaleForkContract(signer);
-  //       await oPresaleContract.syncData(rawResults[0].toString(), rawResults[1].toString(), rawResults[2].toString())
-  //     }
-  //     sync();
-  //   }
-  // }, [presaleData, signer]);
-
-  console.log(presaleData)
 
   return (
     <div className="w-full container max-w-[500px] mx-3">
@@ -171,8 +138,8 @@ export default function Presale() {
         </>
       )}
 
-      <div className="tab_panel mx-auto">
-        <div
+      <div className="tab_panel mx-auto p-4">
+        {/* <div
           className={`tab_button py-[2px!important]  ${
             active === 0
               ? "main_btn hover:scale-[100%!important] hover:bg-[white!important] hover:text-[black!important]"
@@ -181,7 +148,7 @@ export default function Presale() {
           onClick={() => setActive(0)}
         >
           Sale
-        </div>
+        </div> */}
         <div
           className={`tab_button py-[2px!important]  ${
             active === 1
@@ -193,12 +160,19 @@ export default function Presale() {
           Claim
         </div>
       </div>
-      <div className="bg-secondary px-4 py-6 rounded-lg">
-        {active === 0 ? (
-          <SaleComponent saleData={presaleData} />
-        ) : (
-          <ClaimComponent saleData={presaleData} />
-        )}
+      <div className="relative">
+        <div className="bg-secondary px-4 py-6 rounded-lg">
+          {active === 0 ? (
+            <SaleComponent saleData={presaleData} />
+          ) : (
+            <ClaimComponent saleData={presaleData} />
+          )}
+        </div>
+        <img
+          src="/assets/stickers/sticker1.png"
+          alt=""
+          className="relative w-[270px] sm:inline-block bottom-8 left-1/2 -translate-x-1/2 "
+        />
       </div>
       <img
         src="/assets/stickers/wild1.png"

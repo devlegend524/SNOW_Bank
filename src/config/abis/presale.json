@@ -90,13 +90,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "buyWILD",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -273,12 +266,12 @@
   {
     "inputs": [
       {
-        "internalType": "bool",
-        "name": "_enabled",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "_finishedTimestamp",
+        "type": "uint256"
       }
     ],
-    "name": "setEnabled",
+    "name": "setFinishedTimeStamp",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -305,6 +298,38 @@
       }
     ],
     "name": "setWILDAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_users",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_WILDOwned",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "setWiLDOwned",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "setfinalizeSale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "setfinishedTimestamp",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -369,6 +394,19 @@
       }
     ],
     "name": "user_withdraw_timestamp",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "users_timeStamp",
     "outputs": [
       {
         "internalType": "uint256",

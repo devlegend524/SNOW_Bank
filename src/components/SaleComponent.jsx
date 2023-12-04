@@ -151,7 +151,7 @@ export default function SaleComponent({ saleData }) {
         {!saleData?.enabled
           ? "Presale is not started yet"
           : saleData?.sale_finalized
-          ? "Preslae is ended"
+          ? "Preslae has ended"
           : 250 <= Number(saleData?.WILDOwned) + Number(amount)
           ? "Exceed Maximum Amount"
           : "BUY BWILD"}

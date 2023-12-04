@@ -66,7 +66,7 @@ export default function FarmBanner() {
       </div>
       <div className="flex justify-end p-3 md:p-6 w-fill md:w-1/2">
         <div className="buy_card">
-          <img src="/assets/stickers/sticker4.webp" className="w-[150px] h-[150px] min-w-[150px] col-span-12 lg:col-span-5 mx-auto my-1" alt="sticker" />
+          <img src="/assets/stickers/sticker4.png" className="w-[160px] h-[160px] min-w-[160px] col-span-12 lg:col-span-5 mx-auto my-1" alt="sticker" />
           <div className="w-full col-span-12 lg:col-span-7">
             <div className="flex items-center justify-center gap-2">
               <a

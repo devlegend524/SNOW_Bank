@@ -6,12 +6,12 @@ import Header from "./Header";
 export default function index({ children }) {
   return (
     <div>
-      <Header />
-      <div className="flex w-full justify-center items-center  min-h-[calc(100vh-90px)] pb-[100px] relative px-1">
+      {/* <Header /> */}
+      {/* <div className="flex w-full justify-center items-center  min-h-[calc(100vh-90px)] pb-[100px] relative px-1"> */}
         {children}
-        <Footer />
-      </div>
-      <div className="fixed -z-10 top-40 left-1/2 -translate-x-1/2 w-100">
+        {/* <Footer /> */}
+      {/* </div> */}
+      {/* <div className="fixed -z-10 top-40 left-1/2 -translate-x-1/2 w-100">
         <img src="/assets/background.png" alt="" className="w-100 min-w-[500px] sm:min-w-[600px] md:min-w-[900px] opacity-70" />
       </div>
       <div className="fixed -z-10 lg:top-32 top-28 left-1/2 -translate-x-1/2 w-100">
@@ -23,7 +23,7 @@ export default function index({ children }) {
       <div className="fixed top-[55%] left-[50%]  -translate-x-1/2 -translate-y-1/2  -z-20  rounded-full h-[200px] w-[200px] bg-symbol/50  blur-3xl"></div>
       <div className="fixed top-[55%] left-[50%]  -translate-x-1/2 -translate-y-1/2  -z-20  rounded-full h-[400px] w-[400px] bg-symbol/30  blur-3xl"></div>
       <div className="fixed top-[60%] left-[50%]  -translate-x-1/2 -translate-y-1/2  -z-20  rounded-full h-[1000px] w-[1000px] bg-symbol/10  blur-3xl"></div>
-      <div className="fixed top-[60%] left-[50%]  -translate-x-1/2 -translate-y-1/2  -z-20  rounded-full h-[1300px] w-[1300px] bg-symbol/5  blur-3xl"></div>
+      <div className="fixed top-[60%] left-[50%]  -translate-x-1/2 -translate-y-1/2  -z-20  rounded-full h-[1300px] w-[1300px] bg-symbol/5  blur-3xl"></div> */}
     </div>
   );
 }
