@@ -8,18 +8,14 @@ export default function Header() {
   const [isMobile, setMobile] = useState(false);
 
   return (
-    <>
-      <div className="py-3">
-        <div className="container mr-auto ml-auto relative">
-          <div className="flex justify-between">
-            <div className="hidden sm:block logo">
+    <div className="w-full py-3 absolute top-3 left-1/2 -translate-x-1/2 px-3">
+      <div className="container mx-auto relative">
+        <div className="flex justify-between">
+          <div className="hidden sm:block logo">
+            <div className="block logo">
               <a href="/">
-                <img
-                  src="/logo.png"
-                  className="h-16 w-18"
-                  alt=""
-                />
-                {/* <span className="text-symbol">3</span>WiLD */}
+                {/* <img src="/logo.png" className="h-16 w-18" alt="" /> */}
+                SNOW BASE
               </a>
             </div>
             <div
@@ -28,53 +24,52 @@ export default function Header() {
             >
               <Hamburger />
             </div>
-
-            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <ul className="nav_list">
-                {routes.map((link, key) => (
-                  <li
-                    className={`list_item ${
-                      currentUrl === link.url ? "active" : ""
-                    }`}
-                    key={key}
-                  >
-                    <a href={link.url}>{link.name}</a>
-                    <div className="flex gap-[2px]">
-                      <div className="h-1 w-full bg-symbol"></div>
-                      <div className="w-1 h-1 bg-symbol rounded-full"></div>
-                    </div>
-                  </li>
-                ))}
-                <li className="list_item">
-                  <a
-                    href="https://lodgedocs.gitbook.io/wildbase-farm/protocol/about-bwild"
-                    target="_blank"
-                    className={`p-3`}
-                    rel="noopener noreferrer"
-                  >
-                    Docs
-                  </a>
+          </div>
+          {/* <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <ul className="nav_list">
+              {routes.map((link, key) => (
+                <li
+                  className={`list_item ${
+                    currentUrl === link.url ? "active" : ""
+                  }`}
+                  key={key}
+                >
+                  <a href={link.url}>{link.name}</a>
                   <div className="flex gap-[2px]">
                     <div className="h-1 w-full bg-symbol"></div>
                     <div className="w-1 h-1 bg-symbol rounded-full"></div>
                   </div>
                 </li>
-              </ul>
-            </div>
-
-            <div className="nav_action">
-              <WalletConnect />
-              <div
-                className="text-symbol ml-2 hidden sm:block lg:hidden"
-                onClick={() => setMobile(!isMobile)}
-              >
-                <Hamburger />
-              </div>
-            </div>
+              ))}
+              <li className="list_item">
+                <a
+                  href="https://lodgedocs.gitbook.io/wildbase-farm/protocol/about-bwild"
+                  target="_blank"
+                  className={`p-3`}
+                  rel="noopener noreferrer"
+                >
+                  Docs
+                </a>
+                <div className="flex gap-[2px]">
+                  <div className="h-1 w-full bg-symbol"></div>
+                  <div className="w-1 h-1 bg-symbol rounded-full"></div>
+                </div>
+              </li>
+            </ul>
+          </div> */}
+          <div className="sm:hidden"></div>
+          <div className="nav_action">
+            <WalletConnect />
+            {/* <div
+              className="text-symbol ml-2 hidden sm:block lg:hidden"
+              onClick={() => setMobile(!isMobile)}
+            >
+              <Hamburger />
+            </div> */}
           </div>
         </div>
       </div>
-      {isMobile === true ? (
+      {/* {isMobile === true ? (
         <div className="container mr-auto ml-auto">
           <div className="nav_bar mobile_navbar">
             <ul className="nav_list">
@@ -104,7 +99,7 @@ export default function Header() {
         </div>
       ) : (
         ""
-      )}
-    </>
+      )} */}
+    </div>
   );
 }

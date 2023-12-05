@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import {
   getDefaultWallets,
   RainbowKitProvider,
-  darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { base } from "wagmi/chains";
@@ -39,7 +38,7 @@ const Providers = ({ children }) => {
   });
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains} theme={darkTheme()}>
+      <RainbowKitProvider chains={chains}>
         <Provider store={store}>
           <HelmetProvider>
             <ThemeContextProvider>

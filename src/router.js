@@ -32,12 +32,12 @@ const router = createBrowserRouter([
   // },
   // {
   //   path: "/presale",
-  //   element: <Presale />,
+  //   element: <SnowPresale />,
   // },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
+  // {
+  //   path: "*",
+  //   element: <NotFound />,
+  // },
 ]);
 
 export default router;

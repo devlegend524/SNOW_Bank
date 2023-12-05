@@ -60,7 +60,7 @@ export const WalletConnect = () => {
               }
               return (
                 <div className="flex items-center">
-                  <a
+                  {/* <a
                     href={`https://dexscreener.com/base/${contractAddresses.wildWethlp}`}
                     target="_blank"
                     className="hidden sm:flex items-center text-white"
@@ -89,7 +89,8 @@ export const WalletConnect = () => {
                         className="h-[30px!important] w-[30px!important]"
                       />
                     )}
-                  </button>
+                  </button> */}
+                  {Number(account.balanceFormatted).toFixed(4)} <span className="text-[10px]">&nbsp;( ETH )</span>  
                   <button
                     onClick={openAccountModal}
                     className="m-2 sm:m-0 hover:bg-symbolHover main_btn px-5 py-1transition ease-in-out flex justify-center items-center gap-1"

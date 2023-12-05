@@ -41,7 +41,7 @@ export function CountDownComponent({ setEnded }) {
 
   return (
     <div className="flex justify-center">
-      <Countdown date={1701547400000} renderer={renderer} autoStart />
+      <Countdown date={1706547400000} renderer={renderer} autoStart />
     </div>
   );
 }

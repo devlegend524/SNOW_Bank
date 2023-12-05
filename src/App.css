@@ -331,7 +331,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .Toastify__toast-theme--dark {
-  background: #1f212a !important;
+  background: #2b5e8b !important;
   border: 1px solid #989696;
   border-radius: 14px;
   color: var(--toastify-text-color-dark);

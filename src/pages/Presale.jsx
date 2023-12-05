@@ -139,7 +139,7 @@ export default function Presale() {
       )}
 
       <div className="tab_panel mx-auto p-4">
-        {/* <div
+        <div
           className={`tab_button py-[2px!important]  ${
             active === 0
               ? "main_btn hover:scale-[100%!important] hover:bg-[white!important] hover:text-[black!important]"
@@ -148,7 +148,7 @@ export default function Presale() {
           onClick={() => setActive(0)}
         >
           Sale
-        </div> */}
+        </div>
         <div
           className={`tab_button py-[2px!important]  ${
             active === 1
@@ -161,7 +161,7 @@ export default function Presale() {
         </div>
       </div>
       <div className="relative">
-        <div className="bg-secondary px-4 py-6 rounded-lg">
+        <div className="bg-secondary px-4 py-6 rounded-lg snow_effect">
           {active === 0 ? (
             <SaleComponent saleData={presaleData} />
           ) : (

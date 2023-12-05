@@ -1,11 +1,147 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useAccount } from "wagmi";
+import { toReadableAmount } from "utils/customHelpers";
+import ClaimComponent from "components/ClaimComponent";
+import SaleComponent from "components/SaleComponent";
+import useRefresh from "hooks/useRefresh";
+import PresaleForkABI from "config/abis/presaleFork.json";
+import { getPresaleAddress } from "utils/addressHelpers";
+import multicall from "utils/multicall";
+import { CountDownComponent } from "../components/CountDown";
+import { BASE_EXPLORER } from "config";
+import Banner from "components/Presale/Banner";
+import Tab from "components/Presale/Tab";
+import PresaleDetails from "components/Presale/PresaleDetails";
 
 export default function SnowPresale() {
+  const preslaeContractAddress = getPresaleAddress();
+  const { address } = useAccount();
+  const { fastRefresh } = useRefresh();
+
+  const [active, setActive] = useState(0);
+  const [presaleData, setPresaleData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const calls = [
+        {
+          address: preslaeContractAddress,
+          name: "enabled",
+          params: [],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "sale_finalized",
+          params: [],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "finishedTimestamp",
+          params: [],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "total_deposited",
+          params: [],
+        },
+      ];
+
+      try {
+        const rawResults = await multicall(PresaleForkABI, calls);
+        rawResults.map((data, index) => {
+          const newData =
+            index <= 2
+              ? {
+                  [calls[index]["name"]]:
+                    index === 2 ? Number(data[0]) : data[0],
+                }
+              : {
+                  [calls[index]["name"]]: toReadableAmount(
+                    rawResults[index].toString(),
+                    18,
+                    6
+                  ),
+                };
+
+          setPresaleData((value) => ({ ...value, ...newData }));
+        });
+      } catch (e) {
+        console.log("Fetch Farms With Balance Error:", e);
+      }
+    };
+
+    fetchData();
+  }, [fastRefresh]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const calls = [
+        {
+          address: preslaeContractAddress,
+          name: "user_deposits",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "WILDOwned",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "user_withdraw_amount",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "user_withdraw_timestamp",
+          params: [address],
+        },
+        {
+          address: preslaeContractAddress,
+          name: "getAmountToWithdraw",
+          params: [address],
+        },
+      ];
+
+      try {
+        const rawResults = await multicall(PresaleForkABI, calls);
+        rawResults.map((data, index) => {
+          const newData = {
+            [calls[index]["name"]]:
+              index === 3
+                ? Number(rawResults[index])
+                : toReadableAmount(rawResults[index].toString(), 18, 6),
+          };
+          setPresaleData((value) => ({ ...value, ...newData }));
+        });
+      } catch (e) {
+        console.log("Fetch Farms With Balance Error:", e);
+      }
+    };
+
+    if (address) {
+      fetchData();
+    }
+  }, [address]);
+
   return (
-    <div className="main">
-      <div className="gradient"></div>
-      <div className="lines"></div>
-      <h1 className="bg-text">PRESALE</h1>
+    <div className="min-h-[calc(100vh-200px)] max-w-[1200px] mx-3 container">
+      <Banner />
+
+      <div className="w-full mt-3 grid grid-cols-12 gap-3">
+        <div className="col-span-12 sm:col-span-6">
+          <div className="px-4 py-6 rounded-lg snow_effect">
+            <Tab active={active} setActive={setActive} />
+            {active === 0 ? (
+              <SaleComponent saleData={presaleData} />
+            ) : (
+              <ClaimComponent saleData={presaleData} />
+            )}
+          </div>
+        </div>
+
+        <PresaleDetails saleData={presaleData} />
+      </div>
     </div>
   );
 }

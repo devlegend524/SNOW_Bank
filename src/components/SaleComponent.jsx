@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  didUserReject,
-  formatAddress,
-  fromReadableAmount,
-} from "utils/customHelpers";
-import { getPresaleAddress } from "utils/addressHelpers";
+import React, { useState } from "react";
+import { didUserReject, fromReadableAmount } from "utils/customHelpers";
 import { useBalance, useAccount } from "wagmi";
-import { privateWILDPrice, BASE_EXPLORER } from "config";
 import { notify } from "utils/toastHelper";
 import { usePresaleContract } from "hooks/useContract";
+import { SALE_PRICE } from "config";
+import { MAX_PER_USER } from "config";
 
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
@@ -58,7 +54,7 @@ export default function SaleComponent({ saleData }) {
         value: fromReadableAmount(Number(ethAmountToSend).toFixed(5)),
       });
       await tx.wait();
-      notify("success", `You bought ${amount} BWILD successfully`);
+      notify("success", `You bought ${amount} SNOW successfully`);
     } catch (error) {
       if (didUserReject(error)) {
         notify("warning", "User Rejected transaction");
@@ -70,56 +66,34 @@ export default function SaleComponent({ saleData }) {
     }
   };
 
-  console.log(saleData)
-
   return (
-    <div>
+    <div className="w-full">
       <div className="balance_form">
-        {/* <p className="text-center text-lg font-semibold">Presale is now until timer expires.</p> */}
         <div className="my-8">
-          {/* <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
+          <div className="flex justify-between mb-3 px-1">
             <div> Total Raised:</div>
             <div>{saleData?.total_deposited || "0"} ETH</div>
-          </div> */}
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
+          </div>
+          <div className="flex justify-between mb-3 px-1">
             <div> Your Committed:</div>
             <div>{saleData?.user_deposits || "0"} ETH</div>
           </div>
-          {/* <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-            <div> Token Sale Contract:</div>
+          <div className="flex justify-between mb-3 px-1">
+            <div>MAX Per User:</div>
             <div>
-              <a
-                href={`${BASE_EXPLORER}/address/${getPresaleAddress()}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className=" text-symbol"
-              >
-                {formatAddress(getPresaleAddress(), 4)}
-              </a>
+              {MAX_PER_USER} <span className="text-sm">SNOW</span>{" "}
             </div>
-          </div> */}
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-            <div> Presale Price:</div>
+          </div>
+          <div className="flex justify-between mb-3 px-1">
+            <div>Price:</div>
             <div>
               <p className="flex gap-1">
-                <span className={"font-semibold text-green-500"}>
-                  ${privateWILDPrice}
-                </span>
+                <span className="font-semibold">$ {SALE_PRICE}</span>
               </p>
             </div>
           </div>
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-            <div> Launch Price:</div>
-            <div>
-              <p className="flex gap-1">
-                <span className={"font-semibold text-green-500"}>
-                  $14
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className="flex justify-between mb-3 border-b border-symbolBorder px-1">
-            <div> Your ETH Balance:</div>
+          <div className="flex justify-between mb-3 px-1">
+            <div>Balance:</div>
             <div>
               {Number(data?.formatted).toFixed(5) === "NaN"
                 ? "0.000"
@@ -128,19 +102,16 @@ export default function SaleComponent({ saleData }) {
             </div>
           </div>
         </div>
-        <div>
-          <div> BWILD Amount to Buy</div>
-          <input
-            className="w-full rounded-md py-1 bg-primary/20 px-3 mb-3 hover:outline-none focus-visible:outline-none border border-symbol/70"
-            type="number"
-            placeholder="Input BWILD amount to Buy."
-            value={amount}
-            onChange={(e) => handleChange(e.target.value)}
-          />
-        </div>
+        <input
+          className="w-full rounded-md py-3 bg-primary/20 px-3 mb-3 hover:outline-none focus-visible:outline-none border border-secondary focus-visible:border-white/70 transition ease-in-out duration-300"
+          type="number"
+          placeholder="Input SNOW Amount to Buy."
+          value={amount}
+          onChange={(e) => handleChange(e.target.value)}
+        />
       </div>
       <button
-        className="main_btn w-full my-2"
+        className="main_btn w-full mt-4"
         onClick={() => handleBuyWild()}
         disabled={
           !saleData?.enabled ||
@@ -151,10 +122,10 @@ export default function SaleComponent({ saleData }) {
         {!saleData?.enabled
           ? "Presale is not started yet"
           : saleData?.sale_finalized
-          ? "Preslae has ended"
+          ? "Presale has ended"
           : 250 <= Number(saleData?.WILDOwned) + Number(amount)
           ? "Exceed Maximum Amount"
-          : "BUY BWILD"}
+          : "BUY SNOW"}
       </button>
     </div>
   );

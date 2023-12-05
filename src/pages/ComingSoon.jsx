@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ComingSoon() {
   return (
-    <div className="h-full flex flex-col items-center justify-center">
+    <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
       <h1 className="text-5xl text-white font-bold mb-8 animate-pulse">
         Coming Soon
       </h1>
