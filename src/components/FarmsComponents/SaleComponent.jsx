@@ -12,7 +12,7 @@ import { notify } from "utils/toastHelper";
 export default function SaleComponent({
   totalRaised,
   isPrivateParticipant,
-  buyBWiLDToken,
+  buySNOWToken,
   userDeposited,
   hasNFT,
   started,
@@ -39,7 +39,7 @@ export default function SaleComponent({
     setMaximum(isPrivateParticipant ? maxPrivatePurchase : maxPublicPurchase);
   }, [isPrivateParticipant]);
 
-  const handleBuyWild = () => {
+  const handleBuySnow = () => {
     if (!started) {
       notify("error", "Presale is not started yet");
       return;
@@ -63,7 +63,7 @@ export default function SaleComponent({
       notify("warning", "Insufficient Balance");
       return;
     }
-    buyBWiLDToken(amount);
+    buySNOWToken(amount);
   };
 
   return (
@@ -105,16 +105,16 @@ export default function SaleComponent({
       </div>
       <button
         className="btn buy_btn"
-        onClick={() => handleBuyWild()}
+        onClick={() => handleBuySnow()}
         disabled={!hasNFT || !started || finished ? "dissabled" : ""}
       >
         {!hasNFT
-          ? "You must have BWiLD NFT to buy token!"
+          ? "You must have SNOW NFT to buy token!"
           : !started
           ? "Presale is not started yet"
           : finished
           ? "Preslae is ended"
-          : "BUY BWiLD"}
+          : "BUY SNOW"}
       </button>
     </div>
   );

@@ -17,7 +17,7 @@ import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import toast from "react-hot-toast";
 import { SubmitButton } from "./UI/SubmitButton";
 
-export default function WildSwapCard() {
+export default function SnowSwapCard() {
   const signer = useEthersSigner();
   const { address } = useAccount();
   const { chain } = useNetwork();
@@ -291,7 +291,7 @@ export default function WildSwapCard() {
         </div>
         <div className="flex-1 flex justify-center items-center">
           <div className="block">
-            <h1 className="text-center text-symbol text-2xl">Wild Swap</h1>
+            <h1 className="text-center text-symbol text-2xl">Snow Swap</h1>
           </div>
         </div>
         <div className="flex-1 flex justify-end items-center">

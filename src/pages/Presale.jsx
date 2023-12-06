@@ -86,7 +86,7 @@ export default function Presale() {
         },
         {
           address: preslaeContractAddress,
-          name: "WILDOwned",
+          name: "SNOWOwned",
           params: [address],
         },
         {
@@ -132,7 +132,7 @@ export default function Presale() {
       {!presaleData?.sale_finalized && !ended && (
         <>
           <p className="text-center text-3xl font-bold shadow-md shadow-black/50 py-3 bg-secondary/40 rounded-md mb-2 backdrop-blur-sm">
-            BWiLD SALE ENDS IN:
+            SNOW SALE ENDS IN:
           </p>
           <CountDownComponent setEnded={setEnded} />
         </>
@@ -175,12 +175,12 @@ export default function Presale() {
         />
       </div>
       <img
-        src="/assets/stickers/wild1.png"
+        src="/assets/stickers/snow1.png"
         alt=""
         className="fixed animate-pulse duration-1000 w-[150px] sm:w-[300px] md:w-[400px] lg:w-[500px] -z-[999] sm:inline-block bottom-8 left-3"
       />
       <img
-        src="/assets/stickers/wild2.png"
+        src="/assets/stickers/snow2.png"
         alt=""
         className="fixed animate-pulse duration-1000 w-[150px] sm:w-[300px] md:w-[400px] lg:w-[500px] -z-[999] sm:inline-block bottom-8 right-3"
       />

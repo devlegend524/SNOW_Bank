@@ -25,7 +25,7 @@ export default function PresaleDetails({ saleData }) {
             <div className="flex justify-between mb-4 px-1">
               <div> Your {mainTokenSymbol} Owned:</div>
               <div>
-                {saleData?.WILDOwned || "0.00"} {mainTokenSymbol}
+                {saleData?.SNOWOwned || "0.00"} {mainTokenSymbol}
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">

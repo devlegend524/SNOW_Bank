@@ -5,7 +5,7 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { base } from "wagmi/chains";
+import { mainnet, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
@@ -21,12 +21,12 @@ import store from "state";
 
 const Providers = ({ children }) => {
   const { chains, publicClient } = configureChains(
-    [base],
+    [mainnet, goerli],
     [alchemyProvider({ apiKey: ALCHEMY_ID }), publicProvider()]
   );
 
   const { connectors } = getDefaultWallets({
-    appName: "wildbase.fram",
+    appName: "snowbase.fram",
     projectId: "85ea32d265dfc865d0672c8b6b5c53d2",
     chains,
   });

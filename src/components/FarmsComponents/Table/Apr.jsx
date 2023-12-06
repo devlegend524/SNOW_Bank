@@ -54,7 +54,7 @@ const Apr = ({
   lpLabel,
   tokenAddress,
   quoteTokenAddress,
-  wildPrice,
+  snowPrice,
   originalValue,
   hideButton = false,
   index,
@@ -80,7 +80,7 @@ const Apr = ({
         {!hideButton && (
           <ApyButton
             lpLabel={lpLabel}
-            wildPrice={wildPrice}
+            snowPrice={snowPrice}
             apr={originalValue}
             addLiquidityUrl={addLiquidityUrl}
           />

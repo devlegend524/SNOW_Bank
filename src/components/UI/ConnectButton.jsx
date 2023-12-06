@@ -1,9 +1,9 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import contractAddresses from "constants/addresses";
 import { FaAngleDown } from "react-icons/fa";
-import { usePriceBWiLDUsdc } from "state/hooks";
+import { usePriceSNOWUsdc } from "state/hooks";
 export const WalletConnect = () => {
-  const priceData = usePriceBWiLDUsdc();
+  const priceData = usePriceSNOWUsdc();
   return (
     <ConnectButton.Custom>
       {({
@@ -51,7 +51,7 @@ export const WalletConnect = () => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="m-2 sm:m-0 hover:bg-red-500 bg-red-600  transition ease-in-out text-[white!important] flex justify-center items-center gap-1 py-2 px-4 rounded-full"
+                    className="m-2 main_btn  sm:m-0  bg-[red!important]  transition ease-in-out text-[white!important] flex justify-center items-center gap-1 py-2 px-4 rounded-full"
                   >
                     Wrong network
                     <FaAngleDown className="text-xl" />
@@ -61,12 +61,12 @@ export const WalletConnect = () => {
               return (
                 <div className="flex items-center">
                   {/* <a
-                    href={`https://dexscreener.com/base/${contractAddresses.wildWethlp}`}
+                    href={`https://dexscreener.com/base/${contractAddresses.snowWethlp}`}
                     target="_blank"
                     className="hidden sm:flex items-center text-white"
                   >
                     <img
-                      src="/logo.png"
+                      src="/logo.webp"
                       alt="logo"
                       className="w-[33.5px] h-[33.5px] mx-1"
                       />
@@ -93,7 +93,7 @@ export const WalletConnect = () => {
                   {Number(account.balanceFormatted).toFixed(4)} <span className="text-[10px]">&nbsp;( ETH )</span>  
                   <button
                     onClick={openAccountModal}
-                    className="m-2 sm:m-0 hover:bg-symbolHover main_btn px-5 py-1transition ease-in-out flex justify-center items-center gap-1"
+                    className="m-2 sm:m-0 main_btn px-5 py-1transition ease-in-out flex justify-center items-center gap-1"
                     type="button"
                   >
                     {account.displayName}

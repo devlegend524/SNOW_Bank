@@ -3,12 +3,12 @@ import { IconButton, useModal, CalculateIcon } from "uikit";
 import ApyCalculatorModal from "./ApyCalculatorModal";
 import { useTranslation } from "context/Localization";
 
-const ApyButton = ({ lpLabel, wildPrice, apr, addLiquidityUrl }) => {
+const ApyButton = ({ lpLabel, snowPrice, apr, addLiquidityUrl }) => {
   const { t } = useTranslation();
   const [onPresentApyModal] = useModal(
     <ApyCalculatorModal
       linkLabel={t("Get %symbol%", { symbol: lpLabel })}
-      tokenPrice={wildPrice.toNumber()}
+      tokenPrice={snowPrice.toNumber()}
       apr={apr}
       linkHref={addLiquidityUrl}
       isFarm

@@ -8,8 +8,8 @@ export const getFactoryAddress = () => {
   return contractAddresses.factory;
 };
 
-export const getBWiLDAddress = () => {
-  return tokens.wild.address;
+export const getSNOWAddress = () => {
+  return tokens.snow.address;
 };
 export const getMasterChefAddress = () => {
   return contractAddresses.masterChef;

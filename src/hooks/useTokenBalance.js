@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 import {
   getErc20Contract,
-  getBWiLDContract,
+  getSNOWContract,
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { BIG_ZERO } from "utils/bigNumber";
@@ -57,11 +57,11 @@ export const useTotalSupply = () => {
   const provider = useEthersProvider();
   useEffect(() => {
     async function fetchTotalSupply() {
-      const wildContract = getBWiLDContract(
+      const snowContract = getSNOWContract(
         provider,
         chain ? chain.id : CHAIN_ID
       );
-      const supply = await wildContract.totalSupply();
+      const supply = await snowContract.totalSupply();
       setTotalSupply(toReadableAmount(supply));
     }
     fetchTotalSupply();
@@ -70,26 +70,26 @@ export const useTotalSupply = () => {
   return totalSupply;
 };
 
-export const useBWiLDPerSecond = () => {
+export const useSNOWPerSecond = () => {
   const { fastRefresh } = useRefresh();
-  const [bWildPerSecond, setWildPerSecond] = useState(BIG_ZERO);
+  const [bSnowPerSecond, setSnowPerSecond] = useState(BIG_ZERO);
   const { chain } = useNetwork();
   const provider = useEthersProvider();
 
   useEffect(() => {
-    async function fetchWildPerSecond() {
+    async function fetchSnowPerSecond() {
       try {
         const masterChefContract = getMasterchefContract(provider);
-        const perSecond = await masterChefContract.bWildPerSecond();
-        setWildPerSecond(toReadableAmount(perSecond, 18, 5));
+        const perSecond = await masterChefContract.bSnowPerSecond();
+        setSnowPerSecond(toReadableAmount(perSecond, 18, 5));
       } catch (e) {
         console.log(e);
       }
     }
-    if (provider) fetchWildPerSecond();
+    if (provider) fetchSnowPerSecond();
   }, [fastRefresh, provider]);
 
-  return bWildPerSecond;
+  return bSnowPerSecond;
 };
 
 export const useBurnedBalance = (tokenAddress) => {
@@ -112,18 +112,18 @@ export const useBurnedBalance = (tokenAddress) => {
   return balance;
 };
 
-export const useBWiLDBurnedBalance = () => {
+export const useSNOWBurnedBalance = () => {
   const [balance, setBalance] = useState(BIG_ZERO);
   const { fastRefresh } = useRefresh();
   const { chain } = useNetwork();
   const provider = useEthersProvider();
   useEffect(() => {
     const fetchBalance = async () => {
-      const wildContract = getBWiLDContract(
+      const snowContract = getSNOWContract(
         provider,
         chain ? chain.id : CHAIN_ID
       );
-      const res = await wildContract.totalFees();
+      const res = await snowContract.totalFees();
       setBalance(new BigNumber(res).div(new BigNumber(3))); // 1/3 of total fees are burning
     };
 

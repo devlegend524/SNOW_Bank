@@ -11,14 +11,14 @@ import { filterFarmsByQuoteToken } from "utils/farmsPriceHelpers";
 import { useEthersProvider } from "hooks/useEthers";
 import {
   fetchFarmsPublicDataAsync,
-  // fetchBWiLDVaultPublicData,
-  // fetchBWiLDVaultUserData,
-  // fetchBWiLDVaultFees,
+  // fetchSNOWVaultPublicData,
+  // fetchSNOWVaultUserData,
+  // fetchSNOWVaultFees,
   setBlock,
 } from "./actions";
 import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
 import { useAccount } from "wagmi";
-import { wildWethFarmPid, mainTokenSymbol, wethUsdcFarmPid } from "config";
+import { snowWethFarmPid, mainTokenSymbol, wethUsdcFarmPid } from "config";
 import addresses from "constants/addresses";
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 0 = BWiLD-ETH LP
+ * 0 = SNOW-ETH LP
  *
  */
 export const usePollCoreFarmData = () => {
@@ -127,7 +127,7 @@ export const useUSDCPriceFromToken = (tokenSymbol) => {
 export const useLpTokenPrice = (symbol) => {
   const farm = useFarmFromLpSymbol(symbol);
   const wethPrice = usePriceEthUsdc();
-  const farmTokenPriceInUsd = usePriceBWiLDUsdc()[0];
+  const farmTokenPriceInUsd = usePriceSNOWUsdc()[0];
   let lpTokenPrice = BIG_ZERO;
   const stables = ["USDC", "MIM", "DAI"];
   if (stables.includes(symbol)) return new BigNumber(1);
@@ -152,45 +152,45 @@ export const useLpTokenPrice = (symbol) => {
 
 // Pools
 
-export const useFetchBWiLDVault = () => {
+export const useFetchSNOWVault = () => {
   // const { account } = useWeb3React()
   // const { fastRefresh } = useRefresh()
   // const dispatch = useAppDispatch()
   // useEffect(() => {
-  //   dispatch(fetchBWiLDVaultPublicData())
+  //   dispatch(fetchSNOWVaultPublicData())
   // }, [dispatch, fastRefresh])
   // useEffect(() => {
-  //   dispatch(fetchBWiLDVaultUserData({ account }))
+  //   dispatch(fetchSNOWVaultUserData({ account }))
   // }, [dispatch, fastRefresh, account])
   // useEffect(() => {
-  //   dispatch(fetchBWiLDVaultFees())
+  //   dispatch(fetchSNOWVaultFees())
   // }, [dispatch])
 };
 
-export const useBWiLDVault = () => {
+export const useSNOWVault = () => {
   const {
     totalShares: totalSharesAsString,
     pricePerFullShare: pricePerFullShareAsString,
-    totalBWiLDInVault: totalBWiLDInVaultAsString,
-    estimatedBWiLDBountyReward: estimatedBWiLDBountyRewardAsString,
-    totalPendingBWiLDHarvest: totalPendingBWiLDHarvestAsString,
+    totalSNOWInVault: totalSNOWInVaultAsString,
+    estimatedSNOWBountyReward: estimatedSNOWBountyRewardAsString,
+    totalPendingSNOWHarvest: totalPendingSNOWHarvestAsString,
     fees: { performanceFee, callFee, withdrawalFee, withdrawalFeePeriod },
     userData: {
       isLoading,
       userShares: userSharesAsString,
-      wildAtLastUserAction: wildAtLastUserActionAsString,
+      snowAtLastUserAction: snowAtLastUserActionAsString,
       lastDepositedTime,
       lastUserActionTime,
     },
-  } = useSelector((state) => state.pools.wildVault);
+  } = useSelector((state) => state.pools.snowVault);
 
-  const estimatedBWiLDBountyReward = useMemo(() => {
-    return new BigNumber(estimatedBWiLDBountyRewardAsString);
-  }, [estimatedBWiLDBountyRewardAsString]);
+  const estimatedSNOWBountyReward = useMemo(() => {
+    return new BigNumber(estimatedSNOWBountyRewardAsString);
+  }, [estimatedSNOWBountyRewardAsString]);
 
-  const totalPendingBWiLDHarvest = useMemo(() => {
-    return new BigNumber(totalPendingBWiLDHarvestAsString);
-  }, [totalPendingBWiLDHarvestAsString]);
+  const totalPendingSNOWHarvest = useMemo(() => {
+    return new BigNumber(totalPendingSNOWHarvestAsString);
+  }, [totalPendingSNOWHarvestAsString]);
 
   const totalShares = useMemo(() => {
     return new BigNumber(totalSharesAsString);
@@ -200,24 +200,24 @@ export const useBWiLDVault = () => {
     return new BigNumber(pricePerFullShareAsString);
   }, [pricePerFullShareAsString]);
 
-  const totalBWiLDInVault = useMemo(() => {
-    return new BigNumber(totalBWiLDInVaultAsString);
-  }, [totalBWiLDInVaultAsString]);
+  const totalSNOWInVault = useMemo(() => {
+    return new BigNumber(totalSNOWInVaultAsString);
+  }, [totalSNOWInVaultAsString]);
 
   const userShares = useMemo(() => {
     return new BigNumber(userSharesAsString);
   }, [userSharesAsString]);
 
-  const wildAtLastUserAction = useMemo(() => {
-    return new BigNumber(wildAtLastUserActionAsString);
-  }, [wildAtLastUserActionAsString]);
+  const snowAtLastUserAction = useMemo(() => {
+    return new BigNumber(snowAtLastUserActionAsString);
+  }, [snowAtLastUserActionAsString]);
 
   return {
     totalShares,
     pricePerFullShare,
-    totalBWiLDInVault,
-    estimatedBWiLDBountyReward,
-    totalPendingBWiLDHarvest,
+    totalSNOWInVault,
+    estimatedSNOWBountyReward,
+    totalPendingSNOWHarvest,
     fees: {
       performanceFee,
       callFee,
@@ -227,7 +227,7 @@ export const useBWiLDVault = () => {
     userData: {
       isLoading,
       userShares,
-      wildAtLastUserAction,
+      snowAtLastUserAction,
       lastDepositedTime,
       lastUserActionTime,
     },
@@ -251,13 +251,13 @@ export const usePriceEthUsdc = () => {
   return new BigNumber(ethUsdcFarm.quoteToken.usdcPrice);
 };
 
-export const usePriceBWiLDUsdc = () => {
-  // const wildEthFarm = useFarmFromPid(wildWethFarmPid)
+export const usePriceSNOWUsdc = () => {
+  // const snowEthFarm = useFarmFromPid(snowWethFarmPid)
   const [priceUsd, setPriceUsd] = useState(0);
   const [liquidity, setLiquidity] = useState(0);
   const [marketCap, setMarketCap] = useState(0);
   const { fastRefresh } = useRefresh();
-  // https://api.dexscreener.com/latest/dex/search?q=bWILD
+  // https://api.dexscreener.com/latest/dex/search?q=bSNOW
   useEffect(() => {
     async function fetchData() {
       try {
@@ -271,12 +271,12 @@ export const usePriceBWiLDUsdc = () => {
           let data = returned.pairs[0];
           if (returned.pairs.length === 1) {
             data = returned.pairs[0].chainId === "base" &&
-              returned.pairs[0].pairAddress === addresses.wildWethlp ? returned.pairs[0] : undefined;
+              returned.pairs[0].pairAddress === addresses.snowWethlp ? returned.pairs[0] : undefined;
           } else {
             data = returned.pairs.filter(
               (pair) =>
                 pair.chainId == "base" &&
-                pair.pairAddress == addresses.wildWethlp
+                pair.pairAddress == addresses.snowWethlp
             )[0];
           }
           setPriceUsd(data?.priceUsd);
@@ -401,7 +401,7 @@ export const useGetLastOraclePrice = () => {
 export const useTotalValue = () => {
   const farms = useFarms();
   const wethPrice = usePriceEthUsdc();
-  const wildPrice = usePriceBWiLDUsdc()[0];
+  const snowPrice = usePriceSNOWUsdc()[0];
   let value = new BigNumber(0);
   for (let i = 0; i < farms.data.length; i++) {
     const farm = farms.data[i];
@@ -409,8 +409,8 @@ export const useTotalValue = () => {
       let val;
       if (farm.quoteToken.symbol === "WETH" && wethPrice) {
         val = wethPrice.times(farm.lpTotalInQuoteToken);
-      } else if (farm.quoteToken.symbol === "BWiLD") {
-        val = wildPrice.times(farm.lpTotalInQuoteToken);
+      } else if (farm.quoteToken.symbol === "SNOW") {
+        val = snowPrice.times(farm.lpTotalInQuoteToken);
       } else {
         val = new BigNumber(farm.lpTotalInQuoteToken);
       }

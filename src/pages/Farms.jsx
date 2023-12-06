@@ -18,9 +18,9 @@ import { latinise } from "utils/latinise";
 import { getFarmApr } from "utils/getApr";
 import { getBalanceNumber } from "utils/formatBalance";
 import isArchivedPid from "utils/farmHelpers";
-import { useBWiLDPerSecond } from "hooks/useTokenBalance";
+import { useSNOWPerSecond } from "hooks/useTokenBalance";
 import { NUMBER_OF_FARMS_VISIBLE } from "config";
-import { useFarms, usePollFarmsData, usePriceBWiLDUsdc } from "state/hooks";
+import { useFarms, usePollFarmsData, usePriceSNOWUsdc } from "state/hooks";
 import { useAccount } from "wagmi";
 import LogoLoading from "components/LogoLoading";
 
@@ -32,7 +32,7 @@ export default function Farms() {
   const isActive = !isInactive && !isArchived;
   usePollFarmsData(isArchived);
 
-  const wildPrice = usePriceBWiLDUsdc()[0];
+  const snowPrice = usePriceSNOWUsdc()[0];
   const loadMoreRef = useRef();
 
   const [userDataReady, setUserDataReady] = useState("hot");
@@ -43,7 +43,7 @@ export default function Farms() {
     NUMBER_OF_FARMS_VISIBLE
   );
   const [observerIsSet, setObserverIsSet] = useState(false);
-  const bWildPerSecond = useBWiLDPerSecond();
+  const bSnowPerSecond = useSNOWPerSecond();
 
   const { data: farmsData, userDataLoaded } = useFarms();
 
@@ -109,9 +109,9 @@ export default function Farms() {
         );
         const apr = getFarmApr(
           new BigNumber(farm.poolWeight),
-          wildPrice,
+          snowPrice,
           totalLiquidity,
-          bWildPerSecond,
+          bSnowPerSecond,
           farm.isNFTPool
         );
         return { ...farm, apr, liquidity: totalLiquidity };
@@ -125,7 +125,7 @@ export default function Farms() {
       }
       return farmsToDisplayWithAPR;
     },
-    [wildPrice, query, isActive, bWildPerSecond]
+    [snowPrice, query, isActive, bSnowPerSecond]
   );
 
   useEffect(() => {
@@ -231,7 +231,7 @@ export default function Farms() {
         lpLabel,
         tokenAddress,
         quoteTokenAddress,
-        wildPrice,
+        snowPrice,
         originalValue: farm.apr,
       },
       farm: {

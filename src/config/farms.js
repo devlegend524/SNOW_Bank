@@ -4,11 +4,11 @@ import addresses from "constants/addresses";
 export const liquidityList = [
   {
     pid: 0,
-    lpSymbol: tokens.wild.symbol,
+    lpSymbol: tokens.snow.symbol,
     isTokenOnly: true,
-    lpAddresses: tokens.wild.address,
+    lpAddresses: tokens.snow.address,
     decimals: 18,
-    logoA: tokens.wild.logo,
+    logoA: tokens.snow.logo,
     logoB: "",
   },
   {
@@ -31,11 +31,11 @@ export const liquidityList = [
   },
   {
     pid: 1,
-    lpSymbol: "WETH-BWiLD",
+    lpSymbol: "WETH-SNOW",
     isTokenOnly: false,
-    lpAddresses: addresses.wildWethlp,
+    lpAddresses: addresses.snowWethlp,
     decimals: 18,
-    logoA: tokens.wild.logo,
+    logoA: tokens.snow.logo,
     logoB: tokens.weth.logo,
   },
 ];
@@ -43,11 +43,11 @@ export const liquidityList = [
 export const zapList = [
   {
     pid: 0,
-    lpSymbol: tokens.wild.symbol,
+    lpSymbol: tokens.snow.symbol,
     isTokenOnly: true,
-    lpAddresses: tokens.wild.address,
+    lpAddresses: tokens.snow.address,
     decimals: 18,
-    logoA: tokens.wild.logo,
+    logoA: tokens.snow.logo,
     logoB: "",
   },
   {
@@ -70,11 +70,11 @@ export const zapList = [
   },
   {
     pid: 1,
-    lpSymbol: "WETH-BWiLD",
+    lpSymbol: "WETH-SNOW",
     isTokenOnly: false,
-    lpAddresses: addresses.wildWethlp,
+    lpAddresses: addresses.snowWethlp,
     decimals: 18,
-    logoA: tokens.wild.logo,
+    logoA: tokens.snow.logo,
     logoB: tokens.weth.logo,
   },
 ];
@@ -82,13 +82,13 @@ export const zapList = [
 const farmsConfig = [
   {
     pid: 0,
-    lpSymbol: "WETH-BWiLD",
-    lpAddresses: addresses.wildWethlp,
+    lpSymbol: "WETH-SNOW",
+    lpAddresses: addresses.snowWethlp,
     isTokenOnly: false,
     isNFTPool: false,
-    token: tokens.wild,
+    token: tokens.snow,
     quoteToken: tokens.weth,
-    logoA: tokens.wild.logo,
+    logoA: tokens.snow.logo,
     logoB: tokens.weth.logo,
   },
   {
@@ -104,14 +104,14 @@ const farmsConfig = [
   },
   {
     pid: 2,
-    lpSymbol: "BWILD",
-    lpAddresses: addresses.wild,
+    lpSymbol: "BSNOW",
+    lpAddresses: addresses.snow,
     isTokenOnly: true,
     isNFTPool: false,
-    token: tokens.wild,
-    quoteToken: tokens.wild,
-    logoA: tokens.wild.logo,
-    logoB: tokens.wild.logo,
+    token: tokens.snow,
+    quoteToken: tokens.snow,
+    logoA: tokens.snow.logo,
+    logoB: tokens.snow.logo,
   },
   // {
   //   pid: 3,
@@ -126,12 +126,12 @@ const farmsConfig = [
   // },
   // {
   //   pid: 4,
-  //   lpSymbol: "BWiLDNFT",
+  //   lpSymbol: "SNOWNFT",
   //   lpAddresses: addresses.nft,
   //   isTokenOnly: true,
   //   isNFTPool: true,
   //   token: tokens.nft,
-  //   quoteToken: tokens.wild,
+  //   quoteToken: tokens.snow,
   //   logoA: "/assets/tokens/nft.png",
   //   logoB: "",
   // },

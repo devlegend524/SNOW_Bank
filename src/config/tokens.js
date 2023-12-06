@@ -7,12 +7,12 @@ const tokens = {
     decimals: 18,
     logo: "/assets/tokens/eth.svg",
   },
-  wild: {
-    symbol: "BWiLD",
-    address: addresses.wild,
+  snow: {
+    symbol: "SNOW",
+    address: addresses.snow,
     decimals: 18,
-    logo: "/assets/tokens/wildx.png",
-    projectLink: "https://wildbase.farm/", // todo:
+    logo: "/assets/tokens/snow.webp",
+    projectLink: "https://snowbank.farm/", // todo:
   },
   weth: {
     symbol: "WETH",
@@ -39,7 +39,7 @@ const tokens = {
     logo: "/assets/tokens/mim.svg",
   },
   nft: {
-    symbol: "BWiLD NFT",
+    symbol: "SNOW NFT",
     address: addresses.nft,
     decimals: 18,
     logo: "/assets/tokens/nft.png",

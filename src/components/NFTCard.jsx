@@ -4,6 +4,7 @@ import { useNFTContract } from "hooks/useContract";
 export default function NFTCard({ tokenId }) {
   const [tokenUri, setTokenUri] = useState("");
   const nftContract = useNFTContract();
+  console.log(nftContract)
 
   const handleImageError = (event) => {
     event.target.src = "/assets/stickers/NFT.webp";
@@ -11,14 +12,14 @@ export default function NFTCard({ tokenId }) {
 
   const getTokenUri = async (_tokenId) => {
     const url = await nftContract.tokenURI(_tokenId);
-    console.log(url);
+
     setTokenUri(url || "/assets/stickers/NFT.webp");
   };
   useEffect(() => {
     getTokenUri(tokenId);
   }, [tokenId]);
   return (
-    <div className="w-full max-w-[300px] max-h-[400px] p-4 rounded-lg bg-[#0d223de8]">
+    <div className="w-full max-w-[400px] max-h-[400px] p-6 rounded-lg snow_effect">
       <img
         src={tokenUri}
         onError={handleImageError}

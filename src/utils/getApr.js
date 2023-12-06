@@ -28,27 +28,27 @@ export const getPoolApr = (
 /**
  * Get farm APR value in %
  * @param poolWeight allocationPoint / totalAllocationPoint
- * @param wildPriceUsd BWiLD price in USD
+ * @param snowPriceUsd SNOW price in USD
  * @param poolLiquidityUsd Total pool liquidity in USD
  * @returns
  */
 export const getFarmApr = (
   poolWeight,
-  wildPriceUsd,
+  snowPriceUsd,
   poolLiquidityUsd,
   tokenPerBlock,
   isNFTPool
 ) => {
-  const wildPerYear = YEAR_BN.times(Number(tokenPerBlock));
-  const yearlyBWiLDRewardAllocation = wildPerYear.times(poolWeight);
-  const wildRewardsApr = yearlyBWiLDRewardAllocation
-    .times(wildPriceUsd)
+  const snowPerYear = YEAR_BN.times(Number(tokenPerBlock));
+  const yearlySNOWRewardAllocation = snowPerYear.times(poolWeight);
+  const snowRewardsApr = yearlySNOWRewardAllocation
+    .times(snowPriceUsd)
     .div(poolLiquidityUsd)
     .times(100);
-  if (wildRewardsApr.isNaN() || !wildRewardsApr.isFinite()) {
+  if (snowRewardsApr.isNaN() || !snowRewardsApr.isFinite()) {
     return null;
   }
-  const combinedApr = wildRewardsApr;
+  const combinedApr = snowRewardsApr;
   return combinedApr.toNumber();
 };
 

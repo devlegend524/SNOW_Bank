@@ -2,12 +2,12 @@ import React from "react";
 import BigNumber from "bignumber.js";
 import { DEFAULT_TOKEN_DECIMAL } from "config";
 
-import { usePriceWILDXUsdc } from "state/hooks";
+import { usePriceSNOWUsdc } from "state/hooks";
 import CardValue from "./CardValue";
 import CardUsdValue from "./CardUsdValue";
 import { useEthersSigner } from "hooks/useEthers";
 
-const WILDXHarvestBalance = ({ farmsWithBalance }) => {
+const SNOWXHarvestBalance = ({ farmsWithBalance }) => {
   const signer = useEthersSigner();
   const earningsSum = farmsWithBalance.reduce((accum, earning) => {
     const earningNumber = new BigNumber(earning.balance);
@@ -16,9 +16,9 @@ const WILDXHarvestBalance = ({ farmsWithBalance }) => {
     }
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber();
   }, 0);
-  const wildPriceUsdc = usePriceWILDXUsdc()[0];
+  const snowPriceUsdc = usePriceSNOWUsdc()[0];
   const earningsUsdt = new BigNumber(earningsSum)
-    .multipliedBy(wildPriceUsdc)
+    .multipliedBy(snowPriceUsdc)
     .toNumber();
 
   if (!signer) {
@@ -32,9 +32,9 @@ const WILDXHarvestBalance = ({ farmsWithBalance }) => {
   return (
     <div>
       <CardValue value={earningsSum} lineHeight="1.5" color="#fff" />
-      {wildPriceUsdc.gt(0) && <CardUsdValue value={earningsUsdt} />}
+      {snowPriceUsdc.gt(0) && <CardUsdValue value={earningsUsdt} />}
     </div>
   );
 };
 
-export default WILDXHarvestBalance;
+export default SNOWXHarvestBalance;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FaExternalLinkAlt, FaRegCopy } from "react-icons/fa";
-import { getBWiLDAddress, getWethAddress } from "utils/addressHelpers";
+import { getSNOWAddress, getWethAddress } from "utils/addressHelpers";
 import { CHAIN_ID, TESTNET_CHAIN_ID, BASE_SWAP_URL, BASE_URL } from "config";
 import { useNetwork } from "wagmi";
 import { formatAddress } from "utils/customHelpers";
@@ -10,12 +10,12 @@ import { getScanTokenUrl } from "utils/getExplorerURL";
 
 export default function FarmBanner() {
   const [isCopied, setIsCopied] = useState(false);
-  const [wildAddress, setWildAddress] = useState("Connect correct wallet");
+  const [snowAddress, setSnowAddress] = useState("Connect correct wallet");
   const { chain } = useNetwork();
-  const token = getBWiLDAddress();
+  const token = getSNOWAddress();
   // const provider = useEthersProvider()
 
-  const addWatchBWiLDToken = useCallback(async () => {
+  const addWatchSNOWToken = useCallback(async () => {
     const provider = window.ethereum;
     if (provider) {
       try {
@@ -26,9 +26,9 @@ export default function FarmBanner() {
             type: "ERC20",
             options: {
               address: token,
-              symbol: "BWiLD",
+              symbol: "SNOW",
               decimals: "18",
-              image: `${BASE_URL}/assets/tokens/wildx.png`,
+              image: `${BASE_URL}/assets/tokens/snow.webp`,
             },
           },
         });
@@ -52,15 +52,15 @@ export default function FarmBanner() {
 
   useEffect(() => {
     if (chain && (chain.id === CHAIN_ID || chain.id === TESTNET_CHAIN_ID)) {
-      const addr = getBWiLDAddress();
-      setWildAddress(addr);
+      const addr = getSNOWAddress();
+      setSnowAddress(addr);
     }
   }, [chain]);
   return (
     <div className="flex justify-center flex-col md:flex-row bg-secondary rounded-md">
       <div className="p-3 md:p-12 md:w-1/2 w-full text-center md:text-left">
         <h1 className="text-7xl">
-          Earn BWiLD <br />
+          Earn SNOW <br />
           <span className="text-symbol font-semibold"> on Base</span>
         </h1>
       </div>
@@ -71,16 +71,16 @@ export default function FarmBanner() {
             <div className="flex items-center justify-center gap-2">
               <a
                 className="main_btn w-full"
-                href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${getBWiLDAddress()}`}
+                href={`${BASE_SWAP_URL}?inputCurrency=${getWethAddress()}&outputCurrency=${getSNOWAddress()}`}
                 target="_blank"
               >
-                Buy BWiLD
+                Buy SNOW
               </a>
               <button
-                onClick={addWatchBWiLDToken}
+                onClick={addWatchSNOWToken}
                 className="main_btn flex items-center justify-center w-full"
               >
-                Add BWiLD &nbsp;
+                Add SNOW &nbsp;
                 <svg
                   viewBox="0 0 35 33"
                   color="text"
@@ -214,16 +214,16 @@ export default function FarmBanner() {
               <a
                 className="w-100  flex items-center justify-center py-10 text-base hover:underline text-symbol"
                 href={`${chain && chain.id === CHAIN_ID
-                  ? getScanTokenUrl(wildAddress)
+                  ? getScanTokenUrl(snowAddress)
                   : ""
                   }`}
                 target="_blank"
               >
                 <span className="hidden xl:block">
-                  {formatAddress(wildAddress, 10)}
+                  {formatAddress(snowAddress, 10)}
                 </span>
                 <span className="block xl:hidden">
-                  {formatAddress(wildAddress, 6)}
+                  {formatAddress(snowAddress, 6)}
                 </span>
                 &nbsp;
                 <FaExternalLinkAlt color="gray" />
@@ -231,7 +231,7 @@ export default function FarmBanner() {
               </a>
             </div>
             <div className="flex items-center justify-center">
-              <CopyToClipboard text={wildAddress} onCopy={handleCopy}>
+              <CopyToClipboard text={snowAddress} onCopy={handleCopy}>
                 <span className="flex items-center cursor-pointer">
                   {isCopied === true ? "Copied" : "Copy Address"} &nbsp;{" "}
                   <FaRegCopy color="gray" />

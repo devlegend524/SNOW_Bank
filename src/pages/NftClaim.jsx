@@ -80,7 +80,7 @@ export default function Zap() {
       <div className="flex my-6 py-1 bg-secondary w-fit mx-auto rounded-full">
         <button
           onClick={() => setStats(true)}
-          className="text-center w-32 py-2 px-4 rounded-l-full border-[#243753e8]    transition ease-in-out"
+          className="text-center w-32 py-2 px-4 rounded-l-full border-[#243753e8] transition ease-in-out"
         >
           My NFTs
         </button>

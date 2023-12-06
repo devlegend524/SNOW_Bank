@@ -1,20 +1,20 @@
 import React from "react";
 import useTokenBalance from "hooks/useTokenBalance";
-import { getWILDXAddress } from "utils/addressHelpers";
+import { getSNOWAddress } from "utils/addressHelpers";
 import { toReadableAmount } from "utils/customHelpers";
 import { BigNumber } from "bignumber.js";
 import CardValue from "./CardValue";
 import CardUsdValue from "./CardUsdValue";
 import { useEthersSigner } from "hooks/useEthers";
-import { usePriceWILDXUsdc } from "state/hooks";
+import { usePriceSNOWUsdc } from "state/hooks";
 
-const WILDXWalletBalance = () => {
+const SNOWXWalletBalance = () => {
   const signer = useEthersSigner();
-  const { balance } = useTokenBalance(getWILDXAddress());
-  const wildPriceUsdc = usePriceWILDXUsdc()[0];
+  const { balance } = useTokenBalance(getSNOWAddress());
+  const snowPriceUsdc = usePriceSNOWUsdc()[0];
   const usdBalance = new BigNumber(
     toReadableAmount(balance.toString(), 18)
-  ).multipliedBy(wildPriceUsdc);
+  ).multipliedBy(snowPriceUsdc);
 
   if (!signer) {
     return (
@@ -37,4 +37,4 @@ const WILDXWalletBalance = () => {
   );
 };
 
-export default WILDXWalletBalance;
+export default SNOWXWalletBalance;

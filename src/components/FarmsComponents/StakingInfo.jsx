@@ -5,8 +5,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useMasterchef } from "hooks/useContract";
 import { useFarmsWithBalance } from "hooks/useFarmsWithBalance";
 import { harvestMany } from "utils/callHelpers";
-import WiLDHarvestBalance from "./Staking/WiLDHarvestBalance";
-import WiLDWalletBalance from "./Staking/WiLDWalletBalance";
+import SNOWHarvestBalance from "./Staking/SNOWHarvestBalance";
+import SNOWWalletBalance from "./Staking/SNOWWalletBalance";
 import Loading from "components/Loading";
 import CompoundModal from "./CompoundModal";
 import { useHarvest } from "hooks/useHarvest";
@@ -96,15 +96,15 @@ export default function FarmStaking() {
       </div>
       <div className="flex justify-between flex-col md:flex-row">
         <div>
-          <div className="text-base pb-2 font-semibold">BWiLD to Harvest:</div>
+          <div className="text-base pb-2 font-semibold">SNOW to Harvest:</div>
           <div className="text-sm text-gray-300">
-            <WiLDHarvestBalance farmsWithBalance={balancesWithValue} />
+            <SNOWHarvestBalance farmsWithBalance={balancesWithValue} />
           </div>
           <div className="text-base pb-2 font-semibold mt-5">
-            BWiLD in Wallet:
+            SNOW in Wallet:
           </div>
           <div className="text-sm text-gray-300">
-            <WiLDWalletBalance />
+            <SNOWWalletBalance />
           </div>
         </div>
         <div>
@@ -119,7 +119,7 @@ export default function FarmStaking() {
             </div>
 
             <span className="text-[11px] text-right">
-              ( Sales tax burns all of the BWiLD automatically. <br /> The sales
+              ( Sales tax burns all of the SNOW automatically. <br /> The sales
               tax will drop over the next week to 8% )
             </span>
           </div> */}

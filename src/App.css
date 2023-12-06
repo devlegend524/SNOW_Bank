@@ -28,7 +28,7 @@
 }
 
 .nav_list .list_item.active a {
-  @apply text-symbol;
+  @apply text-white;
 }
 
 .nav_list .list_item.active div {
@@ -36,7 +36,7 @@
 }
 
 .nav_list .list_item:hover a {
-  @apply text-symbol;
+  @apply text-white;
 }
 
 .nav_list .list_item div {
@@ -48,7 +48,7 @@
 }
 
 .nav_list .list_item:hover a {
-  @apply text-symbol;
+  @apply text-white;
 }
 
 .nav_list .list_item a {

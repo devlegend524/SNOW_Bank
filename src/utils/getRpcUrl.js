@@ -2,7 +2,7 @@ import random from "lodash/random";
 
 // Array of available nodes to connect to
 export const nodes = [
-  "https://mainnet.base.org"
+  "https://rpc.ankr.com/eth_goerli"
 ];
 
 const getNodeUrl = () => {

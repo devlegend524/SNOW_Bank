@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fade as Hamburger } from "hamburger-react";
 import { routes } from "config";
 import { WalletConnect } from "components/UI/ConnectButton";
@@ -6,18 +6,30 @@ import { WalletConnect } from "components/UI/ConnectButton";
 export default function Header() {
   const currentUrl = window.location.pathname;
   const [isMobile, setMobile] = useState(false);
+  const [scrollHeader, setScrollHeader] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        setScrollHeader(true);
+      } else {
+        setScrollHeader(false);
+      }
+    });
+  }, []);
 
   return (
-    <div className="w-full py-3 absolute top-3 left-1/2 -translate-x-1/2 px-3">
+    <div
+      className={`w-full  fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-300 ${
+        scrollHeader ? "bg-secondary top-0 py-2" : "top-2 py-3"
+      }`}
+    >
       <div className="container mx-auto relative">
         <div className="flex justify-between">
-          <div className="hidden sm:block logo">
-            <div className="block logo">
-              <a href="/">
-                {/* <img src="/logo.png" className="h-16 w-18" alt="" /> */}
-                SNOW BASE
-              </a>
-            </div>
+          <div className="hidden sm:block logo relative">
+            <a href="/" className="absolute -top-1 left-0 h-[65px] w-[72px]">
+              <img src="/logo.webp" className="h-[70px] w-[75px] mt-1" alt="" />
+            </a>
             <div
               className="text-symbol ml-2 block sm:hidden mt-[3px]"
               onClick={() => setMobile(!isMobile)}
@@ -25,7 +37,7 @@ export default function Header() {
               <Hamburger />
             </div>
           </div>
-          {/* <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
@@ -36,14 +48,13 @@ export default function Header() {
                 >
                   <a href={link.url}>{link.name}</a>
                   <div className="flex gap-[2px]">
-                    <div className="h-1 w-full bg-symbol"></div>
-                    <div className="w-1 h-1 bg-symbol rounded-full"></div>
+                    <div className="h-1 w-full bg-white"></div>
                   </div>
                 </li>
               ))}
               <li className="list_item">
                 <a
-                  href="https://lodgedocs.gitbook.io/wildbase-farm/protocol/about-bwild"
+                  href="https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow"
                   target="_blank"
                   className={`p-3`}
                   rel="noopener noreferrer"
@@ -51,12 +62,11 @@ export default function Header() {
                   Docs
                 </a>
                 <div className="flex gap-[2px]">
-                  <div className="h-1 w-full bg-symbol"></div>
-                  <div className="w-1 h-1 bg-symbol rounded-full"></div>
+                  <div className="h-1 w-full bg-white"></div>
                 </div>
               </li>
             </ul>
-          </div> */}
+          </div>
           <div className="sm:hidden"></div>
           <div className="nav_action">
             <WalletConnect />
@@ -85,7 +95,7 @@ export default function Header() {
               ))}
               <li className={`list_item`}>
                 <a
-                  href="https://lodgedocs.gitbook.io/wildbase-farm/protocol/about-bwild"
+                  href="https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow"
                   target="_blank"
                   className={`p-3`}
                   rel="noopener noreferrer"

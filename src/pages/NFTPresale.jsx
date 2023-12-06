@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useAccount } from "wagmi";
-import { toReadableAmount } from "utils/customHelpers";
-import ClaimComponent from "components/ClaimComponent";
-import SaleComponent from "components/SaleComponent";
+import { useAccount, useBalance } from "wagmi";
+import { toReadableAmount, fromReadableAmount, didUserReject } from "utils/customHelpers";
 import useRefresh from "hooks/useRefresh";
 import PreslaeABI from "config/abis/presale.json";
 import { getPresaleAddress } from "utils/addressHelpers";
 import multicall from "utils/multicall";
 // import { CountDownComponent } from "../components/CountDown";
 // import { BASE_EXPLORER } from "config";
-import Banner from "components/Presale/Banner";
 // import Tab from "components/Presale/Tab";
 import PresaleDetails from "components/Presale/PresaleDetails";
+import NFTBanner from "components/Presale/NFTBanner";
+import { usePresaleContract } from "hooks/useContract";
+import LogoLoading from "components/LogoLoading";
+import NFTCard from "components/NFTCard";
 // import LogoLoading from "components/LogoLoading";
+import { notify } from "utils/toastHelper";
 
-export default function SnowPresale() {
+export default function NFTPresale() {
   const preslaeContractAddress = getPresaleAddress();
+  const presaleContract = usePresaleContract();
+  const [pendingTx, setPendingTx] = useState(false);
   const { address } = useAccount();
   const { fastRefresh } = useRefresh();
+  const { data } = useBalance({
+    address: address,
+  });
 
   const [active, setActive] = useState(0);
   const [presaleData, setPresaleData] = useState({});
@@ -157,24 +164,70 @@ export default function SnowPresale() {
     }
   }, [address]);
 
+  const handleBuyNFT = async () => {
+    if (!presaleData?.enabled) {
+      notify("error", "Presale is not started yet");
+      return;
+    }
+    if (presaleData?.sale_finalized) {
+      notify("error", "Presale is ended");
+      return;
+    }
+
+    if (Number(data?.formatted) <= 0.3) {
+      notify("warning", "Insufficient Balance");
+      return;
+    }
+
+    try {
+      setPendingTx(true);
+      const tx = await presaleContract.buySNOW({
+        from: address,
+        value: fromReadableAmount(Number(0.30).toFixed(5)),
+      });
+      await tx.wait();
+      setPendingTx(false);
+      notify("success", `You bought SNOW NFT successfully`);
+    } catch (error) {
+      console.log(error);
+      setPendingTx(false);
+      if (didUserReject(error)) {
+        notify("warning", "User Rejected transaction");
+        return;
+      } else {
+        notify("warning", error.reason);
+        return;
+      }
+    }
+  };
+
   return (
-    <div className="min-h-[calc(100vh-200px)] max-w-[1200px] mx-3 container">
-      <Banner />
-
-      <div className="w-full mt-3 grid grid-cols-12 gap-3">
-        <div className="col-span-12 sm:col-span-6">
-          <div className="rounded-lg">
-            {/* <Tab active={active} setActive={setActive} /> */}
-            {active === 0 ? (
-              <SaleComponent saleData={presaleData} />
-            ) : (
-              <ClaimComponent saleData={presaleData} />
-            )}
-          </div>
+    <div className="container max-w-[1200px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <NFTBanner />
+        <div className="snow_effect rounded-md w-full mt-12 flex flex-col justify-between">
+          <img
+            src="/assets/stickers/sticker4.webp"
+            alt=""
+            className="w-[80%] mx-auto"
+          />
+          <button className="main_btn mx-auto my-auto" onClick={handleBuyNFT}>
+            Buy Today's NFT
+          </button>
         </div>
-
-        <PresaleDetails saleData={presaleData} />
       </div>
+
+      <p className="text-center text-white font-bold text-4xl my-6">
+        Saled NFTs
+      </p>
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt- 6 mx-auto`}
+      >
+        {Array.from({ length: 10 }, (_, index) => {
+          return <NFTCard tokenId={index} key={index} />;
+        })}
+      </div>
+      {pendingTx && <LogoLoading title="Buying NFT..." />}
     </div>
   );
 }

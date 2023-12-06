@@ -35,7 +35,7 @@ import {
   getMasterchefContract,
 } from "utils/contractHelpers";
 import { useEthersSigner } from "hooks/useEthers";
-import { usePriceBWiLDUsdc } from "state/hooks";
+import { usePriceSNOWUsdc } from "state/hooks";
 import { toReadableAmount } from "utils/customHelpers";
 
 const StakedAction = ({
@@ -62,7 +62,7 @@ const StakedAction = ({
     tokenBalance: tokenBalanceAsString,
     stakedBalance: stakedBalanceAsString,
   } = useFarmUser(pid);
-  const wildPrice = usePriceBWiLDUsdc()[0];
+  const snowPrice = usePriceSNOWUsdc()[0];
 
   const masterChefContract = getMasterchefContract(signer);
 
@@ -223,7 +223,7 @@ const StakedAction = ({
                 isNFTPool
                   ? stakedBalance
                       .times(new BigNumber(amountPerNFT))
-                      .times(wildPrice)
+                      .times(snowPrice)
                   : getBalanceNumber(lpPrice.times(stakedBalance))
               }
               unit=" USD"

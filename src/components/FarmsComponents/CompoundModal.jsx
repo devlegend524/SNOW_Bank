@@ -8,7 +8,7 @@ import tokens from "config/tokens";
 import { ethers } from "ethers";
 import { useEthersSigner } from "hooks/useEthers";
 import { useAccount } from "wagmi";
-import { getBWiLDContract } from "utils/contractHelpers";
+import { getSNOWContract } from "utils/contractHelpers";
 import { useHarvest } from "hooks/useHarvest";
 import { notify } from "utils/toastHelper";
 import { harvestMany } from "utils/callHelpers";
@@ -55,7 +55,7 @@ export default function CompoundModal({
   const { address } = useAccount();
   const zapAddress = getZapAddress();
   const signer = useEthersSigner();
-  const wildXContract = getBWiLDContract(signer);
+  const snowXContract = getSNOWContract(signer);
   const { onReward } = useHarvest(pid[0]);
   const { onZapForFarm } = useZapForFarm();
   const masterChefContract = useMasterchef();
@@ -82,7 +82,7 @@ export default function CompoundModal({
 
   const getAllowance = async () => {
     setIsCheckingAllowance(true);
-    const allowance = await wildXContract.allowance(address, zapAddress, {
+    const allowance = await snowXContract.allowance(address, zapAddress, {
       from: address,
     });
     setAllowance(allowance.toString());
@@ -92,14 +92,14 @@ export default function CompoundModal({
   async function handleApprove() {
     try {
       setIsApproving(true);
-      const allowance = await wildXContract.allowance(address, zapAddress, {
+      const allowance = await snowXContract.allowance(address, zapAddress, {
         from: address,
       });
       if (
         Number(ethers.utils.formatUnits(allowance, "ether")) <
         Number(earnings.toString())
       ) {
-        const tx = await wildXContract.approve(
+        const tx = await snowXContract.approve(
           zapAddress,
           ethers.constants.MaxUint256,
           {
@@ -142,7 +142,7 @@ export default function CompoundModal({
       }
       await sleep(2000);
       await onZapForFarm(
-        tokens.wild.address,
+        tokens.snow.address,
         false,
         ethers.utils.parseEther(earnings.toString() || "1"),
         targetToken.lpAddresses,
@@ -178,7 +178,7 @@ export default function CompoundModal({
     >
       <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg">
         <div className="flex justify-around items-center">
-          <TokenDisplay token={tokens.wild} modal={true} />
+          <TokenDisplay token={tokens.snow} modal={true} />
           <TokenDisplay token={targetToken} modal={true} />
         </div>
         {isAll ? (
@@ -193,7 +193,7 @@ export default function CompoundModal({
                 onChange={(e) => handleChangeToken(e.target.value)}
               >
                 {farms.map((item, key) => {
-                  if (item.lpSymbol === "WETH-BWiLD")
+                  if (item.lpSymbol === "WETH-SNOW")
                     return (
                       <option
                         key={key}
@@ -214,7 +214,7 @@ export default function CompoundModal({
         <p className="text-center text-lg pt-4">
           Compound{" "}
           <span className="font-semibold text-green-500 mx-1">
-            {tokens.wild.symbol}
+            {tokens.snow.symbol}
           </span>
           into{" "}
           <span className="font-semibold text-green-500 mx-1">
@@ -223,7 +223,7 @@ export default function CompoundModal({
           Pool
         </p>
         <p className="text-center my-2">
-          Available: {Number(earnings.toString()).toFixed(3)} BWiLD
+          Available: {Number(earnings.toString()).toFixed(3)} SNOW
         </p>
         <div className="flex gap-3 pt-4">
           <button

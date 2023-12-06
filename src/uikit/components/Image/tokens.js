@@ -3,9 +3,9 @@
  */
 const tokens = {
   cake: {
-    symbol: "BWiLD",
+    symbol: "SNOW",
     address: {
-      84531: "0xBba4f9c1838837246452D3504981066b27D883e5",
+      1: "0xBba4f9c1838837246452D3504981066b27D883e5",
       56: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
       97: "0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe",
     },
@@ -564,7 +564,7 @@ const tokens = {
   sushi: {
     symbol: "SUSHI",
     address: {
-      84531: "0x43fA137808c0469C82E63fB418b4D8f58279A2f1",
+      1: "0x43fA137808c0469C82E63fB418b4D8f58279A2f1",
       56: "0x947950BcC74888a40Ffa2593C5798F11Fc9124C4",
       97: "",
     },

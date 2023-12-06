@@ -3,12 +3,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_wild",
+        "name": "_snow",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_opresale",
+        "name": "_NFT",
         "type": "address"
       }
     ],
@@ -64,7 +64,46 @@
   },
   {
     "inputs": [],
-    "name": "WILD",
+    "name": "NFT",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "NFTBoughtTimestamp",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "NFTPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "SNOW",
     "outputs": [
       {
         "internalType": "contract IERC20",
@@ -83,7 +122,7 @@
         "type": "address"
       }
     ],
-    "name": "WILDOwned",
+    "name": "SNOWOwned",
     "outputs": [
       {
         "internalType": "uint256",
@@ -92,6 +131,20 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "buyNFT",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "buySNOW",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -108,6 +161,19 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "depositNFTs",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "enabled",
     "outputs": [
@@ -118,6 +184,13 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "finalizeSale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -172,6 +245,38 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getSNOWOwned",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getSalableNFTId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getTotalRaised",
     "outputs": [
@@ -207,19 +312,34 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "user",
+        "name": "operator",
         "type": "address"
-      }
-    ],
-    "name": "getWILDOwned",
-    "outputs": [
+      },
+      {
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "tokenId",
         "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
       }
     ],
-    "stateMutability": "view",
+    "name": "onERC721Received",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -250,6 +370,19 @@
   },
   {
     "inputs": [],
+    "name": "rate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "sale_finalized",
     "outputs": [
       {
@@ -264,12 +397,38 @@
   {
     "inputs": [
       {
+        "internalType": "bool",
+        "name": "_enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "setEnabled",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_NFT",
+        "type": "address"
+      }
+    ],
+    "name": "setNFT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
-        "name": "_finishedTimestamp",
+        "name": "_NFTPrice",
         "type": "uint256"
       }
     ],
-    "name": "setFinishedTimeStamp",
+    "name": "setNFTPrice",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -290,12 +449,32 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_rate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "contract IERC20",
-        "name": "_WILD",
+        "name": "_SNOW",
         "type": "address"
       }
     ],
-    "name": "setWILDAddress",
+    "name": "setSNOWAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "setfinalizeSale",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -304,23 +483,19 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_user_deposits",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_user_withdraw_amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_WILDOwned",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "syncData",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "soldedNFTs",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -345,44 +520,6 @@
       }
     ],
     "name": "user_deposits",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "user_first_claim",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "user_synced",
     "outputs": [
       {
         "internalType": "uint256",
@@ -433,19 +570,6 @@
   },
   {
     "inputs": [],
-    "name": "users_timeStamp",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "vestingPeriod",
     "outputs": [
       {
@@ -479,7 +603,14 @@
   },
   {
     "inputs": [],
-    "name": "withdrawWILD",
+    "name": "withdrawNFTs",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawSNOW",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

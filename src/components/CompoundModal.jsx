@@ -95,7 +95,7 @@ export default function CompoundModal({
         <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg">
           <div className="flex justify-around items-center">
             <img
-              src={tokens.wild.logo}
+              src={tokens.snow.logo}
               alt="token"
               className="rounded-full w-[60px] h-[60px] lg:w-[65px] lg:h-[65px] border-[3px] border-white mb-3"
             />
@@ -114,7 +114,7 @@ export default function CompoundModal({
                   onChange={(e) => handleChangeToken(e.target.value)}
                 >
                   {farms.map((item, key) => {
-                    if (item.lpSymbol === "WETH-BWiLD")
+                    if (item.lpSymbol === "WETH-SNOW")
                       return (
                         <option
                           key={key}
@@ -135,7 +135,7 @@ export default function CompoundModal({
           <p className="text-center text-lg pt-4">
             Compound{" "}
             <span className="font-semibold text-green-500 mx-1">
-              {tokens.wild.symbol}
+              {tokens.snow.symbol}
             </span>
             into{" "}
             <span className="font-semibold text-green-500 mx-1">
@@ -144,7 +144,7 @@ export default function CompoundModal({
             Pool
           </p>
           <p className="text-center my-2">
-            Available: {Number(earnings.toString()).toFixed(3)} BWiLD
+            Available: {Number(earnings.toString()).toFixed(3)} SNOW
           </p>
           <div className="flex gap-3 pt-4">
             <button

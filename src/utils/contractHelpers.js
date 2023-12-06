@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 // Addresses
 import {
-  getBWiLDAddress,
+  getSNOWAddress,
   getMasterChefAddress,
   getMulticallAddress,
   getZapAddress,
@@ -16,7 +16,7 @@ import {
 // ABI
 import erc20Abi from "config/abis/erc20.json";
 import lpTokenAbi from "config/abis/lpToken.json";
-import wildAbi from "config/abis/wild.json";
+import snowAbi from "config/abis/snow.json";
 import masterChef from "config/abis/masterchef.json";
 import MultiCallAbi from "config/abis/Multicall.json";
 import zapABI from "config/abis/zap.json";
@@ -48,8 +48,8 @@ export const getErc721Contract = (address, provider) => {
 export const getLpContract = (address, provider) => {
   return getContract(lpTokenAbi, address, provider);
 };
-export const getBWiLDContract = (provider, chainId) => {
-  return getContract(wildAbi, getBWiLDAddress(), provider);
+export const getSNOWContract = (provider, chainId) => {
+  return getContract(snowAbi, getSNOWAddress(), provider);
 };
 export const getMasterchefContract = (provider, chainId) => {
   return getContract(masterChef, getMasterChefAddress(), provider);

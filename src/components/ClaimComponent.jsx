@@ -21,7 +21,7 @@ export default function ClaimComponent({ saleData }) {
       return;
     }
     try {
-      const tx = await presaleContract.withdrawWILD({
+      const tx = await presaleContract.withdrawSNOW({
         from: address,
       });
       await tx.wait();
@@ -51,7 +51,7 @@ export default function ClaimComponent({ saleData }) {
         <div className="flex justify-between mb-3 px-1">
           <div>Vested SNOW:</div>
           <div>
-            {saleData?.WILDOwned - saleData?.user_withdraw_amount || "0.00"}
+            {saleData?.SNOWOwned - saleData?.user_withdraw_amount || "0.00"}
             &nbsp; <span className="text-[10.5px] text-sm">SNOW</span>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function ClaimComponent({ saleData }) {
           ? "Preslae is not ended yet"
           : Number(saleData?.getAmountToWithdraw)
           ? "You don't have any tokens to claim"
-          : "ClAIM WILD"}
+          : "ClAIM SNOW"}
       </button>
     </div>
   );

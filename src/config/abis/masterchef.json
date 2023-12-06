@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_bWild",
+        "name": "_bSnow",
         "type": "address"
       },
       {
@@ -185,10 +185,10 @@
   },
   {
     "inputs": [],
-    "name": "bWild",
+    "name": "bSnow",
     "outputs": [
       {
-        "internalType": "contract BWildToken",
+        "internalType": "contract BSnowToken",
         "name": "",
         "type": "address"
       }
@@ -198,7 +198,7 @@
   },
   {
     "inputs": [],
-    "name": "bWildAddr",
+    "name": "bSnowAddr",
     "outputs": [
       {
         "internalType": "address",
@@ -211,7 +211,7 @@
   },
   {
     "inputs": [],
-    "name": "bWildPerSecond",
+    "name": "bSnowPerSecond",
     "outputs": [
       {
         "internalType": "uint256",
@@ -474,7 +474,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingBWild",
+    "name": "pendingSnow",
     "outputs": [
       {
         "internalType": "uint256",
@@ -512,7 +512,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accBWildPerShare",
+        "name": "accBSnowPerShare",
         "type": "uint256"
       },
       {
@@ -612,11 +612,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_bWild",
+        "name": "_bSnow",
         "type": "address"
       }
     ],
-    "name": "setWildX",
+    "name": "setSnowX",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -677,7 +677,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_bWildPerSecond",
+        "name": "_bSnowPerSecond",
         "type": "uint256"
       }
     ],
