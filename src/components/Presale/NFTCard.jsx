@@ -22,7 +22,7 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
   const { data } = useBalance({
     address: address,
   });
-  const NFTPrice = toReadableAmount(presaleData?.NFTPrice.toString(), 18)
+  const NFTPrice = toReadableAmount(presaleData?.NFTPrice.toString(), 18);
 
   const handleBuyNFT = async () => {
     if (!presaleData?.enabled) {
@@ -42,13 +42,18 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
       return;
     }
 
+    const isWhiteListed = await nftContract.whitelisted(address);
+
     try {
+      if (!isWhiteListed) {
+        await nftContract.whitelistUser(address);
+      }
       setPendingTx(true);
-      const tx = await presaleContract.buyNFT(tokenId, {
-        from: address,
-        value: presaleData.NFTPrice,
-      });
-      await tx.wait();
+      // const tx = await presaleContract.buyNFT(tokenId, {
+      //   from: address,
+      //   value: presaleData.NFTPrice,
+      // });
+      // await tx.wait();
       setPendingTx(false);
       notify("success", `You bought SNOW NFT successfully`);
     } catch (error) {

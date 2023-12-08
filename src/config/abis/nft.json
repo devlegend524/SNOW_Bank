@@ -505,6 +505,19 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_presale",
+        "type": "address"
+      }
+    ],
+    "name": "setPresale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bool",
         "name": "_flag",
         "type": "bool"

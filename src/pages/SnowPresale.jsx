@@ -167,7 +167,7 @@ export default function SnowPresale() {
         <div className="col-span-12 sm:col-span-6">
           <div className="rounded-lg">
             {/* <Tab active={active} setActive={setActive} /> */}
-            {active === 0 ? (
+            {!presaleData?.sale_finalized ? (
               <SaleComponent saleData={presaleData} />
             ) : (
               <ClaimComponent saleData={presaleData} />
