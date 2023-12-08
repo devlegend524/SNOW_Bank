@@ -1,10 +1,11 @@
+import { CHAIN_ID } from "config";
 import { providers } from "ethers";
 import getRpcUrl from "utils/getRpcUrl";
 
 const RPC_URL = getRpcUrl();
 const network = {
-  chainId: 5,
-  name: "goerli",
+  chainId: 8453,
+  name: "base",
   ensAddress: undefined,
 };
 const httpProvider = new providers.JsonRpcProvider(RPC_URL, network);

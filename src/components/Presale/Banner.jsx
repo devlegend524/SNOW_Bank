@@ -15,13 +15,20 @@ export default function Banner() {
           SNOW BANK
         </p>
         <p className="text-center sm:text-left mt-7">
-          An iconic yield farm launching on the BASE blockchain Saturday,
-          December 2nd at 3pm EST. Presale is $12 and launch is $12. Buy SNOW
-          now and lock in your low price. Equipped with an advanced economic
-          model allowing us to pay the highest yields imaginable while
-          maintaining our record breaking price and liquidity growth.
+          Welcome to the Snow Bank's presale, launching on Saturday, January 6th
+          on the Ethereum mainnet. Here, you're more than a token buyer; you're
+          an early adopter in a high-yield farm. Be at the forefront of
+          financial innovation with Snow Bank. Your participation is key to
+          building a robust and dynamic DeFi ecosystem. Join us now and be part
+          of the exciting future of decentralized finance!
         </p>
-        <a className="main_btn mt-7 flex gap-3 w-fit mx-auto sm:mx-0" href={DOCS_URL} target="_blank">Read Docs <FaArrowRight className="my-auto"/></a>
+        <a
+          className="main_btn mt-7 flex gap-3 w-fit mx-auto sm:mx-0"
+          href={DOCS_URL}
+          target="_blank"
+        >
+          Read Docs <FaArrowRight className="my-auto" />
+        </a>
       </div>
     </div>
   );

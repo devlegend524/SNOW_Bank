@@ -17,7 +17,7 @@ const multicall = async (abi, calls) => {
 
     return res;
   } catch (error) {
-    console.log("multicall:", error.reason)
+    console.log("multicall:", error)
     throw new Error(error);
   }
 };

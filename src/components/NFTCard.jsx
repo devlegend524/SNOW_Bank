@@ -10,7 +10,8 @@ export default function NFTCard({ tokenId }) {
   };
 
   const getTokenUri = async (_tokenId) => {
-    const url = await nftContract.tokenURI(_tokenId);
+    // const url = await nftContract.tokenURI(_tokenId);
+    const url = '';
 
     setTokenUri(url || "/assets/stickers/NFT.webp");
   };

@@ -12,6 +12,7 @@ import multicall from "utils/multicall";
 import Banner from "components/Presale/Banner";
 // import Tab from "components/Presale/Tab";
 import PresaleDetails from "components/Presale/PresaleDetails";
+import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 // import LogoLoading from "components/LogoLoading";
 
 export default function SnowPresale() {
@@ -21,6 +22,7 @@ export default function SnowPresale() {
 
   const [active, setActive] = useState(0);
   const [presaleData, setPresaleData] = useState({});
+
 
   useEffect(() => {
     const fetchData = async () => {
