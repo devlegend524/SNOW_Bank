@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useNFTContract } from "hooks/useContract";
-import NFTCard from "components/NFTCard";
+import NFTCard from "components/Presale/NFTCard";
 import { notify } from "utils/toastHelper";
 import useRefresh from "hooks/useRefresh";
 import { didUserReject } from "utils/customHelpers";

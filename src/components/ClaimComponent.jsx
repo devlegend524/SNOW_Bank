@@ -38,8 +38,9 @@ export default function ClaimComponent({ saleData }) {
     }
   };
 
+  
   return (
-    <div className="claim_card relative ">
+    <div className="claim_card relative snow_effect py-4 px-4">
       <div className="py-8">
         <div className="flex justify-between mb-3 px-1">
           <div> Your Claimed SNOW:</div>
@@ -64,7 +65,7 @@ export default function ClaimComponent({ saleData }) {
                 saleData?.user_withdraw_timestamp === 0 ? (
                   <>
                     <CountDownComponentClaim
-                      time={(Number(saleData.finishedTimestamp) + 86400) * 1000}
+                      time={(Number(saleData.finishedTimestamp) + 180) * 1000}
                       key={saleData.finishedTimestamp}
                     />
                   </>
@@ -72,7 +73,7 @@ export default function ClaimComponent({ saleData }) {
                   <>
                     <CountDownComponentClaim
                       time={
-                        (Number(saleData.user_withdraw_timestamp) + 86400) *
+                        (Number(saleData.user_withdraw_timestamp) + 180) *
                         1000
                       }
                       key={saleData.user_withdraw_timestamp}

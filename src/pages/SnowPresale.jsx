@@ -13,13 +13,13 @@ import Banner from "components/Presale/Banner";
 // import Tab from "components/Presale/Tab";
 import PresaleDetails from "components/Presale/PresaleDetails";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
+import Tab from "components/Presale/Tab";
 // import LogoLoading from "components/LogoLoading";
 
 export default function SnowPresale() {
   const preslaeContractAddress = getPresaleAddress();
   const { address } = useAccount();
   const { fastRefresh } = useRefresh();
-
   const [active, setActive] = useState(0);
   const [presaleData, setPresaleData] = useState({});
 
@@ -157,7 +157,7 @@ export default function SnowPresale() {
     if (address) {
       fetchData();
     }
-  }, [address]);
+  }, [address, fastRefresh]);
 
   return (
     <div className="min-h-[calc(100vh-200px)] max-w-[1200px] mx-3 container">

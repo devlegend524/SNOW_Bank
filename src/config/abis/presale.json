@@ -134,7 +134,13 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_NFTID",
+        "type": "uint256"
+      }
+    ],
     "name": "buyNFT",
     "outputs": [],
     "stateMutability": "payable",
@@ -253,19 +259,6 @@
       }
     ],
     "name": "getSNOWOwned",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getSalableNFTId",
     "outputs": [
       {
         "internalType": "uint256",

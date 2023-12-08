@@ -16,7 +16,7 @@ export default function PresaleDetails({ saleData }) {
           <div className="my-8">
             <div className="flex justify-between mb-4 px-1">
               <div> Total Raised:</div>
-              <div>{saleData?.saleData || "0.00"} ETH</div>
+              <div>{saleData?.total_deposited || "0.00"} ETH</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Your Committed:</div>
@@ -50,7 +50,7 @@ export default function PresaleDetails({ saleData }) {
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Vesting Percent:</div>
-              <div>5% daily</div>
+              <div>{saleData.rate}% daily</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Finished Time:</div>

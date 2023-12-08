@@ -26,12 +26,12 @@ export default function Header() {
     >
       <div className="container mx-auto relative">
         <div className="flex justify-between">
-          <div className="hidden sm:block logo relative">
-            <a href="/" className="absolute -top-1 left-0 h-[65px] w-[72px]">
+          <div className="logo relative items-center flex">
+            <a href="/" className="absolute -top-1 left-0 h-[65px] w-[72px] hidden sm:inline-block">
               <img src="/logo.webp" className="h-[70px] w-[75px] mt-1" alt="" />
             </a>
             <div
-              className="text-symbol ml-2 block sm:hidden mt-[3px]"
+              className="text-white ml-2 block sm:hidden my-auto"
               onClick={() => setMobile(!isMobile)}
             >
               <Hamburger />
@@ -41,7 +41,7 @@ export default function Header() {
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item ${
+                  className={`list_item text-white ${
                     currentUrl === link.url ? "active" : ""
                   }`}
                   key={key}
@@ -52,7 +52,7 @@ export default function Header() {
                   </div>
                 </li>
               ))}
-              <li className="list_item">
+              {/* <li className="list_item">
                 <a
                   href="https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow"
                   target="_blank"
@@ -64,28 +64,28 @@ export default function Header() {
                 <div className="flex gap-[2px]">
                   <div className="h-1 w-full bg-white"></div>
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="sm:hidden"></div>
           <div className="nav_action">
             <WalletConnect />
-            {/* <div
-              className="text-symbol ml-2 hidden sm:block lg:hidden"
+            <div
+              className="text-white ml-2 hidden sm:block lg:hidden"
               onClick={() => setMobile(!isMobile)}
             >
               <Hamburger />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
-      {/* {isMobile === true ? (
-        <div className="container mr-auto ml-auto">
+      {isMobile === true ? (
+        <div className="w-full bg-white/5 backdrop-blur-2xl mt-2 rounded-md shadow shadow-black mr-auto ml-auto">
           <div className="nav_bar mobile_navbar">
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item ${
+                  className={`list_item cursor-pointer ${
                     currentUrl === link.url ? "active" : ""
                   }`}
                   key={key}
@@ -93,7 +93,7 @@ export default function Header() {
                   <a href={link.url}>{link.name}</a>
                 </li>
               ))}
-              <li className={`list_item`}>
+              <li className={`list_item cursor-pointer`}>
                 <a
                   href="https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow"
                   target="_blank"
@@ -109,7 +109,7 @@ export default function Header() {
         </div>
       ) : (
         ""
-      )} */}
+      )}
     </div>
   );
 }

@@ -21,8 +21,8 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const SALE_PRICE = 16;
-export const LAUNCH_PRICE = 12;
+export const SALE_PRICE = 50;
+export const LAUNCH_PRICE = 60;
 export const MAX_PER_USER = 300;
 export const HARD_CAP = 50;
 export const SOFT_CAP = 10;
@@ -30,7 +30,7 @@ export const SOFT_CAP = 10;
 
 export const mainTokenSymbol = "SNOW";
 export const DOCS_URL =
-  "https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow";
+  "https://snowbank.gitbook.io/snow-bank";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
   8453: "https://app.uniswap.org",
@@ -52,27 +52,27 @@ export const socials = [
   {
     icon: () => <IoBook />,
     name: "",
-    href: "https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow",
+    href: "https://snowbank.gitbook.io/snow-bank",
   },
   {
     icon: () => <FaDiscord />,
     name: "",
-    href: "https://discord.gg/c6Tq9GqV",
+    href: "https://discord.gg/KUwRXGdp",
   },
-  {
-    icon: () => <FaYoutube />,
-    name: "",
-    href: "https://youtube.com/@lodgecapital",
-  },
+  // {
+  //   icon: () => <FaYoutube />,
+  //   name: "",
+  //   href: "https://youtube.com/@lodgecapital",
+  // },
   {
     icon: () => <FaTwitter />,
     name: "",
-    href: "https://t.me/snowbasefarm",
+    href: "https://x.com/snowbanketh",
   },
   {
     icon: () => <FaTelegramPlane />,
     name: "",
-    href: " https://x.com/lodgecapital",
+    href: " https://t.me/snowbanketh",
   },
 ];
 
@@ -104,5 +104,9 @@ export const routes = [
   {
     name: "NFT Sale",
     url: "/nft-sale",
+  },
+  {
+    name: "Road Map",
+    url: "/roadmap",
   },
 ];

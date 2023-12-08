@@ -1,4 +1,4 @@
-/* .snow {
+.snow {
   position: fixed;
   width: 10px;
   height: 10px;
@@ -360,7 +360,7 @@
   opacity: 0.0614;
   transform: translate(65.5355vw, -10px) scale(0.9499);
   animation: fall-28 11s -19s linear infinite;
- }
+}
 @keyframes fall-28 {
   63.386% {
     transform: translate(67.5952vw, 63.386vh) scale(0.9499);
@@ -2604,4 +2604,4 @@
   to {
     transform: translate(7.61245vw, 100vh) scale(0.686);
   }
-}  */
+}

@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 export default function Banner() {
   return (
-    <div className="w-full rounded-md sm:mt-16 mt-3 p-3 grid grid-cols-12 snow_effect snows">
+    <div className="w-full rounded-md sm:mt-16 mt-3 px-3 grid grid-cols-12 snow_effect snows py-4 gap-3">
       <img
         src="/assets/stickers/snow1.webp"
         alt=""

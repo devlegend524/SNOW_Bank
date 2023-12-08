@@ -31,9 +31,10 @@
 }
 
 body {
-  @apply m-0 bg-primary text-gray-300 font-semibold relative;
+  @apply m-0 bg-primary text-white  font-semibold relative;
   overflow-x: hidden;
-  background:  radial-gradient(ellipse at bottom, #48839e09 0%, #000f1af5 100%), url("../public/bg6.jpg");
+  background: radial-gradient(ellipse at bottom, #48839e09 0%, #000f1af5 100%),
+    url("../public/bg6.jpg");
 }
 
 .buy_card {

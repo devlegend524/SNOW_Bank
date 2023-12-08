@@ -9,6 +9,7 @@ const NFT = lazy(() => import("pages/NftClaim"));
 const Presale = lazy(() => import("pages/Presale"));
 const SnowPresale = lazy(() => import("pages/SnowPresale"));
 const NFTPresale = lazy(() => import("pages/NFTPresale"));
+const Roadmap = lazy(() => import("pages/Roadmap"));
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/nft-sale",
     element: <NFTPresale />,
+  },
+  {
+    path: "/roadmap",
+    element: <Roadmap />,
   },
   // {
   //   path: "/farms",
