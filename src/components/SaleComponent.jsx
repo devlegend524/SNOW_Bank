@@ -54,7 +54,8 @@ export default function SaleComponent({ saleData }) {
       console.log(data?.formatted)
       const tx = await presaleContract.buySNOW({
         from: address,
-        value: fromReadableAmount(Number(ethAmountToSend).toFixed(5)),
+        value: fromReadableAmount(Number(amount).toFixed(5)),
+        gasLimit: 300000
       });
       await tx.wait();
       setPendingTx(false);

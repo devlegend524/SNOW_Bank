@@ -174,16 +174,19 @@ export default function NFTPresale() {
       return;
     }
 
-    if (Number(data?.formatted) <= 0.3) {
+    if (Number(data?.formatted) <= Number(presaleData.NFTPrice)) {
       notify("warning", "Insufficient Balance");
       return;
     }
+
+    console.log(fromReadableAmount(presaleData.NFTPrice))
 
     try {
       setPendingTx(true);
       const tx = await presaleContract.buySNOW({
         from: address,
-        value: fromReadableAmount(Number(0.30).toFixed(5)),
+        value: fromReadableAmount(presaleData.NFTPrice),
+        gasLimit: 1000000
       });
       await tx.wait();
       setPendingTx(false);
@@ -200,6 +203,8 @@ export default function NFTPresale() {
       }
     }
   };
+
+  // console.log(presaleData, '----')
 
   return (
     <div className="container max-w-[1200px]">

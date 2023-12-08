@@ -4,7 +4,6 @@ import { useNFTContract } from "hooks/useContract";
 export default function NFTCard({ tokenId }) {
   const [tokenUri, setTokenUri] = useState("");
   const nftContract = useNFTContract();
-  console.log(nftContract)
 
   const handleImageError = (event) => {
     event.target.src = "/assets/stickers/NFT.webp";
