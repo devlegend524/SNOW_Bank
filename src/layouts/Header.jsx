@@ -12,7 +12,7 @@ export default function Header() {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 50) {
         setScrollHeader(true);
       } else {
         setScrollHeader(false);

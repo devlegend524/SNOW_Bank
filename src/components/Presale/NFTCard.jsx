@@ -23,9 +23,15 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
     address: address,
   });
   const [type, setType] = useState(active);
-  const NFTPrice = toReadableAmount(presaleData?.NFTPrice.toString(), 18);
+  const NFTPrice =
+    presaleData?.NFTPrice &&
+    toReadableAmount(presaleData?.NFTPrice.toString(), 18);
 
   const handleBuyNFT = async () => {
+    if (!presaleData?.NFTPrice) {
+      return;
+    }
+
     if (!presaleData?.enabled) {
       notify("error", "Presale is not started yet");
       return;
@@ -37,7 +43,7 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
 
     if (
       Number(data?.formatted) <=
-      Number(toReadableAmount(presaleData.NFTPrice, 18))
+      Number(toReadableAmount(presaleData?.NFTPrice.toString(), 18))
     ) {
       notify("warning", "Insufficient Balance");
       return;
@@ -52,7 +58,7 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
       setPendingTx(true);
       const tx = await presaleContract.buyNFT(tokenId, {
         from: address,
-        value: presaleData.NFTPrice,
+        value: presaleData?.NFTPrice,
       });
       await tx.wait();
       setPendingTx(false);
