@@ -11,10 +11,10 @@ export default function Banner() {
         className="sm:col-span-4 md:col-span-3 col-span-12 max-w-[270px] w-full mx-auto my-auto"
       />
       <div className="sm:col-span-8 md:col-span-9 col-span-12">
-        <p className="lg:text-6xl sm:text-left font-semibold mt-2 text-center text-4xl">
+        <p className="lg:text-6xl sm:text-left font-semibold mt-3 text-center text-4xl font-cls">
           SNOW BANK
         </p>
-        <p className="text-center sm:text-left mt-7">
+        <p className="text-center sm:text-left mt-6">
           Welcome to the Snow Bank's presale, launching on Saturday, January 6th
           on the Ethereum mainnet. Here, you're more than a token buyer; you're
           an early adopter in a high-yield farm. Be at the forefront of

@@ -22,6 +22,7 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
   const { data } = useBalance({
     address: address,
   });
+  const [type, setType] = useState(active);
   const NFTPrice = toReadableAmount(presaleData?.NFTPrice.toString(), 18);
 
   const handleBuyNFT = async () => {
@@ -49,11 +50,11 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
         await nftContract.whitelistUser(address);
       }
       setPendingTx(true);
-      // const tx = await presaleContract.buyNFT(tokenId, {
-      //   from: address,
-      //   value: presaleData.NFTPrice,
-      // });
-      // await tx.wait();
+      const tx = await presaleContract.buyNFT(tokenId, {
+        from: address,
+        value: presaleData.NFTPrice,
+      });
+      await tx.wait();
       setPendingTx(false);
       notify("success", `You bought SNOW NFT successfully`);
     } catch (error) {
@@ -90,9 +91,13 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
 
   return (
     <>
-      <div className="w-full max-w-[400px] max-h-[400px] p-6 rounded-lg snow_effect">
+      <div
+        className={`w-full min-h-[${
+          type ? 337 : 227
+        }px] p-6 rounded-lg snow_effect flex flex-col justify-between`}
+      >
         {delay ? (
-          <div className="mx-auto h-[177px] w-[177px] bg-white/5 rounded-md animate-pulse"></div>
+          <div className="mx-auto w-full h-[177px] w-[177px] bg-white/5 rounded-md animate-pulse"></div>
         ) : (
           <img
             // src={tokenUri}
@@ -103,23 +108,24 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
             className="w-full border-opacity-30"
           />
         )}
-
-        <div className="flex justify-between px-2">
-          <p>NFT ID: </p>
-          <p>{tokenId}</p>
+        <div>
+          <div className="flex justify-between px-2">
+            <p>NFT ID: </p>
+            <p>{tokenId}</p>
+          </div>
+          <div className="flex justify-between px-2">
+            <p>Price: </p>
+            <p>{NFTPrice} ETH</p>
+          </div>
+          {active && (
+            <button
+              onClick={handleBuyNFT}
+              className="main_btn mx-auto mt-4 py-[9px!important]"
+            >
+              Buy Now
+            </button>
+          )}
         </div>
-        <div className="flex justify-between px-2">
-          <p>Price: </p>
-          <p>{NFTPrice} ETH</p>
-        </div>
-        {active && (
-          <button
-            onClick={handleBuyNFT}
-            className="main_btn mx-auto mt-4 py-[9px!important]"
-          >
-            Buy Now
-          </button>
-        )}
       </div>
       {pendingTx && <LogoLoading />}
     </>

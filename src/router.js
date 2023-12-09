@@ -1,17 +1,16 @@
-import React, { lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import React from "react";
 
-const Swap = lazy(() => import("pages/Swap"));
-const Liquidity = lazy(() => import("pages/Liquidity"));
-const NotFound = lazy(() => import("pages/Notfound"));
-const Farms = lazy(() => import("pages/Farms"));
-const NFT = lazy(() => import("pages/NftClaim"));
-const Presale = lazy(() => import("pages/Presale"));
-const SnowPresale = lazy(() => import("pages/SnowPresale"));
-const NFTPresale = lazy(() => import("pages/NFTPresale"));
-const Roadmap = lazy(() => import("pages/Roadmap"));
+import Swap from "pages/Swap";
+import Liquidity from "pages/Liquidity";
+import NotFound from "pages/Notfound";
+import Farms from "pages/Farms";
+import NFT from "pages/NftClaim";
+import Presale from "pages/Presale";
+import SnowPresale from "pages/SnowPresale";
+import NFTPresale from "pages/NFTPresale";
+import Roadmap from "pages/Roadmap";
 
-const router = createBrowserRouter([
+const router = [
   {
     path: "/",
     element: <SnowPresale />,
@@ -48,6 +47,6 @@ const router = createBrowserRouter([
   //   path: "*",
   //   element: <NotFound />,
   // },
-]);
+];
 
 export default router;

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Fade as Hamburger } from "hamburger-react";
 import { routes } from "config";
 import { WalletConnect } from "components/UI/ConnectButton";
+import { Link, useLocation } from "react-router-dom";
+import { DOCS_URL } from "config";
 
 export default function Header() {
-  const currentUrl = window.location.pathname;
   const [isMobile, setMobile] = useState(false);
   const [scrollHeader, setScrollHeader] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -20,36 +22,36 @@ export default function Header() {
 
   return (
     <div
-      className={`w-full  fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-300 ${
-        scrollHeader ? "bg-secondary top-0 py-2" : "top-2 py-3"
+      className={`w-full top-0 fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-200 ${
+        scrollHeader ? "bg-secondary py-3" : "py-4"
       }`}
     >
       <div className="container mx-auto relative">
         <div className="flex justify-between">
           <div className="logo relative items-center flex">
-            <a href="/" className="absolute -top-1 left-0 h-[65px] w-[72px] hidden sm:inline-block">
+            <a
+              href="/"
+              className="absolute -top-1 left-0 h-[65px] w-[72px] hidden sm:inline-block"
+            >
               <img src="/logo.webp" className="h-[70px] w-[75px] mt-1" alt="" />
             </a>
             <div
               className="text-white ml-2 block sm:hidden my-auto"
               onClick={() => setMobile(!isMobile)}
             >
-              <Hamburger />
+              <Hamburger toggled={isMobile} />
             </div>
           </div>
           <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <ul className="nav_list">
+            <ul className="nav_list gap-3">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item text-white ${
-                    currentUrl === link.url ? "active" : ""
+                  className={`list_item py-2 px-3 text-white ${
+                    location.pathname === link.url ? "snow_effect_nav" : ""
                   }`}
                   key={key}
                 >
-                  <a href={link.url}>{link.name}</a>
-                  <div className="flex gap-[2px]">
-                    <div className="h-1 w-full bg-white"></div>
-                  </div>
+                  <Link to={link.url}>{link.name}</Link>
                 </li>
               ))}
               {/* <li className="list_item">
@@ -86,23 +88,25 @@ export default function Header() {
               {routes.map((link, key) => (
                 <li
                   className={`list_item cursor-pointer ${
-                    currentUrl === link.url ? "active" : ""
+                    location.pathname === link.url ? "active" : ""
                   }`}
                   key={key}
                 >
-                  <a href={link.url}>{link.name}</a>
+                  <Link to={link.url} onClick={() => setMobile(false)}>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
               <li className={`list_item cursor-pointer`}>
-                <a
-                  href="https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow"
+                <Link
+                  to={DOCS_URL}
                   target="_blank"
                   className={`p-3`}
                   rel="noopener noreferrer"
                 >
                   {" "}
                   Docs
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

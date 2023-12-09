@@ -11,10 +11,10 @@ export default function NFTBanner() {
         className="sm:col-span-4 md:col-span-3 col-span-12 max-w-[270px] w-full mx-auto my-auto"
       />
       <div className="sm:col-span-8 md:col-span-9 col-span-12">
-        <p className="lg:text-6xl sm:text-left font-semibold mt-2 text-center text-4xl">
+        <p className="lg:text-6xl sm:text-left font-semibold mt-3 text-center text-4xl font-cls">
           SNOW BANK
         </p>
-        <p className="text-center sm:text-left mt-7">
+        <p className="text-center sm:text-left mt-6">
           Snow Bank introduces an exclusive range of SNOW NFTs, a unique
           collection that offers more than just aesthetic appeal. These NFTs are
           available for purchase at 0.05 ETH each and play a pivotal role in the

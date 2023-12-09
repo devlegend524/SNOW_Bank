@@ -96,15 +96,41 @@ export default function NFTPresale() {
     if (NFTContract) {
       fetchNFTs();
     }
-  }, [active, address, fastRefresh]);
+  }, [fastRefresh]);
+
+  useEffect(() => {
+    async function fetchNFTs() {
+      let nfts = [];
+      try {
+        if (active) {
+          nfts = await NFTContract.walletOfOwner(presaleContractAddress);
+        } else {
+          nfts = address ? await NFTContract.walletOfOwner(address) : [];
+        }
+        setNFTs(nfts);
+        setPendingTx(false);
+      } catch (error) {
+        console.log(error);
+        setPendingTx(false);
+      }
+    }
+
+    if (NFTContract) {
+      fetchNFTs();
+      setPendingTx(true);
+    }
+  }, [active, address]);
 
   return (
-    <div className="container max-w-[1200px]">
+    <div className="container max-w-[1200px] px-3 sm:px-0">
       <NFTBanner />
 
       <div className="my-4 flex gap-3">
         <button
-          onClick={() => setActive(true)}
+          onClick={() => {
+            setPendingTx(true);
+            setActive(true);
+          }}
           className={`snow_effect px-3 py-2 hover:bg-primary/40 transition ease-in-out ${
             active ? "bg-[#058ee7!important]" : ""
           }`}
@@ -112,7 +138,10 @@ export default function NFTPresale() {
           Listed NFTs
         </button>
         <button
-          onClick={() => setActive(false)}
+          onClick={() => {
+            setPendingTx(true);
+            setActive(false);
+          }}
           className={`snow_effect px-3 py-2 hover:bg-primary/40 transition ease-in-out  ${
             !active ? "bg-[#058ee7!important]" : ""
           }`}
@@ -123,8 +152,8 @@ export default function NFTPresale() {
       <div
         className={`grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt- 6 mx-auto`}
       >
-        {!NFTs
-          ? [9, 9, 9, 9, 9, 9, 9, 9, 9, 9].map((_, index) => {
+        {pendingTx
+          ? [9, 9, 9, 9, 9].map((_, index) => {
               return <NFTCardLoading key={index} active={active} />;
             })
           : NFTs.map((item, index) => {

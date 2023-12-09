@@ -22,39 +22,9 @@
   justify-content: center;
 }
 
-.nav_list .list_item {
-  padding: 0 20px;
-  position: relative;
-}
-
-.nav_list .list_item.active a {
-  @apply text-white;
-}
-
-.nav_list .list_item.active div {
-  visibility: visible;
-}
-
-.nav_list .list_item:hover a {
-  @apply text-white;
-}
-
-.nav_list .list_item div {
-  visibility: hidden;
-}
-
-.nav_list .list_item:hover div {
-  visibility: visible;
-}
-
-.nav_list .list_item:hover a {
-  @apply text-white;
-}
-
 .nav_list .list_item a {
   font-size: 17px;
   font-style: normal;
-  font-weight: 400;
   position: relative;
 }
 
@@ -74,10 +44,6 @@
 .mobile_navbar .nav_list .list_item a {
   padding: 15px;
   line-height: 40px;
-}
-
-.mobile_navbar .list_item:hover {
-  @apply bg-white/10 backdrop-blur-lg text-white;
 }
 
 /* End Header styling */
