@@ -43,10 +43,10 @@ const router = [
   //   path: "/presale",
   //   element: <SnowPresale />,
   // },
-  // {
-  //   path: "*",
-  //   element: <NotFound />,
-  // },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ];
 
 export default router;

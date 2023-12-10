@@ -93,13 +93,9 @@ export const routes = [
   //   name: "NFT Claim",
   //   url: "/nft-claim",
   // },
-  // {
-  //   name: "Claim",
-  //   url: "/presale",
-  // },
   {
     name: "Snow Sale",
-    url: "/",
+    url: "/presale",
   },
   {
     name: "NFT Sale",

@@ -46,11 +46,11 @@ body {
 } */
 
 .tr {
-  @apply bg-secondary border-t border-[#20334b] cursor-pointer last:rounded-b-lg hover:bg-primary transition ease-in-out;
+  @apply bg-secondary border-t border-[#20334b] cursor-pointer last:rounded-b-lg hover:bg-[#181d25] transition ease-in-out;
 }
 
 .action_panel_container {
-  @apply flex flex-col md:flex-row justify-between p-2 lg:p-3 w-full border border-symbolBorder last:rounded-b-md;
+  @apply flex flex-col md:flex-row justify-between p-2 lg:p-3 w-full border border-symbolBorder last:rounded-b-md bg-[#181d25];
 }
 
 .action_panel {
