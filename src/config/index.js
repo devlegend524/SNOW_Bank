@@ -78,8 +78,8 @@ export const socials = [
 
 export const routes = [
   // {
-  //   name: "Farm",
-  //   url: "/",
+    // name: "Farm",
+    // url: "/",
   // },
   // {
   //   name: "Swap",
@@ -95,7 +95,7 @@ export const routes = [
   // },
   {
     name: "Snow Sale",
-    url: "/presale",
+    url: "/",
   },
   {
     name: "NFT Sale",

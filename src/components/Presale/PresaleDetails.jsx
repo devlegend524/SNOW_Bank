@@ -29,14 +29,6 @@ export default function PresaleDetails({ saleData }) {
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
-              <div> Hadcap:</div>
-              <div>{HARD_CAP} ETH</div>
-            </div>
-            <div className="flex justify-between mb-4 px-1">
-              <div> SoftCap:</div>
-              <div>{SOFT_CAP} ETH</div>
-            </div>
-            <div className="flex justify-between mb-4 px-1">
               <div> Presale Price:</div>
               <div>${SALE_PRICE}</div>
             </div>
