@@ -42,11 +42,11 @@ export default function SnowPresale() {
           name: "finishedTimestamp",
           params: [],
         },
-        {
-          address: preslaeContractAddress,
-          name: "NFTBoughtTimestamp",
-          params: [],
-        },
+        // {
+        //   address: preslaeContractAddress,
+        //   name: "finishedTimestamp",
+        //   params: [],
+        // },
         {
           address: preslaeContractAddress,
           name: "presalePriceOfToken",
@@ -83,12 +83,12 @@ export default function SnowPresale() {
         const rawResults = await multicall(PreslaeABI, calls);
         rawResults.map((data, index) => {
           const newData =
-            index <= 5
+            index <= 4
               ? {
                   [calls[index]["name"]]:
                     index >= 2 ? Number(data[0]) : data[0],
                 }
-              : index === 9
+              : index === 8
               ? { [calls[index]["name"]]: rawResults[index].toString() }
               : {
                   [calls[index]["name"]]: toReadableAmount(

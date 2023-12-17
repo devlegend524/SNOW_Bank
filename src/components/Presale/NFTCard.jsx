@@ -9,6 +9,7 @@ import { usePresaleContract } from "hooks/useContract";
 import LogoLoading from "components/LogoLoading";
 import { notify } from "utils/toastHelper";
 import { useEthersProvider } from "hooks/useEthers";
+import { fromReadableAmount } from "utils";
 
 export default function NFTCard({ tokenId, index, presaleData, active }) {
   const [tokenUri, setTokenUri] = useState("");
@@ -40,31 +41,22 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
       notify("error", "Presale is ended");
       return;
     }
-
     if (
       Number(data?.formatted) <=
-      Number(toReadableAmount(presaleData?.NFTPrice.toString(), 18))
+      Number(toReadableAmount(presaleData?.NFTPrice?.toFixed(0), 18, 5))
     ) {
       notify("warning", "Insufficient Balance");
       return;
     }
-
-    const isWhiteListed = await nftContract.whitelisted(address);
-
     try {
-      if (!isWhiteListed) {
-        await nftContract.whitelistUser(address);
-      }
-      setPendingTx(true);
       const tx = await presaleContract.buyNFT(tokenId, {
         from: address,
-        value: presaleData?.NFTPrice,
+        value: presaleData?.NFTPrice?.toFixed(0),
       });
       await tx.wait();
       setPendingTx(false);
       notify("success", `You bought SNOW NFT successfully`);
     } catch (error) {
-      console.log(error);
       setPendingTx(false);
       if (didUserReject(error)) {
         notify("warning", "User Rejected transaction");

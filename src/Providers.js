@@ -5,7 +5,7 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { base, mainnet, goerli } from "wagmi/chains";
+import { pulsechain, base, mainnet, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
@@ -21,7 +21,7 @@ import store from "state";
 
 const Providers = ({ children }) => {
   const { chains, publicClient } = configureChains(
-    [base, mainnet, goerli],
+    [pulsechain],
     [alchemyProvider({ apiKey: ALCHEMY_ID }), publicProvider()]
   );
 

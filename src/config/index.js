@@ -9,7 +9,7 @@ import { FaTwitter } from "react-icons/fa";
 export const BASE_URL = "https://snowbank.farm";
 export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 
-export const CHAIN_ID = 8453;
+export const CHAIN_ID = 369;
 export const TESTNET_CHAIN_ID = 5;
 
 export const DEFAULT_GAS_LIMIT = 2000000;
@@ -33,7 +33,7 @@ export const DOCS_URL =
   "https://snowbank.gitbook.io/snow-bank";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  8453: "https://app.uniswap.org",
+  369: "https://app.uniswap.org",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];

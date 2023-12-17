@@ -4,8 +4,8 @@ import getRpcUrl from "utils/getRpcUrl";
 
 const RPC_URL = getRpcUrl();
 const network = {
-  chainId: 8453,
-  name: "base",
+  chainId: 369,
+  name: undefined,
   ensAddress: undefined,
 };
 const httpProvider = new providers.JsonRpcProvider(RPC_URL, network);

@@ -2,7 +2,7 @@ import random from "lodash/random";
 
 // Array of available nodes to connect to
 export const nodes = [
-  "https://base.llamarpc.com"
+  "https://rpc-pulsechain.g4mm4.io"
 ];
 
 const getNodeUrl = () => {
