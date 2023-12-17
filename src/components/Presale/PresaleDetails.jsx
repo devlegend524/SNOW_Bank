@@ -9,6 +9,7 @@ import { getPresaleAddress } from "utils/addressHelpers";
 import { formatAddress } from "utils/customHelpers";
 
 export default function PresaleDetails({ saleData }) {
+
   return (
     <div className="col-span-12 sm:col-span-6">
       <div className="w-full rounded-md p-4 snow_effect">

@@ -10,8 +10,8 @@ const contractAddresses = {
   nft: "0xb81026D460f254949a67FAAe48EC09073f020337",
   usdcLp: "0x6bee1580471F38000951abd788A9C060A4ad3Ac3",
   snowWethlp: "0x28eE0Ec1FcbeafB1F2F8d2558421d5e84Ab9fBe9",
-  presaleContract: "0xf7c6118bdB9b74817dC2BD25BA4804De41aAE027",
-  presaleFork: "0xf7c6118bdB9b74817dC2BD25BA4804De41aAE027",
+  presaleContract: "0x4813B01898C3795783Cfa08FeE5aa040Ab029c86",
+  presaleFork: "0x4813B01898C3795783Cfa08FeE5aa040Ab029c86",
 };
 
 export default contractAddresses;

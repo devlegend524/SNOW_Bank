@@ -130,12 +130,7 @@ export default function SnowPresale() {
           address: preslaeContractAddress,
           name: "user_withdraw_timestamp",
           params: [address],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "getAmountToWithdraw",
-          params: [address],
-        },
+        }
       ];
 
       try {
@@ -150,7 +145,7 @@ export default function SnowPresale() {
           setPresaleData((value) => ({ ...value, ...newData }));
         });
       } catch (e) {
-        console.log("Fetch Farms With Balance Error:", e);
+        console.log("Fetch Farms With Balance Error:", e.reason);
       }
     };
 
