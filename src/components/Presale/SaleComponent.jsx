@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { didUserReject, fromReadableAmount } from "utils/customHelpers";
+import { didUserReject, fromReadableAmount, toReadableAmount } from "utils/customHelpers";
 import { useBalance, useAccount } from "wagmi";
 import { notify } from "utils/toastHelper";
 import { usePresaleContract } from "hooks/useContract";
@@ -7,29 +7,35 @@ import LogoLoading from "../LogoLoading";
 import SNOW from "components/UI/SNOW";
 import ETH from "components/UI/ETH";
 import { useEffect } from "react";
+import { useEthersSigner } from "hooks/useEthers";
 
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
   const { address } = useAccount();
-  const { data } = useBalance({
-    address: address,
-  });
-  const [ethPrice, setEthPrice] = useState(0.00006195);
+  const [ethPrice, setEthPrice] = useState(0.00006144);
   const [pendingTx, setPendingTx] = useState(false);
   const [ethAmount, setEthAmount] = useState("");
   const [amount, setAmount] = useState("");
   const [snowAmount, setSnowAmount] = useState("");
+  const [balance, setBalance] = useState(0);
+  const signer = useEthersSigner();
+
+  const getBalance = async () => {
+    const data = await signer.getBalance();
+    const readableData = toReadableAmount(data.toString(), 18);
+    setBalance(Number(readableData))
+  }
 
   const handleChangeETH = (value) => {
     setAmount(value);
     setEthAmount(value);
-    const ethSnowAmount = Number(((value * ethPrice) / 0.6).toFixed(5));
+    const ethSnowAmount = Number(((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(5));
     setSnowAmount(ethSnowAmount);
   };
 
   const handleChangeSnow = (value) => {
     setSnowAmount(value);
-    const ethBuyAmount = Number(((value * 0.6) / ethPrice).toFixed(5));
+    const ethBuyAmount = Number(((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(5));
     setEthAmount(ethBuyAmount);
   };
 
@@ -45,6 +51,11 @@ export default function SaleComponent({ saleData }) {
   };
 
   const handleBuySnow = async () => {
+    if (!address) {
+      notify("error", "Please connect your wallet");
+      return;
+    }
+
     if (!saleData?.enabled) {
       notify("error", "Presale is not started yet");
       return;
@@ -59,7 +70,7 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
-    if (!amount) {
+    if (!ethAmount) {
       notify("error", "Please input the correct amount to buy.");
       return;
     }
@@ -68,12 +79,13 @@ export default function SaleComponent({ saleData }) {
       setPendingTx(true);
       const tx = await presaleContract.buySNOW({
         from: address,
-        value: fromReadableAmount(Number(amount).toFixed(5)),
+        value: fromReadableAmount(Number(ethAmount).toFixed(5)),
       });
 
       await tx.wait();
       setPendingTx(false);
-      notify("success", `You bought ${amount} SNOW successfully`);
+      notify("success", `You bought ${snowAmount} SNOW successfully`);
+      getBalance();
     } catch (error) {
       console.log(error);
       setPendingTx(false);
@@ -87,6 +99,12 @@ export default function SaleComponent({ saleData }) {
     }
   };
 
+  useEffect(() => {
+    if (signer) {
+      getBalance()
+    }
+  }, [signer])
+
   return (
     <>
       <div className="w-full snow_effect px-4 py-4">
@@ -97,7 +115,7 @@ export default function SaleComponent({ saleData }) {
               <div>
                 <p className="flex gap-1">
                   <span className="font-semibold">
-                   {saleData?.presalePriceOfToken * 100} cents
+                    {saleData?.presalePriceOfToken} cents
                   </span>
                 </p>
               </div>
@@ -111,14 +129,14 @@ export default function SaleComponent({ saleData }) {
             <div className="flex justify-between mb-3 px-1">
               <div>Balance:</div>
               <div className="flex gap-1">
-                {Number(data?.formatted).toFixed(5) === "NaN"
+                {Number(balance).toFixed(5) === "NaN"
                   ? "0.00"
-                  : Number(data?.formatted).toFixed(5)}
+                  : Number(balance).toFixed(5)}
                 <ETH width={15} height={15} />
               </div>
             </div>
           </div>
-          <div className="flex gap-3 mb-3">
+          <div className="flex gap-3 mb-2">
             <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full">
               <img
                 src="/assets/tokens/snow.png"
@@ -146,7 +164,22 @@ export default function SaleComponent({ saleData }) {
                 onChange={(e) => handleChangeETH(e.target.value)}
               />
             </div>
+
           </div>
+
+          <input
+            className="accent-[#204253] flex-auto w-full border-transparent mb-3 bg-primary/20"
+            type="range"
+            w-full="true"
+            min="0"
+            max={4000}
+            step="1"
+            value={snowAmount}
+            onChange={(e) => {
+              handleChangeSnow(e.target.value)
+            }}
+            list="tickmarks1"
+          />
 
           <div className="bg-primary/20 rounded-lg p-3 mb-3 text-sm">
             <div className="flex gap-2 justify-between mt-1">
@@ -194,10 +227,10 @@ export default function SaleComponent({ saleData }) {
           {!saleData?.enabled
             ? "Presale is not started yet"
             : saleData?.sale_finalized
-            ? "Presale has ended"
-            : 250 <= Number(saleData?.SNOWOwned) + Number(amount)
-            ? "Exceed Maximum Amount"
-            : "BUY SNOW"}
+              ? "Presale has ended"
+              : 250 <= Number(saleData?.SNOWOwned) + Number(amount)
+                ? "Exceed Maximum Amount"
+                : "BUY SNOW"}
         </button>
       </div>
       {pendingTx && <LogoLoading />}

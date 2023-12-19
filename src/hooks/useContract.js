@@ -79,9 +79,10 @@ export const useRouterContract = () => {
 
 export const useNFTContract = () => {
   const signer = useEthersSigner();
+  const provider = useEthersProvider();
   const { chain } = useNetwork();
   return useMemo(
-    () => chain && chain.id === CHAIN_ID && getNFTContract(signer),
+    () => chain && chain.id === CHAIN_ID && getNFTContract(signer ? signer : provider),
     [signer, chain]
   );
 };

@@ -90,7 +90,7 @@ export const WalletConnect = () => {
                       />
                     )}
                   </button> */}
-                  {Number(account.balanceFormatted).toFixed(4)} <span className="text-[10px]">&nbsp;( ETH )</span>  
+                  <div className="hidden sm:inline-block text-sm font-light">{Number(account.balanceFormatted).toFixed(4)} <span className="text-[10px]">&nbsp;( ETH )</span>  </div>
                   <button
                     onClick={openAccountModal}
                     className="m-2 sm:m-0 main_btn px-5 py-1transition py-1.5 ease-in-out flex justify-center items-center gap-1"

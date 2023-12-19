@@ -155,7 +155,7 @@ export default function SnowPresale() {
   }, [address, fastRefresh]);
 
   return (
-    <div className="min-h-[calc(100vh-200px)] max-w-[1200px] mx-3 container">
+    <div className="min-h-[calc(100vh-200px)] max-w-[1200px] mx-3 container mt-8 sm:mt-4">
       <Banner />
 
       <div className="w-full mt-3 grid grid-cols-12 gap-3">

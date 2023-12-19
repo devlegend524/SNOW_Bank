@@ -22,9 +22,8 @@ export default function Header() {
 
   return (
     <div
-      className={`w-full top-0 fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-200 ${
-        scrollHeader ? "bg-secondary py-3" : "py-4"
-      }`}
+      className={`w-full top-0 fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-200 ${scrollHeader ? "bg-secondary py-3" : "py-4"
+        }`}
     >
       <div className="container mx-auto relative">
         <div className="flex justify-between">
@@ -46,9 +45,8 @@ export default function Header() {
             <ul className="nav_list gap-3">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item py-2 px-3 text-white ${
-                    location.pathname === link.url ? "snow_effect_nav" : ""
-                  }`}
+                  className={`list_item py-2 px-3 text-white ${location.pathname === link.url ? "snow_effect_nav" : ""
+                    }`}
                   key={key}
                 >
                   <Link to={link.url}>{link.name}</Link>
@@ -87,9 +85,8 @@ export default function Header() {
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item cursor-pointer ${
-                    location.pathname === link.url ? "active" : ""
-                  }`}
+                  className={`list_item cursor-pointer ${location.pathname === link.url ? "active" : ""
+                    }`}
                   key={key}
                 >
                   <Link to={link.url} onClick={() => setMobile(false)}>
@@ -104,7 +101,6 @@ export default function Header() {
                   className={`p-3`}
                   rel="noopener noreferrer"
                 >
-                  {" "}
                   Docs
                 </Link>
               </li>
