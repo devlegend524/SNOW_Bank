@@ -32,11 +32,7 @@ export default function PresaleDetails({ saleData }) {
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
-              <div> Max NFT Per Wallet:</div>
-              <div className="flex gap-1">1</div>
-            </div>
-            <div className="flex justify-between mb-4 px-1">
-              <div> SALE Price:</div>
+              <div> Presale Price:</div>
               <div>{SALE_PRICE} cents</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
