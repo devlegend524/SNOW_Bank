@@ -34,11 +34,11 @@ export default function PresaleDetails({ saleData }) {
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Presale Price:</div>
-              <div>${SALE_PRICE}</div>
+              <div>{SALE_PRICE} cents</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Launch Price:</div>
-              <div>${LAUNCH_PRICE}</div>
+              <div>{LAUNCH_PRICE} cents</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Vesting Period:</div>

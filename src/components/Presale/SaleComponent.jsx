@@ -62,7 +62,7 @@ export default function SaleComponent({ saleData }) {
               <div>
                 <p className="flex gap-1">
                   <span className="font-semibold">
-                    $ {saleData?.presalePriceOfToken}
+                   {saleData?.presalePriceOfToken * 100} cents
                   </span>
                 </p>
               </div>
