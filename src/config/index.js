@@ -21,9 +21,10 @@ export const wethUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const SALE_PRICE = 50;
-export const LAUNCH_PRICE = 60;
-export const MAX_PER_USER = 300;
+export const NFT_PRICE = 0.3
+export const SALE_PRICE = 60;
+export const LAUNCH_PRICE = 70;
+export const MAX_PER_USER = 4000;
 export const HARD_CAP = 50;
 export const SOFT_CAP = 10;
 // export const MAX_PER_USER = 300;

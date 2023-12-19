@@ -20,14 +20,18 @@ export default function SaleComponent({ saleData }) {
   const [amount, setAmount] = useState("");
   const [snowAmount, setSnowAmount] = useState("");
 
-  const handleChange = (value) => {
+  const handleChangeETH = (value) => {
     setAmount(value);
     setEthAmount(value);
+    const ethSnowAmount = Number(((value * ethPrice) / 0.6).toFixed(5));
+    setSnowAmount(ethSnowAmount);
   };
 
   const handleChangeSnow = (value) => {
     setSnowAmount(value);
-  }
+    const ethBuyAmount = Number(((value * 0.6) / ethPrice).toFixed(5));
+    setEthAmount(ethBuyAmount);
+  };
 
   const getETHPrice = async () => {
     const priceData = await fetch(
@@ -83,81 +87,41 @@ export default function SaleComponent({ saleData }) {
     }
   };
 
-  useEffect(() => {
-    if (snowAmount) {
-      // const ethBuyAmount = Number(
-      //   ((snowAmount * saleData?.presalePriceOfToken) / ethPrice).toFixed(5)
-      // );
-      const ethBuyAmount = Number(((snowAmount * 0.6) / ethPrice).toFixed(5));
-      setEthAmount(ethBuyAmount);
-    }
-  }, [snowAmount]);
-
-  useEffect(() => {
-    if (amount) {
-      // const ethSnowAmount = Number(
-      //   ((amount * ethPrice) / saleData?.presalePriceOfToken).toFixed(5)
-      // );
-      const ethSnowAmount = Number(((amount * ethPrice) / 0.6).toFixed(5));
-      setSnowAmount(ethSnowAmount);
-    }
-  }, [amount]);
-
   return (
     <>
       <div className="w-full snow_effect px-4 py-4">
         <div className="balance_form">
-          <div className="my-8">
+          <div className="mt-8 mb-6">
             <div className="flex justify-between mb-3 px-1">
-              <div>Price:</div>
+              <div>Snow Price:</div>
               <div>
                 <p className="flex gap-1">
                   <span className="font-semibold">
-                    $ {saleData?.presalePriceOfToken}
+                    ${" "}
+                    {saleData?.presalePriceOfToken
+                      ? saleData?.presalePriceOfToken
+                      : "0.00"}
                   </span>
                 </p>
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
-              <div> You bought:</div>
+              <div> You Bought:</div>
               <div className="flex gap-1">
-                {saleData?.SNOWOwned || "0"} <SNOW width={15} height={15} />
-              </div>
-            </div>
-            <div className="flex justify-between mb-3 px-1">
-              <div>MAX Per User:</div>
-              <div className="flex gap-1">
-                {saleData?.MAX_AMOUNT} <SNOW width={15} height={15} />
-              </div>
-            </div>
-            <div className="flex justify-between mb-3 px-1">
-              <div> Total Raised:</div>
-              <div className="flex gap-1">
-                {saleData?.total_deposited || "0"}{" "}
-                <ETH width={15} height={15} />{" "}
+                {saleData?.SNOWOwned || "0.00"} <SNOW width={15} height={15} />
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
               <div>Balance:</div>
               <div className="flex gap-1">
                 {Number(data?.formatted).toFixed(5) === "NaN"
-                  ? "0.000"
-                  : Number(data?.formatted).toFixed(5)}
-                <ETH width={15} height={15} />
-              </div>
-            </div>
-            <div className="flex justify-between mb-3 px-1">
-              <div>ETH Price:</div>
-              <div className="flex gap-1">
-                {Number(data?.formatted).toFixed(5) === "NaN"
-                  ? "0.000"
+                  ? "0.00"
                   : Number(data?.formatted).toFixed(5)}
                 <ETH width={15} height={15} />
               </div>
             </div>
           </div>
-
-          <div className="flex gap-3">
+          <div className="flex gap-3 mb-3">
             <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full">
               <img
                 src="/assets/tokens/snow.png"
@@ -182,8 +146,41 @@ export default function SaleComponent({ saleData }) {
                 type="number"
                 placeholder="Input ETH Amount To Buy."
                 value={ethAmount}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={(e) => handleChangeETH(e.target.value)}
               />
+            </div>
+          </div>
+
+          <div className="bg-primary/20 rounded-lg p-3 mb-3 text-sm">
+            <div className="flex gap-2 justify-between mt-1">
+              <p className="text-sm">SNOW</p>
+              <div className="flex gap-1">
+                <SNOW /> {snowAmount ? snowAmount : "0.00"}
+              </div>
+            </div>
+            <div className="flex gap-2 justify-between mt-1">
+              <p className="text-sm">ETH</p>
+              <div className="flex gap-1">
+                <ETH /> {ethAmount ? ethAmount : "0.00"}
+              </div>
+            </div>
+            <div className="flex gap-2 justify-between mt-1">
+              <p className="text-sm">ETH Price:</p>
+              <div className="flex gap-1">$ ~{ethPrice}</div>
+            </div>
+            <hr className="mt-1 border-white/30 border-[0.5px]" />
+            <div className="flex gap-2 justify-between mt-1">
+              <p className="text-sm">USD Amount</p>
+              <div className="flex gap-1">
+                {ethAmount ? (
+                  <>
+                    {ethPrice} * {ethAmount} = $ ~
+                    {(ethPrice * ethAmount).toFixed(2)}
+                  </>
+                ) : (
+                  <>$ ~</>
+                )}
+              </div>
             </div>
           </div>
         </div>
