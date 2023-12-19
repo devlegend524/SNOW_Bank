@@ -33,7 +33,7 @@ export default function Header() {
               href="/"
               className="absolute -top-1 left-0 h-[65px] w-[72px] hidden sm:inline-block"
             >
-              <img src="/logo.png" className="h-[70px] w-[75px] mt-1" alt="" />
+              <img src="/logo.png" className="h-[70px] w-[75px]" alt="" />
             </a>
             <div
               className="text-white ml-2 block sm:hidden my-auto"
