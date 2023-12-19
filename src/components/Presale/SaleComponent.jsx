@@ -6,18 +6,38 @@ import { usePresaleContract } from "hooks/useContract";
 import LogoLoading from "../LogoLoading";
 import SNOW from "components/UI/SNOW";
 import ETH from "components/UI/ETH";
+import { useEffect } from "react";
 
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
-  const [pendingTx, setPendingTx] = useState(false);
-  const [amount, setAmount] = useState("");
   const { address } = useAccount();
   const { data } = useBalance({
     address: address,
   });
+  const [ethPrice, setEthPrice] = useState(0.00006195);
+  const [pendingTx, setPendingTx] = useState(false);
+  const [ethAmount, setEthAmount] = useState("");
+  const [amount, setAmount] = useState("");
+  const [snowAmount, setSnowAmount] = useState("");
 
   const handleChange = (value) => {
     setAmount(value);
+    setEthAmount(value);
+  };
+
+  const handleChangeSnow = (value) => {
+    setSnowAmount(value);
+  }
+
+  const getETHPrice = async () => {
+    const priceData = await fetch(
+      "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
+    );
+    const res = await priceData.json();
+    if (res && res.USD) {
+      ethPrice = res.USD;
+      setEthPrice(Number(ethPrice));
+    }
   };
 
   const handleBuySnow = async () => {
@@ -30,12 +50,23 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
+    if (ethPrice === 0) {
+      notify("error", "ETH price fetch failed.");
+      return;
+    }
+
+    if (!amount) {
+      notify("error", "Please input the correct amount to buy.");
+      return;
+    }
+
     try {
       setPendingTx(true);
       const tx = await presaleContract.buySNOW({
         from: address,
         value: fromReadableAmount(Number(amount).toFixed(5)),
       });
+
       await tx.wait();
       setPendingTx(false);
       notify("success", `You bought ${amount} SNOW successfully`);
@@ -51,6 +82,26 @@ export default function SaleComponent({ saleData }) {
       }
     }
   };
+
+  useEffect(() => {
+    if (snowAmount) {
+      // const ethBuyAmount = Number(
+      //   ((snowAmount * saleData?.presalePriceOfToken) / ethPrice).toFixed(5)
+      // );
+      const ethBuyAmount = Number(((snowAmount * 0.6) / ethPrice).toFixed(5));
+      setEthAmount(ethBuyAmount);
+    }
+  }, [snowAmount]);
+
+  useEffect(() => {
+    if (amount) {
+      // const ethSnowAmount = Number(
+      //   ((amount * ethPrice) / saleData?.presalePriceOfToken).toFixed(5)
+      // );
+      const ethSnowAmount = Number(((amount * ethPrice) / 0.6).toFixed(5));
+      setSnowAmount(ethSnowAmount);
+    }
+  }, [amount]);
 
   return (
     <>
@@ -117,8 +168,8 @@ export default function SaleComponent({ saleData }) {
                 className="w-full py-3.5 bg-transparent text-sm px-2 hover:outline-none focus-visible:outline-none focus-visible:border-white/70"
                 type="number"
                 placeholder="Input SNOW Amount To Buy."
-                value={amount}
-                onChange={(e) => handleChange(e.target.value)}
+                value={snowAmount}
+                onChange={(e) => handleChangeSnow(e.target.value)}
               />
             </div>
             <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full">
@@ -130,12 +181,13 @@ export default function SaleComponent({ saleData }) {
                 className="py-3.5 bg-transparent text-sm w-full px-2 hover:outline-none focus-visible:outline-none  focus-visible:border-white/70"
                 type="number"
                 placeholder="Input ETH Amount To Buy."
-                value={amount}
+                value={ethAmount}
                 onChange={(e) => handleChange(e.target.value)}
               />
             </div>
           </div>
         </div>
+
         <button
           className="main_btn w-full mt-6 mb-2"
           onClick={() => handleBuySnow()}
