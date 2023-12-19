@@ -117,7 +117,7 @@ const Farm = ({
         <TokenWrapper>
           <StyledPrimaryImage
             variant="inverted"
-            src="/assets/tokens/snow.webp"
+            src="/assets/tokens/snow.png"
             width={imgSize}
             height={imgSize}
           />

@@ -1,15 +1,14 @@
-import { HARD_CAP } from "config";
+import React from "react";
+import SNOW from "components/UI/SNOW";
+import ETH from "components/UI/ETH";
 import { mainTokenSymbol } from "config";
-import { SOFT_CAP } from "config";
 import { LAUNCH_PRICE } from "config";
 import { SALE_PRICE } from "config";
 import { BASE_EXPLORER } from "config";
-import React from "react";
 import { getPresaleAddress } from "utils/addressHelpers";
 import { formatAddress } from "utils/customHelpers";
 
 export default function PresaleDetails({ saleData }) {
-
   return (
     <div className="col-span-12 sm:col-span-6">
       <div className="w-full rounded-md p-4 snow_effect">
@@ -17,16 +16,20 @@ export default function PresaleDetails({ saleData }) {
           <div className="my-8">
             <div className="flex justify-between mb-4 px-1">
               <div> Total Raised:</div>
-              <div>{saleData?.total_deposited || "0.00"} ETH</div>
+              <div className="flex gap-1">
+                {saleData?.total_deposited || "0.00"} <ETH />{" "}
+              </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Your Committed:</div>
-              <div>{saleData?.user_deposits || "0.00"} ETH</div>
+              <div className="flex gap-1">
+                {saleData?.user_deposits || "0.00"} <ETH />
+              </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Your {mainTokenSymbol} Owned:</div>
-              <div>
-                {saleData?.SNOWOwned || "0.00"} {mainTokenSymbol}
+              <div className="flex gap-1">
+                {saleData?.SNOWOwned || "0.00"} <SNOW />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">

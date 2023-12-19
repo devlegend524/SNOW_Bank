@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
 import { toReadableAmount } from "utils/customHelpers";
 import ClaimComponent from "components/ClaimComponent";
-import SaleComponent from "components/SaleComponent";
+import SaleComponent from "components/Presale/SaleComponent";
 import useRefresh from "hooks/useRefresh";
 import PreslaeABI from "config/abis/presale.json";
 import { getPresaleAddress } from "utils/addressHelpers";

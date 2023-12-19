@@ -3,7 +3,7 @@ import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import { toReadableAmount } from "utils/customHelpers";
 import ClaimComponent from "components/ClaimComponent";
-import SaleComponent from "components/SaleComponent";
+import SaleComponent from "components/Presale/SaleComponent";
 import useRefresh from "hooks/useRefresh";
 import PresaleABI from "config/abis/presale.json";
 import PresaleForkABI from "config/abis/presaleFork.json";

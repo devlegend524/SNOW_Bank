@@ -28,7 +28,7 @@ export default function FarmBanner() {
               address: token,
               symbol: "SNOW",
               decimals: "18",
-              image: `${BASE_URL}/assets/tokens/snow.webp`,
+              image: `${BASE_URL}/assets/tokens/snow.png`,
             },
           },
         });
