@@ -12,7 +12,7 @@ const tokens = {
     address: addresses.snow,
     decimals: 18,
     logo: "/assets/tokens/snow.png",
-    projectLink: "https://snowbank.farm/", // todo:
+    projectLink: "https://snowbank.io/", // todo:
   },
   weth: {
     symbol: "WETH",

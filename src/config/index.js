@@ -6,7 +6,7 @@ import { FaYoutube } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 
-export const BASE_URL = "https://snowbank.farm";
+export const BASE_URL = "https://snowbank.io";
 export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 
 export const CHAIN_ID = 369;
