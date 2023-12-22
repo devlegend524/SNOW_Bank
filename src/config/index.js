@@ -68,7 +68,7 @@ export const socials = [
   {
     icon: () => <FaTwitter />,
     name: "",
-    href: "https://x.com/snowbanketh",
+    href: "https://twitter.com/SnowBank_io",
   },
   {
     icon: () => <FaTelegramPlane />,
