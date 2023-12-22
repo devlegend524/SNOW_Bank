@@ -12,7 +12,7 @@ import { useEthersSigner } from "hooks/useEthers";
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
   const { address } = useAccount();
-  const [ethPrice, setEthPrice] = useState(0.00006144);
+  const [ethPrice, setEthPrice] = useState(2100);
   const [pendingTx, setPendingTx] = useState(false);
   const [ethAmount, setEthAmount] = useState("");
   const [amount, setAmount] = useState("");
@@ -29,13 +29,13 @@ export default function SaleComponent({ saleData }) {
   const handleChangeETH = (value) => {
     setAmount(value);
     setEthAmount(value);
-    const ethSnowAmount = Number(((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(5));
+    const ethSnowAmount = Number(((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(8));
     setSnowAmount(ethSnowAmount);
   };
 
   const handleChangeSnow = (value) => {
     setSnowAmount(value);
-    const ethBuyAmount = Number(((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(5));
+    const ethBuyAmount = Number(((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(8));
     setEthAmount(ethBuyAmount);
   };
 
@@ -45,8 +45,8 @@ export default function SaleComponent({ saleData }) {
     );
     const res = await priceData.json();
     if (res && res.USD) {
-      ethPrice = res.USD;
-      setEthPrice(Number(ethPrice));
+      const price = res.USD;
+      setEthPrice(Number(price));
     }
   };
 
@@ -75,11 +75,16 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
+    if (ethAmount >= Number(balance)) {
+      notify("error", "You dont't have enough balance to buy.");
+      return;
+    }
+
     try {
       setPendingTx(true);
       const tx = await presaleContract.buySNOW({
         from: address,
-        value: fromReadableAmount(Number(ethAmount).toFixed(5)),
+        value: fromReadableAmount(Number(ethAmount).toFixed(8)),
       });
 
       await tx.wait();
@@ -100,6 +105,7 @@ export default function SaleComponent({ saleData }) {
   };
 
   useEffect(() => {
+    getETHPrice();
     if (signer) {
       getBalance()
     }
@@ -123,7 +129,7 @@ export default function SaleComponent({ saleData }) {
             <div className="flex justify-between mb-3 px-1">
               <div> You Bought:</div>
               <div className="flex gap-1">
-                {saleData?.SNOWOwned || "0.00"} <SNOW width={15} height={15} />
+                {saleData?.SNOWOwned ? Number(saleData?.SNOWOwned).toFixed(2) : "0.00"} <SNOW width={15} height={15} />
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
