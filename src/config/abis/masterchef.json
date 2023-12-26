@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_bSnow",
+        "name": "_gem",
         "type": "address"
       },
       {
@@ -184,45 +184,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "bSnow",
-    "outputs": [
-      {
-        "internalType": "contract BSnowToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "bSnowAddr",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "bSnowPerSecond",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -328,6 +289,45 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gem",
+    "outputs": [
+      {
+        "internalType": "contract GEMToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gemAddr",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gemPerSecond",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -474,7 +474,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingSnow",
+    "name": "pendingGEM",
     "outputs": [
       {
         "internalType": "uint256",
@@ -512,7 +512,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accBSnowPerShare",
+        "name": "accGEMPerShare",
         "type": "uint256"
       },
       {
@@ -612,11 +612,37 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_bSnow",
+        "name": "_gem",
         "type": "address"
       }
     ],
-    "name": "setSnowX",
+    "name": "setGemX",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_newMaxRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxTaxRate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_newStaticRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setStaticTaxRate",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -677,7 +703,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_bSnowPerSecond",
+        "name": "_gemPerSecond",
         "type": "uint256"
       }
     ],

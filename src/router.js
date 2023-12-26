@@ -16,21 +16,21 @@ const router = [
     element: <SnowPresale />,
   },
   {
-    path: "/nft-sale",
+    path: "/nfts",
     element: <NFTPresale />,
   },
   {
     path: "/roadmap",
     element: <Roadmap />,
   },
-  // {
-  //   path: "/farms",
-  //   element: <Farms />,
-  // },
-  // {
-  //   path: "/swap",
-  //   element: <Swap />,
-  // },
+  {
+    path: "/stake",
+    element: <Farms />,
+  },
+  {
+    path: "/swap",
+    element: <Swap />,
+  },
   // {
   //   path: "/liquidity",
   //   element: <Liquidity />,
@@ -43,10 +43,10 @@ const router = [
   //   path: "/presale",
   //   element: <SnowPresale />,
   // },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
+  // {
+  //   path: "*",
+  //   element: <NotFound />,
+  // },
 ];
 
 export default router;

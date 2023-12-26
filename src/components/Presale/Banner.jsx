@@ -15,20 +15,23 @@ export default function Banner() {
           SNOW BANK
         </p>
         <p className="text-center sm:text-left mt-6">
-          Welcome to the Snow Bank's presale, launching on Saturday, January 6th
-          on the Ethereum mainnet. Here, you're more than a token buyer; you're
-          an early adopter in a high-yield farm. Be at the forefront of
-          financial innovation with Snow Bank. Your participation is key to
-          building a robust and dynamic DeFi ecosystem. Join us now and be part
-          of the exciting future of decentralized finance!
+          WELCOME TO SNOW BANK: Stake SNOW/wETH LP, SNOW or Snow NFT's to earn SNOW. Launching on Saturday, January 6th 2024 on Ethereum Mainnet.
         </p>
-        <a
-          className="main_btn mt-7 flex gap-3 w-fit mx-auto sm:mx-0"
+        <div className="flex gap-2"> <a
+          className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
           href={DOCS_URL}
           target="_blank"
         >
-          Read Docs <FaArrowRight className="my-auto" />
+          SNOW Farm<FaArrowRight className="my-auto hidden sm:inline-block" />
         </a>
+          <a
+            className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fongs-lg w-fit mx-auto sm:mx-0"
+            href={"https://opensea.io/"}
+            target="_blank"
+          >
+            Open Sea<FaArrowRight className="my-auto hidden sm:inline-block" />
+          </a>
+        </div>
       </div>
     </div>
   );

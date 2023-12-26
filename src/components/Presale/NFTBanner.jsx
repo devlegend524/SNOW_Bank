@@ -20,13 +20,21 @@ export default function NFTBanner() {
           available for purchase at 0.05 ETH each and play a pivotal role in the
           Snow Bank ecosystem.
         </p>
-        <a
-          className="main_btn mt-7 flex gap-3 w-fit mx-auto sm:mx-0"
-          href={DOCS_URL + "/snow-nfts"}
+        <div className="flex gap-2"> <a
+          className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
+          href={DOCS_URL}
           target="_blank"
         >
-          Read Docs <FaArrowRight className="my-auto" />
+          SNOW Farm<FaArrowRight className="my-auto hidden sm:inline-block" />
         </a>
+          <a
+            className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fongs-lg w-fit mx-auto sm:mx-0"
+            href={"https://opensea.io/"}
+            target="_blank"
+          >
+            Open Sea<FaArrowRight className="my-auto hidden sm:inline-block" />
+          </a>
+        </div>
       </div>
     </div>
   );

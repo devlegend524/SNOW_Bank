@@ -15,6 +15,8 @@ import PresaleDetails from "components/Presale/PresaleDetails";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
 import Tab from "components/Presale/Tab";
 // import LogoLoading from "components/LogoLoading";
+import { ref, push, query, onValue, update, get } from "firebase/database";
+import { db } from "config/firebase";
 
 export default function SnowPresale() {
   const preslaeContractAddress = getPresaleAddress();
@@ -22,84 +24,91 @@ export default function SnowPresale() {
   const { fastRefresh } = useRefresh();
   const [active, setActive] = useState(0);
   const [presaleData, setPresaleData] = useState({});
-
+  const [ethRaised, setTotalRaisedETH] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const calls = [
-        {
-          address: preslaeContractAddress,
-          name: "enabled",
-          params: [],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "sale_finalized",
-          params: [],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "finishedTimestamp",
-          params: [],
-        },
-        // {
-        //   address: preslaeContractAddress,
-        //   name: "finishedTimestamp",
-        //   params: [],
-        // },
-        {
-          address: preslaeContractAddress,
-          name: "presalePriceOfToken",
-          params: [],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "rate",
-          params: [],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "MAX_AMOUNT",
-          params: [],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "total_deposited",
-          params: [],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "NFTPrice",
-          params: [],
-        },
-        // {
-        //   address: preslaeContractAddress,
-        //   name: "soldedNFTs",
-        //   params: [],
-        // },
-      ];
+      // const calls = [
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "enabled",
+      //     params: [],
+      //   },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "sale_finalized",
+      //     params: [],
+      //   },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "finishedTimestamp",
+      //     params: [],
+      //   },
+      //   // {
+      //   //   address: preslaeContractAddress,
+      //   //   name: "finishedTimestamp",
+      //   //   params: [],
+      //   // },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "presalePriceOfToken",
+      //     params: [],
+      //   },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "rate",
+      //     params: [],
+      //   },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "MAX_AMOUNT",
+      //     params: [],
+      //   },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "total_deposited",
+      //     params: [],
+      //   },
+      //   {
+      //     address: preslaeContractAddress,
+      //     name: "NFTPrice",
+      //     params: [],
+      //   },
+      //   // {
+      //   //   address: preslaeContractAddress,
+      //   //   name: "soldedNFTs",
+      //   //   params: [],
+      //   // },
+      // ];
 
       try {
-        const rawResults = await multicall(PreslaeABI, calls);
-        rawResults.map((data, index) => {
-          const newData =
-            index <= 4
-              ? {
-                  [calls[index]["name"]]:
-                    index >= 2 ? Number(data[0]) : data[0],
-                }
-              : index === 8
-              ? { [calls[index]["name"]]: rawResults[index].toString() }
-              : {
-                  [calls[index]["name"]]: toReadableAmount(
-                    rawResults[index].toString(),
-                    18,
-                    6
-                  ),
-                };
+        // const rawResults = await multicall(PreslaeABI, calls);
+        // rawResults.map((data, index) => {
+        //   const newData =
+        //     index <= 4
+        //       ? {
+        //         [calls[index]["name"]]:
+        //           index >= 2 ? Number(data[0]) : data[0],
+        //       }
+        //       : index === 8
+        //         ? { [calls[index]["name"]]: rawResults[index].toString() }
+        //         : {
+        //           [calls[index]["name"]]: toReadableAmount(
+        //             rawResults[index].toString(),
+        //             18,
+        //             6
+        //           ),
+        //         };
 
-          setPresaleData((value) => ({ ...value, ...newData }));
+        const dbQuery = query(ref(db, "stats"));
+        onValue(dbQuery, async (snapshot) => {
+          const exist = snapshot.val();
+          if (exist) {
+            setTotalRaisedETH(Number(exist[Object.keys(exist)[0]].eth || 0));
+          }
         });
+        // setPresaleData((value) => ({ ...value, ...newData }));
+        // });
       } catch (e) {
         console.log("Fetch Farms With Balance Error:", e);
       }
@@ -108,51 +117,51 @@ export default function SnowPresale() {
     fetchData();
   }, [fastRefresh]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const calls = [
-        {
-          address: preslaeContractAddress,
-          name: "user_deposits",
-          params: [address],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "SNOWOwned",
-          params: [address],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "user_withdraw_amount",
-          params: [address],
-        },
-        {
-          address: preslaeContractAddress,
-          name: "user_withdraw_timestamp",
-          params: [address],
-        }
-      ];
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     // const calls = [
+  //     //   {
+  //     //     address: preslaeContractAddress,
+  //     //     name: "user_deposits",
+  //     //     params: [address],
+  //     //   },
+  //     //   {
+  //     //     address: preslaeContractAddress,
+  //     //     name: "SNOWOwned",
+  //     //     params: [address],
+  //     //   },
+  //     //   {
+  //     //     address: preslaeContractAddress,
+  //     //     name: "user_withdraw_amount",
+  //     //     params: [address],
+  //     //   },
+  //     //   {
+  //     //     address: preslaeContractAddress,
+  //     //     name: "user_withdraw_timestamp",
+  //     //     params: [address],
+  //     //   }
+  //     // ];
 
-      try {
-        const rawResults = await multicall(PreslaeABI, calls);
-        rawResults.map((data, index) => {
-          const newData = {
-            [calls[index]["name"]]:
-              index === 3
-                ? Number(rawResults[index])
-                : toReadableAmount(rawResults[index].toString(), 18, 6),
-          };
-          setPresaleData((value) => ({ ...value, ...newData }));
-        });
-      } catch (e) {
-        console.log("Fetch Farms With Balance Error:", e.reason);
-      }
-    };
+  //     try {
+  //       // const rawResults = await multicall(PreslaeABI, calls);
+  //       // rawResults.map((data, index) => {
+  //       //   const newData = {
+  //       //     [calls[index]["name"]]:
+  //       //       index === 3
+  //       //         ? Number(rawResults[index])
+  //       //         : toReadableAmount(rawResults[index].toString(), 18, 6),
+  //       //   };
+  //       //   setPresaleData((value) => ({ ...value, ...newData }));
+  //       // });
+  //     } catch (e) {
+  //       console.log("Fetch Farms With Balance Error:", e.reason);
+  //     }
+  //   };
 
-    if (address) {
-      fetchData();
-    }
-  }, [address, fastRefresh]);
+  //   if (address) {
+  //     // fetchData();
+  //   }
+  // }, [address, fastRefresh]);
 
   return (
     <div className="min-h-[calc(100vh-200px)] max-w-[1200px] mx-3 container mt-8 sm:mt-4">
@@ -170,7 +179,7 @@ export default function SnowPresale() {
           </div>
         </div>
 
-        <PresaleDetails saleData={presaleData} />
+        <PresaleDetails saleData={presaleData} ethRaised={ethRaised} />
       </div>
     </div>
   );

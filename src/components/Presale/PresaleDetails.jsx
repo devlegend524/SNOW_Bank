@@ -7,7 +7,8 @@ import { getPresaleAddress } from "utils/addressHelpers";
 import { formatAddress } from "utils/customHelpers";
 import { CountDownComponentClaim } from "components/CountDownClaim";
 
-export default function PresaleDetails({ saleData }) {
+export default function PresaleDetails({ saleData, ethRaised }) {
+
   return (
     <div className="col-span-12 sm:col-span-6">
       <div className="w-full rounded-md p-4 snow_effect">
@@ -16,13 +17,13 @@ export default function PresaleDetails({ saleData }) {
             <div className="flex justify-between mb-4 px-1">
               <div> Total Raised:</div>
               <div className="flex gap-1">
-                {saleData?.total_deposited || "0.00"} <ETH />
+                {Number(ethRaised).toFixed(5) || "0.00"} <ETH />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Max SNOW Per Wallet:</div>
               <div className="flex gap-1">
-                {MAX_PER_USER || "0.00"} <SNOW />
+                100,000 ($4,000 USD) <SNOW />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
@@ -33,19 +34,20 @@ export default function PresaleDetails({ saleData }) {
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Presale Price:</div>
-              <div>{saleData?.presalePriceOfToken} cents</div>
+              {/* <div>{saleData?.presalePriceOfToken} cents</div> */}
+              <div>4 cents</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Launch Price:</div>
-              <div>{saleData?.presalePriceOfToken + 2} cents</div>
+              <div>6 cents</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Vesting Period:</div>
-              <div>20 days</div>
+              <div>10 days</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Vesting Percent:</div>
-              <div>5% daily</div>
+              <div>10% daily</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div>Sale Ends In:</div>
@@ -59,23 +61,23 @@ export default function PresaleDetails({ saleData }) {
                 <CountDownComponentClaim time={1704585600000} />
               </div>
             </div>
-            <div className="flex justify-between mb-4 px-1">
+            {/* <div className="flex justify-between mb-4 px-1">
               <div>Sale Finished Time:</div>
               <div>
                 {saleData?.finishedTimestamp
                   ? new Date(saleData?.finishedTimestamp * 1000).toDateString()
                   : "0000-00-00 00:00:00"}
               </div>
-            </div>
+            </div> */}
             <div className="flex justify-between mb-4 px-1">
               <div> Launch Date:</div>
-              <div>2024-01-07</div>
+              <div>January 6th 2024</div>
             </div>
-            <div className="flex justify-between mb-4 px-1">
+            {/* <div className="flex justify-between mb-4 px-1">
               <div> Presale End Date:</div>
               <div>2024-01-06</div>
-            </div>
-            <div className="flex justify-between mb-3 px-1">
+            </div> */}
+            {/* <div className="flex justify-between mb-3 px-1">
               <div>Contract:</div>
               <div>
                 <a
@@ -86,7 +88,7 @@ export default function PresaleDetails({ saleData }) {
                   {formatAddress(getPresaleAddress(), 4)}
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

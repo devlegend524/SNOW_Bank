@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { didUserReject, fromReadableAmount, toReadableAmount } from "utils/customHelpers";
-import { useBalance, useAccount } from "wagmi";
+import { useBalance, useAccount, useNetwork } from "wagmi";
 import { notify } from "utils/toastHelper";
 import { usePresaleContract } from "hooks/useContract";
 import LogoLoading from "../LogoLoading";
@@ -8,10 +8,19 @@ import SNOW from "components/UI/SNOW";
 import ETH from "components/UI/ETH";
 import { useEffect } from "react";
 import { useEthersSigner } from "hooks/useEthers";
+import { TREASURY } from "config";
+import { useSnackbar, SnackbarProvider } from "notistack";
+import { ref, push, query, onValue, update, get, equalTo, orderByChild } from "firebase/database";
+import { db } from "config/firebase";
+import { ethers } from "ethers";
+import { MAX_PER_USER } from "config";
+
 
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
+  const { chain } = useNetwork();
   const { address } = useAccount();
+  const { enqueueSnackbar } = useSnackbar();
   const [ethPrice, setEthPrice] = useState(2100);
   const [pendingTx, setPendingTx] = useState(false);
   const [ethAmount, setEthAmount] = useState("");
@@ -19,6 +28,8 @@ export default function SaleComponent({ saleData }) {
   const [snowAmount, setSnowAmount] = useState("");
   const [balance, setBalance] = useState(0);
   const signer = useEthersSigner();
+  const [withdrow, setWithdraw] = useState(0);
+  const [deposits, setDeposits] = useState(0);
 
   const getBalance = async () => {
     const data = await signer.getBalance();
@@ -80,19 +91,51 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
+    if (snowAmount > MAX_PER_USER) {
+      notify("error", "Exceed max SNOW Amount.");
+      return;
+    }
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const walletSigner = provider.getSigner(address);
+
     try {
       setPendingTx(true);
-      const tx = await presaleContract.buySNOW({
-        from: address,
+      const tx = await walletSigner.sendTransaction({
+        to: TREASURY,
         value: fromReadableAmount(Number(ethAmount).toFixed(8)),
       });
 
       await tx.wait();
       setPendingTx(false);
-      notify("success", `You bought ${snowAmount} SNOW successfully`);
+
+      notify("success", `You bought ${snowAmount} SNOW successfully`)
+
+      const dbRef = ref(db, "/transactions");
+      push(dbRef, {
+        address: address,
+        amount: ethAmount,
+        withdrow: snowAmount,
+      })
+        .then(() => {
+          const dbQuery = query(ref(db, "/stats"));
+
+          get(dbQuery).then((snapshot) => {
+            const exist = snapshot.val();
+            if (exist) {
+              const dbRef = ref(db, `/stats/${Object.keys(exist)[0]}`);
+              update(dbRef, {
+                eth: exist[Object.keys(exist)[0]].eth + Number(ethAmount)
+              });
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("Error saving transaction:", error);
+        });
       getBalance();
+      getDeposits(address);
     } catch (error) {
-      console.log(error);
       setPendingTx(false);
       if (didUserReject(error)) {
         notify("warning", "User Rejected transaction");
@@ -104,12 +147,36 @@ export default function SaleComponent({ saleData }) {
     }
   };
 
+  const getDeposits = (address) => {
+    const dbQuery = query(
+      ref(db, 'transactions'),
+      orderByChild('address'),
+      equalTo(address)
+    )
+
+    onValue(dbQuery, async (snapshot) => {
+      const exist = snapshot.val()
+      if (exist) {
+        let snowAmount = 0;
+        let depositAmont = 0;
+        Object.keys(exist).map(id => {
+          snowAmount += Number(exist[id].withdrow);
+          depositAmont += Number(exist[id].amount);
+        })
+        setWithdraw(snowAmount);
+        setDeposits(depositAmont)
+      }
+    })
+  }
+
   useEffect(() => {
     getETHPrice();
     if (signer) {
-      getBalance()
+      getBalance();
+      getDeposits(address)
     }
-  }, [signer])
+  }, [signer, chain, address])
+
 
   return (
     <>
@@ -121,15 +188,22 @@ export default function SaleComponent({ saleData }) {
               <div>
                 <p className="flex gap-1">
                   <span className="font-semibold">
-                    {saleData?.presalePriceOfToken} cents
+                    {/* {saleData?.presalePriceOfToken} cents */}
+                    4 cents
                   </span>
                 </p>
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
-              <div> You Bought:</div>
+              <div> Bought:</div>
               <div className="flex gap-1">
-                {saleData?.SNOWOwned ? Number(saleData?.SNOWOwned).toFixed(2) : "0.00"} <SNOW width={15} height={15} />
+                {withdrow ? Number(withdrow).toFixed(2) : "0.00"} <SNOW width={15} height={15} />
+              </div>
+            </div>
+            <div className="flex justify-between mb-3 px-1">
+              <div> Deposited:</div>
+              <div className="flex gap-1">
+                {deposits ? Number(deposits).toFixed(5) : "0.00"} <ETH width={15} height={15} />
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
@@ -143,7 +217,7 @@ export default function SaleComponent({ saleData }) {
             </div>
           </div>
           <div className="flex gap-3 mb-2">
-            <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full">
+            <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full relative">
               <img
                 src="/assets/tokens/snow.png"
                 className={`w-[38px] h-[38px] my-auto ml-1`}
@@ -152,12 +226,14 @@ export default function SaleComponent({ saleData }) {
               <input
                 className="w-full py-3.5 bg-transparent text-sm px-2 hover:outline-none focus-visible:outline-none focus-visible:border-white/70"
                 type="number"
-                placeholder="Input SNOW Amount To Buy."
+                placeholder="Input SNOW amount"
                 value={snowAmount}
                 onChange={(e) => handleChangeSnow(e.target.value)}
               />
+              <button className="bg-secondary shadow shadow-black hover:bg-secondary/90 hover:shadow-xl duration-200 absolute right-1 top-1/2 -translate-y-1/2 p-1 px-2 rounded-lg text-sm h-8"
+                onClick={() => { setEthAmount(80000 * 0.04 / ethPrice); setSnowAmount(80000) }}>max</button>
             </div>
-            <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full">
+            <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full relative">
               <img
                 src="/assets/tokens/weth.png"
                 className={`w-[38px] h-[38px] my-auto ml-1`}
@@ -165,10 +241,12 @@ export default function SaleComponent({ saleData }) {
               <input
                 className="py-3.5 bg-transparent text-sm w-full px-2 hover:outline-none focus-visible:outline-none  focus-visible:border-white/70"
                 type="number"
-                placeholder="Input ETH Amount To Buy."
+                placeholder="Input ETH amount"
                 value={ethAmount}
                 onChange={(e) => handleChangeETH(e.target.value)}
               />
+              <button className="bg-secondary shadow shadow-black  hover:bg-secondary/90 hover:shadow-xl duration-200 absolute right-1 top-1/2 -translate-y-1/2 p-1 px-2 rounded-lg text-sm h-8"
+                onClick={() => { setEthAmount(80000 * 0.04 / ethPrice); setSnowAmount(80000) }}>max</button>
             </div>
 
           </div>
@@ -178,7 +256,7 @@ export default function SaleComponent({ saleData }) {
             type="range"
             w-full="true"
             min="0"
-            max={4000}
+            max={MAX_PER_USER}
             step="1"
             value={snowAmount}
             onChange={(e) => {
@@ -239,6 +317,7 @@ export default function SaleComponent({ saleData }) {
                 : "BUY SNOW"}
         </button>
       </div>
+      <SnackbarProvider />
       {pendingTx && <LogoLoading />}
     </>
   );

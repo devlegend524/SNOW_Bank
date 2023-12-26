@@ -24,6 +24,10 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
     toReadableAmount(presaleData?.NFTPrice.toString(), 18);
 
   const handleBuyNFT = async () => {
+    notify("error", "NFT sale is not started yet");
+    return;
+
+
     if (!presaleData?.NFTPrice) {
       return;
     }
@@ -120,7 +124,7 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
               <p>Price: </p>
               <p>{NFTPrice} ETH</p>
             </div>
-            {isSold ? <button
+            {/* {!isSold ? <button
               key={tokenId}
               disabled={true}
               className="main_btn mx-auto mt-4 py-[9px!important] opacity-50 text-green-400 flex items-center"
@@ -131,7 +135,13 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
               className="main_btn mx-auto mt-4 py-[9px!important]"
             >
               Buy Now
-            </button>}
+            </button>} */}
+            <button key={tokenId}
+              onClick={handleBuyNFT}
+              className="main_btn mx-auto mt-4 py-[9px!important]"
+            >
+              Soon
+            </button>
           </div>
         </div>
         {pendingTx && <LogoLoading />}

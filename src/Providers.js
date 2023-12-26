@@ -5,7 +5,13 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { pulsechain, base, mainnet, goerli } from "wagmi/chains";
+import {
+  mainnet,
+  optimism,
+  arbitrum,
+  base,
+  zkSync,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
@@ -15,13 +21,15 @@ import ContractContextProvideer from "context/contracts";
 import { ThemeContextProvider } from "context/ThemeContext";
 import { LanguageProvider } from "context/Localization";
 import { ModalProvider } from "uikit";
-
 import { ALCHEMY_ID } from "config";
 import store from "state";
 
 const Providers = ({ children }) => {
   const { chains, publicClient } = configureChains(
-    [base],
+    [
+      mainnet,
+      base
+    ],
     [alchemyProvider({ apiKey: ALCHEMY_ID }), publicProvider()]
   );
 

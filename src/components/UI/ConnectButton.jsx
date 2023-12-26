@@ -71,10 +71,10 @@ export const WalletConnect = () => {
                       className="w-[33.5px] h-[33.5px] mx-1"
                       />
                       {Number(priceData[0]) ? `${priceData[0].toString()}` : ""}
-                  </a>
+                  </a> */}
                   <button
                     onClick={openChainModal}
-                    className="hidden sm:inline-flex justify-center items-center rounded-full  transition ease-in-out text-black text-xl"
+                    className="inline-flex justify-center snow_effect_chain items-center rounded-full  transition ease-in-out text-black text-xl mr-1"
                   >
                     {chain.iconUrl ? (
                       <img
@@ -89,7 +89,7 @@ export const WalletConnect = () => {
                         className="h-[30px!important] w-[30px!important]"
                       />
                     )}
-                  </button> */}
+                  </button>
                   <div className="hidden sm:inline-block text-sm font-light">{Number(account.balanceFormatted).toFixed(4)} <span className="text-[10px]">&nbsp;( ETH )</span>  </div>
                   <button
                     onClick={openAccountModal}

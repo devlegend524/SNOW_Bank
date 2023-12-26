@@ -12,6 +12,8 @@ export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 export const CHAIN_ID = 8453;
 export const TESTNET_CHAIN_ID = 5;
 
+export const TREASURY = "0x2324Bf6650AEA8710d1f868C829986eD6aDAfD4A"; // 0x41140Df415A2898937d147842C314c70B3aab82E // 0x2324Bf6650AEA8710d1f868C829986eD6aDAfD4A
+
 export const DEFAULT_GAS_LIMIT = 2000000;
 export const DEFAULT_GAS_PRICE = 2;
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18);
@@ -24,7 +26,7 @@ export const YEAR_BN = new BigNumber(YEAR);
 export const NFT_PRICE = 0.3
 export const SALE_PRICE = 60;
 export const LAUNCH_PRICE = 70;
-export const MAX_PER_USER = 4000;
+export const MAX_PER_USER = 80000;
 export const HARD_CAP = 50;
 export const SOFT_CAP = 10;
 // export const MAX_PER_USER = 300;
@@ -58,7 +60,7 @@ export const socials = [
   {
     icon: () => <FaDiscord />,
     name: "",
-    href: "https://discord.gg/KUwRXGdp",
+    href: "https://discord.com/invite/Gde9pgxX",
   },
   // {
   //   icon: () => <FaYoutube />,
@@ -68,39 +70,31 @@ export const socials = [
   {
     icon: () => <FaTwitter />,
     name: "",
-    href: "https://twitter.com/SnowBank_io",
+    href: "https://x.com/SnowBank_io",
   },
   {
     icon: () => <FaTelegramPlane />,
     name: "",
-    href: " https://t.me/snowbanketh",
+    href: "https://t.me/Snowbanktg",
   },
 ];
 
 export const routes = [
-  // {
-    // name: "Farm",
-    // url: "/",
-  // },
-  // {
-  //   name: "Swap",
-  //   url: "/swap",
-  // },
-  // {
-  //   name: "Liquidity",
-  //   url: "/liquidity",
-  // },
-  // {
-  //   name: "NFT Claim",
-  //   url: "/nft-claim",
-  // },
   {
-    name: "Snow Sale",
+    name: "BUY SNOW",
     url: "/",
   },
   {
-    name: "NFT Sale",
-    url: "/nft-sale",
+    name: "NFTs",
+    url: "/nfts",
+  },
+  {
+    name: "STAKE",
+    url: "/stake",
+  },
+  {
+    name: "SWAP",
+    url: "/swap",
   },
   {
     name: "Road Map",
