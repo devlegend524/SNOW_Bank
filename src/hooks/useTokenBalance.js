@@ -83,7 +83,7 @@ export const useSNOWPerSecond = () => {
         const perSecond = await masterChefContract.gemPerSecond();
         setSnowPerSecond(toReadableAmount(perSecond, 18, 5));
       } catch (e) {
-        console.log(e);
+        console.log(e.reason);
       }
     }
     if (provider) fetchSnowPerSecond();
