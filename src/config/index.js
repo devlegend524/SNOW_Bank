@@ -2,7 +2,7 @@ import { BIG_TEN } from "utils/bigNumber";
 import BigNumber from "bignumber.js";
 import { IoBook } from "react-icons/io5";
 import { FaDiscord } from "react-icons/fa6";
-import { FaYoutube } from "react-icons/fa";
+import { FaGithub, FaYoutube } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 
@@ -61,6 +61,11 @@ export const socials = [
     icon: () => <FaDiscord />,
     name: "",
     href: "https://discord.com/invite/Gde9pgxX",
+  },
+  {
+    icon: () => <FaGithub />,
+    name: "",
+    href: "https://github.com/legend524/Snow_Bank_MasterChef",
   },
   // {
   //   icon: () => <FaYoutube />,
