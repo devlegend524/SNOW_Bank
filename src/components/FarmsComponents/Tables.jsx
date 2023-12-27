@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useTable } from "uikit";
 import Row from "./Table/Row";
+import SnowBox from "./Table/SnowBox";
 
 export default function FarmTables(props) {
   const tableWrapperEl = useRef();
@@ -12,24 +13,18 @@ export default function FarmTables(props) {
   });
 
   return (
-    <div
-      ref={tableWrapperEl}
-      className="overflow-visible "
-    >
-      <table className="border-collapse rounded-sm mx-auto w-full main_bg">
-        <tbody>
-          {rows.map((row, key) => {
-            return (
-              <Row
-                {...row.original}
-                userDataReady={userDataReady}
-                key={`table-row-${row.id}`}
-                index={key}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="grid grid-cols-1  sm:grid-cols-3 sm:gap-6 gap-3">
+        {rows.map((row, key) => {
+          return (
+            <SnowBox
+              {...row.original}
+              userDataReady={userDataReady}
+              index={key}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }

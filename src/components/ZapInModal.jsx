@@ -204,7 +204,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
         style={customStyles}
         ariaHideApp={false}
       >
-        <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-xl">
+        <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-xl snow_effect">
           <div className="flex justify-around items-center">
             <TokenDisplay token={inputToken} modal={true} />
             <ArrowForwardIcon />
@@ -274,13 +274,13 @@ export default function ZapInModal({ open, closeModal, pid }) {
 
           <div className="flex gap-3 pt-4">
             <button
-              className="border border-gray-600 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px]"
+              className="box-btn-stake hover:bg-red-400"
               onClick={closeModal}
             >
               Cancel
             </button>
             {isCheckingAllowance ? (
-              <button className="border flex justify-center disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] ">
+              <button className="box-btn-stake ">
                 <Loading /> Loading...
               </button>
             ) : inputToken.lpSymbol !== "ETH" &&
@@ -288,14 +288,14 @@ export default function ZapInModal({ open, closeModal, pid }) {
               <button
                 onClick={handleApprove}
                 disabled={isApproving}
-                className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
+                className="box-btn-stake"
               >
                 Approve
               </button>
             ) : (
               <button
                 onClick={handleDeposit}
-                className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] "
+                className="box-btn-stake"
                 disabled={Number(amount) === 0 || pendingZapTx}
               >
                 {t("Zap in")}

@@ -97,6 +97,10 @@ export const routes = [
     url: "/swap",
   },
   {
+    name: "SNOW GAME",
+    url: "/game",
+  },
+  {
     name: "Road Map",
     url: "/roadmap",
   },

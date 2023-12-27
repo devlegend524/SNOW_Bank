@@ -9,6 +9,7 @@ import Presale from "pages/Presale";
 import SnowPresale from "pages/SnowPresale";
 import NFTPresale from "pages/NFTPresale";
 import Roadmap from "pages/Roadmap";
+import ComingSoon from "pages/ComingSoon";
 
 const router = [
   {
@@ -31,10 +32,10 @@ const router = [
     path: "/swap",
     element: <Swap />,
   },
-  // {
-  //   path: "/liquidity",
-  //   element: <Liquidity />,
-  // },
+  {
+    path: "/game",
+    element: <ComingSoon />,
+  },
   // {
   //   path: "/nft-claim",
   //   element: <NFT />,

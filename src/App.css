@@ -271,14 +271,9 @@ input[type="number"]::-webkit-inner-spin-button {
   border: none !important;
 }
 
-.ReactModal__Content,
-.ReactModal__Content--after-open>div {
-  @apply bg-secondary p-8;
-}
-
 .ReactModal__Overlay,
 .ReactModal__Overlay--after-open {
-  background-color: #070000bd !important;
+  background-color: #07000061 !important;
   transition: all 0.3s ease-in-out;
 }
 

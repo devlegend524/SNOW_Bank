@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useMemo, useState } from "react";
-import { Button, Modal, Skeleton } from "uikit";
+import { Modal } from "uikit";
 import BigNumber from "bignumber.js";
 import ModalActions from "./ModalActions";
 import ModalInput from "./ModalInput";
@@ -57,7 +57,7 @@ const DepositModal = ({
   }, [])
   return (
     <>
-      <Modal title={t("Stake tokens")} onDismiss={onDismiss}>
+      <Modal title={t("Stake tokens")} onDismiss={onDismiss} className="snow_effect">
         <ModalInput
           value={val}
           onSelectMax={handleSelectMax}
@@ -75,12 +75,12 @@ const DepositModal = ({
             onClick={onDismiss}
             width="100%"
             disabled={pendingTx}
-            className="main_btn w-full bg-[transparent!important] text-[white!important] border border-symbol"
+            className="box-btn-stake w-full hover:bg-red-400"
           >
             {t("Cancel")}
           </button>
           <button
-            className="main_btn w-full"
+            className="box-btn-stake w-full"
             width="100%"
             disabled={
               pendingTx ||

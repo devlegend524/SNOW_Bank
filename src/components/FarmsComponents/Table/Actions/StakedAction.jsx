@@ -37,6 +37,7 @@ import {
 import { useEthersSigner } from "hooks/useEthers";
 import { usePriceSNOWUsdc } from "state/hooks";
 import { toReadableAmount } from "utils/customHelpers";
+import ZapInModal from "components/ZapInModal";
 
 const StakedAction = ({
   isTokenOnly,
@@ -63,6 +64,7 @@ const StakedAction = ({
     stakedBalance: stakedBalanceAsString,
   } = useFarmUser(pid);
   const snowPrice = usePriceSNOWUsdc()[0];
+  const [open, setOpen] = useState(false);
 
   const masterChefContract = getMasterchefContract(signer);
 
@@ -156,6 +158,15 @@ const StakedAction = ({
   const dispatch = useAppDispatch();
   const { onApprove } = useApprove(lpContract, isNFTPool);
 
+  function openModal() {
+    console.log(pid);
+    setOpen(true);
+  }
+
+  function closeModal() {
+    setOpen(false);
+  }
+
   const handleApprove = useCallback(async () => {
     try {
       setRequestedApproval(true);
@@ -172,6 +183,7 @@ const StakedAction = ({
     const _amountPerNFT = await masterChefContract.getAmountPerNFT();
     setAmountPerNFT(toReadableAmount(_amountPerNFT.toString()));
   };
+
   useEffect(() => {
     if (signer) {
       getAmountPerNFT();
@@ -266,21 +278,30 @@ const StakedAction = ({
   }
 
   return (
-    <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-4 p-2 lg:p-4 w-full">
-      <div className="flex justify-center font-semibold text-xl w-full">
-        {t("Stake").toUpperCase()} {lpSymbol}
-      </div>
-      <div className="flex w-full justify-center">
+    <div className="flex gap-2 px-3">
+      <button
+        onClick={onPresentDeposit}
+        disabled={["history", "archived"].some((item) =>
+          location.pathname.includes(item)
+        )}
+        className="box-btn-stake"
+      >
+        {t("Stake")}
+      </button>
+
+      {!isNFTPool && (
         <button
-          onClick={onPresentDeposit}
-          disabled={["history", "archived"].some((item) =>
-            location.pathname.includes(item)
-          )}
-          className="rounded-md p-1  text-center text-white font-medium base_bg max-w-[200px] w-full hover:bg-symbolHover hover:text-white transition ease-in-out duration-300 hover:scale-105"
+          className="box-btn-stake"
+          data-tooltip-id="zap-tooltip"
+          data-tooltip-content="Stake to this pool from your wallet"
+          disabled={!userDataReady}
+          onClick={openModal}
         >
-          {t("Stake")}
+          {t("Zap in")}
         </button>
-      </div>
+      )}
+
+      {open && <ZapInModal open={open} closeModal={closeModal} pid={pid} />}
     </div>
   );
 };

@@ -92,13 +92,13 @@ export default function  TokenSelect({
 
   return (
     <>
-      <div className="custom_input bg-primary/60">
+      <div className="custom_input bg-primary/20">
         <div className="token_select min-w-max mr-3">
           <div
             onClick={() => {
               setOpen(true);
             }}
-            className="flex items-center gap-3 hover:bg-primary transition ease-in-out rounded-full cursor-pointer p-2 bg-secondary min-w-max mr-2"
+            className="flex items-center gap-3 hover:bg-primary/30 transition ease-in-out rounded-full cursor-pointer p-2 bg-primary/20 min-w-max mr-2"
           >
             {token.isTokenOnly ? (
               <img
@@ -128,7 +128,7 @@ export default function  TokenSelect({
           {!selectOnly && (
             <div
               onClick={handleMaxAmount}
-              className="bg-secondary shadow-md shadow-gray hover:bg-primary rounded-md px-2 py-1 text-[12px] transition ease-in-out"
+              className="bg-primary/20 shadow-md shadow-gray hover:bg-primary/30 rounded-md px-2 py-1 text-[12px] transition ease-in-out"
             >
               max
             </div>

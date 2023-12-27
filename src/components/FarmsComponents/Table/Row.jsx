@@ -14,7 +14,7 @@ import Details from "./Details";
 import Multiplier from "./Multiplier";
 import Liquidity from "./Liquidity";
 import ActionPanel from "./Actions/ActionPanel";
-import CellLayout from "./CellLayout";
+import CellLayout from "./SnowCellLayout";
 import { DesktopColumnSchema, MobileColumnSchema } from "constants";
 
 const cells = {

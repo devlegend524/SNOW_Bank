@@ -104,7 +104,7 @@ const farmsConfig = [
   },
   {
     pid: 2,
-    lpSymbol: "BSNOW",
+    lpSymbol: "SNOW",
     lpAddresses: addresses.snow,
     isTokenOnly: true,
     isNFTPool: false,
@@ -124,17 +124,17 @@ const farmsConfig = [
   //   logoA: tokens.weth.logo,
   //   logoB: tokens.weth.logo,
   // },
-  // {
-  //   pid: 4,
-  //   lpSymbol: "SNOWNFT",
-  //   lpAddresses: addresses.nft,
-  //   isTokenOnly: true,
-  //   isNFTPool: true,
-  //   token: tokens.nft,
-  //   quoteToken: tokens.snow,
-  //   logoA: "/assets/tokens/nft.png",
-  //   logoB: "",
-  // },
+  {
+    pid: 3,
+    lpSymbol: "SNOWNFT",
+    lpAddresses: addresses.nft,
+    isTokenOnly: true,
+    isNFTPool: true,
+    token: tokens.nft,
+    quoteToken: tokens.snow,
+    logoA: "/assets/tokens/nft.png",
+    logoB: "",
+  },
 ];
 
 export default farmsConfig;

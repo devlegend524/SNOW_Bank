@@ -4,9 +4,7 @@ import { useFarmUser } from "state/hooks";
 import { useTranslation } from "context/Localization";
 import { Text } from "uikit";
 import { getBalanceNumber } from "utils/formatBalance";
-import TokenPairImage, {
-  getImageUrlFromToken,
-} from "components/TokenPairImage";
+import TokenPairImage from "components/TokenPairImage";
 import { StyledPrimaryImage } from "uikit/components/Image/styles";
 import DepositFee from "./DepositFee";
 
@@ -40,8 +38,6 @@ const TokensWrapper = styled.div`
   align-items: center;
   color: #fff;
   margin-right: 10px;
-
-  flex-direction: column;
 
   @media (max-width: 767px) {
     .tokens-arrow {
@@ -123,7 +119,7 @@ const Farm = ({
           />
         </TokenWrapper>
       </TokensWrapper>
-      <div>
+      {/* <div>
         {handleRenderFarming()}
         <p className="font-semibold text-sm lg:text-lg">{label}</p>
         {depositFee !== '0' && (
@@ -137,7 +133,7 @@ const Farm = ({
             🔥
           </p>
         )}
-      </div>
+      </div> */}
     </Container>
   );
 };

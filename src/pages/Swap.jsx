@@ -14,6 +14,8 @@ import TokenSelect from "components/TokenSelect";
 import Loading from "components/Loading";
 import LogoLoading from "components/LogoLoading";
 import useZap from "hooks/useZap";
+import { FaLinesLeaning } from "react-icons/fa6";
+import { MdOutlineSwapCalls } from "react-icons/md";
 
 export default function Swap() {
   const signer = useEthersSigner();
@@ -43,6 +45,7 @@ export default function Swap() {
   const zapAddress = getZapAddress();
   const [isApproving, setIsApproving] = useState(false);
   const [updateBalance, setUpdateBalance] = useState(false);
+  const [pendingRefresh, setPendingRefresh] = useState(false);
 
   const closeModalA = () => {
     setOpenA(false);
@@ -159,29 +162,31 @@ export default function Swap() {
   }
 
   const refreshData = () => {
+    setPendingRefresh(true);
     setTokenAAmount("");
     setUpdateBalance(true);
     checkAllowance(tokenA, "A");
+    setTimeout(() => {
+      setPendingRefresh(false);
+    }, 500);
   };
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
-      <div className="card">
+      <div className="snow_effect p-6">
         <div className="flex justify-between items-center">
           <div className="flex-1"></div>
           <div className="flex-1 flex justify-center items-center">
             <div className="block">
-              <h1 className="text-center text-symbol text-2xl font-semibold">
-                Zapper
-              </h1>
+              <h1 className="text-center text-2xl font-semibold">Zapper</h1>
             </div>
           </div>
           <div className="flex-1 flex justify-end items-center">
             <button
-              className="action_btn shadow-md hover:bg-primary  transition ease-in-out"
+              className="bg-primary/20 rounded-full p-2 shadow-md hover:bg-primary/40 transition ease-in-out"
               onClick={refreshData}
             >
-              <img src="/assets/refresh.png" alt="" />
+              <img src="/assets/refresh.png" alt="" className={`${pendingRefresh && "animate-spin"}`}/>
             </button>
           </div>
         </div>
@@ -199,20 +204,21 @@ export default function Swap() {
             setStates={handleSetTokenAAvailable}
             setInsufficient={handleSetInsufficientA}
             updateBalance={updateBalance}
-            setDirection={() => { }}
+            setDirection={() => {}}
             tokenType=""
           />
 
-          <div className="flex justify-center">
-            <div className="swap_btn_box">
+          <div className="flex justify-center items-center h-[26px] relative">
+            <div className="p-2 bg-[#457081] rounded-full scale-125 z-20 absolute">
               <button
                 onClick={handleReverse}
-                className="scale-100 hover:scale-110 transition ease-in-out"
+                className="transition ease-in-out flex justify-center items-center bg-primary/30 rounded-full p-1"
               >
-                <RiExchangeDollarLine className="text-3xl" />
+                <MdOutlineSwapCalls className="text-xl hover:rotate-180  duration-300" />
               </button>
             </div>
           </div>
+
           <TokenSelect
             type="B"
             selectOnly={true}
@@ -223,20 +229,21 @@ export default function Swap() {
             setStates={handleSetTokenBAvailable}
             setInsufficient={handleSetInsufficientB}
             updateBalance={updateBalance}
-            setDirection={() => { }}
+            setDirection={() => {}}
             tokenType=""
           />
 
           {isCheckingAllowance ? (
             <button className="main_btn mt-8 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700">
-              <Loading title="Loading..." />
+              <Loading  size="2xl"/>
             </button>
           ) : (tokenA.lpSymbol !== "ETH" && Number(tokenAAllowance) === 0) ||
             (tokenA.lpSymbol !== "ETH" &&
               Number(tokenAAllowance) < Number(tokenAAmount)) ? (
             <button
               onClick={handleApprove}
-              disabled={isApproving}
+              // disabled={isApproving}
+              disabled={true}
               className="main_btn mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700"
             >
               Approve
@@ -244,13 +251,14 @@ export default function Swap() {
           ) : (
             <button
               onClick={handleDeposit}
-              disabled={
-                (tokenA.lpSymbol !== "ETH" &&
-                  Number(tokenAAllowance) < Number(tokenAAmount)) ||
-                status.insufficientA ||
-                pendingTx ||
-                isApproving
-              }
+              // disabled={
+              //   (tokenA.lpSymbol !== "ETH" &&
+              //     Number(tokenAAllowance) < Number(tokenAAmount)) ||
+              //   status.insufficientA ||
+              //   pendingTx ||
+              //   isApproving
+              // }
+              disabled={true}
               className="main_btn mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700"
             >
               {`Swap ${tokenA.lpSymbol} into ${tokenB.lpSymbol}`}
@@ -274,10 +282,8 @@ export default function Swap() {
           tokens={zapList}
         />
       </div>
-      {pendingTx &&
-        <LogoLoading title="Zapping..." />}
-      {isApproving &&
-        <LogoLoading title="Approving..." />}
+      {pendingTx && <LogoLoading title="Zapping..." />}
+      {isApproving && <LogoLoading title="Approving..." />}
     </div>
   );
 }
