@@ -65,7 +65,7 @@ export const socials = [
   {
     icon: () => <FaGithub />,
     name: "",
-    href: "https://github.com/legend524/Snow_Bank_MasterChef",
+    href: "https://github.com/cryptoGuru525/Snow_Bank_MasterChef",
   },
   // {
   //   icon: () => <FaYoutube />,
