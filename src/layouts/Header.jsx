@@ -4,6 +4,7 @@ import { routes } from "config";
 import { WalletConnect } from "components/UI/ConnectButton";
 import { Link, useLocation } from "react-router-dom";
 import { DOCS_URL } from "config";
+import { FiExternalLink } from "react-icons/fi";
 
 export default function Header() {
   const [isMobile, setMobile] = useState(false);
@@ -22,8 +23,9 @@ export default function Header() {
 
   return (
     <div
-      className={`w-full top-0 fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-200 ${scrollHeader ? "bg-secondary py-3" : "py-4"
-        }`}
+      className={`w-full top-0 fixed left-1/2 -translate-x-1/2 px-3 z-50 duration-200 ${
+        scrollHeader ? "bg-secondary py-3" : "py-4"
+      }`}
     >
       <div className="container mx-auto relative">
         <div className="flex justify-between">
@@ -45,26 +47,25 @@ export default function Header() {
             <ul className="nav_list gap-3">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item py-2 px-3 text-white ${location.pathname === link.url ? "snow_effect_nav" : ""
-                    }`}
+                  className={`list_item py-2 px-3 text-white text-[12px!important]  ${
+                    location.pathname === link.url ? "snow_effect_nav" : ""
+                  }`}
                   key={key}
                 >
                   <Link to={link.url}>{link.name}</Link>
                 </li>
               ))}
-              {/* <li className="list_item">
+              <li className="list_item">
                 <a
-                  href="https://lodgedocs.gitbook.io/snowbase-farm/protocol/about-snow"
+                  href="https://snow-bank-capital.vercel.app/"
                   target="_blank"
-                  className={`p-3`}
+                  className={`p-3 flex gap-1 items-center text-[12px!important]`}
                   rel="noopener noreferrer"
                 >
-                  Docs
+                  DEX
+                  <FiExternalLink />
                 </a>
-                <div className="flex gap-[2px]">
-                  <div className="h-1 w-full bg-white"></div>
-                </div>
-              </li> */}
+              </li>
             </ul>
           </div>
           <div className="sm:hidden"></div>
@@ -85,8 +86,9 @@ export default function Header() {
             <ul className="nav_list">
               {routes.map((link, key) => (
                 <li
-                  className={`list_item cursor-pointer ${location.pathname === link.url ? "active" : ""
-                    }`}
+                  className={`list_item cursor-pointer ${
+                    location.pathname === link.url ? "active" : ""
+                  }`}
                   key={key}
                 >
                   <Link to={link.url} onClick={() => setMobile(false)}>

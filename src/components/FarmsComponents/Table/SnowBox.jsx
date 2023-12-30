@@ -49,7 +49,9 @@ export default function SnowBox(props) {
 
   return (
     <div className="ice_box rounded-t-[230px!important] rounded-b-3xl">
-      <img src="/assets/box-header.png" alt="" className="w-full" />
+      <div className="h-[120px]">
+        <img src="/assets/box-header.png" alt="" className="w-full" />
+      </div>
 
       <div className="sm:p-4 p-3">
         <div className="" onClick={toggleActionPanel}>

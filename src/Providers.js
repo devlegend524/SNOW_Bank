@@ -27,8 +27,7 @@ import store from "state";
 const Providers = ({ children }) => {
   const { chains, publicClient } = configureChains(
     [
-      mainnet,
-      base
+      mainnet
     ],
     [alchemyProvider({ apiKey: ALCHEMY_ID }), publicProvider()]
   );

@@ -22,10 +22,10 @@ export default function NFTBanner() {
         </p>
         <div className="flex gap-2"> <a
           className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
-          href={DOCS_URL}
+          href={DOCS_URL + "/snow-bank-docs/nfts"}
           target="_blank"
         >
-          SNOW Farm<FaArrowRight className="my-auto hidden sm:inline-block" />
+         Mint NFT(s)<FaArrowRight className="my-auto hidden sm:inline-block" />
         </a>
           <a
             className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fongs-lg w-fit mx-auto sm:mx-0"

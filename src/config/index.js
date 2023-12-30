@@ -86,7 +86,7 @@ export const socials = [
 
 export const routes = [
   {
-    name: "BUY SNOW",
+    name: "SNOW",
     url: "/",
   },
   {
@@ -102,11 +102,11 @@ export const routes = [
     url: "/swap",
   },
   {
-    name: "SNOW GAME",
+    name: "GAME",
     url: "/game",
   },
   {
-    name: "Road Map",
+    name: "ROADMAP",
     url: "/roadmap",
   },
 ];

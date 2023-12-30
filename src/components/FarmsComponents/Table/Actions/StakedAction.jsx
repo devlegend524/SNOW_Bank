@@ -190,31 +190,31 @@ const StakedAction = ({
     }
   }, [signer]);
 
-  if (!address) {
-    return (
-      <ActionContainer>
-        <ActionTitles>
-          <Text color="white" fontSize="20px">
-            {t("Start Farming")}
-          </Text>
-        </ActionTitles>
-        <ActionContent>Unlock</ActionContent>
-      </ActionContainer>
-    );
-  }
+  // if (!address) {
+  //   return (
+  //     <ActionContainer>
+  //       <ActionTitles>
+  //         <Text color="white" fontSize="20px">
+  //           {t("Start Farming")}
+  //         </Text>
+  //       </ActionTitles>
+  //       <ActionContent>Unlock</ActionContent>
+  //     </ActionContainer>
+  //   );
+  // }
 
-  if (!userDataReady) {
-    return (
-      <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-4 p-2 lg:p-4 w-full">
-        <div className="flex justify-center font-semibold text-xl w-full">
-          {t("Start Farming")}
-        </div>
-        <div className="flex w-full justify-center">
-          <Skeleton width={180} marginBottom={28} marginTop={14} />
-        </div>
-      </div>
-    );
-  }
+  // if (!userDataReady) {
+  //   return (
+  //     <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-4 p-2 lg:p-4 w-full">
+  //       <div className="flex justify-center font-semibold text-xl w-full">
+  //         {t("Start Farming")}
+  //       </div>
+  //       <div className="flex w-full justify-center">
+  //         <Skeleton width={180} marginBottom={28} marginTop={14} />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   if (stakedBalance.gt(0)) {
     return (

@@ -50,17 +50,19 @@ export default function SaleComponent({ saleData }) {
   const handleChangeETH = (value) => {
     setAmount(value);
     setEthAmount(value);
-    const ethSnowAmount = Number(
-      ((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(8)
-    );
+    // const ethSnowAmount = Number(
+    //   ((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(8)
+    // );
+    const ethSnowAmount = Number(((value * ethPrice) / (4 / 100)).toFixed(8));
     setSnowAmount(ethSnowAmount);
   };
 
   const handleChangeSnow = (value) => {
     setSnowAmount(value);
-    const ethBuyAmount = Number(
-      ((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(8)
-    );
+    // const ethBuyAmount = Number(
+    //   ((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(8)
+    // );
+    const ethBuyAmount = Number(((value * (4 / 100)) / ethPrice).toFixed(8));
     setEthAmount(ethBuyAmount);
   };
 
@@ -81,10 +83,10 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
-    if (!saleData?.enabled) {
-      notify("error", "Presale is not started yet");
-      return;
-    }
+    // if (!saleData?.enabled) {
+    //   notify("error", "Presale is not started yet");
+    //   return;
+    // }
     if (saleData?.sale_finalized) {
       notify("error", "Presale is ended");
       return;
@@ -247,8 +249,8 @@ export default function SaleComponent({ saleData }) {
               <button
                 className="bg-secondary shadow shadow-black hover:bg-secondary/90 hover:shadow-xl duration-200 absolute right-1 top-1/2 -translate-y-1/2 p-1 px-2 rounded-lg text-sm h-8"
                 onClick={() => {
-                  setEthAmount((80000 * 0.04) / ethPrice);
-                  setSnowAmount(80000);
+                  setEthAmount((100000 * 0.04) / ethPrice);
+                  setSnowAmount(100000);
                 }}
               >
                 max
@@ -269,8 +271,8 @@ export default function SaleComponent({ saleData }) {
               <button
                 className="bg-secondary shadow shadow-black  hover:bg-secondary/90 hover:shadow-xl duration-200 absolute right-1 top-1/2 -translate-y-1/2 p-1 px-2 rounded-lg text-sm h-8"
                 onClick={() => {
-                  setEthAmount((80000 * 0.04) / ethPrice);
-                  setSnowAmount(80000);
+                  setEthAmount((100000 * 0.04) / ethPrice);
+                  setSnowAmount(100000);
                 }}
               >
                 max
@@ -329,19 +331,20 @@ export default function SaleComponent({ saleData }) {
         <button
           className="main_btn w-full mt-6 mb-2"
           onClick={() => handleBuySnow()}
-          disabled={
-            !saleData?.enabled ||
-            saleData?.sale_finalized ||
-            250 <= Number(saleData?.SNOWOwned) + Number(amount)
-          }
+          // disabled={
+          //   !saleData?.enabled ||
+          //   saleData?.sale_finalized ||
+          //   250 <= Number(saleData?.SNOWOwned) + Number(amount)
+          // }
         >
-          {!saleData?.enabled
+          {/* {!saleData?.enabled
             ? "Presale is not started yet"
             : saleData?.sale_finalized
             ? "Presale has ended"
             : 250 <= Number(saleData?.SNOWOwned) + Number(amount)
             ? "Exceed Maximum Amount"
-            : "BUY SNOW"}
+            : "BUY SNOW"} */}
+          BUY SNOW
         </button>
       </div>
       {pendingTx && <LogoLoading />}
