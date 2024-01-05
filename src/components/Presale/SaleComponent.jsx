@@ -87,6 +87,7 @@ export default function SaleComponent({ saleData }) {
     //   notify("error", "Presale is not started yet");
     //   return;
     // }
+    
     if (saleData?.sale_finalized) {
       notify("error", "Presale is ended");
       return;

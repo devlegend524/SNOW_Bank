@@ -20,6 +20,7 @@ import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
 import { useAccount } from "wagmi";
 import { snowWethFarmPid, mainTokenSymbol, wethUsdcFarmPid } from "config";
 import addresses from "constants/addresses";
+
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch();
   const { fastRefresh } = useRefresh();
@@ -146,7 +147,7 @@ export const useLpTokenPrice = (symbol) => {
       // Divide total value of all tokens, by the number of LP tokens
       lpTokenPrice = overallValueOfAllTokensInFarm.div(farm.lpTotalSupply);
     }
-  } catch { }
+  } catch {}
   return lpTokenPrice;
 };
 
@@ -270,8 +271,11 @@ export const usePriceSNOWUsdc = () => {
         if (returned && returned.pairs) {
           let data = returned.pairs[0];
           if (returned.pairs.length === 1) {
-            data = returned.pairs[0].chainId === "base" &&
-              returned.pairs[0].pairAddress === addresses.snowWethlp ? returned.pairs[0] : undefined;
+            data =
+              returned.pairs[0].chainId === "base" &&
+              returned.pairs[0].pairAddress === addresses.snowWethlp
+                ? returned.pairs[0]
+                : undefined;
           } else {
             data = returned.pairs.filter(
               (pair) =>
@@ -283,7 +287,7 @@ export const usePriceSNOWUsdc = () => {
           setLiquidity(data?.liquidity?.usd);
           setMarketCap(data?.fdv);
         }
-      } catch { }
+      } catch {}
     }
     fetchData();
   }, [fastRefresh]);

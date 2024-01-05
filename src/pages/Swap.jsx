@@ -186,12 +186,16 @@ export default function Swap() {
               className="bg-primary/20 rounded-full p-2 shadow-md hover:bg-primary/40 transition ease-in-out"
               onClick={refreshData}
             >
-              <img src="/assets/refresh.png" alt="" className={`${pendingRefresh && "animate-spin"}`}/>
+              <img
+                src="/assets/refresh.png"
+                alt=""
+                className={`${pendingRefresh && "animate-spin"}`}
+              />
             </button>
           </div>
         </div>
         <p className="text-center text-gray-400 py-3">
-          Trade tokens in on instant
+          Swap Anything to Anything
         </p>
         <div className="block">
           <TokenSelect
@@ -235,7 +239,7 @@ export default function Swap() {
 
           {isCheckingAllowance ? (
             <button className="main_btn mt-8 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700">
-              <Loading  size="2xl"/>
+              <Loading size="2xl" />
             </button>
           ) : (tokenA.lpSymbol !== "ETH" && Number(tokenAAllowance) === 0) ||
             (tokenA.lpSymbol !== "ETH" &&
