@@ -184,17 +184,17 @@ const farmsConfig = [
     logoA: tokens.usdc.logo,
     logoB: tokens.usdc.logo,
   },
-  {
-    pid: 9,
-    lpSymbol: "3WiLDNFT",
-    lpAddresses: addresses.nft,
-    isTokenOnly: true,
-    isNFTPool: true,
-    token: tokens.nft,
-    quoteToken: tokens.wild,
-    logoA: "/assets/tokens/nft.png",
-    logoB: "",
-  },
+  // {
+  //   pid: 9,
+  //   lpSymbol: "3WiLDNFT",
+  //   lpAddresses: addresses.nft,
+  //   isTokenOnly: true,
+  //   isNFTPool: true,
+  //   token: tokens.nft,
+  //   quoteToken: tokens.wild,
+  //   logoA: "/assets/tokens/nft.png",
+  //   logoB: "",
+  // },
 ];
 
 export default farmsConfig;
