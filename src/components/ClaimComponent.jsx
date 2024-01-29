@@ -19,22 +19,18 @@ export default function ClaimComponent({ saleData }) {
       notify("error", "Presale is not ended yet");
       return;
     }
-    if (Number(saleData.user_deposits) === 0) {
-      notify("error", "You do not have any tokens to claim");
-      return;
-    }
 
     try {
-      setPendingTx(true)
+      setPendingTx(true);
       const tx = await presaleContract.withdrawSNOW({
         from: address,
       });
       await tx.wait();
       notify("success", "You claimed tokens successfully");
       window.localStorage.setItem("lastClaimedTime", Date.now());
-      setPendingTx(false)
+      setPendingTx(false);
     } catch (error) {
-      setPendingTx(false)
+      setPendingTx(false);
       if (didUserReject(error)) {
         notify("warning", "User Rejected transaction");
         return;
@@ -44,7 +40,6 @@ export default function ClaimComponent({ saleData }) {
       }
     }
   };
-
 
   return (
     <>
@@ -67,7 +62,21 @@ export default function ClaimComponent({ saleData }) {
           <div className="flex justify-between mb-3 px-1">
             <div>Claimable Amount:</div>
             <div className="flex gap-1">
-              {saleData?.SNOWOwned - saleData?.user_withdraw_amount >= 0 ? saleData?.SNOWOwned * 0.05 : 0.00 || "0.00"}
+              {saleData?.seed_investors && saleData?.seed_investors[0] ? (
+                <>
+                  {" "}
+                  {saleData?.SNOWOwned - saleData?.user_withdraw_amount >= 0
+                    ? saleData?.SNOWOwned * 0.2
+                    : 0.0 || "0.00"}
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {saleData?.SNOWOwned - saleData?.user_withdraw_amount >= 0
+                    ? saleData?.SNOWOwned * 0.1
+                    : 0.0 || "0.00"}
+                </>
+              )}
               &nbsp; <SNOW />
             </div>
           </div>
@@ -77,10 +86,10 @@ export default function ClaimComponent({ saleData }) {
               {Boolean(saleData?.sale_finalized) ? (
                 <>
                   {Boolean(saleData?.sale_finalized) &&
-                    saleData?.user_withdraw_timestamp === 0 ? (
+                  saleData?.user_withdraw_timestamp === 0 ? (
                     <>
                       <CountDownComponentClaim
-                        time={(Number(saleData.finishedTimestamp) + 180) * 1000}
+                        time={(Number(saleData.finishedTimestamp) + 3600 * 24) * 1000}
                         key={saleData.finishedTimestamp}
                       />
                     </>
@@ -88,7 +97,7 @@ export default function ClaimComponent({ saleData }) {
                     <>
                       <CountDownComponentClaim
                         time={
-                          (Number(saleData.user_withdraw_timestamp) + 180) *
+                          (Number(saleData.user_withdraw_timestamp) + 3600 * 24) *
                           1000
                         }
                         key={saleData.user_withdraw_timestamp}
@@ -111,14 +120,11 @@ export default function ClaimComponent({ saleData }) {
           {!Boolean(saleData?.sale_finalized)
             ? "Preslae is not ended yet"
             : Number(saleData?.getAmountToWithdraw)
-              ? "You don't have any tokens to claim"
-              : "ClAIM SNOW"}
+            ? "You don't have any tokens to claim"
+            : "ClAIM SNOW"}
         </button>
-
       </div>
-      {
-        pendingTx && <LogoLoading />
-      }
+      {pendingTx && <LogoLoading />}
     </>
   );
 }

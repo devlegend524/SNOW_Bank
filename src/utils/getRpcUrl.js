@@ -2,7 +2,7 @@ import random from "lodash/random";
 
 // Array of available nodes to connect to
 export const nodes = [
-  "https://mainnet.base.org"
+  "https://bsc-dataseed.bnbchain.org/"
 ];
 
 const getNodeUrl = () => {

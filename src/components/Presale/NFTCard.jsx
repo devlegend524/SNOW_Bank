@@ -7,7 +7,7 @@ import LogoLoading from "components/LogoLoading";
 import { notify } from "utils/toastHelper";
 import { FaCheck } from "react-icons/fa";
 
-export default function NFTCard({ tokenId, index, presaleData, active }) {
+export default function NFTCard({ tokenId, index, presaleData, active, myNFTID }) {
   const preslaeContractAddress = getPresaleAddress();
   const presaleContract = usePresaleContract();
   const nftContract = useNFTContract();
@@ -24,10 +24,6 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
     toReadableAmount(presaleData?.NFTPrice.toString(), 18);
 
   const handleBuyNFT = async () => {
-    notify("error", "NFT sale is not started yet");
-    return;
-
-
     if (!presaleData?.NFTPrice) {
       return;
     }
@@ -84,12 +80,12 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
     } else {
       setIsSold(false);
     }
-  }
+  };
 
   useEffect(() => {
     checkIsSold();
     setTimeout(() => {
-      setDelay(false)
+      setDelay(false);
     }, 1000);
   }, [tokenId]);
 
@@ -109,7 +105,6 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
                 src={`https://snowbank.io/NFTs/sn${tokenId}.png`}
                 onError={handleImageError}
                 alt="NFT"
-                srcSet=""
                 className="w-full border-opacity-30 h-[177px] sm:h-[190px] object-cover"
               />
             )}
@@ -122,49 +117,49 @@ export default function NFTCard({ tokenId, index, presaleData, active }) {
             </div>
             <div className="flex justify-between px-2">
               <p>Price: </p>
-              <p>{NFTPrice} ETH</p>
+              <p>{NFTPrice} BNB</p>
             </div>
-            {/* {!isSold ? <button
-              key={tokenId}
-              disabled={true}
-              className="main_btn mx-auto mt-4 py-[9px!important] opacity-50 text-green-400 flex items-center"
-            >
-              <FaCheck className="text-green-400 text-xl mr-1 my-auto mt-1" />  Sold
-            </button> : <button key={tokenId}
-              onClick={handleBuyNFT}
-              className="main_btn mx-auto mt-4 py-[9px!important]"
-            >
-              Buy Now
-            </button>} */}
-            <button key={tokenId}
-              onClick={handleBuyNFT}
-              className="main_btn mx-auto mt-4 py-[9px!important]"
-            >
-              Soon
-            </button>
+            {isSold ? (
+              <button
+                key={tokenId}
+                disabled={true}
+                className="main_btn mx-auto mt-4 py-[9px!important] opacity-50 text-green-400 flex items-center"
+              >
+                <FaCheck className="text-green-400 text-xl mr-1 my-auto mt-1" />{" "}
+                Sold
+              </button>
+            ) : (
+              <button
+                key={tokenId}
+                onClick={handleBuyNFT}
+                className="main_btn mx-auto mt-4 py-[9px!important]"
+              >
+                Buy Now
+              </button>
+            )}
           </div>
         </div>
         {pendingTx && <LogoLoading />}
       </>
     );
   } else {
-
-    return <div className={`w-full max-w-[400px] min-h-[227px] mx-auto my-3 p-6 rounded-lg snow_effect flex flex-col justify-between`} >
-      <div>
-        {delay ? (
-          <div className="mx-auto w-full  h-[300px] sm:h-[400px] bg-white/5 rounded-md animate-pulse"></div>
-        ) : (
-          <img
-            src={`https://wildbase.farm/images/nfts/${tokenId}.png`}
-            onError={handleImageError}
-            alt="NFT"
-            srcSet=""
-            className="w-full border-opacity-30 h-[300px] sm:h-[400px] object-cover"
-          />
-        )}
+    return (
+      <div
+        className={`w-full max-w-[400px] min-h-[227px] mx-auto my-3 p-6 rounded-lg snow_effect flex flex-col justify-between`}
+      >
+        <div>
+          {delay ? (
+            <div className="mx-auto w-full  h-[300px] sm:h-[400px] bg-white/5 rounded-md animate-pulse"></div>
+          ) : (
+            <img
+              src={`https://snowbank.io/NFTs/sn${myNFTID}.png`}
+              onError={handleImageError}
+              alt="NFT"
+              className="w-full border-opacity-30 h-[300px] sm:h-[400px] object-cover"
+            />
+          )}
+        </div>
       </div>
-    </div>
+    );
   }
-
-
 }

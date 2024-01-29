@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_gem",
+        "name": "_Snow",
         "type": "address"
       },
       {
@@ -127,6 +127,45 @@
   {
     "inputs": [],
     "name": "BONUS_MULTIPLIER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "Snow",
+    "outputs": [
+      {
+        "internalType": "contract SnowToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "SnowAddr",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "SnowPerSecond",
     "outputs": [
       {
         "internalType": "uint256",
@@ -296,45 +335,6 @@
   },
   {
     "inputs": [],
-    "name": "gem",
-    "outputs": [
-      {
-        "internalType": "contract GEMToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "gemAddr",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "gemPerSecond",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getAmountPerNFT",
     "outputs": [
       {
@@ -474,7 +474,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingGEM",
+    "name": "pendingSnow",
     "outputs": [
       {
         "internalType": "uint256",
@@ -512,7 +512,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accGEMPerShare",
+        "name": "accSnowPerShare",
         "type": "uint256"
       },
       {
@@ -612,37 +612,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_gem",
+        "name": "_Snow",
         "type": "address"
       }
     ],
-    "name": "setGemX",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_newMaxRate",
-        "type": "uint256"
-      }
-    ],
-    "name": "setMaxTaxRate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_newStaticRate",
-        "type": "uint256"
-      }
-    ],
-    "name": "setStaticTaxRate",
+    "name": "setSnowX",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -703,7 +677,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_gemPerSecond",
+        "name": "_SnowPerSecond",
         "type": "uint256"
       }
     ],

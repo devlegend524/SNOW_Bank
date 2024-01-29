@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fromReadableAmount, getAllowance } from "utils";
 import { useAccount, useNetwork } from "wagmi";
 import { useEthersProvider, useEthersSigner } from "hooks/useEthers";
@@ -16,6 +16,17 @@ import LogoLoading from "components/LogoLoading";
 import useZap from "hooks/useZap";
 import { FaLinesLeaning } from "react-icons/fa6";
 import { MdOutlineSwapCalls } from "react-icons/md";
+import {
+  ref,
+  push,
+  query,
+  onValue,
+  update,
+  get,
+  equalTo,
+  orderByChild,
+} from "firebase/database";
+import { db } from "config/firebase";
 
 export default function Swap() {
   const signer = useEthersSigner();
@@ -90,7 +101,7 @@ export default function Swap() {
   };
 
   const checkAllowance = async (token, type) => {
-    if (token.lpSymbol !== "ETH") {
+    if (token.lpSymbol !== "BNB") {
       setIsCheckingAllowance(true);
       const res = await getAllowance(address, token, zapAddress, provider);
       if (type === "A") {
@@ -143,10 +154,10 @@ export default function Swap() {
       setPendingTx(true);
       await onZap(
         tokenA.lpAddresses,
-        tokenA.lpSymbol === "ETH" ? true : false,
+        tokenA.lpSymbol === "BNB" ? true : false,
         fromReadableAmount(Number(tokenAAmount)),
         tokenB.lpAddresses,
-        tokenB.lpSymbol === "ETH" ? true : false
+        tokenB.lpSymbol === "BNB" ? true : false
       );
       refreshData();
       setPendingTx(false);
@@ -241,13 +252,12 @@ export default function Swap() {
             <button className="main_btn mt-8 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700">
               <Loading size="2xl" />
             </button>
-          ) : (tokenA.lpSymbol !== "ETH" && Number(tokenAAllowance) === 0) ||
-            (tokenA.lpSymbol !== "ETH" &&
+          ) : (tokenA.lpSymbol !== "BNB" && Number(tokenAAllowance) === 0) ||
+            (tokenA.lpSymbol !== "BNB" &&
               Number(tokenAAllowance) < Number(tokenAAmount)) ? (
             <button
               onClick={handleApprove}
-              // disabled={isApproving}
-              disabled={true}
+              disabled={isApproving}
               className="main_btn mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700"
             >
               Approve
@@ -255,14 +265,13 @@ export default function Swap() {
           ) : (
             <button
               onClick={handleDeposit}
-              // disabled={
-              //   (tokenA.lpSymbol !== "ETH" &&
-              //     Number(tokenAAllowance) < Number(tokenAAmount)) ||
-              //   status.insufficientA ||
-              //   pendingTx ||
-              //   isApproving
-              // }
-              disabled={true}
+              disabled={
+                (tokenA.lpSymbol !== "BNB" &&
+                  Number(tokenAAllowance) < Number(tokenAAmount)) ||
+                status.insufficientA ||
+                pendingTx ||
+                isApproving
+              }
               className="main_btn mt-8 hover:bg-symbolHover disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700"
             >
               {`Swap ${tokenA.lpSymbol} into ${tokenB.lpSymbol}`}

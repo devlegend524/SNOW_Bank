@@ -164,11 +164,11 @@ export const zapForFarm = async (
 };
 
 export const harvest = async (masterChefContract, pid, address) => {
-  const res = await limitedFunction(false, address);
-  if (!res?.success) {
-    notify("error", "You can not harvest or compound three times a day.");
-    return false;
-  }
+  // const res = await limitedFunction(false, address);
+  // if (!res?.success) {
+  //   notify("error", "You can not harvest or compound three times a day.");
+  //   return false;
+  // }
 
   try {
     console.log(pid);

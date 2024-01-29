@@ -60,18 +60,18 @@ export const WalletConnect = () => {
               }
               return (
                 <div className="flex items-center">
-                  {/* <a
-                    href={`https://dexscreener.com/base/${contractAddresses.snowWethlp}`}
+                  <a
+                    href={`https://dexscreener.com/bsc/${contractAddresses.snowWbnblp}`}
                     target="_blank"
                     className="hidden sm:flex items-center text-white"
                   >
                     <img
-                      src="/logo.png"
+                      src="/logo32.png"
                       alt="logo"
                       className="w-[33.5px] h-[33.5px] mx-1"
-                      />
-                      {Number(priceData[0]) ? `${priceData[0].toString()}` : ""}
-                  </a> */}
+                    />
+                    $ {Number(priceData[0]) ? `${priceData[0].toString()}` : ""}
+                  </a>
                   <button
                     onClick={openChainModal}
                     className="inline-flex justify-center snow_effect_chain items-center rounded-full  transition ease-in-out text-black text-xl mr-1"
@@ -90,7 +90,10 @@ export const WalletConnect = () => {
                       />
                     )}
                   </button>
-                  <div className="hidden sm:inline-block text-sm font-light">{Number(account.balanceFormatted).toFixed(4)} <span className="text-[10px]">&nbsp;( ETH )</span>  </div>
+                  <div className="hidden sm:inline-block text-sm font-light">
+                    {Number(account.balanceFormatted).toFixed(4)}{" "}
+                    <span className="text-[10px]">&nbsp;( BNB )</span>{" "}
+                  </div>
                   <button
                     onClick={openAccountModal}
                     className="m-2 sm:m-0 main_btn px-5 py-1transition py-1.5 ease-in-out flex justify-center items-center gap-1"

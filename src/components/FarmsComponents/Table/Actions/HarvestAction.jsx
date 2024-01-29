@@ -99,7 +99,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
         data-tooltip-id="harvest-tooltip"
         data-tooltip-content={"Havest SNOW you earned."}
       >
-        {t(`Harvest`)}
+        {pendingCompoundTx || pendingTx ? <Loading /> : t(`Harvest`)}
       </button>
 
       {!isNFTPool && (
@@ -110,7 +110,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
           data-tooltip-content={
             "Havest SNOW you earned & restake the SNOW profit to this pool"
           }
-          disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
+          // disabled={earnings.eq(0) || pendingCompoundTx || !userDataReady}
         >
           {t(`Compound`)}
         </button>
@@ -129,8 +129,8 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
         />
       )}
 
-      {pendingTx && <LogoLoading title="Harvesting..." />}
-      {pendingCompoundTx && <Loading title="Compounding..." />}
+      {/* {pendingTx && <LogoLoading title="Harvesting..." />}
+      {pendingCompoundTx && <Loading title="Compounding..." />} */}
     </div>
   );
 };

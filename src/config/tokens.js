@@ -1,11 +1,11 @@
 import addresses from "constants/addresses";
 
 const tokens = {
-  eth: {
-    symbol: "ETH",
-    address: addresses.weth,
+  bnb: {
+    symbol: "BNB",
+    address: addresses.wbnb,
     decimals: 18,
-    logo: "/assets/tokens/eth.svg",
+    logo: "/assets/tokens/bnb.png",
   },
   snow: {
     symbol: "SNOW",
@@ -14,10 +14,10 @@ const tokens = {
     logo: "/assets/tokens/snow.png",
     projectLink: "https://snowbank.io/", // todo:
   },
-  weth: {
-    symbol: "WETH",
-    logo: "/assets/tokens/weth.png",
-    address: addresses.weth,
+  wbnb: {
+    symbol: "WBNB",
+    logo: "/assets/tokens/bnb.png",
+    address: addresses.wbnb,
     decimals: 18,
   },
   usdc: {

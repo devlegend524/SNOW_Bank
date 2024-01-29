@@ -39,20 +39,20 @@ const customStyles = {
 const tokensList = [
   {
     pid: 0,
-    lpSymbol: "ETH",
+    lpSymbol: "BNB",
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-    decimals: tokens.eth.decimals,
-    logoA: "/assets/tokens/eth.svg",
+    decimals: tokens.bnb.decimals,
+    logoA: "/assets/tokens/bnb.png",
     logoB: "",
   },
   {
     pid: 1,
-    lpSymbol: "WETH",
+    lpSymbol: "WBNB",
     isTokenOnly: true,
-    lpAddresses: tokens.weth.address,
-    decimals: tokens.weth.decimals,
-    logoA: "/assets/tokens/weth.png",
+    lpAddresses: tokens.wbnb.address,
+    decimals: tokens.wbnb.decimals,
+    logoA: "/assets/tokens/bnb.png",
     logoB: "",
   },
 ];
@@ -132,7 +132,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
     try {
       await onZapForFarm(
         inputToken.lpAddresses,
-        inputToken.lpSymbol === "ETH" ? true : false,
+        inputToken.lpSymbol === "BNB" ? true : false,
         fromReadableAmount(amount.toString(), inputToken.decimals),
         targetToken.lpAddresses,
         targetToken.pid
@@ -159,7 +159,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
   const getBalance = async (token) => {
     try {
       setLoadingBalance(true);
-      if (token.lpSymbol === "ETH") {
+      if (token.lpSymbol === "BNB") {
         const balance = await signer.getBalance();
         setBalance(toReadableAmount(balance, token.decimals));
       } else {
@@ -283,30 +283,30 @@ export default function ZapInModal({ open, closeModal, pid }) {
               <button className="box-btn-stake ">
                 <Loading /> Loading...
               </button>
-            ) : inputToken.lpSymbol !== "ETH" &&
+            ) : inputToken.lpSymbol !== "BNB" &&
               Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ? (
               <button
                 onClick={handleApprove}
                 disabled={isApproving}
-                className="box-btn-stake"
+                className="box-btn-stake flex justify-center items-center"
               >
-                Approve
+                {isApproving ? <Loading /> : "Approve"}
               </button>
             ) : (
               <button
                 onClick={handleDeposit}
-                className="box-btn-stake"
+                className="box-btn-stake flex justify-center items-center"
                 disabled={Number(amount) === 0 || pendingZapTx}
               >
-                {t("Zap in")}
+                {pendingZapTx ? <Loading /> : t("Zap in")}
               </button>
             )}
           </div>
         </div>
       </Modal>
-
+      {/* 
       {isApproving && <LogoLoading title="Approving..." />}
-      {pendingZapTx && <LogoLoading title="Zapping in..." />}
+      {pendingZapTx && <LogoLoading title="Zapping in..." />} */}
     </>
   );
 }

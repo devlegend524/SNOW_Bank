@@ -72,7 +72,7 @@ export const useTotalSupply = () => {
 
 export const useSNOWPerSecond = () => {
   const { fastRefresh } = useRefresh();
-  const [bSnowPerSecond, setSnowPerSecond] = useState(BIG_ZERO);
+  const [snowPerSecond, setSnowPerSecond] = useState(BIG_ZERO);
   const { chain } = useNetwork();
   const provider = useEthersProvider();
 
@@ -80,7 +80,7 @@ export const useSNOWPerSecond = () => {
     async function fetchSnowPerSecond() {
       try {
         const masterChefContract = getMasterchefContract(provider);
-        const perSecond = await masterChefContract.gemPerSecond();
+        const perSecond = await masterChefContract.SnowPerSecond();
         setSnowPerSecond(toReadableAmount(perSecond, 18, 5));
       } catch (e) {
         console.log(e.reason);
@@ -89,7 +89,7 @@ export const useSNOWPerSecond = () => {
     if (provider) fetchSnowPerSecond();
   }, [fastRefresh, provider]);
 
-  return bSnowPerSecond;
+  return snowPerSecond;
 };
 
 export const useBurnedBalance = (tokenAddress) => {

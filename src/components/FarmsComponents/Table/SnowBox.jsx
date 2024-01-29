@@ -48,12 +48,9 @@ export default function SnowBox(props) {
   const columnNames = tableSchema.map((column) => column.name);
 
   return (
-    <div className="ice_box rounded-t-[230px!important] rounded-b-3xl">
-      <div className="h-[120px]">
-        <img src="/assets/box-header.png" alt="" className="w-full" />
-      </div>
+    <div className="flex justify-center px-2 w-full">
 
-      <div className="sm:p-4 p-3">
+      <div className="sm:p-4 p-3 sm:max-w-[400px] snows max-w-full w-full">
         <div className="" onClick={toggleActionPanel}>
           {Object.keys(props).map((key) => {
             const columnIndex = columnNames.indexOf(key);

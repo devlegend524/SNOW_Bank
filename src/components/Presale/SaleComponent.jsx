@@ -26,6 +26,7 @@ import {
 import { db } from "config/firebase";
 import { ethers } from "ethers";
 import { MAX_PER_USER } from "config";
+import BNB from "components/UI/BNB";
 
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
@@ -47,28 +48,26 @@ export default function SaleComponent({ saleData }) {
     setBalance(Number(readableData));
   };
 
-  const handleChangeETH = (value) => {
+  const handleChangeBNB = (value) => {
     setAmount(value);
     setEthAmount(value);
-    // const ethSnowAmount = Number(
-    //   ((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(8)
-    // );
-    const ethSnowAmount = Number(((value * ethPrice) / (4 / 100)).toFixed(8));
+    const ethSnowAmount = Number(
+      ((value * ethPrice) / (saleData?.presalePriceOfToken / 100)).toFixed(8)
+    );
     setSnowAmount(ethSnowAmount);
   };
 
   const handleChangeSnow = (value) => {
     setSnowAmount(value);
-    // const ethBuyAmount = Number(
-    //   ((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(8)
-    // );
-    const ethBuyAmount = Number(((value * (4 / 100)) / ethPrice).toFixed(8));
+    const ethBuyAmount = Number(
+      ((value * (saleData?.presalePriceOfToken / 100)) / ethPrice).toFixed(8)
+    );
     setEthAmount(ethBuyAmount);
   };
 
-  const getETHPrice = async () => {
+  const getBNBPrice = async () => {
     const priceData = await fetch(
-      "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
+      "https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD"
     );
     const res = await priceData.json();
     if (res && res.USD) {
@@ -78,23 +77,25 @@ export default function SaleComponent({ saleData }) {
   };
 
   const handleBuySnow = async () => {
+
     if (!address) {
       notify("error", "Please connect your wallet");
       return;
     }
 
+
     // if (!saleData?.enabled) {
     //   notify("error", "Presale is not started yet");
     //   return;
     // }
-    
+
     if (saleData?.sale_finalized) {
       notify("error", "Presale is ended");
       return;
     }
 
     if (ethPrice === 0) {
-      notify("error", "ETH price fetch failed.");
+      notify("error", "BNB price fetch failed.");
       return;
     }
 
@@ -113,13 +114,10 @@ export default function SaleComponent({ saleData }) {
       return;
     }
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const walletSigner = provider.getSigner(address);
-
     try {
       setPendingTx(true);
-      const tx = await walletSigner.sendTransaction({
-        to: TREASURY,
+      const tx = await presaleContract.buySNOW({
+        from: address,
         value: fromReadableAmount(Number(ethAmount).toFixed(8)),
       });
 
@@ -128,28 +126,28 @@ export default function SaleComponent({ saleData }) {
 
       notify("success", `You bought ${snowAmount} SNOW successfully`);
 
-      const dbRef = ref(db, "/transactions");
-      push(dbRef, {
-        address: address,
-        amount: ethAmount,
-        withdrow: snowAmount,
-      })
-        .then(() => {
-          const dbQuery = query(ref(db, "/stats"));
+      // const dbRef = ref(db, "/transactions");
+      // push(dbRef, {
+      //   address: address,
+      //   amount: ethAmount,
+      //   withdrow: snowAmount,
+      // })
+      //   .then(() => {
+      //     const dbQuery = query(ref(db, "/stats"));
 
-          get(dbQuery).then((snapshot) => {
-            const exist = snapshot.val();
-            if (exist) {
-              const dbRef = ref(db, `/stats/${Object.keys(exist)[0]}`);
-              update(dbRef, {
-                eth: exist[Object.keys(exist)[0]].eth + Number(ethAmount),
-              });
-            }
-          });
-        })
-        .catch((error) => {
-          console.error("Error saving transaction:", error);
-        });
+      //     get(dbQuery).then((snapshot) => {
+      //       const exist = snapshot.val();
+      //       if (exist) {
+      //         const dbRef = ref(db, `/stats/${Object.keys(exist)[0]}`);
+      //         update(dbRef, {
+      //           eth: exist[Object.keys(exist)[0]].bnb + Number(ethAmount),
+      //         });
+      //       }
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error saving transaction:", error);
+      //   });
       getBalance();
       getDeposits(address);
     } catch (error) {
@@ -187,7 +185,7 @@ export default function SaleComponent({ saleData }) {
   };
 
   useEffect(() => {
-    getETHPrice();
+    getBNBPrice();
     if (signer) {
       getBalance();
       getDeposits(address);
@@ -204,7 +202,7 @@ export default function SaleComponent({ saleData }) {
               <div>
                 <p className="flex gap-1">
                   <span className="font-semibold">
-                    {/* {saleData?.presalePriceOfToken} cents */}4 cents
+                    {saleData?.presalePriceOfToken} cents
                   </span>
                 </p>
               </div>
@@ -212,15 +210,26 @@ export default function SaleComponent({ saleData }) {
             <div className="flex justify-between mb-3 px-1">
               <div> Bought:</div>
               <div className="flex gap-1">
-                {withdrow ? Number(withdrow).toFixed(2) : "0.00"}{" "}
+                {saleData?.SNOWOwned
+                  ? Number(saleData?.SNOWOwned).toFixed(2)
+                  : "0.00"}{" "}
                 <SNOW width={15} height={15} />
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
-              <div> Deposited:</div>
+              <div> Deposited ETH:</div>
               <div className="flex gap-1">
                 {deposits ? Number(deposits).toFixed(5) : "0.00"}{" "}
                 <ETH width={15} height={15} />
+              </div>
+            </div>
+            <div className="flex justify-between mb-3 px-1">
+              <div> Deposited BNB:</div>
+              <div className="flex gap-1">
+                {saleData?.user_deposits
+                  ? Number(saleData?.user_deposits).toFixed(5)
+                  : "0.00"}{" "}
+                <BNB width={15} height={15} />
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
@@ -229,7 +238,7 @@ export default function SaleComponent({ saleData }) {
                 {Number(balance).toFixed(5) === "NaN"
                   ? "0.00"
                   : Number(balance).toFixed(5)}
-                <ETH width={15} height={15} />
+                <BNB width={15} height={15} />
               </div>
             </div>
           </div>
@@ -259,15 +268,15 @@ export default function SaleComponent({ saleData }) {
             </div>
             <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full relative">
               <img
-                src="/assets/tokens/weth.png"
+                src="/assets/tokens/bnb.png"
                 className={`w-[38px] h-[38px] my-auto ml-1`}
               />
               <input
                 className="py-3.5 bg-transparent text-sm w-full px-2 hover:outline-none focus-visible:outline-none  focus-visible:border-white/70"
                 type="number"
-                placeholder="Input ETH amount"
+                placeholder="Input BNB amount"
                 value={ethAmount}
-                onChange={(e) => handleChangeETH(e.target.value)}
+                onChange={(e) => handleChangeBNB(e.target.value)}
               />
               <button
                 className="bg-secondary shadow shadow-black  hover:bg-secondary/90 hover:shadow-xl duration-200 absolute right-1 top-1/2 -translate-y-1/2 p-1 px-2 rounded-lg text-sm h-8"
@@ -303,13 +312,13 @@ export default function SaleComponent({ saleData }) {
               </div>
             </div>
             <div className="flex gap-2 justify-between mt-1">
-              <p className="text-sm">ETH</p>
+              <p className="text-sm">BNB</p>
               <div className="flex gap-1">
-                <ETH /> {ethAmount ? ethAmount : "0.00"}
+                <BNB /> {ethAmount ? ethAmount : "0.00"}
               </div>
             </div>
             <div className="flex gap-2 justify-between mt-1">
-              <p className="text-sm">ETH Price:</p>
+              <p className="text-sm">BNB Price:</p>
               <div className="flex gap-1">$ ~{ethPrice}</div>
             </div>
             <hr className="mt-1 border-white/30 border-[0.5px]" />
@@ -318,7 +327,7 @@ export default function SaleComponent({ saleData }) {
               <div className="flex gap-1">
                 {ethAmount ? (
                   <>
-                    {ethPrice} * {ethAmount} = $ ~
+                    {ethPrice} * {ethAmount.toFixed(4)} = $ ~
                     {(ethPrice * ethAmount).toFixed(2)}
                   </>
                 ) : (
@@ -332,20 +341,19 @@ export default function SaleComponent({ saleData }) {
         <button
           className="main_btn w-full mt-6 mb-2"
           onClick={() => handleBuySnow()}
-          // disabled={
-          //   !saleData?.enabled ||
-          //   saleData?.sale_finalized ||
-          //   250 <= Number(saleData?.SNOWOwned) + Number(amount)
-          // }
+          disabled={
+            !saleData?.enabled ||
+            saleData?.sale_finalized ||
+            100000 <= Number(saleData?.SNOWOwned) + Number(amount)
+          }
         >
-          {/* {!saleData?.enabled
+          {!saleData?.enabled
             ? "Presale is not started yet"
             : saleData?.sale_finalized
             ? "Presale has ended"
-            : 250 <= Number(saleData?.SNOWOwned) + Number(amount)
+            : 100000 <= Number(saleData?.SNOWOwned) + Number(amount)
             ? "Exceed Maximum Amount"
-            : "BUY SNOW"} */}
-          BUY SNOW
+            : "BUY SNOW"}
         </button>
       </div>
       {pendingTx && <LogoLoading />}

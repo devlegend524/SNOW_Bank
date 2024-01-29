@@ -14,6 +14,7 @@ import { didUserReject } from "utils/customHelpers";
 import tokens from "config/tokens";
 import { getCounts } from "utils/limitHelper";
 import LogoLoading from "./LogoLoading";
+import Loading from "components/Loading";
 
 const customStyles = {
   content: {
@@ -92,12 +93,12 @@ export default function CompoundModal({
         style={customStyles}
         ariaHideApp={false}
       >
-        <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg">
+        <div className="min-w-[350px] max-w-[500px] w-full p-6 rounded-lg snow_effect">
           <div className="flex justify-around items-center">
             <img
               src={tokens.snow.logo}
               alt="token"
-              className="rounded-full w-[60px] h-[60px] lg:w-[65px] lg:h-[65px] border-[3px] border-white mb-3"
+              className="rounded-full w-[60px] h-[60px] lg:w-[65px] lg:h-[65px] mb-3"
             />
             <ArrowForwardIcon />
             <TokenDisplay token={targetToken} modal={true} />
@@ -114,7 +115,7 @@ export default function CompoundModal({
                   onChange={(e) => handleChangeToken(e.target.value)}
                 >
                   {farms.map((item, key) => {
-                    if (item.lpSymbol === "WETH-SNOW")
+                    if (item.lpSymbol === "WBNB-SNOW")
                       return (
                         <option
                           key={key}
@@ -148,21 +149,21 @@ export default function CompoundModal({
           </p>
           <div className="flex gap-3 pt-4">
             <button
-              className="border border-gray-600 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px]"
+              className="box-btn-harvest hover:bg-red-400"
               onClick={closeModal}
             >
               Cancel
             </button>
 
-              <button
-                onClick={handleDeposit}
-                className="border disabled:opacity-50 disabled:hover:scale-100 border-secondary-700 w-full rounded-lg hover:scale-105 transition ease-in-out p-[8px] bg-secondary-700"
-                disabled={
-                  Number(earnings) === 0 || pendingZapTx || currentCounts === 0
-                }
-              >
-                {t("Compound")}
-              </button>
+            <button
+              onClick={handleDeposit}
+              className="box-btn-harvest flex justify-center items-center"
+              disabled={
+                Number(earnings) === 0 || pendingZapTx || currentCounts === 0
+              }
+            >
+              {pendingZapTx ? <Loading /> : t("Compound")}
+            </button>
           </div>
 
           {currentCounts === 0 ? (
@@ -174,7 +175,7 @@ export default function CompoundModal({
           )}
         </div>
       </Modal>
-      {pendingZapTx && <LogoLoading title="Compounding..." />}
+      {/* {pendingZapTx && <LogoLoading title="Compounding..." />} */}
     </>
   );
 }

@@ -254,7 +254,6 @@
 .token_lists {
   max-height: 400px;
   overflow-y: auto;
-  background-color: #1b1d27;
 }
 
 .token_lists li {

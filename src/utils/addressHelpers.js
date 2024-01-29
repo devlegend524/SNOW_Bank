@@ -18,7 +18,7 @@ export const getMulticallAddress = () => {
   return contractAddresses.multiCall;
 };
 export const getWethAddress = () => {
-  return tokens.weth.address;
+  return tokens.wbnb.address;
 };
 export const getNFTAddress = () => {
   return contractAddresses.nft;

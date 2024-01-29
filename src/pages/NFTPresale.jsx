@@ -36,8 +36,8 @@ export default function NFTPresale() {
   const [maxPage, setMaxPage] = useState(41);
 
   const handlePageClick = (e) => {
-    setPage(1 + (e.selected * 10))
-  }
+    setPage(1 + e.selected * 10);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,12 +65,12 @@ export default function NFTPresale() {
           const newData =
             index <= 5
               ? {
-                [calls[index]["name"]]:
-                  index >= 2 ? Number(data[0]) : data[0],
-              }
+                  [calls[index]["name"]]:
+                    index >= 2 ? Number(data[0]) : data[0],
+                }
               : index === 9
-                ? { [calls[index]["name"]]: rawResults[index].toString() }
-                : {
+              ? { [calls[index]["name"]]: rawResults[index].toString() }
+              : {
                   [calls[index]["name"]]: toReadableAmount(
                     rawResults[index].toString(),
                     18,
@@ -134,8 +134,9 @@ export default function NFTPresale() {
             setPendingTx(true);
             setActive(true);
           }}
-          className={`snow_effect px-3 py-2 hover:bg-primary/40 transition ease-in-out ${active ? "bg-[#058ee7!important]" : ""
-            }`}
+          className={`snow_effect px-3 py-2 hover:bg-primary/40 transition ease-in-out ${
+            active ? "bg-[#058ee7!important]" : ""
+          }`}
         >
           Listed NFTs
         </button>
@@ -144,69 +145,80 @@ export default function NFTPresale() {
             setPendingTx(true);
             setActive(false);
           }}
-          className={`snow_effect px-3 py-2 hover:bg-primary/40 transition ease-in-out  ${!active ? "bg-[#058ee7!important]" : ""
-            }`}
+          className={`snow_effect px-3 py-2 hover:bg-primary/40 transition ease-in-out  ${
+            !active ? "bg-[#058ee7!important]" : ""
+          }`}
         >
           My NFTs
         </button>
       </div>
 
-      {
-        active ?
-          <div
-            className={`relative`}
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt- 6 mx-auto mb-8">
-              {saleArray.map((_, index) => {
-                if ((index + page) <= maxPage)
-                  return (
-                    <NFTCard
-                      tokenId={index + page}
-                      key={index}
-                      presaleData={presaleData}
-                      index={index}
-                      active={active}
-                    />
-                  );
-              })}
-            </div>
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel=">"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={2}
-              marginPagesDisplayed={1}
-              pageCount={5}
-              previousLabel="<"
-              renderOnZeroPageCount={null}
-              className="pagination"
-            />
-          </div> :
-          <>{pendingTx ?
+      {active ? (
+        <div className={`relative`}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt- 6 mx-auto mb-8">
+            {saleArray.map((_, index) => {
+              if (index + page <= maxPage)
+                return (
+                  <NFTCard
+                    tokenId={index + page}
+                    key={index}
+                    presaleData={presaleData}
+                    index={index}
+                    active={active}
+                  />
+                );
+            })}
+          </div>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={1}
+            pageCount={5}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            className="pagination"
+          />
+        </div>
+      ) : (
+        <>
+          {pendingTx ? (
             <div className="flex justify-center my-32 sm:my-[200px]">
               <AiOutlineLoading3Quarters className="text-3xl font-bold animate-spin" />
-            </div> :
+            </div>
+          ) : (
             <div>
-              {NFTs?.length > 0 ?
-                NFTs.map((_, index) => {
+              {NFTs?.length > 0 ? (
+                NFTs.map((id, index) => {
                   return (
                     <NFTCard
                       tokenId={index + 1}
                       key={index}
                       presaleData={presaleData}
                       index={index}
-                      active={active} />
-                  )
-                }) : <div className="w-full flex justify-center items-center flex-col">
-                  <p className="my-6 text-lg text-center w-full">You don't have any NFT(s).</p>
-                  <button className="snow_effect mx-auto py-2 px-3" onClick={(e) => setActive(true)}>Buy Now</button>
+                      active={active}
+                      myNFTID={id}
+                    />
+                  );
+                })
+              ) : (
+                <div className="w-full flex justify-center items-center flex-col">
+                  <p className="my-6 text-lg text-center w-full">
+                    You don't have any NFT(s).
+                  </p>
+                  <button
+                    className="snow_effect mx-auto py-2 px-3"
+                    onClick={(e) => setActive(true)}
+                  >
+                    Buy Now
+                  </button>
                 </div>
-              }
+              )}
             </div>
-          }
-          </>
-      }
-
+          )}
+        </>
+      )}
     </div>
   );
 }

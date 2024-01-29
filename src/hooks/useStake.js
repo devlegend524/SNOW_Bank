@@ -12,6 +12,8 @@ const useStake = (pid, isNFTPool) => {
   const tokenDecimals = farm.isTokenOnly ? farm.token.decimals : 18;
   const handleStake = useCallback(
     async (amount, isNFTALL) => {
+      console.log( isNFTPool);
+
       // const whitelistMerkleTree = StandardMerkleTree.of(
       //   merkleTree.values.map((item) => item.value),
       //   merkleTree.leafEncoding,
@@ -22,7 +24,14 @@ const useStake = (pid, isNFTPool) => {
       // } catch (e) {
       //  console.log('Whitelist check error', e)
       // }
-      await stake(masterChefContract, pid, amount, tokenDecimals, isNFTPool, isNFTALL);
+      await stake(
+        masterChefContract,
+        pid,
+        amount,
+        tokenDecimals,
+        isNFTPool,
+        isNFTALL
+      );
     },
     [address, masterChefContract, pid, tokenDecimals, isNFTPool]
   );

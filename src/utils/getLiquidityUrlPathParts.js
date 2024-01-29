@@ -4,16 +4,16 @@ import { CHAIN_ID } from "config";
 import { getWethAddress } from "./addressHelpers";
 
 const getLiquidityUrlPathParts = ({ quoteTokenAddress, tokenAddress }) => {
-  const wETHAddressString = getWethAddress();
+  const wBNBAddressString = getWethAddress();
   const quoteTokenAddressString = quoteTokenAddress ? quoteTokenAddress : null;
   const tokenAddressString = tokenAddress ? tokenAddress : null;
   const firstPart =
-    !quoteTokenAddressString || quoteTokenAddressString === wETHAddressString
-      ? "ETH"
+    !quoteTokenAddressString || quoteTokenAddressString === wBNBAddressString
+      ? "wBNB"
       : quoteTokenAddressString;
   const secondPart =
-    !tokenAddressString || tokenAddressString === wETHAddressString
-      ? "ETH"
+    !tokenAddressString || tokenAddressString === wBNBAddressString
+      ? "BNB"
       : tokenAddressString;
   return `${firstPart}/${secondPart}`;
 };

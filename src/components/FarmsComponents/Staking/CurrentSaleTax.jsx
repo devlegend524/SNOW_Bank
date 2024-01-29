@@ -7,8 +7,8 @@ export default function CurrentSaleTax() {
   const provider = useEthersProvider();
   const getCurrentTaxRate = async () => {
     try {
-      const bSnowContract = getSNOWContract(provider);
-      const currentRate = await bSnowContract.getCurrentTaxRate();
+      const snowContract = getSNOWContract(provider);
+      const currentRate = await snowContract.getCurrentTaxRate();
       setTaxRate(Number(currentRate) / 100);
     } catch (e) {
       console.log(e);

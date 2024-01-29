@@ -80,8 +80,8 @@ export default function Roadmap() {
             </div>
             <div className="text-white text-sm">
               Launch of Snow Bank: Snow Bank goes live - marking the start of
-              yield farming SNOW on Ethereum.
-              <br /> SNOW/ETH LP Pool: Zap into the high APR SNOW/ETH LP pool
+              yield farming SNOW on BNB smart chain.
+              <br /> SNOW/BNB LP Pool: Zap into the high APR SNOW/BNB LP pool
               along with exclusive staking options for SNOW and SNOW NFTs.
               <br /> Community Engagement: Strengthen community ties through
               interactive sessions, AMAs, and continuous support.

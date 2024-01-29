@@ -27,8 +27,8 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
       <li
         className={`flex p-2 justify-between items-center border border-secondary transition ease-in-out relative  ${
           token.lpSymbol === disabledToken
-            ? "bg-black opacity-40"
-            : "hover:bg-primary hover:bg-opacity-40"
+            ? "bg-primary/5 opacity-40"
+            : "hover:bg-primary/10 hover:bg-opacity-40"
         }`}
         onClick={(e) => {
           token.lpSymbol !== disabledToken && handleToken(token);
@@ -53,7 +53,7 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
           )}
 
           <div className="block ml-3 py-1">
-            <h1 className="text-symbol text-base">{token?.lpSymbol}</h1>
+            <h1 className="text-white text-base">{token?.lpSymbol}</h1>
             <p className="text-gray-400 text-sm">{token.title}</p>
           </div>
         </div>

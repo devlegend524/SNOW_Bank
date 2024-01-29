@@ -1,17 +1,8 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-} from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import {
-  mainnet,
-  optimism,
-  arbitrum,
-  base,
-  zkSync,
-} from "wagmi/chains";
+import { bsc } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
@@ -26,9 +17,7 @@ import store from "state";
 
 const Providers = ({ children }) => {
   const { chains, publicClient } = configureChains(
-    [
-      mainnet
-    ],
+    [bsc],
     [alchemyProvider({ apiKey: ALCHEMY_ID }), publicProvider()]
   );
 

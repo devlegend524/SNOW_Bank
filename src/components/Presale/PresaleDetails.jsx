@@ -6,6 +6,7 @@ import { BASE_EXPLORER } from "config";
 import { getPresaleAddress } from "utils/addressHelpers";
 import { formatAddress } from "utils/customHelpers";
 import { CountDownComponentClaim } from "components/CountDownClaim";
+import BNB from "components/UI/BNB";
 
 export default function PresaleDetails({ saleData, ethRaised }) {
 
@@ -15,9 +16,15 @@ export default function PresaleDetails({ saleData, ethRaised }) {
         <div className="balance_form">
           <div className="my-8">
             <div className="flex justify-between mb-4 px-1">
-              <div> Total Raised:</div>
+              <div> Total Raised ETH:</div>
               <div className="flex gap-1">
                 {Number(ethRaised).toFixed(5) || "0.00"} <ETH />
+              </div>
+            </div>
+            <div className="flex justify-between mb-4 px-1">
+              <div> Total Raised BNB:</div>
+              <div className="flex gap-1">
+                {Number(saleData?.total_deposited).toFixed(5) || "0.00"} <BNB />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
@@ -29,13 +36,12 @@ export default function PresaleDetails({ saleData, ethRaised }) {
             <div className="flex justify-between mb-4 px-1">
               <div> NFT Price:</div>
               <div className="flex gap-1">
-                {NFT_PRICE} <ETH />
+                {saleData?.NFTPrice} <BNB />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Presale Price:</div>
-              {/* <div>{saleData?.presalePriceOfToken} cents</div> */}
-              <div>4 cents</div>
+              <div>{saleData?.presalePriceOfToken} cents</div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div> Launch Price:</div>
@@ -52,13 +58,13 @@ export default function PresaleDetails({ saleData, ethRaised }) {
             <div className="flex justify-between mb-4 px-1">
               <div>Sale Ends In:</div>
               <div>
-                <CountDownComponentClaim time={1704499200000} />
+                <CountDownComponentClaim time={1704579867764} />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
               <div>Farming Starts In:</div>
               <div>
-                <CountDownComponentClaim time={1704585600000} />
+                <CountDownComponentClaim time={1704579867764} />
               </div>
             </div>
             {/* <div className="flex justify-between mb-4 px-1">
@@ -77,7 +83,7 @@ export default function PresaleDetails({ saleData, ethRaised }) {
               <div> Presale End Date:</div>
               <div>2024-01-06</div>
             </div> */}
-            {/* <div className="flex justify-between mb-3 px-1">
+            <div className="flex justify-between mb-3 px-1">
               <div>Contract:</div>
               <div>
                 <a
@@ -88,7 +94,7 @@ export default function PresaleDetails({ saleData, ethRaised }) {
                   {formatAddress(getPresaleAddress(), 4)}
                 </a>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

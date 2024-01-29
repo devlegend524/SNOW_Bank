@@ -106,27 +106,22 @@ const ActionPanel = ({
   return (
     <div className="">
       <SnowCellLayout label={t("Get %symbol%", { symbol: lpLabel })}>
-        <button
-          // href={BASE_ADD_LIQUIDITY_URL}
+        <a
+          href={nftOnly ? "/nfts" : link}
           className="box-text flex gap-1"
-          target={"_blank"}
+          target={!nftOnly && "_blank"}
           disabled={true}
         >
           {t("%symbol%", { symbol: lpLabel })}{" "}
           <FiExternalLink className="my-auto text-sm" />
-        </button>
+        </a>
       </SnowCellLayout>
 
       <SnowCellLayout label="View Contract">
-        <button
-          // href={scan}
-          className="box-text flex gap-2"
-          target={"_blank"}
-          disabled={true}
-        >
+        <a href={scan} className="box-text flex gap-2" target={"_blank"}>
           {formatAddress(farm.lpAddresses, 6)}{" "}
           <FiExternalLink className="my-auto text-sm" />
-        </button>
+        </a>
       </SnowCellLayout>
 
       <SnowCellLayout label="Tags">

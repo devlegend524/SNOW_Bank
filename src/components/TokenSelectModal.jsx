@@ -53,11 +53,11 @@ export default function TokenSelectModal({
         style={customStyle}
         contentLabel="Example Modal"
       >
-        <div className="bg-[#16171E] p-6 rounded-md border-gray-300/60 border">
-          <div className="flex justify-between border-b border-yellow-500 py-4">
-            <h1 className="text-xl text-symbol">Select Token</h1>
+        <div className="snow_effect p-6 rounded-md border-gray-300/60 border">
+          <div className="flex justify-between border-b border-white py-4">
+            <h1 className="text-xl">Select Token</h1>
             <button
-              className="text-2xl text-symbol"
+              className="text-2xl"
               onClick={() => closeModal()}
             >
               &times;

@@ -36,6 +36,10 @@ const router = [
     path: "/game",
     element: <ComingSoon />,
   },
+  {
+    path: "/bank",
+    element: <ComingSoon />,
+  },
   // {
   //   path: "/nft-claim",
   //   element: <NFT />,

@@ -435,8 +435,8 @@ const tokens = {
     decimals: 18,
     projectLink: "https://venus.io/",
   },
-  weth: {
-    symbol: "weth",
+  wbnb: {
+    symbol: "wbnb",
     address: {
       56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       97: "0xae13d989dac2f0debff460ac112a837c89baa7cd",

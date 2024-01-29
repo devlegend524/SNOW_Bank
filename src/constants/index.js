@@ -1,5 +1,5 @@
 export const EXPLORER_URL = {
-  1: "https://etherscan.io/",
+  56: "https://bscscan.com/",
 };
 
 export const getSortOptions = () => {

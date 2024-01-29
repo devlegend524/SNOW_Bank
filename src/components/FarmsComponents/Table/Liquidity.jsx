@@ -22,6 +22,7 @@ const Container = styled.div`
 `;
 
 const Liquidity = ({ liquidity }) => {
+
   const displayLiquidity =
     liquidity && liquidity.gt(0)
       ? `$${Number(liquidity).toLocaleString(undefined, {
@@ -39,7 +40,7 @@ const Liquidity = ({ liquidity }) => {
   return (
     <Container>
       <LiquidityWrapper>
-        <Text color="secondary">{displayLiquidity}</Text>
+        {/* <Text color="secondary">{displayLiquidity}</Text> */}
       </LiquidityWrapper>
       <HelpIcon
         data-tooltip-id="liquidity-tooltip"

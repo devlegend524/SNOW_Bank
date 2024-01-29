@@ -18,7 +18,7 @@ import {
 } from "./actions";
 import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
 import { useAccount } from "wagmi";
-import { snowWethFarmPid, mainTokenSymbol, wethUsdcFarmPid } from "config";
+import { snowWethFarmPid, mainTokenSymbol, wbnbUsdcFarmPid } from "config";
 import addresses from "constants/addresses";
 
 export const usePollFarmsData = (includeArchive = false) => {
@@ -40,7 +40,7 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 0 = SNOW-ETH LP
+ * 0 = SNOW-BNB LP
  *
  */
 export const usePollCoreFarmData = () => {
@@ -57,7 +57,7 @@ export const usePollBlockNumber = () => {
   const provider = useEthersProvider();
   useEffect(() => {
     const interval = setInterval(async () => {
-      const blockNumber = await provider.eth.getBlockNumber();
+      const blockNumber = await provider.bnb.getBlockNumber();
       dispatch(setBlock(blockNumber));
     }, 6000);
 
@@ -127,13 +127,13 @@ export const useUSDCPriceFromToken = (tokenSymbol) => {
 
 export const useLpTokenPrice = (symbol) => {
   const farm = useFarmFromLpSymbol(symbol);
-  const wethPrice = usePriceEthUsdc();
+  const wbnbPrice = usePriceEthUsdc();
   const farmTokenPriceInUsd = usePriceSNOWUsdc()[0];
   let lpTokenPrice = BIG_ZERO;
   const stables = ["USDC", "MIM", "DAI"];
   if (stables.includes(symbol)) return new BigNumber(1);
 
-  if (symbol === "WETH") return wethPrice;
+  if (symbol === "WBNB") return wbnbPrice;
   if (farm.isTokenOnly) return farmTokenPriceInUsd;
 
   try {
@@ -248,7 +248,7 @@ export const useProfile = () => {
 };
 
 export const usePriceEthUsdc = () => {
-  const ethUsdcFarm = useFarmFromPid(wethUsdcFarmPid);
+  const ethUsdcFarm = useFarmFromPid(wbnbUsdcFarmPid);
   return new BigNumber(ethUsdcFarm.quoteToken.usdcPrice);
 };
 
@@ -258,7 +258,7 @@ export const usePriceSNOWUsdc = () => {
   const [liquidity, setLiquidity] = useState(0);
   const [marketCap, setMarketCap] = useState(0);
   const { fastRefresh } = useRefresh();
-  // https://api.dexscreener.com/latest/dex/search?q=bSNOW
+  // https://api.dexscreener.com/latest/dex/search?q=SNOW
   useEffect(() => {
     async function fetchData() {
       try {
@@ -272,15 +272,15 @@ export const usePriceSNOWUsdc = () => {
           let data = returned.pairs[0];
           if (returned.pairs.length === 1) {
             data =
-              returned.pairs[0].chainId === "base" &&
-              returned.pairs[0].pairAddress === addresses.snowWethlp
+              returned.pairs[0].chainId === "bsc" &&
+              returned.pairs[0].pairAddress === addresses.snowWbnblp
                 ? returned.pairs[0]
                 : undefined;
           } else {
             data = returned.pairs.filter(
               (pair) =>
-                pair.chainId == "base" &&
-                pair.pairAddress == addresses.snowWethlp
+                pair.chainId == "bsc" &&
+                pair.pairAddress == addresses.snowWbnblp
             )[0];
           }
           setPriceUsd(data?.priceUsd);
@@ -404,15 +404,15 @@ export const useGetLastOraclePrice = () => {
 
 export const useTotalValue = () => {
   const farms = useFarms();
-  const wethPrice = usePriceEthUsdc();
+  const wbnbPrice = usePriceEthUsdc();
   const snowPrice = usePriceSNOWUsdc()[0];
   let value = new BigNumber(0);
   for (let i = 0; i < farms.data.length; i++) {
     const farm = farms.data[i];
     if (farm.lpTotalInQuoteToken) {
       let val;
-      if (farm.quoteToken.symbol === "WETH" && wethPrice) {
-        val = wethPrice.times(farm.lpTotalInQuoteToken);
+      if (farm.quoteToken.symbol === "WBNB" && wbnbPrice) {
+        val = wbnbPrice.times(farm.lpTotalInQuoteToken);
       } else if (farm.quoteToken.symbol === "SNOW") {
         val = snowPrice.times(farm.lpTotalInQuoteToken);
       } else {

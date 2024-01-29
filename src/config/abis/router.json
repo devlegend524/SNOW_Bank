@@ -9,7 +9,7 @@
       },
       {
         "type": "address",
-        "name": "_WETH",
+        "name": "_WBNB",
         "internalType": "address"
       }
     ]
@@ -24,7 +24,7 @@
         "internalType": "address"
       }
     ],
-    "name": "WETH",
+    "name": "WBNB",
     "inputs": []
   },
   {

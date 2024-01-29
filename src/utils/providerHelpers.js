@@ -5,7 +5,7 @@ import getRpcUrl from "utils/getRpcUrl";
 const RPC_URL = getRpcUrl();
 const network = {
   chainId: CHAIN_ID,
-  name: 'base',
+  name: "bnb",
   ensAddress: undefined,
 };
 const httpProvider = new providers.JsonRpcProvider(RPC_URL, network);
@@ -13,7 +13,7 @@ const httpProvider = new providers.JsonRpcProvider(RPC_URL, network);
 // const RPC_URL = getRpcUrl();
 // const network = {
 //   chainId: 1,
-//   name: "ETH Smart Chain",
+//   name: "BNB Smart Chain",
 //   ensAddress: undefined,
 // };
 // const httpProvider = new providers.JsonRpcProvider(RPC_URL, network);

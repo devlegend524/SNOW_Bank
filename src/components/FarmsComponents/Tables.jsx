@@ -14,13 +14,14 @@ export default function FarmTables(props) {
 
   return (
     <>
-      <div className="grid grid-cols-1  sm:grid-cols-3 sm:gap-6 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-6 gap-3">
         {rows.map((row, key) => {
           return (
             <SnowBox
               {...row.original}
               userDataReady={userDataReady}
               index={key}
+              key={key}
             />
           );
         })}

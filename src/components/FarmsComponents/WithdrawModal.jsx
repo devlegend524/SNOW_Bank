@@ -51,7 +51,7 @@ const WithdrawModal = ({
   }, [])
   return (
     <>
-      <Modal title={t("Unstake tokens")} onDismiss={onDismiss}>
+      <Modal title={t("Unstake tokens")} onDismiss={onDismiss} className="snow_effect">
         <ModalInput
           onSelectMax={handleSelectMax}
           onChange={handleChange}

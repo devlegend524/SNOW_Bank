@@ -1,7 +1,8 @@
 import BigNumber from "bignumber.js";
 import { BIG_ONE, BIG_TEN, BIG_ZERO } from "utils/bigNumber";
 import { filterFarmsByQuoteToken } from "utils/farmsPriceHelpers";
-import { snowWethFarmPid, wethUsdcFarmPid } from "config";
+import { snowWethFarmPid, wbnbUsdcFarmPid } from "config";
+
 const getFarmFromTokenSymbol = (farms, tokenSymbol, preferredQuoteTokens) => {
   const farmsWithTokenSymbol = farms.filter(
     (farm) => farm.token.symbol === tokenSymbol
@@ -16,8 +17,8 @@ const getFarmFromTokenSymbol = (farms, tokenSymbol, preferredQuoteTokens) => {
 const getFarmBaseTokenPrice = (
   farm,
   quoteTokenFarm,
-  wethPriceUsdt,
-  bSnowPriceUsdc
+  wbnbPriceUsdt,
+  snowPriceUsdc
 ) => {
   const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote);
   if (["USDC", "MIM", "DAI"].includes(farm.quoteToken.symbol)) {
@@ -25,14 +26,14 @@ const getFarmBaseTokenPrice = (
       ? new BigNumber(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
-  if (farm.quoteToken.symbol === "WETH") {
+  if (farm.quoteToken.symbol === "WBNB") {
     return hasTokenPriceVsQuote
-      ? wethPriceUsdt.times(farm.tokenPriceVsQuote)
+      ? wbnbPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
   if (farm.quoteToken.symbol === "SNOW") {
     return hasTokenPriceVsQuote
-      ? bSnowPriceUsdc.times(farm.tokenPriceVsQuote)
+      ? snowPriceUsdc.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
 
@@ -42,12 +43,12 @@ const getFarmBaseTokenPrice = (
   }
 
   // Possible alternative farm quoteTokens:
-  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), ETH (i.e. SUSHI-ETH)
+  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), BNB (i.e. SUSHI-BNB)
   // If the farm's quote token isn't USDC or wWBNB, we then use the quote token, of the original farm's quote token
   // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - WBNB, (pBTC - WBNB)
   // from the WBNB - pBTC price, we can calculate the PNT - USDC price
-  if (quoteTokenFarm.quoteToken.symbol === "WETH") {
-    const quoteTokenInUsdc = wethPriceUsdt.times(
+  if (quoteTokenFarm.quoteToken.symbol === "WBNB") {
+    const quoteTokenInUsdc = wbnbPriceUsdt.times(
       quoteTokenFarm.tokenPriceVsQuote
     );
     return hasTokenPriceVsQuote && quoteTokenInUsdc
@@ -69,25 +70,25 @@ const getFarmBaseTokenPrice = (
 const getFarmQuoteTokenPrice = (
   farm,
   quoteTokenFarm,
-  wethPriceUsdt,
-  bSnowPriceUsdc
+  wbnbPriceUsdt,
+  snowPriceUsdc
 ) => {
   if (["USDC", "MIM", "DAI"].includes(farm.quoteToken.symbol)) {
     return BIG_ONE;
   }
   if (farm.quoteToken.symbol === "SNOW") {
-    return bSnowPriceUsdc;
+    return snowPriceUsdc;
   }
-  if (farm.quoteToken.symbol === "WETH") {
-    return wethPriceUsdt;
+  if (farm.quoteToken.symbol === "WBNB") {
+    return wbnbPriceUsdt;
   }
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }
 
-  if (quoteTokenFarm.quoteToken.symbol === "WETH") {
+  if (quoteTokenFarm.quoteToken.symbol === "WBNB") {
     return quoteTokenFarm.tokenPriceVsQuote
-      ? wethPriceUsdt.times(quoteTokenFarm.tokenPriceVsQuote)
+      ? wbnbPriceUsdt.times(quoteTokenFarm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
 
@@ -95,16 +96,16 @@ const getFarmQuoteTokenPrice = (
 };
 
 const fetchFarmsPrices = async (farms) => {
-  const wethUsdtFarm = farms.find((farm) => farm.pid === wethUsdcFarmPid);
-  const wethPriceUsdt =
-    wethUsdtFarm.tokenPriceVsQuote > 0
-      ? BIG_ONE.div(wethUsdtFarm.tokenPriceVsQuote).times(BIG_TEN.pow(new BigNumber(12)))
+  const wbnbUsdtFarm = farms.find((farm) => farm.pid === wbnbUsdcFarmPid);
+  const wbnbPriceUsdt =
+    wbnbUsdtFarm.tokenPriceVsQuote > 0
+      ? BIG_ONE.div(wbnbUsdtFarm.tokenPriceVsQuote).times(BIG_TEN.pow(new BigNumber(12)))
       : BIG_ZERO;
 
-  const bSnowUsdtFarm = farms.find((farm) => farm.pid === snowWethFarmPid);
-  const bSnowPriceUsdc =
-    bSnowUsdtFarm.tokenPriceVsQuote > 0
-      ? new BigNumber(bSnowUsdtFarm.tokenPriceVsQuote).times(wethPriceUsdt)
+  const snowUsdtFarm = farms.find((farm) => farm.pid === snowWethFarmPid);
+  const snowPriceUsdc =
+    snowUsdtFarm.tokenPriceVsQuote > 0
+      ? new BigNumber(snowUsdtFarm.tokenPriceVsQuote).times(wbnbPriceUsdt)
       : BIG_ZERO;
 
   const farmsWithPrices = farms.map((farm) => {
@@ -115,14 +116,14 @@ const fetchFarmsPrices = async (farms) => {
     const baseTokenPrice = getFarmBaseTokenPrice(
       farm,
       quoteTokenFarm,
-      wethPriceUsdt,
-      bSnowPriceUsdc
+      wbnbPriceUsdt,
+      snowPriceUsdc
     );
     const quoteTokenPrice = getFarmQuoteTokenPrice(
       farm,
       quoteTokenFarm,
-      wethPriceUsdt,
-      bSnowPriceUsdc
+      wbnbPriceUsdt,
+      snowPriceUsdc
     );
 
     const token = { ...farm.token, usdcPrice: baseTokenPrice.toJSON() };

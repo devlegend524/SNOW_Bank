@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import BigNumber from "bignumber.js";
 import FarmBanner from "components/FarmsComponents/Banner";
-import FarmStaking from "components/FarmsComponents/StakingInfo";
-import TotalValueLocked from "components/FarmsComponents/TotalValueLocked";
 import FarmControls from "components/FarmsComponents/Controls";
 import FarmTables from "components/FarmsComponents/Tables";
 import { getSortOptions, DesktopColumnSchema } from "constants";
@@ -22,7 +20,6 @@ import { useSNOWPerSecond } from "hooks/useTokenBalance";
 import { NUMBER_OF_FARMS_VISIBLE } from "config";
 import { useFarms, usePollFarmsData, usePriceSNOWUsdc } from "state/hooks";
 import { useAccount } from "wagmi";
-import LogoLoading from "components/LogoLoading";
 
 export default function Farms() {
   const { pathname } = useLocation();
@@ -43,7 +40,7 @@ export default function Farms() {
     NUMBER_OF_FARMS_VISIBLE
   );
   const [observerIsSet, setObserverIsSet] = useState(false);
-  const bSnowPerSecond = useSNOWPerSecond();
+  const snowPerSecond = useSNOWPerSecond();
 
   const { data: farmsData, userDataLoaded } = useFarms();
 
@@ -104,14 +101,19 @@ export default function Farms() {
           return farm;
         }
 
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(
-          farm.quoteToken.usdcPrice
-        );
+        const totalLiquidity = farm.isNFTPool
+          ? new BigNumber(farm.lpTotalInQuoteToken)
+          : new BigNumber(farm.lpTotalInQuoteToken).times(
+              new BigNumber(farm.quoteToken.usdcPrice).div(
+                new BigNumber(10 * 10 ** 11)
+              )
+            );
+
         const apr = getFarmApr(
           new BigNumber(farm.poolWeight),
           snowPrice,
           totalLiquidity,
-          bSnowPerSecond,
+          snowPerSecond,
           farm.isNFTPool
         );
         return { ...farm, apr, liquidity: totalLiquidity };
@@ -125,7 +127,7 @@ export default function Farms() {
       }
       return farmsToDisplayWithAPR;
     },
-    [snowPrice, query, isActive, bSnowPerSecond]
+    [snowPrice, query, isActive, snowPerSecond]
   );
 
   useEffect(() => {
@@ -302,11 +304,7 @@ export default function Farms() {
   return (
     <div className="flex justify-center w-full md:max-w-7xl mt-12">
       <div className="container m-3">
-        {/* <FarmBanner /> */}
-        {/* <div className="flex gap-5 flex-col md:flex-row mt-5">
-          <FarmStaking />
-          <TotalValueLocked />
-        </div> */}
+        <FarmBanner />
 
         {renderContent()}
         <div ref={loadMoreRef} />

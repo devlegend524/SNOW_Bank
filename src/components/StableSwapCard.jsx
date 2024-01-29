@@ -239,7 +239,7 @@ export default function SnowSwapCard() {
         (amount_out * (100 - slippage)) / 100
       )?.toString();
 
-      if (tokenA.address === "WETH") {
+      if (tokenA.address === "WBNB") {
         await contracts.routerSigner.swapExactETHForTokens(
           amount_out,
           [tokenA.address, tokenB.address],
@@ -249,7 +249,7 @@ export default function SnowSwapCard() {
             value: Web3.utils.toWei(tokenAAmount, "ether"),
           }
         );
-      } else if (tokenB.address === "WETH") {
+      } else if (tokenB.address === "WBNB") {
         await contracts.routerSigner.swapExactTokensForETH(
           amount_in,
           amount_out,

@@ -31,23 +31,21 @@ const Farm = ({
     return null;
   };
 
-  const imgSize = 40;
-
   return (
     <div className="w-full">
-      <div className="flex justify-center -mt-16">
+      <div className="flex justify-center">
         {isTokenOnly ? (
           <div className="w-32 flex justify-end">
             <img src={token.logo} alt="" className="token" />
           </div>
         ) : (
           <div className="flex justify-end w-32">
-            <img src={quoteToken.logo} alt="" className="token" />
+            <img src={quoteToken.logo} alt="" className="token"  />
             <img src="/assets/tokens/snow.png" alt="" className="token -ml-8" />
           </div>
         )}
 
-        <RiEdgeNewFill className="text-white mx-8 my-auto text-2xl duration-200" />
+        <RiEdgeNewFill className="text-white lg:mx-4 sm:mx-3 mx-6 my-auto text-2xl duration-200" />
 
         <div className="w-32">
           <img src="/assets/tokens/snow.png" alt="" className="token" />

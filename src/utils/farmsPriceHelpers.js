@@ -7,7 +7,7 @@
  */
 export const filterFarmsByQuoteToken = (
   farms,
-  preferredQuoteTokens = ['USDC', 'MIM', 'ETH'],
+  preferredQuoteTokens = ['USDC', 'MIM', 'BNB'],
 ) => {
   const preferredFarm = farms.find((farm) => {
     return preferredQuoteTokens.some((quoteToken) => {

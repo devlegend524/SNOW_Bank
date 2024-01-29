@@ -218,62 +218,79 @@ const StakedAction = ({
 
   if (stakedBalance.gt(0)) {
     return (
-      <div className="flex flex-row items-center justify-between md:justify-end gap-5 p-2 lg:p-4 w-full">
-        <div className="flex flex-col gap-1 justify-between md:min-w-[200px]">
-          <div className="text-lg font-semibold">
-            {lpSymbol}
-            &nbsp;
-            {t("Staked")}
-          </div>
-          <Earned>{displayBalance()}</Earned>
-          {stakedBalance.gt(0) && lpPrice.gt(0) && (
-            <Balance
-              fontSize="15px"
-              color="white"
-              decimals={2}
-              value={
-                isNFTPool
-                  ? stakedBalance
-                      .times(new BigNumber(amountPerNFT))
-                      .times(snowPrice)
-                  : getBalanceNumber(lpPrice.times(stakedBalance))
-              }
-              unit=" USD"
-              prefix="~"
-            />
+      <>
+        <div className="px-3 w-full">
+          {open && <ZapInModal open={open} closeModal={closeModal} pid={pid} />}
+          {!isNFTPool && (
+            <button
+              className="box-btn-stake"
+              data-tooltip-id="zap-tooltip"
+              data-tooltip-content="Stake to this pool from your wallet"
+              disabled={!userDataReady}
+              onClick={openModal}
+            >
+              {t("Zap in")}
+            </button>
           )}
         </div>
-        <div className="flex flex-row items-center">
-          <IconButton
-            variant="secondary"
-            data-tooltip-id="unstake-tooltip"
-            data-tooltip-content="Unstake Pool"
-            onClick={() => {
-              setIsNFTALL(false);
-              onPresentWithdraw();
-            }}
-            mr="6px"
-          >
-            <MinusIcon color="primary" width="14px" />
-          </IconButton>
-          <IconButton
-            variant="secondary"
-            data-tooltip-id="stake-tooltip"
-            data-tooltip-content="Stake pool"
-            onClick={() => {
-              setIsNFTALL(false);
-              onPresentDeposit();
-            }}
-            disabled={["history", "archived"].some((item) =>
-              location.pathname.includes(item)
+
+        <div className="flex flex-row items-center justify-between md:justify-end gap-5 p-2 lg:p-4 w-full">
+          <div className="flex flex-col gap-1 justify-between md:min-w-[200px]">
+            <div className="text-lg font-semibold">
+              {lpSymbol}
+              &nbsp;
+              {t("Staked")}
+            </div>
+            <Earned>{displayBalance()}</Earned>
+            {stakedBalance.gt(0) && lpPrice.gt(0) && (
+              <Balance
+                fontSize="15px"
+                color="white"
+                decimals={2}
+                value={
+                  isNFTPool
+                    ? stakedBalance
+                        .times(new BigNumber(amountPerNFT))
+                        .times(snowPrice)
+                    : getBalanceNumber(lpPrice.times(stakedBalance))
+                }
+                unit=" USD"
+                prefix="~"
+              />
             )}
-          >
-            <AddIcon color="primary" width="14px" />
-          </IconButton>
-          <Tooltip id="unstake-tooltip" />
-          <Tooltip id="stake-tooltip" />
+          </div>
+          <div className="flex flex-row items-center">
+            <IconButton
+              variant="secondary"
+              data-tooltip-id="unstake-tooltip"
+              data-tooltip-content="Unstake Pool"
+              onClick={() => {
+                setIsNFTALL(false);
+                onPresentWithdraw();
+              }}
+              mr="6px"
+            >
+              <MinusIcon color="primary" width="14px" />
+            </IconButton>
+            <IconButton
+              variant="secondary"
+              data-tooltip-id="stake-tooltip"
+              data-tooltip-content="Stake pool"
+              onClick={() => {
+                setIsNFTALL(false);
+                onPresentDeposit();
+              }}
+              disabled={["history", "archived"].some((item) =>
+                location.pathname.includes(item)
+              )}
+            >
+              <AddIcon color="primary" width="14px" />
+            </IconButton>
+            <Tooltip id="unstake-tooltip" />
+            <Tooltip id="stake-tooltip" />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

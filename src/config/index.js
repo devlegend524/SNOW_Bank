@@ -9,7 +9,7 @@ import { FaTwitter } from "react-icons/fa";
 export const BASE_URL = "https://snowbank.io";
 export const ALCHEMY_ID = "86wTK178jC4XNO9sh-iVI7P5fV1tg_Dx";
 
-export const CHAIN_ID = 8453;
+export const CHAIN_ID = 56;
 export const TESTNET_CHAIN_ID = 5;
 
 export const TREASURY = "0x2324Bf6650AEA8710d1f868C829986eD6aDAfD4A"; // 0x41140Df415A2898937d147842C314c70B3aab82E // 0x2324Bf6650AEA8710d1f868C829986eD6aDAfD4A
@@ -19,11 +19,11 @@ export const DEFAULT_GAS_PRICE = 2;
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18);
 export const NUMBER_OF_FARMS_VISIBLE = 12;
 export const snowWethFarmPid = 0;
-export const wethUsdcFarmPid = 1;
+export const wbnbUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
-export const NFT_PRICE = 0.3
+export const NFT_PRICE = 0.3;
 export const SALE_PRICE = 60;
 export const LAUNCH_PRICE = 70;
 export const MAX_PER_USER = 80000;
@@ -32,24 +32,23 @@ export const SOFT_CAP = 10;
 // export const MAX_PER_USER = 300;
 
 export const mainTokenSymbol = "SNOW";
-export const DOCS_URL =
-  "https://snowbank.gitbook.io/snow-bank";
+export const DOCS_URL = "https://snowbank.gitbook.io/snow-bank";
 
 export const BASE_EXCHANGE_URL_BY_CHAIN = {
-  369: "https://app.uniswap.org",
+  56: "https://pancakeswap.finance",
 };
 
 export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];
 
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/liquidity`;
 export const BASE_SWAP_URL = `${BASE_EXCHANGE_URL}/swap`;
-export const ARCHIVED_NODE = "https://developer-access-mainnet.base.org";
+export const ARCHIVED_NODE = "https://bsc-dataseed.bnbchain.org/";
 
 // export const YEAR = 60 * 60 * 24 * 365
 // export const YEAR_BN = new BigNumber(YEAR)
 
 export const privateSNOWPrice = 12;
-export const BASE_EXPLORER = "https://etherscan.io/";
+export const BASE_EXPLORER = "https://bscscan.com/";
 
 export const socials = [
   {
@@ -65,7 +64,7 @@ export const socials = [
   {
     icon: () => <FaGithub />,
     name: "",
-    href: "https://github.com/cryptoGuru525/Snow_Bank_MasterChef",
+    href: "https://github.com/cryptoGuru525/snow_bank_final",
   },
   // {
   //   icon: () => <FaYoutube />,
@@ -104,6 +103,10 @@ export const routes = [
   {
     name: "GAME",
     url: "/game",
+  },
+  {
+    name: "BANK",
+    url: "/bank",
   },
   {
     name: "ROADMAP",
