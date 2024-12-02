@@ -9,7 +9,7 @@
       },
       {
         "type": "address",
-        "name": "_WBNB",
+        "name": "_WPLS",
         "internalType": "address"
       }
     ]
@@ -24,7 +24,7 @@
         "internalType": "address"
       }
     ],
-    "name": "WBNB",
+    "name": "WPLS",
     "inputs": []
   },
   {

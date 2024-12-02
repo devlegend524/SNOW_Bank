@@ -118,7 +118,12 @@ const ActionPanel = ({
       </SnowCellLayout>
 
       <SnowCellLayout label="View Contract">
-        <a href={scan} className="box-text flex gap-2" target={"_blank"}>
+        <a
+          href={scan}
+          className="box-text flex gap-2"
+          target={"_blank"}
+          rel="noreferrer"
+        >
           {formatAddress(farm.lpAddresses, 6)}{" "}
           <FiExternalLink className="my-auto text-sm" />
         </a>

@@ -39,20 +39,20 @@ const customStyles = {
 const tokensList = [
   {
     pid: 0,
-    lpSymbol: "BNB",
+    lpSymbol: "PLS",
     isTokenOnly: true,
     lpAddresses: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-    decimals: tokens.bnb.decimals,
-    logoA: "/assets/tokens/bnb.png",
+    decimals: tokens.pls.decimals,
+    logoA: "/assets/tokens/pls.svg",
     logoB: "",
   },
   {
     pid: 1,
-    lpSymbol: "WBNB",
+    lpSymbol: "WPLS",
     isTokenOnly: true,
-    lpAddresses: tokens.wbnb.address,
-    decimals: tokens.wbnb.decimals,
-    logoA: "/assets/tokens/bnb.png",
+    lpAddresses: tokens.wpls.address,
+    decimals: tokens.wpls.decimals,
+    logoA: "/assets/tokens/pls.svg",
     logoB: "",
   },
 ];
@@ -132,7 +132,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
     try {
       await onZapForFarm(
         inputToken.lpAddresses,
-        inputToken.lpSymbol === "BNB" ? true : false,
+        inputToken.lpSymbol === "PLS" ? true : false,
         fromReadableAmount(amount.toString(), inputToken.decimals),
         targetToken.lpAddresses,
         targetToken.pid
@@ -159,7 +159,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
   const getBalance = async (token) => {
     try {
       setLoadingBalance(true);
-      if (token.lpSymbol === "BNB") {
+      if (token.lpSymbol === "PLS") {
         const balance = await signer.getBalance();
         setBalance(toReadableAmount(balance, token.decimals));
       } else {
@@ -283,7 +283,7 @@ export default function ZapInModal({ open, closeModal, pid }) {
               <button className="box-btn-stake ">
                 <Loading /> Loading...
               </button>
-            ) : inputToken.lpSymbol !== "BNB" &&
+            ) : inputToken.lpSymbol !== "PLS" &&
               Number(ethers.utils.formatUnits(allowance, "ether")) === 0 ? (
               <button
                 onClick={handleApprove}

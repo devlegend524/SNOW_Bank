@@ -26,7 +26,7 @@ import {
 import { db } from "config/firebase";
 import { ethers } from "ethers";
 import { MAX_PER_USER } from "config";
-import BNB from "components/UI/BNB";
+import PLS from "components/UI/PLS";
 
 export default function SaleComponent({ saleData }) {
   const presaleContract = usePresaleContract();
@@ -48,7 +48,7 @@ export default function SaleComponent({ saleData }) {
     setBalance(Number(readableData));
   };
 
-  const handleChangeBNB = (value) => {
+  const handleChangePLS = (value) => {
     setAmount(value);
     setEthAmount(value);
     const ethSnowAmount = Number(
@@ -65,9 +65,9 @@ export default function SaleComponent({ saleData }) {
     setEthAmount(ethBuyAmount);
   };
 
-  const getBNBPrice = async () => {
+  const getPLSPrice = async () => {
     const priceData = await fetch(
-      "https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD"
+      "https://min-api.cryptocompare.com/data/price?fsym=PLS&tsyms=USD"
     );
     const res = await priceData.json();
     if (res && res.USD) {
@@ -77,12 +77,10 @@ export default function SaleComponent({ saleData }) {
   };
 
   const handleBuySnow = async () => {
-
     if (!address) {
       notify("error", "Please connect your wallet");
       return;
     }
-
 
     // if (!saleData?.enabled) {
     //   notify("error", "Presale is not started yet");
@@ -95,7 +93,7 @@ export default function SaleComponent({ saleData }) {
     }
 
     if (ethPrice === 0) {
-      notify("error", "BNB price fetch failed.");
+      notify("error", "PLS price fetch failed.");
       return;
     }
 
@@ -140,7 +138,7 @@ export default function SaleComponent({ saleData }) {
       //       if (exist) {
       //         const dbRef = ref(db, `/stats/${Object.keys(exist)[0]}`);
       //         update(dbRef, {
-      //           eth: exist[Object.keys(exist)[0]].bnb + Number(ethAmount),
+      //           eth: exist[Object.keys(exist)[0]].pls + Number(ethAmount),
       //         });
       //       }
       //     });
@@ -185,7 +183,7 @@ export default function SaleComponent({ saleData }) {
   };
 
   useEffect(() => {
-    getBNBPrice();
+    getPLSPrice();
     if (signer) {
       getBalance();
       getDeposits(address);
@@ -224,12 +222,12 @@ export default function SaleComponent({ saleData }) {
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
-              <div> Deposited BNB:</div>
+              <div> Deposited PLS:</div>
               <div className="flex gap-1">
                 {saleData?.user_deposits
                   ? Number(saleData?.user_deposits).toFixed(5)
                   : "0.00"}{" "}
-                <BNB width={15} height={15} />
+                <PLS width={15} height={15} />
               </div>
             </div>
             <div className="flex justify-between mb-3 px-1">
@@ -238,7 +236,7 @@ export default function SaleComponent({ saleData }) {
                 {Number(balance).toFixed(5) === "NaN"
                   ? "0.00"
                   : Number(balance).toFixed(5)}
-                <BNB width={15} height={15} />
+                <PLS width={15} height={15} />
               </div>
             </div>
           </div>
@@ -268,15 +266,15 @@ export default function SaleComponent({ saleData }) {
             </div>
             <div className="flex gap-1 bg-primary/20 rounded-md border-secondary hover:border-white border duration-300 w-full relative">
               <img
-                src="/assets/tokens/bnb.png"
+                src="/assets/tokens/pls.svg"
                 className={`w-[38px] h-[38px] my-auto ml-1`}
               />
               <input
                 className="py-3.5 bg-transparent text-sm w-full px-2 hover:outline-none focus-visible:outline-none  focus-visible:border-white/70"
                 type="number"
-                placeholder="Input BNB amount"
+                placeholder="Input PLS amount"
                 value={ethAmount}
-                onChange={(e) => handleChangeBNB(e.target.value)}
+                onChange={(e) => handleChangePLS(e.target.value)}
               />
               <button
                 className="bg-secondary shadow shadow-black  hover:bg-secondary/90 hover:shadow-xl duration-200 absolute right-1 top-1/2 -translate-y-1/2 p-1 px-2 rounded-lg text-sm h-8"
@@ -312,13 +310,13 @@ export default function SaleComponent({ saleData }) {
               </div>
             </div>
             <div className="flex gap-2 justify-between mt-1">
-              <p className="text-sm">BNB</p>
+              <p className="text-sm">PLS</p>
               <div className="flex gap-1">
-                <BNB /> {ethAmount ? ethAmount : "0.00"}
+                <PLS /> {ethAmount ? ethAmount : "0.00"}
               </div>
             </div>
             <div className="flex gap-2 justify-between mt-1">
-              <p className="text-sm">BNB Price:</p>
+              <p className="text-sm">PLS Price:</p>
               <div className="flex gap-1">$ ~{ethPrice}</div>
             </div>
             <hr className="mt-1 border-white/30 border-[0.5px]" />

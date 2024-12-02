@@ -18,7 +18,7 @@ import {
 } from "./actions";
 import { fetchFarmUserDataAsync, nonArchivedFarms } from "./farms";
 import { useAccount } from "wagmi";
-import { snowWethFarmPid, mainTokenSymbol, wbnbUsdcFarmPid } from "config";
+import { snowWethFarmPid, mainTokenSymbol, wplsUsdcFarmPid } from "config";
 import addresses from "constants/addresses";
 
 export const usePollFarmsData = (includeArchive = false) => {
@@ -40,7 +40,7 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 0 = SNOW-BNB LP
+ * 0 = SNOW-PLS LP
  *
  */
 export const usePollCoreFarmData = () => {
@@ -57,7 +57,7 @@ export const usePollBlockNumber = () => {
   const provider = useEthersProvider();
   useEffect(() => {
     const interval = setInterval(async () => {
-      const blockNumber = await provider.bnb.getBlockNumber();
+      const blockNumber = await provider.pls.getBlockNumber();
       dispatch(setBlock(blockNumber));
     }, 6000);
 
@@ -127,13 +127,13 @@ export const useUSDCPriceFromToken = (tokenSymbol) => {
 
 export const useLpTokenPrice = (symbol) => {
   const farm = useFarmFromLpSymbol(symbol);
-  const wbnbPrice = usePriceEthUsdc();
+  const wplsPrice = usePriceEthUsdc();
   const farmTokenPriceInUsd = usePriceSNOWUsdc()[0];
   let lpTokenPrice = BIG_ZERO;
   const stables = ["USDC", "MIM", "DAI"];
   if (stables.includes(symbol)) return new BigNumber(1);
 
-  if (symbol === "WBNB") return wbnbPrice;
+  if (symbol === "WPLS") return wplsPrice;
   if (farm.isTokenOnly) return farmTokenPriceInUsd;
 
   try {
@@ -248,7 +248,7 @@ export const useProfile = () => {
 };
 
 export const usePriceEthUsdc = () => {
-  const ethUsdcFarm = useFarmFromPid(wbnbUsdcFarmPid);
+  const ethUsdcFarm = useFarmFromPid(wplsUsdcFarmPid);
   return new BigNumber(ethUsdcFarm.quoteToken.usdcPrice);
 };
 
@@ -273,14 +273,14 @@ export const usePriceSNOWUsdc = () => {
           if (returned.pairs.length === 1) {
             data =
               returned.pairs[0].chainId === "bsc" &&
-              returned.pairs[0].pairAddress === addresses.snowWbnblp
+              returned.pairs[0].pairAddress === addresses.snowWplslp
                 ? returned.pairs[0]
                 : undefined;
           } else {
             data = returned.pairs.filter(
               (pair) =>
                 pair.chainId == "bsc" &&
-                pair.pairAddress == addresses.snowWbnblp
+                pair.pairAddress == addresses.snowWplslp
             )[0];
           }
           setPriceUsd(data?.priceUsd);
@@ -404,15 +404,15 @@ export const useGetLastOraclePrice = () => {
 
 export const useTotalValue = () => {
   const farms = useFarms();
-  const wbnbPrice = usePriceEthUsdc();
+  const wplsPrice = usePriceEthUsdc();
   const snowPrice = usePriceSNOWUsdc()[0];
   let value = new BigNumber(0);
   for (let i = 0; i < farms.data.length; i++) {
     const farm = farms.data[i];
     if (farm.lpTotalInQuoteToken) {
       let val;
-      if (farm.quoteToken.symbol === "WBNB" && wbnbPrice) {
-        val = wbnbPrice.times(farm.lpTotalInQuoteToken);
+      if (farm.quoteToken.symbol === "WPLS" && wplsPrice) {
+        val = wplsPrice.times(farm.lpTotalInQuoteToken);
       } else if (farm.quoteToken.symbol === "SNOW") {
         val = snowPrice.times(farm.lpTotalInQuoteToken);
       } else {

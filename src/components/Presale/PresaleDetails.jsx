@@ -6,10 +6,9 @@ import { BASE_EXPLORER } from "config";
 import { getPresaleAddress } from "utils/addressHelpers";
 import { formatAddress } from "utils/customHelpers";
 import { CountDownComponentClaim } from "components/CountDownClaim";
-import BNB from "components/UI/BNB";
+import PLS from "components/UI/PLS";
 
 export default function PresaleDetails({ saleData, ethRaised }) {
-
   return (
     <div className="col-span-12 sm:col-span-6">
       <div className="w-full rounded-md p-4 snow_effect">
@@ -22,9 +21,9 @@ export default function PresaleDetails({ saleData, ethRaised }) {
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
-              <div> Total Raised BNB:</div>
+              <div> Total Raised PLS:</div>
               <div className="flex gap-1">
-                {Number(saleData?.total_deposited).toFixed(5) || "0.00"} <BNB />
+                {Number(saleData?.total_deposited).toFixed(5) || "0.00"} <PLS />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">
@@ -36,7 +35,7 @@ export default function PresaleDetails({ saleData, ethRaised }) {
             <div className="flex justify-between mb-4 px-1">
               <div> NFT Price:</div>
               <div className="flex gap-1">
-                {saleData?.NFTPrice} <BNB />
+                {saleData?.NFTPrice} <PLS />
               </div>
             </div>
             <div className="flex justify-between mb-4 px-1">

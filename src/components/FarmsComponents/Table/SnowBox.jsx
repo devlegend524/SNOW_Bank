@@ -48,8 +48,7 @@ export default function SnowBox(props) {
   const columnNames = tableSchema.map((column) => column.name);
 
   return (
-    <div className="flex justify-center px-2 w-full">
-
+    <div className="flex justify-center w-full mt-2">
       <div className="sm:p-4 p-3 sm:max-w-[400px] snows max-w-full w-full">
         <div className="" onClick={toggleActionPanel}>
           {Object.keys(props).map((key) => {

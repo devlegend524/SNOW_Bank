@@ -15,21 +15,26 @@ export default function Banner() {
           SNOW BANK
         </p>
         <p className="text-center sm:text-left mt-6">
-          WELCOME TO SNOW BANK: Stake SNOW/wBNB LP, SNOW or Snow NFT's to earn SNOW. Launching on Saturday, January 6th 2024 on BNB Smart Chain.
+          WELCOME TO SNOW BANK: Stake SNOW/wPLS LP, SNOW or Snow NFT's to earn
+          SNOW. Launching on Saturday, January 6th 2024 on PLS Smart Chain.
         </p>
-        <div className="flex gap-2"> <a
-          className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
-          href={DOCS_URL}
-          target="_blank"
-        >
-          SNOW Farm<FaArrowRight className="my-auto hidden sm:inline-block" />
-        </a>
+        <div className="flex gap-2">
+          {" "}
+          <a
+            className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
+            href={DOCS_URL}
+            target="_blank"
+          >
+            SNOW Farm
+            <FaArrowRight className="my-auto hidden sm:inline-block" />
+          </a>
           <a
             className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fongs-lg w-fit mx-auto sm:mx-0"
             href={"https://opensea.io/"}
             target="_blank"
           >
-            Open Sea<FaArrowRight className="my-auto hidden sm:inline-block" />
+            Open Sea
+            <FaArrowRight className="my-auto hidden sm:inline-block" />
           </a>
         </div>
       </div>

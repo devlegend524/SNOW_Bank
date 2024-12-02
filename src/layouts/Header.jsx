@@ -4,7 +4,6 @@ import { routes } from "config";
 import { WalletConnect } from "components/UI/ConnectButton";
 import { Link, useLocation } from "react-router-dom";
 import { DOCS_URL } from "config";
-import { FiExternalLink } from "react-icons/fi";
 
 export default function Header() {
   const [isMobile, setMobile] = useState(false);
@@ -55,17 +54,6 @@ export default function Header() {
                   <Link to={link.url}>{link.name}</Link>
                 </li>
               ))}
-              <li className="list_item">
-                <a
-                  href="https://snow-bank-capital.vercel.app/"
-                  target="_blank"
-                  className={`p-3 flex gap-1 items-center text-[12px!important]`}
-                  rel="noopener noreferrer"
-                >
-                  DEX
-                  <FiExternalLink />
-                </a>
-              </li>
             </ul>
           </div>
           <div className="sm:hidden"></div>

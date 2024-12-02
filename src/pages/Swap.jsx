@@ -101,7 +101,7 @@ export default function Swap() {
   };
 
   const checkAllowance = async (token, type) => {
-    if (token.lpSymbol !== "BNB") {
+    if (token.lpSymbol !== "PLS") {
       setIsCheckingAllowance(true);
       const res = await getAllowance(address, token, zapAddress, provider);
       if (type === "A") {
@@ -154,10 +154,10 @@ export default function Swap() {
       setPendingTx(true);
       await onZap(
         tokenA.lpAddresses,
-        tokenA.lpSymbol === "BNB" ? true : false,
+        tokenA.lpSymbol === "PLS" ? true : false,
         fromReadableAmount(Number(tokenAAmount)),
         tokenB.lpAddresses,
-        tokenB.lpSymbol === "BNB" ? true : false
+        tokenB.lpSymbol === "PLS" ? true : false
       );
       refreshData();
       setPendingTx(false);
@@ -252,8 +252,8 @@ export default function Swap() {
             <button className="main_btn mt-8 hover:bg-symbolHover  flex justify-center disabled:opacity-50 disabled:hover:scale-100  w-full rounded-lg transition ease-in-out p-[8px] bg-secondary-700">
               <Loading size="2xl" />
             </button>
-          ) : (tokenA.lpSymbol !== "BNB" && Number(tokenAAllowance) === 0) ||
-            (tokenA.lpSymbol !== "BNB" &&
+          ) : (tokenA.lpSymbol !== "PLS" && Number(tokenAAllowance) === 0) ||
+            (tokenA.lpSymbol !== "PLS" &&
               Number(tokenAAllowance) < Number(tokenAAmount)) ? (
             <button
               onClick={handleApprove}
@@ -266,7 +266,7 @@ export default function Swap() {
             <button
               onClick={handleDeposit}
               disabled={
-                (tokenA.lpSymbol !== "BNB" &&
+                (tokenA.lpSymbol !== "PLS" &&
                   Number(tokenAAllowance) < Number(tokenAAmount)) ||
                 status.insufficientA ||
                 pendingTx ||

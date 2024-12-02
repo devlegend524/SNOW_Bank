@@ -17,22 +17,26 @@ export default function NFTBanner() {
         <p className="text-center sm:text-left mt-6">
           Snow Bank introduces an exclusive range of SNOW NFTs, a unique
           collection that offers more than just aesthetic appeal. These NFTs are
-          available for purchase at 0.1 BNB each and play a pivotal role in the
+          available for purchase at 0.1 PLS each and play a pivotal role in the
           Snow Bank ecosystem.
         </p>
-        <div className="flex gap-2"> <a
-          className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
-          href={DOCS_URL + "/snow-bank-docs/nfts"}
-          target="_blank"
-        >
-         Mint NFT(s)<FaArrowRight className="my-auto hidden sm:inline-block" />
-        </a>
+        <div className="flex gap-2">
+          {" "}
+          <a
+            className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fong-lg w-fit mx-auto sm:mx-0"
+            href={DOCS_URL + "/snow-bank-docs/nfts"}
+            target="_blank"
+          >
+            Mint NFT(s)
+            <FaArrowRight className="my-auto hidden sm:inline-block" />
+          </a>
           <a
             className="main_btn_2 sm:py-3 sm:px-5 py-4 px-6 sm:text-lg  mt-7 flex sm:gap-3 gap-1 sm:fongs-lg w-fit mx-auto sm:mx-0"
             href={"https://opensea.io/"}
             target="_blank"
           >
-            Open Sea<FaArrowRight className="my-auto hidden sm:inline-block" />
+            Open Sea
+            <FaArrowRight className="my-auto hidden sm:inline-block" />
           </a>
         </div>
       </div>

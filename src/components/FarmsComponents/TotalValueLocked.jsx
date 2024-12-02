@@ -7,7 +7,6 @@ import { useContractRead, erc20ABI } from "wagmi";
 import { getSNOWAddress, getWethAddress } from "utils/addressHelpers";
 import snowABI from "config/abis/snow.json";
 
-
 export default function TotalValueLocked() {
   const tvlData = useTotalValue();
   const tvl = tvlData
@@ -45,20 +44,22 @@ export default function TotalValueLocked() {
     totalSupply - toReadableAmount(tokenABalanceRead?.data, 18);
 
   return (
-    <div className="flex-1 rounded-md ">
-      <div className="text-3xl text-right  font-semibold text-symbol">
-        Total Value Locked
-      </div>
+    <div className="flex-1 p-8 rounded-md snows">
+      <div className="text-3xl text-right mb-5">Snow Bank Stats</div>
+
+      <div className="text-base text-right font-semibold">Total Staked</div>
       <div className="mb-5">
         {tvlData !== null ? (
-          <div color="#fff" className="text-2xl font-semibold text-right pb-3">
-            {`$${tvl}`} staked
+          <div
+            color="#fff"
+            className="text-[40px] font-semibold text-right pb-3"
+          >
+            {`$${tvl}`}
           </div>
         ) : (
           <div />
         )}
       </div>
-      <div className="text-3xl text-right mb-5">SNOW Stats</div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <p className="font-semibold">Liquidity</p>
@@ -84,7 +85,7 @@ export default function TotalValueLocked() {
             )}
           </div>
         </div>
-        {/* <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <p className="font-semibold">Total Burned</p>
           <div>
             {toReadableAmount(tokenABalanceRead?.data, 18) && (
@@ -109,9 +110,8 @@ export default function TotalValueLocked() {
               />
             )}
           </div>
-        </div> */}
+        </div>
       </div>
-
     </div>
   );
 }

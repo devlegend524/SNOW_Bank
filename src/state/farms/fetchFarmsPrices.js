@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 import { BIG_ONE, BIG_TEN, BIG_ZERO } from "utils/bigNumber";
 import { filterFarmsByQuoteToken } from "utils/farmsPriceHelpers";
-import { snowWethFarmPid, wbnbUsdcFarmPid } from "config";
+import { snowWethFarmPid, wplsUsdcFarmPid } from "config";
 
 const getFarmFromTokenSymbol = (farms, tokenSymbol, preferredQuoteTokens) => {
   const farmsWithTokenSymbol = farms.filter(
@@ -17,7 +17,7 @@ const getFarmFromTokenSymbol = (farms, tokenSymbol, preferredQuoteTokens) => {
 const getFarmBaseTokenPrice = (
   farm,
   quoteTokenFarm,
-  wbnbPriceUsdt,
+  wplsPriceUsdt,
   snowPriceUsdc
 ) => {
   const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote);
@@ -26,9 +26,9 @@ const getFarmBaseTokenPrice = (
       ? new BigNumber(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
-  if (farm.quoteToken.symbol === "WBNB") {
+  if (farm.quoteToken.symbol === "WPLS") {
     return hasTokenPriceVsQuote
-      ? wbnbPriceUsdt.times(farm.tokenPriceVsQuote)
+      ? wplsPriceUsdt.times(farm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
   if (farm.quoteToken.symbol === "SNOW") {
@@ -37,18 +37,18 @@ const getFarmBaseTokenPrice = (
       : BIG_ZERO;
   }
 
-  // We can only calculate profits without a quoteTokenFarm for USDC/WBNB farms
+  // We can only calculate profits without a quoteTokenFarm for USDC/WPLS farms
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }
 
   // Possible alternative farm quoteTokens:
-  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), BNB (i.e. SUSHI-BNB)
-  // If the farm's quote token isn't USDC or wWBNB, we then use the quote token, of the original farm's quote token
-  // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - WBNB, (pBTC - WBNB)
-  // from the WBNB - pBTC price, we can calculate the PNT - USDC price
-  if (quoteTokenFarm.quoteToken.symbol === "WBNB") {
-    const quoteTokenInUsdc = wbnbPriceUsdt.times(
+  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), PLS (i.e. SUSHI-PLS)
+  // If the farm's quote token isn't USDC or wWPLS, we then use the quote token, of the original farm's quote token
+  // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - WPLS, (pBTC - WPLS)
+  // from the WPLS - pBTC price, we can calculate the PNT - USDC price
+  if (quoteTokenFarm.quoteToken.symbol === "WPLS") {
+    const quoteTokenInUsdc = wplsPriceUsdt.times(
       quoteTokenFarm.tokenPriceVsQuote
     );
     return hasTokenPriceVsQuote && quoteTokenInUsdc
@@ -70,7 +70,7 @@ const getFarmBaseTokenPrice = (
 const getFarmQuoteTokenPrice = (
   farm,
   quoteTokenFarm,
-  wbnbPriceUsdt,
+  wplsPriceUsdt,
   snowPriceUsdc
 ) => {
   if (["USDC", "MIM", "DAI"].includes(farm.quoteToken.symbol)) {
@@ -79,16 +79,16 @@ const getFarmQuoteTokenPrice = (
   if (farm.quoteToken.symbol === "SNOW") {
     return snowPriceUsdc;
   }
-  if (farm.quoteToken.symbol === "WBNB") {
-    return wbnbPriceUsdt;
+  if (farm.quoteToken.symbol === "WPLS") {
+    return wplsPriceUsdt;
   }
   if (!quoteTokenFarm) {
     return BIG_ZERO;
   }
 
-  if (quoteTokenFarm.quoteToken.symbol === "WBNB") {
+  if (quoteTokenFarm.quoteToken.symbol === "WPLS") {
     return quoteTokenFarm.tokenPriceVsQuote
-      ? wbnbPriceUsdt.times(quoteTokenFarm.tokenPriceVsQuote)
+      ? wplsPriceUsdt.times(quoteTokenFarm.tokenPriceVsQuote)
       : BIG_ZERO;
   }
 
@@ -96,16 +96,16 @@ const getFarmQuoteTokenPrice = (
 };
 
 const fetchFarmsPrices = async (farms) => {
-  const wbnbUsdtFarm = farms.find((farm) => farm.pid === wbnbUsdcFarmPid);
-  const wbnbPriceUsdt =
-    wbnbUsdtFarm.tokenPriceVsQuote > 0
-      ? BIG_ONE.div(wbnbUsdtFarm.tokenPriceVsQuote).times(BIG_TEN.pow(new BigNumber(12)))
+  const wplsUsdtFarm = farms.find((farm) => farm.pid === wplsUsdcFarmPid);
+  const wplsPriceUsdt =
+    wplsUsdtFarm.tokenPriceVsQuote > 0
+      ? BIG_ONE.div(wplsUsdtFarm.tokenPriceVsQuote).times(BIG_TEN.pow(new BigNumber(12)))
       : BIG_ZERO;
 
   const snowUsdtFarm = farms.find((farm) => farm.pid === snowWethFarmPid);
   const snowPriceUsdc =
     snowUsdtFarm.tokenPriceVsQuote > 0
-      ? new BigNumber(snowUsdtFarm.tokenPriceVsQuote).times(wbnbPriceUsdt)
+      ? new BigNumber(snowUsdtFarm.tokenPriceVsQuote).times(wplsPriceUsdt)
       : BIG_ZERO;
 
   const farmsWithPrices = farms.map((farm) => {
@@ -116,13 +116,13 @@ const fetchFarmsPrices = async (farms) => {
     const baseTokenPrice = getFarmBaseTokenPrice(
       farm,
       quoteTokenFarm,
-      wbnbPriceUsdt,
+      wplsPriceUsdt,
       snowPriceUsdc
     );
     const quoteTokenPrice = getFarmQuoteTokenPrice(
       farm,
       quoteTokenFarm,
-      wbnbPriceUsdt,
+      wplsPriceUsdt,
       snowPriceUsdc
     );
 

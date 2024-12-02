@@ -19,7 +19,7 @@ export const DEFAULT_GAS_PRICE = 2;
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18);
 export const NUMBER_OF_FARMS_VISIBLE = 12;
 export const snowWethFarmPid = 0;
-export const wbnbUsdcFarmPid = 1;
+export const wplsUsdcFarmPid = 1;
 export const YEAR = 60 * 60 * 24 * 365;
 export const YEAR_BN = new BigNumber(YEAR);
 
@@ -42,7 +42,7 @@ export const BASE_EXCHANGE_URL = BASE_EXCHANGE_URL_BY_CHAIN[CHAIN_ID];
 
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/liquidity`;
 export const BASE_SWAP_URL = `${BASE_EXCHANGE_URL}/swap`;
-export const ARCHIVED_NODE = "https://bsc-dataseed.bnbchain.org/";
+export const ARCHIVED_NODE = "https://bsc-dataseed.plschain.org/";
 
 // export const YEAR = 60 * 60 * 24 * 365
 // export const YEAR_BN = new BigNumber(YEAR)
@@ -85,7 +85,7 @@ export const socials = [
 
 export const routes = [
   {
-    name: "SNOW",
+    name: "STAKE",
     url: "/",
   },
   {
@@ -93,23 +93,38 @@ export const routes = [
     url: "/nfts",
   },
   {
-    name: "STAKE",
-    url: "/stake",
-  },
-  {
     name: "SWAP",
     url: "/swap",
   },
   {
-    name: "GAME",
-    url: "/game",
-  },
-  {
-    name: "BANK",
-    url: "/bank",
-  },
-  {
     name: "ROADMAP",
     url: "/roadmap",
+  },
+];
+
+export const roadmaps = [
+  {
+    title: "EARLY DECEMBER 2024",
+    content: "Snow Bank deployment on Pulsechain",
+  },
+  {
+    title: "MID DECEMBER 2024",
+    content: "Snow Bank deployment on Avalanche",
+  },
+  {
+    title: "LATE DECEMBER 2024",
+    content: "Snow Bank deployment on BASE",
+  },
+  {
+    title: "EARLY JANUARY 2025",
+    content: "Snow Bank deployment on BSC (Binance Smart Chain)",
+  },
+  {
+    title: "MID JANUARY 2025",
+    content: "Snow Bank deployment on Ethereum Mainnet",
+  },
+  {
+    title: "LATE JANUARY 2025",
+    content: "Snow Bank deployment on Solana",
   },
 ];

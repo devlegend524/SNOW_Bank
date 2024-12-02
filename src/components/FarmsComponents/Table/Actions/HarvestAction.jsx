@@ -95,7 +95,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
       <button
         disabled={earnings.eq(0) || pendingTx || !userDataReady}
         onClick={handleHavest}
-        className="box-btn-harvest text-orange-400"
+        className="box-btn-harvest text-purple-400"
         data-tooltip-id="harvest-tooltip"
         data-tooltip-content={"Havest SNOW you earned."}
       >
@@ -104,7 +104,7 @@ const HarvestAction = ({ pid, userData, userDataReady, isNFTPool }) => {
 
       {!isNFTPool && (
         <button
-          className="box-btn-harvest text-orange-400"
+          className="box-btn-harvest text-purple-400"
           data-tooltip-id="compound-tooltip"
           onClick={openCompoundModal}
           data-tooltip-content={

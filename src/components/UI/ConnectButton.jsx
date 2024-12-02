@@ -61,9 +61,10 @@ export const WalletConnect = () => {
               return (
                 <div className="flex items-center">
                   <a
-                    href={`https://dexscreener.com/bsc/${contractAddresses.snowWbnblp}`}
+                    href={`https://dexscreener.com/pulsechain/${contractAddresses.snowWplslp}`}
                     target="_blank"
                     className="hidden sm:flex items-center text-white"
+                    rel="noreferrer"
                   >
                     <img
                       src="/logo32.png"
@@ -92,7 +93,7 @@ export const WalletConnect = () => {
                   </button>
                   <div className="hidden sm:inline-block text-sm font-light">
                     {Number(account.balanceFormatted).toFixed(4)}{" "}
-                    <span className="text-[10px]">&nbsp;( BNB )</span>{" "}
+                    <span className="text-[10px]">&nbsp;( PLS )</span>{" "}
                   </div>
                   <button
                     onClick={openAccountModal}

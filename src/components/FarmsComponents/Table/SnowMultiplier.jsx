@@ -16,9 +16,7 @@ const Multiplier = ({ multiplier, pid }) => {
         proportion of SNOW rewards each farm receives"
       />
       <Tooltip id={"multiplier" + pid} />
-      <div className="box-text text-orange-400">
-        {displayMultiplier}
-      </div>
+      <div className="box-text text-purple-400">{displayMultiplier}</div>
     </div>
   );
 };

@@ -7,9 +7,8 @@ import React, {
 } from "react";
 import BigNumber from "bignumber.js";
 import FarmBanner from "components/FarmsComponents/Banner";
-import FarmControls from "components/FarmsComponents/Controls";
 import FarmTables from "components/FarmsComponents/Tables";
-import { getSortOptions, DesktopColumnSchema } from "constants";
+import { DesktopColumnSchema } from "constants";
 import { useLocation } from "react-router-dom";
 import { orderBy } from "lodash";
 import { latinise } from "utils/latinise";
@@ -49,14 +48,6 @@ export default function Farms() {
   }, [address, userDataLoaded]);
 
   const farmsLP = farmsData.filter((farm) => farm.pid !== 1);
-
-  const handleSortOptionChange = (option) => {
-    setSortOption(option.value);
-  };
-
-  const handleChangeQuery = (event) => {
-    setQuery(event.target.value);
-  };
 
   const activeFarms = farmsLP.filter(
     (farm) =>

@@ -644,7 +644,7 @@ td {
 }
 
 .box-btn-harvest {
-  @apply rounded-md w-full px-2 py-1 h-8  text-center font-medium duration-300  transition ease-in-out hover:shadow hover:shadow-black/50  base_bg hover:bg-[#f0b90b];
+  @apply rounded-md w-full px-2 py-1 h-8  text-center font-medium duration-300  transition ease-in-out hover:shadow hover:shadow-black/50  base_bg hover:bg-[#e619e6];
 }
 
 .box-btn-stake {
@@ -655,4 +655,3 @@ td {
 .w-full-innertext-label {
   color: white !important;
 }
-

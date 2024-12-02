@@ -21,7 +21,6 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
     if (address) fetch();
   }, [address]);
 
-
   return (
     <>
       <li
@@ -58,7 +57,9 @@ export default function TokenItem({ token, disabledToken, handleToken }) {
           </div>
         </div>
         {!loading ? (
-          <p className={`text-md text-gray-400`}>{toFixed(balance, 5)}</p>
+          <p className={`text-md text-gray-400`}>
+            {toFixed(balance || "0", 5)}
+          </p>
         ) : (
           <div>
             <ImSpinner9 className="text-gray-500 animate-spin" />

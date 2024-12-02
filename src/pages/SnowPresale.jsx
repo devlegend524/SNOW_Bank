@@ -25,7 +25,7 @@ export default function SnowPresale() {
   const { fastRefresh } = useRefresh();
   const [active, setActive] = useState(0);
   const [presaleData, setPresaleData] = useState({});
-  const [ethRaised, setTotalRaisedBNB] = useState();
+  const [ethRaised, setTotalRaisedPLS] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +95,7 @@ export default function SnowPresale() {
           onValue(dbQuery, async (snapshot) => {
             const exist = snapshot.val();
             if (exist) {
-              setTotalRaisedBNB(Number(exist[Object.keys(exist)[0]].bnb || 0));
+              setTotalRaisedPLS(Number(exist[Object.keys(exist)[0]].pls || 0));
             }
           });
           setPresaleData((value) => ({ ...value, ...newData }));

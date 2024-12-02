@@ -133,7 +133,7 @@ export const useSNOWBurnedBalance = () => {
   return balance;
 };
 
-export const useGetBnbBalance = () => {
+export const useGetPLSBalance = () => {
   const [balance, setBalance] = useState(BIG_ZERO);
   const { address } = useAccount();
   const { lastUpdated, setLastUpdated } = useLastUpdated();

@@ -1,12 +1,8 @@
 import React from "react";
 
 import Swap from "pages/Swap";
-import Liquidity from "pages/Liquidity";
 import NotFound from "pages/Notfound";
 import Farms from "pages/Farms";
-import NFT from "pages/NftClaim";
-import Presale from "pages/Presale";
-import SnowPresale from "pages/SnowPresale";
 import NFTPresale from "pages/NFTPresale";
 import Roadmap from "pages/Roadmap";
 import ComingSoon from "pages/ComingSoon";
@@ -14,7 +10,7 @@ import ComingSoon from "pages/ComingSoon";
 const router = [
   {
     path: "/",
-    element: <SnowPresale />,
+    element: <Farms />,
   },
   {
     path: "/nfts",
@@ -48,10 +44,10 @@ const router = [
   //   path: "/presale",
   //   element: <SnowPresale />,
   // },
-  // {
-  //   path: "*",
-  //   element: <NotFound />,
-  // },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ];
 
 export default router;

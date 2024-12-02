@@ -7,7 +7,13 @@ import LogoLoading from "components/LogoLoading";
 import { notify } from "utils/toastHelper";
 import { FaCheck } from "react-icons/fa";
 
-export default function NFTCard({ tokenId, index, presaleData, active, myNFTID }) {
+export default function NFTCard({
+  tokenId,
+  index,
+  presaleData,
+  active,
+  myNFTID,
+}) {
   const preslaeContractAddress = getPresaleAddress();
   const presaleContract = usePresaleContract();
   const nftContract = useNFTContract();
@@ -117,7 +123,7 @@ export default function NFTCard({ tokenId, index, presaleData, active, myNFTID }
             </div>
             <div className="flex justify-between px-2">
               <p>Price: </p>
-              <p>{NFTPrice} BNB</p>
+              <p>{NFTPrice} PLS</p>
             </div>
             {isSold ? (
               <button

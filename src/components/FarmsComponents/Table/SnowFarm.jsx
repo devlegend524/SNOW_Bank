@@ -40,7 +40,7 @@ const Farm = ({
           </div>
         ) : (
           <div className="flex justify-end w-32">
-            <img src={quoteToken.logo} alt="" className="token"  />
+            <img src={quoteToken.logo} alt="" className="token" />
             <img src="/assets/tokens/snow.png" alt="" className="token -ml-8" />
           </div>
         )}
@@ -54,7 +54,7 @@ const Farm = ({
 
       <div className="mt-4">
         {handleRenderFarming()}
-        <p className="font-semibold text-sm lg:text-lg">{label} POOL</p>
+        <p className="font-semibold text-sm lg:text-lg">{label}</p>
 
         <div className="flex justify-between mt-2">
           <div className="lg:text-[12px] text-[10px] text-gray-300">
